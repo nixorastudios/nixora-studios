@@ -106,14 +106,14 @@ function Index() {
           </p>
         </header>
 
-        <section className="mt-14 grid gap-5 sm:mt-20 [grid-template-columns:repeat(auto-fit,minmax(230px,1fr))]">
+        <section className="mt-14 grid grid-cols-1 gap-5 sm:mt-20 sm:grid-cols-2 lg:grid-cols-5">
           {TOOLS.map((tool, i) => (
             <article
               key={tool}
               className="nixora-card"
               style={{ "--nixora-float-delay": `${(i % 5) * 0.7}s` } as CSSProperties}
             >
-              <span className="text-[11px] tracking-[0.3em] opacity-50">
+              <span className="text-[11px] tracking-[0.3em] opacity-70">
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h2 className="text-base font-bold tracking-[0.12em] uppercase">{tool}</h2>
