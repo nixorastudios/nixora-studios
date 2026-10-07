@@ -21,16 +21,16 @@ export const Route = createFileRoute("/")({
 });
 
 const TOOLS = [
-  "LIPSYNC",
+  "TEXT TO IMAGE",
+  "TEXT TO VIDEO",
+  "IMAGES TO VIDEO",
+  "ANIMATION",
   "SOUND EFFECTS",
+  "VOICE OVER",
   "MUSIC STUDIO",
+  "LIPSYNC",
   "VIDEO EDITOR",
   "CODE ENGINE",
-  "VOICE CLONE",
-  "IMAGE GENERATOR",
-  "AFRO BEAT STUDIO",
-  "NIXORA KIDS",
-  "LIVING ALTAR",
 ];
 
 // Deterministic pseudo-random so the server render and the browser render
@@ -106,12 +106,13 @@ function Index() {
           </p>
         </header>
 
-        <section className="mt-14 grid grid-cols-1 gap-5 sm:mt-20 sm:grid-cols-2 lg:grid-cols-5">
+        <section className="mt-14 flex flex-wrap justify-center gap-5 sm:mt-20">
           {TOOLS.map((tool, i) => (
             <article
               key={tool}
-              className="nixora-card"
-              style={{ "--nixora-float-delay": `${(i % 5) * 0.7}s` } as CSSProperties}
+              data-tool={tool}
+              className="nixora-card w-full sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]"
+              style={{ "--nixora-float-delay": `${(i % 4) * 0.7}s` } as CSSProperties}
             >
               <span className="text-[11px] tracking-[0.3em] opacity-70">
                 {String(i + 1).padStart(2, "0")}
