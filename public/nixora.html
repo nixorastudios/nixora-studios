@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>NIXORA STUDIOS FINAL 5 CHANNELS LOCKED - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - DOMAIN LOCKED</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;overflow-y:auto;overflow-x:hidden}body{background:#0a0a0a;color:#fff;font-family:Inter,system-ui;padding:0;line-height:1.4;margin:0}
+h1{color:#00ff88;font-size:clamp(13px,4vw,18px)}h2{color:#ff6a00;font-size:clamp(11px,3.5vw,14px)}h3{color:#00ff88;font-size:clamp(10px,3vw,12px)}
+.btn{padding:10px 12px;margin:3px;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:clamp(10px,2.8vw,11px);touch-action:manipulation;min-height:36px}
+.green{background:#00ff88;color:#000}.orange{background:#ff6a00;color:#fff}.red{background:#ff0040;color:#fff}.blue{background:#0088ff;color:#fff}.dark{background:#111;color:#fff;border:1px solid #333}
+.card{background:#151515;padding:12px;border-radius:10px;margin:8px 0;border-left:3px solid #00ff88;width:100%;overflow:hidden}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:6px}
+.style-card{background:#000;border:2px solid #333;border-radius:8px;padding:6px;cursor:pointer;text-align:center;touch-action:manipulation;position:relative;overflow:hidden}
+.style-card.selected{border-color:#00ff88;background:#001a0a}
+.badge{padding:3px 6px;border-radius:5px;font-size:9px;font-weight:bold;display:inline-block}
+.badge-green{background:#00ff88;color:#000}.badge-orange{background:#ff6a00;color:#fff}
+input,select,textarea{padding:10px;border-radius:6px;border:1px solid #333;background:#000;color:#fff;width:100%;margin:3px 0;font-size:14px;min-height:40px}
+.lock{border:2px solid #00ff88;background:#001a0a;padding:10px;border-radius:9px}
+.polish{border:2px solid #ff6a00;background:#1a0f00;padding:10px;border-radius:9px}
+.output-box{background:#000;border:1px solid #333;border-radius:8px;padding:10px;margin:6px 0;white-space:pre-wrap;min-height:80px}
+.gate{position:relative;width:100%;height:100vh;min-height:0;background:#0a0a0a;z-index:9999;padding:20px 20px 100px;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;align-items:center;scrollbar-gutter:stable;scroll-padding-bottom:100px}
+.gate>h1,.gate>.card{flex-shrink:0}
+.gate>.card{position:relative;overflow:visible}
+.gate label{display:flex;align-items:flex-start;gap:8px;margin:12px 0}
+.gate input[type=checkbox]{width:20px;height:20px;min-height:20px;flex:0 0 20px;margin:0}
+.hidden{display:none}
+.create-account-btn{position:fixed;bottom:0;left:0;width:100%;height:60px;background:#FF6B00;color:#fff;border:none;border-radius:0;font-weight:bold;font-size:16px;cursor:pointer;z-index:10000;touch-action:manipulation}
+#app{height:100vh;overflow-y:auto;overflow-x:hidden;padding:10px 10px 100px;scrollbar-gutter:stable;scroll-padding-bottom:100px}
+html,body,.gate,#app{scrollbar-width:auto;scrollbar-color:#FF6B00 #151515;touch-action:pan-y}
+html::-webkit-scrollbar,body::-webkit-scrollbar,.gate::-webkit-scrollbar,#app::-webkit-scrollbar{width:12px}
+html::-webkit-scrollbar-track,body::-webkit-scrollbar-track,.gate::-webkit-scrollbar-track,#app::-webkit-scrollbar-track{background:#151515}
+html::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb,.gate::-webkit-scrollbar-thumb,#app::-webkit-scrollbar-thumb{background:#FF6B00;border:2px solid #151515;border-radius:6px}
+.open-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.open-card{background:#000;border:2px solid #333;border-radius:10px;padding:10px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:stretch;transition:border-color .2s,background .2s}
+.open-card:hover{border-color:#00ff88;background:#001a0a}
+.open-card b{color:#fff;font-size:11px;line-height:1.3}
+.open-card small{color:#888;font-size:9px;line-height:1.3}
+.open-btn{width:100%;padding:10px 8px;border:none;border-radius:8px;background:#ff6a00;color:#fff;font-weight:bold;font-size:12px;cursor:pointer;min-height:40px;touch-action:manipulation;letter-spacing:1px}
+.open-btn:hover{background:#ff8533}
+.tool-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tool-card{background:#000;border:2px solid #333;border-radius:10px;padding:10px;text-align:center;display:flex;flex-direction:column;gap:6px;align-items:center;transition:border-color .2s,background .2s;cursor:pointer}
+.tool-card:hover{border-color:#00ff88;background:#001a0a}
+.tool-icon{font-size:26px;line-height:1}
+.tool-card b{color:#fff;font-size:11px;line-height:1.3}
+.tool-card small{color:#888;font-size:9px;line-height:1.3}
+.tool-card .tool-go{width:100%;padding:8px;border:none;border-radius:8px;background:#00ff88;color:#000;font-weight:bold;font-size:11px;cursor:pointer;min-height:36px;touch-action:manipulation;letter-spacing:1px}
+.tool-card .tool-go:hover{background:#33ffaa}
+.tool-card{min-width:0;position:relative;cursor:default}
+.tool-card b,.tool-card small{overflow-wrap:anywhere;width:100%}
+.tool-card b{min-height:29px}.tool-card small{min-height:38px}
+.tool-card .tool-go{margin-top:auto;letter-spacing:0}
+.tool-drag{align-self:flex-end;width:30px;height:28px;background:var(--lip-surface);color:var(--lip-light);border:1px solid var(--lip-border);border-radius:4px;cursor:grab;touch-action:none;font-size:18px}
+.tool-drag:focus-visible{outline:2px solid var(--lip-orange)}
+.tool-card.dragging{opacity:.5}.tool-card.drop-target{border-color:var(--lip-orange)}
+.tool-card[data-tool="animation"] .lip-avatar{animation:facialRealism 5s ease-in-out infinite}
+@keyframes facialRealism{0%,100%{transform:rotate(0)}35%{transform:rotate(-4deg)}70%{transform:rotate(4deg)}}
+@media(max-width:600px){.tool-grid{gap:4px}.tool-card{padding:5px;border-radius:6px}.tool-card .lip-avatar{height:76px}.tool-card b{font-size:10px;min-height:39px}.tool-card small{min-height:65px}.tool-icon{font-size:22px}.tool-card .tool-go{padding:8px 2px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.tool-card[data-tool="animation"] .lip-avatar{animation:none}}
+.avatar-panel{background:#000;border:2px solid #333;border-radius:10px;padding:10px;margin-top:8px}
+.avatar-preview{min-height:130px;border:2px solid #ff6a00;border-radius:10px;background:radial-gradient(circle at 50% 35%,#333 0 24%,#111 25% 100%);display:flex;align-items:center;justify-content:center;color:#00ff88;font-size:52px;margin:6px 0;position:relative;overflow:hidden}
+.avatar-mouth{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);width:38px;height:12px;border-radius:0 0 30px 30px;background:#ff6a00;box-shadow:0 0 18px #ff6a00}
+ :root{--lip-orange:#FF6B00;--lip-surface:#151515;--lip-border:#333;--lip-face:#00ff88;--lip-ink:#0a0a0a;--lip-light:#fff}
+.lip-avatar{display:block;width:100%;max-width:150px;height:112px;margin:0 auto;flex-shrink:0}
+.lip-face{fill:var(--lip-surface);stroke:var(--lip-face);stroke-width:2}
+.lip-hair{fill:var(--lip-ink)}.lip-eye{fill:var(--lip-light);transform-box:fill-box;transform-origin:center;animation:lipBlink 3s infinite}
+.lip-nose{fill:none;stroke:var(--lip-face);stroke-width:2}
+.lip-mouth{fill:var(--lip-orange);transform-box:fill-box;transform-origin:center;transform:scaleY(.09);transition:transform 65ms linear}
+.lip-avatar[data-mouth="half"] .lip-mouth{transform:scaleY(.48)}
+.lip-avatar[data-mouth="wide"] .lip-mouth{transform:scaleY(1)}
+.lip-speaker{background:var(--lip-surface);color:var(--lip-light);border:1px solid var(--lip-orange);width:44px;height:40px;border-radius:8px;cursor:pointer;font-size:20px;margin:4px auto;display:block}
+.lip-speaker[aria-pressed="true"]{background:var(--lip-orange)}
+.lip-speaker:focus-visible{outline:2px solid var(--lip-face);outline-offset:3px}
+#avatarPlayer{width:100%;margin:8px 0}.avatar-preview{background:var(--lip-surface)}
+@keyframes lipBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@media(prefers-reduced-motion:reduce){.lip-eye{animation:none}.lip-mouth{transition:none}}
+</style>
+</head>
+<body>
+<div id="gate" class="gate">
+<h1>NIXORA STUDIOS - OWNER DASHBOARD</h1>
+<div class="card" style="max-width:520px;width:100%">
+<h2>WELCOME BACK</h2>
+<input id="gateEmail" placeholder="Email 3 names anago.vincent.nnalue@gmail.com">
+<input id="gatePass" type="password" placeholder="Password min 8">
+<input id="gateName" placeholder="Full Name 3 Names NIN exact">
+<div style="background:#111;padding:10px;border-radius:6px;margin:6px 0;border:1px solid #333">
+<pre style="white-space:pre-wrap;font-size:9px;background:#000;padding:8px;border-radius:6px;max-height:220px;overflow:auto">
+NIXORA STUDIOS TERMS Oct 2026 - ACHIEVEMENT YESTERDAY ADDED
+Owner Email: anago.vincent.nnalue@gmail.com
+Domain: nixorastudios.com
+Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+God Mode: Email + Hash + Domain locked - $0 UNLIMITED OWNER ONLY
+Business: NIXORA STUDIOS ENTERPRISES BN new not sand mining
+Support: support@nixorastudios.com
+5 CHANNELS LOCKED FINAL:
+1. NIXORA KIDS = FOR KIDS, LEARNING, ADVENTURE, COMEDY, ACTION, ALL IN ONE - Made for Kids YES - 70-100 styles
+2. LIVING ALTAR = GOSPEL SONG FOR ALL - Gospel Full Choir Individual Band - 70-100 styles
+3. AFRO TALES = NETFLIX, YOUTUBE, AMAZON - Epic Village City Drama Village thatch City market yellow bus - 70-100 styles
+4. VIBRA XONA = SPOTIFY, AMAZON - Afrobeats Neon Dance Studio Live - 70-100 styles
+5. NIXOXTAR = INTERNATIONAL STANDARD - Global Blockbuster Cinema + Vibrant Musical Cinema Clean No Trademark - 70-100 styles
+TOTAL: 5 CHANNELS = 350-500 styles 700-1000 photos 2 per type - Many options each time - Clean no trademark
+Domain nixorastudios.com locked + Business locked + God mode email hash locked before build - Secure - Clean file no trademark - One file - Coding engine light for coders as ChatGPT not much - OPTION1 single + OPTION2 team 8+ excellent lock - Self-Recognition 100% - Award Polish 1/2/5/10 - Edit Correction + Down Prompt Box Exact Correction Must Become Excellent
+</pre>
+<label><input type="checkbox" id="gateTerms"> I agree Terms + AI disclaimer + Domain locked</label>
+<label><input type="checkbox" id="gateAI"> I understand AI can make mistake - Bad outcome must get corrected</label>
+<button id="createAccountBtn" class="create-account-btn" onclick="let e=document.getElementById('gateEmail').value; let p=document.getElementById('gatePass').value; let n=document.getElementById('gateName').value; let t=document.getElementById('gateTerms').checked; let ai=document.getElementById('gateAI').checked; if(!e.includes('@')||p.length<8||!n||!t||!ai){alert('Fill email valid + password 8+ + full 3 names + tick both'); return;} localStorage.setItem('user',e); localStorage.setItem('fullName',n); document.getElementById('gate').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); document.getElementById('createAccountBtn').style.display='none'; let m=checkId(e); document.getElementById('status').innerHTML=m.app+' - '+m.id+' - '+m.badge; document.getElementById('gateStatus').innerText='Signed in '+e+' - '+n+' - Domain '+DOMAIN_LOCKED+' locked - God Mode Hash '+OWNER_EMAIL_HASH.substring(0,16)+'... - 5 CHANNELS LOCKED'; window.top.location.href='/homepage';">CONTINUE TO DASHBOARD</button>
+<p id="gateStatus" style="background:#000;padding:6px;border-radius:6px"></p>
+</div>
+</div>
+</div>
+
+<div id="app" class="hidden">
+<h1>NIXORA STUDIOS FINAL - 5 CHANNELS LOCKED - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - DOMAIN LOCKED</h1>
+<script>
+const OWNER_EMAIL_PLAIN = "anago.vincent.nnalue@gmail.com";
+const OWNER_EMAIL_HASH = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+const DOMAIN_LOCKED = "nixorastudios.com";
+const BUSINESS_LOCKED = "NIXORA STUDIOS ENTERPRISES";
+const OWNER_FULL_3 = "ANAGO VINCENT NNALUE";
+let characterLock = JSON.parse(localStorage.getItem('charLock')||'null');
+let castLocks = JSON.parse(localStorage.getItem('castLocks')||'{}');
+let castCount = parseInt(localStorage.getItem('castCount')||'8');
+let realismLock = localStorage.getItem('realismLock')==='true';
+let selectedStyle = localStorage.getItem('selectedStyle')||'';
+let selectedModel = JSON.parse(localStorage.getItem('selectedModel')||'null');
+let voiceCloned = localStorage.getItem('voiceCloned')==='true';
+let awardTiming = localStorage.getItem('awardTiming')||'1min';
+let currentChannel = localStorage.getItem('currentChannel')||'NIXORA_KIDS';
+let lockMode = localStorage.getItem('lockMode')||'single';
+function checkId(e){
+  if(e && e.toLowerCase()===OWNER_EMAIL_PLAIN.toLowerCase()) return {app:"NIXORA STUDIOS 5 CHANNELS", id:"GOD MODE $0 UNLIMITED OWNER ONLY - DOMAIN "+DOMAIN_LOCKED+" - HASH "+OWNER_EMAIL_HASH+" - 5 CHANNELS LOCKED", badge:"GOD - anago.vincent.nnalue@gmail.com + e3b0c44... - All 5 Channels NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR 350-500 styles + OPTION1 single + OPTION2 team 8+ excellent lock + Self-Recognition 100% + Award Polish + Domain "+DOMAIN_LOCKED+" locked", color:"green"};
+  if(localStorage.getItem('isUltra')==='true') return {app:"NIXORA STUDIOS", id:"ULTRA $19/mo UNLIMITED 45min 8K - 5 CHANNELS", badge:"ULTRA - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR", color:"red"};
+  if(localStorage.getItem('isPro')==='true') return {app:"NIXORA STUDIOS", id:"PRO $9/mo BEST ALL ACCESS - 5 CHANNELS LOCKED", badge:"PRO $9 BEST - 5 CHANNELS NIXORA KIDS (Kids Learning Adventure Comedy Action) + LIVING ALTAR (Gospel) + AFRO TALES (Netflix YouTube Amazon Epic) + VIBRA XONA (Spotify Amazon Afrobeats) + NIXOXTAR (International Standard)", color:"orange"};
+  return {app:"NIXORA STUDIOS", id:"FREE $0 TRIAL - 5 CHANNELS", badge:"FREE - 5 CHANNELS LOCKED - 20 styles", color:"gray"};
+}
+function setLockMode(mode){ lockMode=mode; localStorage.setItem('lockMode',mode); document.getElementById('lockModeStatus').innerText='LOCK MODE: '+(mode==='single'?'OPTION1 SINGLE CHARACTER 98% SAME FACE KEEP':'OPTION2 CORE CAST TEAM 8+ EACH 98% SAME TEAM EXCELLENT LOCK'); document.querySelectorAll('.lock-option').forEach(o=>o.classList.add('hidden')); document.getElementById('lock-'+mode).classList.remove('hidden'); updateSelfRecognition(); }
+function selectStyle(name){ selectedStyle=name; localStorage.setItem('selectedStyle',name); document.getElementById('styleStatus').innerText='STYLE LOCKED: '+name+' + Mode '+lockMode+' + Realism '+(realismLock?'ON':'OFF')+' + Voice '+(voiceCloned?'cloned':'none')+' + Timing '+awardTiming+' = 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain '+DOMAIN_LOCKED; updateSelfRecognition(); }
+function selectModel(name,price){ selectedModel={name:name,price:price}; localStorage.setItem('selectedModel',JSON.stringify(selectedModel)); document.getElementById('modelStatus').innerText='MODEL: '+name+' '+(price===0?'FREE $0':'$'+price); updateSelfRecognition(); }
+function updateSelfRecognition(){
+  let s=selectedStyle||'none', m=selectedModel?selectedModel.name:'none', r=realismLock?'ON':'OFF', v=voiceCloned?'cloned':'none', t=awardTiming, ch=currentChannel;
+  let singleChar=characterLock?characterLock.hash+' '+characterLock.name+' 98% OPTION1':'none';
+  let castHashes=Object.values(castLocks).map(l=>l.hash).join('_'); let castNames=Object.values(castLocks).map(l=>l.name).join(' + '); let castCountLocal=Object.keys(castLocks).length;
+  let charPart=lockMode==='single'?singleChar:(castCountLocal+' cast '+castNames+' '+castHashes+' OPTION2');
+  document.getElementById('selfRecogOut').innerText='SELF-RECOGNITION 100% - 5 CHANNELS LOCKED:\n1.NIXORA KIDS 2.LIVING ALTAR 3.AFRO TALES 4.VIBRA XONA 5.NIXOXTAR\nModel '+m+' identifies 100% anything:\n- Style '+s+' Channel '+ch+' + Character '+charPart+' + Realism '+r+' + Voice '+v+' + Timing '+t+'\n- Domain '+DOMAIN_LOCKED+' Hash '+OWNER_EMAIL_HASH+' Owner '+OWNER_EMAIL_PLAIN+'\n- 5 CHANNELS 350-500 styles Many options each time';
+}
+function setAwardTiming(t){ awardTiming=t; localStorage.setItem('awardTiming',t); document.querySelectorAll('.timing-card').forEach(c=>c.classList.remove('selected')); event.currentTarget.classList.add('selected'); document.getElementById('awardOut').innerText=getAwardPrompt(t,document.getElementById('prompt').value||'VIBRA LOVE'); }
+function getAwardPrompt(t,p){
+  let modeTxt=lockMode==='single'?('Single '+ (characterLock?characterLock.name:'') ):'Team '+Object.keys(castLocks).length+' members';
+  let base='Base: '+p+' + Channel '+currentChannel+' 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Style '+selectedStyle+' + '+modeTxt+' + Domain '+DOMAIN_LOCKED;
+  if(t==='1min') return base+'\nAWARD 1 MIN SHORTS VIRAL - 30 cuts - CTR 11% - 9:16 2160x3840';
+  if(t==='10min') return base+'\nAWARD 10 MIN DOCUMENTARY - 100 cuts - IMAX 8K - Master 8K ProRes - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - International';
+  return base+'\nAWARD '+t;
+}
+function doGenerate(){
+  let p=document.getElementById('prompt').value||'VIBRA LOVE'; let t=awardTiming;
+  let charPart=lockMode==='single'?(characterLock?characterLock.name+' '+characterLock.hash+' OPTION1':'no lock OPTION1'):('Team '+Object.keys(castLocks).length+' OPTION2');
+  let out='GENERATED OUTPUT - '+new Date().toLocaleString()+'\nPrompt: '+p+'\nLock Mode: '+lockMode+'\n5 CHANNELS LOCKED FINAL:\n1. NIXORA KIDS = Kids Learning Adventure Comedy Action All in One Made for Kids YES\n2. LIVING ALTAR = Gospel Song For All\n3. AFRO TALES = Netflix YouTube Amazon Epic Village City Drama\n4. VIBRA XONA = Spotify Amazon Afrobeats Neon\n5. NIXOXTAR = International Standard Global Blockbuster + Vibrant Musical Clean\nChannel: '+currentChannel+'\nStyle: '+selectedStyle+'\nCharacter: '+charPart+'\nDomain: '+DOMAIN_LOCKED+' Owner: '+OWNER_EMAIL_PLAIN+' Hash: '+OWNER_EMAIL_HASH+'\nSelf-Recognition 100%\nAward: '+t;
+  document.getElementById('mainOutput').innerText=out; document.getElementById('editSection').classList.remove('hidden'); document.getElementById('correctionPrompt').value=p+' + Keep face(s) 98% same + Realism ON + Style '+selectedStyle+' + 5 CHANNELS LOCKED';
+}
+function doCorrection(){
+  let cp=document.getElementById('correctionPrompt').value; if(!cp){alert('Type correction'); return;}
+  let corrected='CORRECTED EXCELLENT - '+new Date().toLocaleString()+'\nCorrection: '+cp+'\n5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain '+DOMAIN_LOCKED+' + Hash '+OWNER_EMAIL_HASH+' + Owner '+OWNER_EMAIL_PLAIN;
+  document.getElementById('correctedOutput').innerText=corrected; document.getElementById('correctedOutput').classList.remove('hidden');
+}
+function lockCast(num,input){
+  let f=input.files[0]; if(!f) return; let r=new FileReader(); r.onload=e=>{
+    document.getElementById('castPreview'+num).src=e.target.result;
+    let hash='CHAR_'+num+'_'+Date.now()+'_'+Math.random().toString(36).substring(2,6).toUpperCase();
+    let name=document.getElementById('castName'+num).value||f.name;
+    castLocks[num]={name:name, hash:hash}; localStorage.setItem('castLocks',JSON.stringify(castLocks));
+    document.getElementById('castStatus'+num).innerText='LOCKED '+name+' 98% '+hash+' OPTION2';
+    updateAllCastStatus(); updateSelfRecognition();
+  }; r.readAsDataURL(f);
+}
+function addMoreCast(){ castCount++; localStorage.setItem('castCount',castCount); let c=document.getElementById('moreCastContainer'); let d=document.createElement('div'); d.innerHTML='<label>Cast '+castCount+' OPTION2</label><input type="file" accept="image/*" id="cast'+castCount+'" onchange="lockCast('+castCount+',this)"><img id="castPreview'+castCount+'" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #00ff88"><p id="castStatus'+castCount+'" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast '+castCount+'</p><input type="text" id="castName'+castCount+'" placeholder="Cast '+castCount+' Name" style="height:35px">'; c.appendChild(d); }
+function updateAllCastStatus(){ let locks=castLocks; let count=Object.keys(locks).length; let txt='CORE CAST '+count+' images OPTION2:\n'; for(let i=1;i<=castCount;i++){ if(locks[i]){ txt+='Cast '+i+': '+locks[i].name+' - '+locks[i].hash+' 98%\n'; } } document.getElementById('allCastStatus').innerText=txt; }
+function setChannel(ch){ currentChannel=ch; localStorage.setItem('currentChannel',ch); document.querySelectorAll('#chNixoraKids,#chLivingAltar,#chAfroTales,#chVibraXona,#chNixoxtar').forEach(c=>{c.classList.remove('selected'); c.style.borderColor='#333'; c.style.background='#000';}); let map={NIXORA_KIDS:'chNixoraKids',LIVING_ALTAR:'chLivingAltar',AFRO_TALES:'chAfroTales',VIBRA_XONA:'chVibraXona',NIXOXTAR:'chNixoxtar'}; let el=document.getElementById(map[ch]); if(el){el.classList.add('selected'); el.style.borderColor='#00ff88'; el.style.background='#001a0a';} document.getElementById('channelStatus').innerText='CHANNEL LOCKED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 styles each - Domain '+DOMAIN_LOCKED; document.querySelectorAll('.channel-group').forEach(g=>g.classList.add('hidden')); let grp=document.getElementById('group-'+ch); if(grp) grp.classList.remove('hidden'); updateSelfRecognition(); }
+function generateCoderCode(){
+  let p=document.getElementById('coderPrompt').value||'Generate code';
+  let code='// NIXORA 5 CHANNELS LOCKED FINAL - '+new Date().toLocaleString()+'\n// Owner: '+OWNER_EMAIL_PLAIN+' Hash: '+OWNER_EMAIL_HASH+' Domain: '+DOMAIN_LOCKED+'\n// 5 CHANNELS: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR\nfunction generate(){return {owner:"'+OWNER_EMAIL_PLAIN+'",hash:"'+OWNER_EMAIL_HASH+'",domain:"'+DOMAIN_LOCKED+'",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}';
+  document.getElementById('coderOutput').innerText=code;
+}
+function copyCoderCode(){ navigator.clipboard.writeText(document.getElementById('coderOutput').innerText).then(()=>alert('Copied - 5 CHANNELS LOCKED')); }
+function previewCoderCode(){ document.getElementById('coderPreview').innerText='Preview 5 CHANNELS LOCKED - Domain '+DOMAIN_LOCKED+' - Hash '+OWNER_EMAIL_HASH; }
+</script>
+
+<div class="card"><h2>🔐 STATUS - 5 CHANNELS LOCKED FINAL - DOMAIN + HASH + EMAIL GOD MODE</h2><p id="status"></p><p id="gateStatus"></p><small>5 CHANNELS LOCKED: NIXORA KIDS (Kids Learning Adventure Comedy Action All in One) + LIVING ALTAR (Gospel Song For All) + AFRO TALES (Netflix YouTube Amazon) + VIBRA XONA (Spotify Amazon) + NIXOXTAR (International Standard) - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode $0 - Clean file</small></div>
+
+<div class="card" style="border-left-color:#00ff88"><h2>🛠️ AI GENERATIVE ENGINES - 10 TOOLS</h2>
+<div class="tool-grid">
+<div class="tool-card" data-tool="text-image"><div class="tool-icon">🖼️</div><b>TEXT TO IMAGE</b><small>Turn words into photos and art</small><button class="tool-go" onclick="openTool('Text to Image')">START</button></div>
+<div class="tool-card" data-tool="images-video"><div class="tool-icon">📼</div><b>IMAGES TO VIDEO</b><small>Bring still images to life in video</small><button class="tool-go" onclick="openTool('Images to Video')">START</button></div>
+<div class="tool-card" data-tool="text-video"><div class="tool-icon">🎬</div><b>TEXT TO VIDEO</b><small>Turn words into moving video</small><button class="tool-go" onclick="openTool('Text to Video')">START</button></div>
+<div class="tool-card" data-tool="animation"><div class="tool-icon">✨</div><b>ANIMATION</b><small>Facial realism: blinking eyes, mouth shapes and head movement</small><button class="tool-go" onclick="openTool('Animation')">START</button></div>
+<div class="tool-card" data-tool="voice-over"><div class="tool-icon">🎙️</div><b>VOICE OVER</b><small>Spoken narration and character voices</small><button class="tool-go" onclick="openTool('Voice Over')">START</button></div>
+<div class="tool-card" data-tool="lipsync"><div class="tool-icon">🗣️</div><b>LIPSYNC</b><small>Sync mouth to Voice Over audio with Web Audio AnalyserNode</small><button class="tool-go" onclick="openTool('Lipsync')">START</button></div>
+<div class="tool-card" data-tool="sound-effects"><div class="tool-icon">🔊</div><b>SOUND EFFECTS</b><small>Add realistic sound to scenes</small><button class="tool-go" onclick="openTool('Sound Effects')">START</button></div>
+<div class="tool-card" data-tool="music"><div class="tool-icon">🎵</div><b>MUSIC STUDIO</b><small>Make beats, songs and gospel music</small><button class="tool-go" onclick="openTool('Music Studio')">START</button></div>
+<div class="tool-card" data-tool="video-editor"><div class="tool-icon">✂️</div><b>VIDEO EDITOR</b><small>Cut, trim and polish clips</small><button class="tool-go" onclick="openTool('Video Editor')">START</button></div>
+<div class="tool-card" data-tool="code"><div class="tool-icon">💻</div><b>CODE ENGINE</b><small>Write and preview code live</small><button class="tool-go" onclick="openTool('Code Engine')">START</button></div>
+</div>
+<p id="toolStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:6px">No tool opened - Click START on any tool</p>
+<div id="talkingAvatarPanel" class="avatar-panel hidden">
+<h3>🗣️ LIPSYNC - VOICE OVER AUDIO + AVATAR PREVIEW</h3>
+<div class="avatar-preview" id="audioAvatarPreview"></div>
+<audio id="avatarPlayer" controls preload="metadata"></audio>
+<input id="avatarAudio" type="file" accept="audio/*" onchange="handleAvatarAudio(this)">
+<p id="avatarStatus" style="background:#111;padding:6px;border-radius:6px;font-size:10px">Upload audio to animate avatar mouth preview.</p>
+</div>
+</div>
+
+<div class="card" style="border-left-color:#ff6a00"><h2>💰 PRICING - 5 CHANNELS LOCKED</h2>
+<div class="grid">
+<div class="style-card" style="border-color:#888"><b>FREE $0 TRIAL</b><br><small>5 videos 720p 1min - 5 CHANNELS</small><br><span class="badge badge-green">FREE $0</span></div>
+<div class="style-card selected" style="border-color:#00ff88;background:#001a0a"><b>PRO $9/mo BEST - 5 CHANNELS LOCKED - 350-500 STYLES + OPTION1+OPTION2 + CODING LIGHT</b><br><small>100 videos 10min 4K - 5 CHANNELS: NIXORA KIDS + LIVING ALTAR + AFRO TALES + VIBRA XONA + NIXOXTAR - Domain nixorastudios.com locked - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode</small><br><span class="badge badge-green">BEST $9 - 5 CHANNELS LOCKED</span><br><button class="btn green" onclick="localStorage.setItem('isPro','true'); localStorage.setItem('isUltra',''); location.reload();">PRO $9 BEST - 5 CHANNELS LOCKED</button></div>
+<div class="style-card" style="border-color:#ff6a00"><b>ULTRA $19/mo UNLIMITED</b><br><small>Unlimited 45min 8K - 5 CHANNELS LOCKED</small><br><span class="badge badge-orange">ULTRA $19</span></div>
+<div class="style-card" style="border-color:#00ff88;background:#001a0a"><b>GOD MODE $0 OWNER ONLY - anago.vincent.nnalue@gmail.com + e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 + nixorastudios.com</b><br><small>Unlimited - God Mode locked - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 350-500 styles</small><br><span class="badge badge-green">GOD MODE $0 - LOCKED</span></div>
+</div>
+</div>
+
+<div class="card lock"><h2>🧠 SELF-RECOGNITION 100% - 5 CHANNELS LOCKED</h2>
+<button class="btn green" onclick="updateSelfRecognition();">🧠 Update Self-Recognition - 5 CHANNELS</button>
+<p id="selfRecogOut" style="background:#000;padding:7px;border-radius:6px;white-space:pre-wrap;margin-top:6px">Select channel - 5 CHANNELS LOCKED</p>
+</div>
+
+<div class="card"><h2>🔒 CHARACTER LOCK MODE - OPTION1 SINGLE + OPTION2 TEAM 8+</h2>
+<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(140px,1fr))">
+<div class="style-card selected" onclick="setLockMode('single')"><b>OPTION1 SINGLE</b><br><small>One face 98% 26 episodes - Keep</small><br><span class="badge badge-green">OPTION1 SINGLE</span></div>
+<div class="style-card" onclick="setLockMode('team')"><b>OPTION2 TEAM 8+ EXCELLENT LOCK</b><br><small>8+ faces each 98% same team 26 episodes - Excellent</small><br><span class="badge badge-orange">OPTION2 TEAM 8+</span></div>
+</div>
+<p id="lockModeStatus" style="background:#000;padding:6px;border-radius:6px">LOCK MODE: OPTION1 SINGLE</p>
+</div>
+
+<div id="lock-single" class="lock-option card lock">
+<h2>👤 OPTION1 SINGLE - KEEP IMAGE CHARACTER REFERENCE LOCK</h2>
+<input type="file" accept="image/*" onchange="let f=this.files[0]; if(f){ let r=new FileReader(); r.onload=e=>{ characterLock={name:f.name, hash:'CHAR_'+Date.now()}; localStorage.setItem('charLock',JSON.stringify({name:f.name, hash:characterLock.hash})); document.getElementById('charPreview').src=e.target.result; document.getElementById('charStatus').innerText='LOCKED '+f.name+' 98% '+characterLock.hash+' OPTION1'; updateSelfRecognition(); }; r.readAsDataURL(f);} }">
+<img id="charPreview" style="max-width:80px;border-radius:6px;display:block;margin:3px 0;border:2px solid #00ff88">
+<p id="charStatus" style="background:#000;padding:5px;border-radius:5px;font-size:10px">No lock OPTION1</p>
+<input type="text" id="charName" placeholder="Character Name OPTION1" style="height:35px">
+</div>
+
+<div id="lock-team" class="lock-option card lock hidden" style="border-color:#ff6a00;background:#1a0f00">
+<h2>👥 OPTION2 TEAM 8+ EXCELLENT LOCK</h2>
+<label>Cast 1 Lead</label><input type="file" accept="image/*" id="cast1" onchange="lockCast(1,this)"><img id="castPreview1" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #00ff88"><p id="castStatus1" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 1</p><input type="text" id="castName1" placeholder="Cast 1 Name" style="height:35px">
+<label>Cast 2</label><input type="file" accept="image/*" id="cast2" onchange="lockCast(2,this)"><img id="castPreview2" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #ff6a00"><p id="castStatus2" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 2</p><input type="text" id="castName2" placeholder="Cast 2 Name" style="height:35px">
+<label>Cast 3</label><input type="file" accept="image/*" id="cast3" onchange="lockCast(3,this)"><img id="castPreview3" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #ff6a00"><p id="castStatus3" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 3</p><input type="text" id="castName3" placeholder="Cast 3 Name" style="height:35px">
+<label>Cast 4</label><input type="file" accept="image/*" id="cast4" onchange="lockCast(4,this)"><img id="castPreview4" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #0088ff"><p id="castStatus4" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 4</p><input type="text" id="castName4" placeholder="Cast 4 Name" style="height:35px">
+<label>Cast 5</label><input type="file" accept="image/*" id="cast5" onchange="lockCast(5,this)"><img id="castPreview5" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #0088ff"><p id="castStatus5" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 5</p><input type="text" id="castName5" placeholder="Cast 5 Name" style="height:35px">
+<label>Cast 6</label><input type="file" accept="image/*" id="cast6" onchange="lockCast(6,this)"><img id="castPreview6" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #ff0040"><p id="castStatus6" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 6</p><input type="text" id="castName6" placeholder="Cast 6 Name" style="height:35px">
+<label>Cast 7</label><input type="file" accept="image/*" id="cast7" onchange="lockCast(7,this)"><img id="castPreview7" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #ff0040"><p id="castStatus7" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 7</p><input type="text" id="castName7" placeholder="Cast 7 Name" style="height:35px">
+<label>Cast 8</label><input type="file" accept="image/*" id="cast8" onchange="lockCast(8,this)"><img id="castPreview8" style="max-width:70px;border-radius:6px;display:block;margin:3px 0;border:2px solid #00ff88"><p id="castStatus8" style="background:#111;padding:4px;border-radius:5px;font-size:9px">No lock Cast 8</p><input type="text" id="castName8" placeholder="Cast 8 Name" style="height:35px">
+<button class="btn green" onclick="addMoreCast();">➕ Add More Cast 9,10,11...</button><div id="moreCastContainer"></div>
+<button class="btn orange" onclick="let count=Object.keys(castLocks).length; if(count<1){alert('Add at least 1'); return;} localStorage.setItem('castLocks',JSON.stringify(castLocks)); updateAllCastStatus(); updateSelfRecognition(); alert('Locked '+count+' cast OPTION2');">🔒 Lock All Cast OPTION2 TEAM 8+</button>
+<p id="allCastStatus" style="background:#000;padding:6px;border-radius:6px;white-space:pre-wrap;margin-top:6px">No cast locked OPTION2</p>
+</div>
+
+<div class="card"><h2>👤 REALISM + VOICE + PROMPT</h2>
+<label><input type="checkbox" id="realismToggle" onchange="realismLock=this.checked; localStorage.setItem('realismLock',realismLock); updateSelfRecognition();"> Realism ON 8K pores</label><p id="realismStatus"></p>
+<label><input type="checkbox" id="voiceToggle" onchange="voiceCloned=this.checked; localStorage.setItem('voiceCloned',voiceCloned); updateSelfRecognition();"> Voice Clone 95%</label><p id="voiceStatus"></p>
+<textarea id="prompt" placeholder="Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com" style="height:60px"></textarea>
+</div>
+
+<div class="card" style="border-left-color:#00ff88;background:#001a0a">
+<h2>🎨 5 CHANNELS LOCKED FINAL - 350-500 STYLES - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - INTERNATIONAL STANDARD</h2>
+<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(125px,1fr))">
+<div class="style-card selected" id="chNixoraKids" onclick="setChannel('NIXORA_KIDS')"><b>CH1: NIXORA KIDS - FOR KIDS LEARNING ADVENTURE COMEDY ACTION ALL IN ONE</b><br><small>Pastel cartoon 3D Pixar Read Learn ABC 123 Explore Discover Create Imagine Family Friends Nature Grow Music Play Comedy Action Adventure - Made for Kids YES - 70-100 options - Many options each time</small><br><span class="badge badge-green">70-100 Options - NIXORA KIDS</span></div>
+<div class="style-card" id="chLivingAltar" onclick="setChannel('LIVING_ALTAR')"><b>CH2: LIVING ALTAR - GOSPEL SONG FOR ALL</b><br><small>Classical choir robes cathedral, Individual solo mic intimate, Group band full 5-8 members, Contemporary African American praise worship reggae orchestra blues pop afrobeat worship live kids church - Gospel Full - 70-100 options - Many options</small><br><span class="badge badge-green">70-100 Options - LIVING ALTAR - Gospel</span></div>
+<div class="style-card" id="chAfroTales" onclick="setChannel('AFRO_TALES')"><b>CH3: AFRO TALES - NETFLIX YOUTUBE AMAZON - Epic Village City Drama</b><br><small>Village drama thatch, City drama market yellow bus Lagos, Romance neon, Comedy colorful, Action rain Hotel Bar, Horror forest juju, Folktales masquerade, Family drama, Legal drama court - Epic Village City Drama - Netflix YouTube Amazon - 70-100 options</small><br><span class="badge badge-orange">70-100 Options - AFRO TALES - Netflix</span></div>
+<div class="style-card" id="chVibraXona" onclick="setChannel('VIBRA_XONA')"><b>CH4: VIBRA XONA - SPOTIFY AMAZON - Afrobeats Neon</b><br><small>Neon dance Ankara, Studio recording, Live concert, Street market yellow bus, Amapiano rooftop, Highlife sax, Pop neon - Afrobeats Music - Spotify Amazon - 70-100 options - Many options</small><br><span class="badge badge-orange">70-100 Options - VIBRA XONA - Spotify</span></div>
+<div class="style-card" id="chNixoxtar" onclick="setChannel('NIXOXTAR')"><b>CH5: NIXOXTAR - INTERNATIONAL STANDARD - Global Blockbuster + Vibrant Musical Clean No Trademark</b><br><small>Action blockbuster helicopter explosion, Romance Eiffel Tower Paris, Sci-Fi space astronaut, Superhero city skyline cape, Horror forest haunted house, Comedy coffee shop, Drama courtroom judge flag, Thriller mystery detective rain Hotel neon IMAX 8K 35mm Netflix Original 4K HDR Dolby Atmos + Colorful dance festival dhol sari Romance garden roses Wedding red gold bride groom garlands Action rain explosion leather jacket Drama family samosa tea Comedy musical harmonium colorful vest - International Standard - 70-100 options - Clean No Trademark</small><br><span class="badge badge-red">70-100 Options - NIXOXTAR - International</span></div>
+</div>
+<p id="channelStatus" style="background:#000;padding:6px;border-radius:6px">CHANNEL LOCKED: NIXORA_KIDS - 70-100 style options - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com</p>
+<div id="group-NIXORA_KIDS" class="channel-group"><h3>CH1 NIXORA KIDS 70-100 OPTIONS - FOR KIDS LEARNING ADVENTURE COMEDY ACTION ALL IN ONE - Made for Kids YES</h3><div class="grid"><div class="style-card" onclick="selectStyle('Nixora Kids Pastel Read Learn ABC 123 1')"><div style="height:60px;background:linear-gradient(45deg,#ff99cc,#99ccff);border-radius:4px"></div><b>Read Learn ABC 123 1 - Made for Kids YES</b></div><div class="style-card" onclick="selectStyle('Nixora Kids Adventure Comedy Action 1')"><div style="height:60px;background:linear-gradient(45deg,#00ff88,#ffcc00);border-radius:4px"></div><b>Adventure Comedy Action 1 - Made for Kids YES</b></div></div></div>
+<div id="group-LIVING_ALTAR" class="channel-group hidden"><h3>CH2 LIVING ALTAR 70-100 OPTIONS - GOSPEL SONG FOR ALL</h3><div class="grid"><div class="style-card" onclick="selectStyle('Living Altar Classical Choir Robes Cathedral 1')"><div style="height:60px;background:linear-gradient(45deg,#fff,#999);border-radius:4px"></div><b>Classical Choir Robes Cathedral 1 - Gospel Full</b></div><div class="style-card" onclick="selectStyle('Living Altar Individual Solo Mic Intimate 1')"><div style="height:60px;background:linear-gradient(45deg,#333,#666);border-radius:4px"></div><b>Solo Mic Intimate 1 - Gospel</b></div><div class="style-card" onclick="selectStyle('Living Altar Group Band Full 5-8 Members 1')"><div style="height:60px;background:linear-gradient(45deg,#222,#555);border-radius:4px"></div><b>Group Band Full 5-8 Members 1 - Same Band 98% OPTION2 Team</b></div></div></div>
+<div id="group-AFRO_TALES" class="channel-group hidden"><h3>CH3 AFRO TALES 70-100 OPTIONS - NETFLIX YOUTUBE AMAZON - Epic Village City Drama</h3><div class="grid"><div class="style-card" onclick="selectStyle('Afro Tales Village Drama Thatch 1 Netflix')"><div style="height:60px;background:linear-gradient(45deg,#996633,#cc9966);border-radius:4px"></div><b>Village Drama Thatch 1 - Netflix YouTube Amazon - OPTION2 Team 8 Cast</b></div><div class="style-card" onclick="selectStyle('Afro Tales City Drama Market Yellow Bus 1 Netflix')"><div style="height:60px;background:linear-gradient(45deg,#333,#999);border-radius:4px"></div><b>City Drama Market Yellow Bus 1 - Netflix</b></div></div></div>
+<div id="group-VIBRA_XONA" class="channel-group hidden"><h3>CH4 VIBRA XONA 70-100 OPTIONS - SPOTIFY AMAZON - Afrobeats</h3><div class="grid"><div class="style-card" onclick="selectStyle('Vibra Xona Neon Dance Ankara 1 Spotify')"><div style="height:60px;background:linear-gradient(45deg,#ff00ff,#00ff88);border-radius:4px"></div><b>Neon Dance Ankara 1 - Spotify Amazon - Afrobeats</b></div><div class="style-card" onclick="selectStyle('Vibra Xona Studio Recording Live 1 Spotify')"><div style="height:60px;background:linear-gradient(45deg,#ff6a00,#00ff88);border-radius:4px"></div><b>Studio Recording Live 1 - Spotify</b></div></div></div>
+<div id="group-NIXOXTAR" class="channel-group hidden"><h3>CH5 NIXOXTAR 70-100 OPTIONS - INTERNATIONAL STANDARD - Global Blockbuster + Vibrant Musical Clean No Trademark</h3><div class="grid"><div class="style-card" onclick="selectStyle('Nixoxtar Global Blockbuster Action Helicopter Explosion 1 International')"><div style="height:60px;background:linear-gradient(45deg,#111,#ff6600);border-radius:4px"></div><b>Action Blockbuster Helicopter Explosion 1 - International Standard - IMAX 8K</b></div><div class="style-card" onclick="selectStyle('Nixoxtar Vibrant Musical Colorful Dance Festival Dhol Sari 1 International')"><div style="height:60px;background:linear-gradient(45deg,#ff0066,#ffcc00);border-radius:4px"></div><b>Colorful Dance Festival Dhol Sari 1 - International - Vibrant Musical Clean</b></div><div class="style-card" onclick="selectStyle('Nixoxtar Romance Eiffel Tower Paris Cafe 1 International')"><div style="height:60px;background:linear-gradient(45deg,#ffcc99,#cc6666);border-radius:4px"></div><b>Romance Eiffel Tower Paris Cafe 1 - International Standard</b></div></div></div>
+<p id="styleStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:5px">No style - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Click photo 350-500 sets 700-1000 photos 2 per type - OPTION1+OPTION2 team - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash locked</p>
+</div>
+
+<div class="card polish"><h2>🏆 AWARD WINNING FINISH - 1MIN 10MINS - 5 CHANNELS LOCKED</h2>
+<div class="grid">
+<div class="style-card timing-card" onclick="setAwardTiming('1min')"><div style="height:50px;background:linear-gradient(45deg,#00ff88,#0088ff);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold">1 MIN</div><b>1 MIN - SHORTS VIRAL - AI 2 MIN - 5 CHANNELS</b><br><small>Hook 0-3sec big 3 words safe 80% - 30 cuts - CTR 11% - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR</small></div>
+<div class="style-card timing-card" onclick="setAwardTiming('10min')"><div style="height:50px;background:linear-gradient(45deg,#6600ff,#00ff88);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold">10 MINS</div><b>10 MINS - DOCUMENTARY FULL - AWARD WINNING FINISH - 5 CHANNELS LOCKED - INTERNATIONAL STANDARD</b><br><small>Hook 0-15 + Setup + Conflict + Insight + CTA - 100 cuts - IMAX 8K - Master 8K ProRes - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Hash e3b0c44... - Owner anago.vincent.nnalue@gmail.com - Excellent after correction</small></div>
+</div>
+<button class="btn orange" onclick="let t=awardTiming; let p=document.getElementById('prompt').value||'VIBRA LOVE'; document.getElementById('awardOut').innerText=getAwardPrompt(t,p);">🏆 Generate Award Polish Prompt - 5 CHANNELS LOCKED</button>
+<p id="awardOut" style="background:#000;padding:7px;border-radius:6px;white-space:pre-wrap;margin-top:6px">No timing - Click 1min / 10mins - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR</p>
+</div>
+
+<div class="card" style="border-left-color:#0088ff;background:#000a1a">
+<h2>💻 CODING ENGINE LIGHT - 5 CHANNELS LOCKED - DOMAIN + HASH</h2>
+<textarea id="coderPrompt" placeholder="Coder Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain nixorastudios.com + Owner anago.vincent.nnalue@gmail.com + Hash e3b0c44... + OPTION1+OPTION2" style="height:80px;border-color:#0088ff"></textarea>
+<div style="display:flex;gap:5px;flex-wrap:wrap">
+<button class="btn blue" onclick="generateCoderCode();">💻 Generate Code - 5 CHANNELS LOCKED</button>
+<button class="btn green" onclick="copyCoderCode();">📋 Copy Code</button>
+<button class="btn orange" onclick="previewCoderCode();">👁️ Preview</button>
+</div>
+<div style="background:#000;color:#0f0;padding:8px;border-radius:6px;font-family:monospace;font-size:10px;white-space:pre-wrap;min-height:120px;max-height:300px;overflow:auto" id="coderOutput">// Coding engine - 5 CHANNELS LOCKED FINAL - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+function generate(){return {owner:"anago.vincent.nnalue@gmail.com",hash:"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",domain:"nixorastudios.com",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}
+</div>
+<div id="coderPreview" style="background:#000;border:1px solid #333;border-radius:6px;padding:8px;margin:6px 0;min-height:60px;white-space:pre-wrap">Preview 5 CHANNELS LOCKED</div>
+</div>
+
+<div class="card card-blue"><h2>⚡ GENERATE - 5 CHANNELS LOCKED FINAL - EDIT/CORRECTION</h2>
+<button class="btn blue" onclick="doGenerate();">⚡ GENERATE - 5 CHANNELS LOCKED - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain + Hash + Email</button>
+<div id="mainOutput" class="output-box">No output yet - 5 CHANNELS LOCKED FINAL: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode - International Standard</div>
+<div id="editSection" class="hidden">
+<h3>✏️ EDIT / CORRECTION - DOWN PROMPT BOX EXACT CORRECTION - 5 CHANNELS LOCKED</h3>
+<div style="background:#0a1a0a;border:2px solid #00ff88;border-radius:8px;padding:10px;margin:6px 0">
+<p><span class="badge badge-orange">EDIT / CORRECTION - IF BAD MUST BECOME EXCELLENT - 5 CHANNELS LOCKED</span></p>
+<textarea id="correctionPrompt" placeholder="Down Prompt Box Exact Correction - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44..." style="height:90px;border-color:#00ff88"></textarea>
+<button class="btn green" onclick="doCorrection();">✏️ EDIT / CORRECT EXCELLENT - 5 CHANNELS LOCKED</button>
+<button class="btn orange" onclick="let cp=document.getElementById('correctionPrompt').value; if(cp){ document.getElementById('prompt').value=cp; alert('Copied to main prompt - 5 CHANNELS LOCKED'); } else {alert('Type correction first');}">📋 Copy Correction to Main Prompt + Regenerate - 5 CHANNELS</button>
+</div>
+<div id="correctedOutput" class="output-box hidden" style="border-color:#00ff88;background:#001a0a"></div>
+</div>
+</div>
+
+<div class="card card-blue"><h2>👥 CHARACTER MODELS FREE/PAYABLE - 5 CHANNELS LOCKED</h2>
+<div class="grid">
+<div class="style-card" onclick="selectModel('NIXORA-KIDS-BASE-FREE',0)"><div style="height:60px;background:linear-gradient(45deg,#ff99cc,#99ccff);border-radius:4px"></div><b>NIXORA-KIDS-BASE-FREE - Made for Kids YES</b><br><small>Free 60% 720p - NIXORA KIDS</small><br><span class="badge badge-green">FREE $0 - NIXORA KIDS</span></div>
+<div class="style-card" onclick="selectModel('LIVING-ALTAR-PREMIUM-98',50)"><div style="height:60px;background:linear-gradient(45deg,#fff,#999);border-radius:4px"></div><b>LIVING-ALTAR-PREMIUM-98 - Gospel</b><br><small>Premium 98% 8K - LIVING ALTAR</small><br><span class="badge badge-orange">$50 - LIVING ALTAR</span></div>
+<div class="style-card" onclick="selectModel('AFRO-TALES-TEAM-8-PREMIUM-98',50)"><div style="height:60px;background:linear-gradient(45deg,#996633,#cc9966);border-radius:4px"></div><b>AFRO-TALES-TEAM-8-PREMIUM-98 - Netflix</b><br><small>Team 8 cast 98% - AFRO TALES - Netflix YouTube Amazon</small><br><span class="badge badge-orange">$50 - AFRO TALES</span></div>
+<div class="style-card" onclick="selectModel('VIBRA-XONA-PREMIUM-98',50)"><div style="height:60px;background:linear-gradient(45deg,#ff00ff,#00ff88);border-radius:4px"></div><b>VIBRA-XONA-PREMIUM-98 - Spotify Amazon</b><br><small>Premium 98% - VIBRA XONA - Spotify Amazon</small><br><span class="badge badge-orange">$50 - VIBRA XONA</span></div>
+<div class="style-card" onclick="selectModel('NIXOXTAR-TEAM-8-PREMIUM-98-INTERNATIONAL',50)"><div style="height:60px;background:linear-gradient(45deg,#111,#ff6600);border-radius:4px"></div><b>NIXOXTAR-TEAM-8-PREMIUM-98-INTERNATIONAL</b><br><small>Team 8+ 98% - NIXOXTAR International Standard - Global Blockbuster + Vibrant Musical Clean No Trademark</small><br><span class="badge badge-orange">$50 - NIXOXTAR International</span></div>
+</div>
+<p id="modelStatus" style="background:#000;padding:6px;border-radius:6px">No model - Choose - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... locked</p>
+</div>
+
+<div class="card"><h2>📍 EXPORTS - 5 CHANNELS LOCKED - INTERNATIONAL STANDARD</h2>
+<button class="btn orange">[NIXORA KIDS Master] WAV 24/48 - Made for Kids YES - 5 CHANNELS LOCKED</button>
+<button class="btn orange">[LIVING ALTAR Master] Gospel Full - Classical Choir - 5 CHANNELS LOCKED - Domain nixorastudios.com</button>
+<button class="btn orange">[AFRO TALES Master] Netflix YouTube Amazon Epic Village City Drama - Team 8+ - 5 CHANNELS LOCKED</button>
+<button class="btn orange">[VIBRA XONA Master] Spotify Amazon Afrobeats Neon - 5 CHANNELS LOCKED</button>
+<button class="btn red">[NIXOXTAR Master 45min 4K Dolby Atmos International Standard] Global Blockbuster + Vibrant Musical Clean No Trademark - Team 8+ - 5 CHANNELS LOCKED FINAL - Domain nixorastudios.com + Hash e3b0c44... + Owner anago.vincent.nnalue@gmail.com - God Mode $0 - International Standard - Excellent</button>
+</div>
+
+<div class="card"><h2>💳 BILLING - 5 CHANNELS LOCKED FINAL</h2><label><input type="checkbox" id="consent"> I consent auto debit - Domain nixorastudios.com + Hash e3b0c44... + Owner anago.vincent.nnalue@gmail.com - God Mode - 5 CHANNELS LOCKED</label><button class="btn green" onclick="if(!document.getElementById('consent').checked){alert('Tick consent - 5 CHANNELS LOCKED'); return;} localStorage.setItem('consent',JSON.stringify([{time:new Date().toISOString(),business:BUSINESS_LOCKED,domain:DOMAIN_LOCKED,owner:OWNER_EMAIL_PLAIN,hash:OWNER_EMAIL_HASH,channels:['NIXORA KIDS','LIVING ALTAR','AFRO TALES','VIBRA XONA','NIXOXTAR']} ])); localStorage.setItem('isPro','true'); document.getElementById('billOut').innerText='Consent logged - 5 CHANNELS LOCKED FINAL NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode $0 - PRO $9 BEST - International Standard';">💳 Subscribe PRO $9 - 5 CHANNELS LOCKED FINAL - Domain + Hash + Email God Mode</button><p id="billOut" style="background:#000;padding:6px;border-radius:6px;white-space:pre-wrap"></p><button class="btn dark" onclick="localStorage.clear(); alert('Fixed - 5 CHANNELS LOCKED FINAL'); location.reload();">🛠️ Fix My Account - 5 CHANNELS LOCKED</button></div>
+
+<div class="card" style="border-left-color:#ff6a00"><h2>📺 5 CHANNELS - OPEN</h2>
+<div class="open-grid">
+<div class="open-card"><div style="height:56px;background:linear-gradient(45deg,#ff99cc,#99ccff);border-radius:6px"></div><b>CH1: NIXORA KIDS</b><small>Kids Learning Adventure Comedy Action All in One - Made for Kids YES</small><span class="badge badge-green">70-100 Options</span><button class="open-btn" onclick="openChannel('NIXORA_KIDS')">OPEN</button></div>
+<div class="open-card"><div style="height:56px;background:linear-gradient(45deg,#ffffff,#999999);border-radius:6px"></div><b>CH2: LIVING ALTAR</b><small>Gospel Song For All - Choir Solo Band Live</small><span class="badge badge-green">70-100 Options</span><button class="open-btn" onclick="openChannel('LIVING_ALTAR')">OPEN</button></div>
+<div class="open-card"><div style="height:56px;background:linear-gradient(45deg,#996633,#cc9966);border-radius:6px"></div><b>CH3: AFRO TALES</b><small>Netflix YouTube Amazon - Epic Village City Drama</small><span class="badge badge-orange">70-100 Options</span><button class="open-btn" onclick="openChannel('AFRO_TALES')">OPEN</button></div>
+<div class="open-card"><div style="height:56px;background:linear-gradient(45deg,#ff00ff,#00ff88);border-radius:6px"></div><b>CH4: VIBRA XONA</b><small>Spotify Amazon - Afrobeats Neon Dance Live</small><span class="badge badge-orange">70-100 Options</span><button class="open-btn" onclick="openChannel('VIBRA_XONA')">OPEN</button></div>
+<div class="open-card"><div style="height:56px;background:linear-gradient(45deg,#111111,#ff6600);border-radius:6px"></div><b>CH5: NIXOXTAR</b><small>International Standard - Global Blockbuster + Vibrant Musical Clean</small><span class="badge badge-orange">70-100 Options</span><button class="open-btn" onclick="openChannel('NIXOXTAR')">OPEN</button></div>
+</div>
+<p id="openStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:6px">No channel opened - Click OPEN on any card - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com</p>
+</div>
+
+<script>
+function openChannel(ch){
+  setChannel(ch);
+  let map={NIXORA_KIDS:'chNixoraKids',LIVING_ALTAR:'chLivingAltar',AFRO_TALES:'chAfroTales',VIBRA_XONA:'chVibraXona',NIXOXTAR:'chNixoxtar'};
+  let el=document.getElementById(map[ch]);
+  if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); }
+  let s=document.getElementById('openStatus');
+  if(s){ s.innerText='OPENED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 options each - Domain '+DOMAIN_LOCKED+' - Owner '+OWNER_EMAIL_PLAIN; }
+}
+function openTool(t){
+  let s=document.getElementById('toolStatus');
+  if(s){ s.innerText='OPENED TOOL: '+t+' - AI GENERATIVE ENGINES - 10 TOOLS'; }
+  let panel=document.getElementById('talkingAvatarPanel');
+  if(panel){ panel.classList.toggle('hidden',t!=='Lipsync'); }
+  if(t==='Lipsync'){
+    let input=document.getElementById('avatarAudio');
+    if(input){ input.click(); }
+    panel.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+}
+// Native speech synthesis has no MediaStream/output node: speech uses timing
+// and word-boundary events; uploaded media alone is measured by AnalyserNode.
+let lipSession=null, lipFrame=0, lipContext=null, lipAnalyser=null, lipSource=null, lipURL=null;
+const avatarPlayer=document.getElementById('avatarPlayer');
+function faceMarkup(label,index){
+  return '<svg class="lip-avatar" data-mouth="closed" viewBox="0 0 150 112" role="img" aria-label="'+label+' avatar"><path class="lip-face" d="M40 40 Q40 12 75 12 Q110 12 110 40 L106 76 Q100 100 75 104 Q50 100 44 76 Z"/><path class="lip-hair" d="M41 41 Q33 8 75 8 Q115 8 109 42 L99 28 Q75 '+(index%2?45:18)+' 50 30 Z"/><ellipse class="lip-eye" cx="59" cy="51" rx="5" ry="7"/><ellipse class="lip-eye" cx="91" cy="51" rx="5" ry="7"/><path class="lip-nose" d="M75 57 L71 69 L79 69"/><ellipse class="lip-mouth" cx="75" cy="84" rx="15" ry="12"/></svg>';
+}
+function setMouth(avatar,shape){if(avatar) avatar.dataset.mouth=shape;}
+function stopLip(){
+  const old=lipSession; lipSession=null; cancelAnimationFrame(lipFrame);
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  avatarPlayer.pause();
+  document.querySelectorAll('.lip-avatar').forEach(a=>setMouth(a,'closed'));
+  if(old?.button){old.button.setAttribute('aria-pressed','false');old.button.textContent='🔊';}
+}
+function finishLip(session){if(lipSession!==session)return;stopLip();}
+function speakCard(card,button){
+  if(lipSession?.button===button){stopLip();return;}
+  stopLip();
+  if(!('speechSynthesis' in window)){document.getElementById('toolStatus').textContent='Speech playback is not supported in this browser.';return;}
+  const session={avatar:card.querySelector('.lip-avatar'),button,started:0,boundary:0};
+  lipSession=session; button.setAttribute('aria-pressed','true');button.textContent='⏹';
+  const words=card.querySelector('b').textContent.replace(/^CH\d+:\s*/, '');
+  const utterance=new SpeechSynthesisUtterance(words+'. '+(card.querySelector('small')?.textContent||''));
+  session.utterance=utterance;utterance.lang='en';utterance.rate=.95;
+  utterance.onstart=()=>{if(lipSession!==session)return; session.started=performance.now(); animateSpeech();};
+  utterance.onboundary=()=>{session.boundary=performance.now();};
+  utterance.onend=()=>finishLip(session);
+  utterance.onerror=event=>{if(lipSession!==session)return; finishLip(session);document.getElementById('toolStatus').textContent='Speech playback unavailable: '+event.error;};
+  function animateSpeech(){
+    if(lipSession!==session)return;
+    const elapsed=performance.now()-session.started;
+    const phase=Math.floor((session.boundary?performance.now()-session.boundary:elapsed)/95)%6;
+    setMouth(session.avatar,window.speechSynthesis.paused?'closed':(['half','wide','half','closed','wide','half'][phase]));
+    lipFrame=requestAnimationFrame(animateSpeech);
+  }
+  window.speechSynthesis.speak(utterance);
+}
+const lipCards=document.querySelectorAll('.tool-card,.open-card,#chNixoraKids,#chLivingAltar,#chAfroTales,#chVibraXona,#chNixoxtar');
+lipCards.forEach((card,index)=>{
+  const label=card.querySelector('b').textContent;
+  card.insertAdjacentHTML('afterbegin',faceMarkup(label,index));
+  const button=document.createElement('button'); button.type='button';button.className='btn lip-speaker';button.textContent='🔊';button.title='Speak '+label+' / Stop';button.setAttribute('aria-label','Speak '+label);button.setAttribute('aria-pressed','false');
+  button.addEventListener('click',event=>{event.stopPropagation();speakCard(card,button);});
+  card.appendChild(button);
+});
+document.getElementById('audioAvatarPreview').innerHTML=faceMarkup('Talking',8);
+function audioMouth(shape){setMouth(document.querySelector('#audioAvatarPreview .lip-avatar'),shape);setMouth(document.querySelector('.tool-card[data-tool="lipsync"] .lip-avatar'),shape);}
+// Handles support mouse/touch dragging and arrow-key reordering without storage.
+const engineGrid=document.querySelector('.tool-grid');
+let draggedEngine=null,engineTarget=null;
+function clearEngineDrag(){
+  document.querySelectorAll('.tool-card').forEach(card=>card.classList.remove('dragging','drop-target'));
+  draggedEngine=null;engineTarget=null;
+}
+engineGrid.querySelectorAll('.tool-card').forEach(card=>{
+  const handle=document.createElement('button');handle.type='button';handle.className='tool-drag';handle.textContent='⠿';
+  handle.title='Drag to reorder; arrow keys move card';handle.setAttribute('aria-label','Reorder '+card.querySelector('b').textContent);
+  card.prepend(handle);
+  handle.addEventListener('pointerdown',event=>{
+    if(event.button!==0)return;
+    draggedEngine=card;card.classList.add('dragging');handle.setPointerCapture(event.pointerId);
+  });
+  handle.addEventListener('pointermove',event=>{
+    if(draggedEngine!==card)return;
+    const target=document.elementFromPoint(event.clientX,event.clientY)?.closest('.tool-card');
+    if(engineTarget)engineTarget.classList.remove('drop-target');
+    engineTarget=target&&target!==card&&target.parentElement===engineGrid?target:null;
+    if(engineTarget)engineTarget.classList.add('drop-target');
+    const app=document.getElementById('app'),rect=app.getBoundingClientRect();
+    if(event.clientY>rect.bottom-45)app.scrollTop+=12;
+    if(event.clientY<rect.top+45)app.scrollTop-=12;
+  });
+  handle.addEventListener('pointerup',()=>{
+    if(draggedEngine===card&&engineTarget){
+      const cards=Array.from(engineGrid.children);
+      engineGrid.insertBefore(card,cards.indexOf(card)<cards.indexOf(engineTarget)?engineTarget.nextSibling:engineTarget);
+    }
+    clearEngineDrag();
+  });
+  handle.addEventListener('pointercancel',clearEngineDrag);
+  handle.addEventListener('keydown',event=>{
+    const cards=Array.from(engineGrid.children),index=cards.indexOf(card);
+    const offset={ArrowLeft:-1,ArrowRight:1,ArrowUp:-5,ArrowDown:5}[event.key];
+    if(offset===undefined)return;event.preventDefault();
+    const target=cards[index+offset];if(!target)return;
+    engineGrid.insertBefore(card,offset>0?target.nextSibling:target);handle.focus();
+  });
+});
+async function handleAvatarAudio(input){
+  const file=input.files[0];if(!file)return;
+  stopLip();
+  if(lipURL) URL.revokeObjectURL(lipURL);
+  lipURL=URL.createObjectURL(file);avatarPlayer.src=lipURL;
+  document.getElementById('avatarStatus').textContent='AUDIO READY: '+file.name;
+  try{await avatarPlayer.play();}catch{document.getElementById('avatarStatus').textContent='Audio ready. Press Play to listen.';}
+}
+avatarPlayer.addEventListener('play',async()=>{
+  if(lipSession){stopLip();return;}
+  try{
+    const AudioEngine=window.AudioContext||window.webkitAudioContext;
+    if(!AudioEngine)throw new Error('Audio analysis is not supported in this browser.');
+    if(!lipContext){lipContext=new AudioEngine();lipAnalyser=lipContext.createAnalyser();lipAnalyser.fftSize=512;lipAnalyser.smoothingTimeConstant=.35;lipSource=lipContext.createMediaElementSource(avatarPlayer);lipSource.connect(lipAnalyser);lipAnalyser.connect(lipContext.destination);}
+    await lipContext.resume();
+    const samples=new Uint8Array(lipAnalyser.fftSize);
+    cancelAnimationFrame(lipFrame);
+    function measure(){
+      if(avatarPlayer.paused||avatarPlayer.ended){audioMouth('closed');return;}
+      lipAnalyser.getByteTimeDomainData(samples);
+      let sum=0;for(const sample of samples){const level=(sample-128)/128;sum+=level*level;}
+      const rms=Math.sqrt(sum/samples.length);
+      audioMouth(rms<.018?'closed':rms<.10?'half':'wide');
+      lipFrame=requestAnimationFrame(measure);
+    }
+    measure();
+  }catch(error){document.getElementById('avatarStatus').textContent=error.message;audioMouth('closed');}
+});
+['pause','ended','error','waiting'].forEach(type=>avatarPlayer.addEventListener(type,()=>{cancelAnimationFrame(lipFrame);audioMouth('closed');if(type==='error')document.getElementById('avatarStatus').textContent='This audio file cannot be played. Choose a supported audio file.';}));
+window.addEventListener('pagehide',()=>{stopLip();if(lipURL)URL.revokeObjectURL(lipURL);if(lipContext)lipContext.close();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopLip();});
+let u=localStorage.getItem('user'); if(u){ let m=checkId(u); document.getElementById('status').innerHTML=m.app+' - '+m.id+' - '+m.badge; }
+let cl=JSON.parse(localStorage.getItem('charLock')||'null'); if(cl){ document.getElementById('charStatus').innerText='LOCKED '+cl.name+' '+cl.hash+' 98% OPTION1'; }
+if(localStorage.getItem('realismLock')==='true'){ document.getElementById('realismToggle').checked=true; }
+if(localStorage.getItem('voiceCloned')==='true'){ document.getElementById('voiceToggle').checked=true; }
+if(localStorage.getItem('selectedStyle')){ document.getElementById('styleStatus').innerText='STYLE LOCKED: '+localStorage.getItem('selectedStyle')+' - 5 CHANNELS LOCKED'; }
+let sm=JSON.parse(localStorage.getItem('selectedModel')||'null'); if(sm){ document.getElementById('modelStatus').innerText='MODEL: '+sm.name+' $'+sm.price; }
+let at=localStorage.getItem('awardTiming'); if(at){ awardTiming=at; }
+let savedLocks=JSON.parse(localStorage.getItem('castLocks')||'{}'); if(Object.keys(savedLocks).length>0){ castLocks=savedLocks; updateAllCastStatus(); }
+let savedCount=parseInt(localStorage.getItem('castCount')||'8'); if(savedCount>8){ for(let i=9;i<=savedCount;i++){ addMoreCast(); } castCount=savedCount; }
+let savedLockMode=localStorage.getItem('lockMode')||'single'; setLockMode(savedLockMode);
+let savedChannel=localStorage.getItem('currentChannel')||'NIXORA_KIDS'; setChannel(savedChannel);
+updateSelfRecognition();
+if(localStorage.getItem('user')){ document.getElementById('gate').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); document.getElementById('createAccountBtn').style.display='none'; }
+console.log("NIXORA STUDIOS FINAL 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - God Mode $0 - International Standard - 350-500 styles 700-1000 photos - OPTION1+OPTION2 - Self-Recognition 100% - Award Polish - Edit Correction - Coding Light");
+</script>
+</div>
+</body>
+</html>
