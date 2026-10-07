@@ -11,3 +11,4 @@
 
 - Keep the embedded studio's avatar controller in its single HTML file; use AnalyserNode for uploaded audio and speech events for browser TTS because speech synthesis exposes no audio stream.
 - Identify engine cards with stable data-tool keys, not grid positions; in-session drag reordering must not change audio targets.
+- Keep the launcher's palette and motion as `--nixora-*` tokens and `.nixora-*` classes in `src/styles.css` instead of inline hex styles, so the neon look stays themable and one edit retunes it.
