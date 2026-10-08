@@ -102,7 +102,7 @@ export function ExtensionDashboard({ tool, onClose }: { tool: string; onClose: (
       style={{ position: "fixed", inset: 0, zIndex: 50, background: "#0a0f0a", color: green, overflow: "auto", padding: 16, fontFamily: "monospace" }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, borderBottom: `1px solid ${green}`, paddingBottom: 12 }}>
-        <h2 style={{ fontSize: 20, fontWeight: "bold" }}>{tool} - EXTENSION DASHBOARD - GOD MODE</h2>
+        <h2 style={{ fontSize: 20, fontWeight: "bold" }}>{tool} - EXTENSION DASHBOARD</h2>
         <button onClick={onClose} aria-label="Close" style={{ background: "#ff4444", color: "#fff", padding: "8px 16px", border: "none", borderRadius: 5, fontWeight: "bold", cursor: "pointer" }}>
           ✕ CLOSE
         </button>
