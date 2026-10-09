@@ -568,6 +568,9 @@ function xdPreview(){const d=xdLoad();const f=document.getElementById('xdFrame')
   if(activeTool==='code-engine'){f.srcdoc=d.prompt||'<p style="font-family:sans-serif">Nothing to preview yet.</p>';}
   else{f.srcdoc='<div style="font-family:sans-serif;padding:10px"><h3>'+activeToolName+'</h3>'+(d.image?'<img src="'+d.image+'" style="max-width:100%">':'')+'<p>'+(d.prompt||'').replace(/</g,'&lt;')+'</p></div>';}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&showExtensionDashboard)setShowExtensionDashboard(false);});
+ // NIXORA PIPELINE LOADER - 10 MODULES -> 5 CHANNELS
+fetch('./owner-certificate.json').then(r=>r.json()).then(c=>{ console.log('OWNER CERT:',c); localStorage.setItem('nixora_owner', JSON.stringify(c)); });
+fetch('./nixora-pipeline.json').then(r=>r.json()).then(p=>{ console.log('PIPELINE:',p); localStorage.setItem('nixora_pipeline', JSON.stringify(p)); window.NIXORA_PIPELINE = p; });
 </script>
 </body>
 <!-- ADMIN + SUPPORT FOOTER -->
