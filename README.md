@@ -1,24 +1,44 @@
-# Remix of Nixora Studios Play
+# NIXORA STUDIOS
 
-Build this as NIXORA STUDIOS app - 5 channels locked NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - God Mode owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - Clean file - Mobile responsive - International Standard - One file app
+**10 AI GENERATIVE MODULES PLATFORM**
+Hash: `NS-7f3a9c2e`
+Owner: anago.vincent.nnalue@gmail.com
+Domain: nixorastudios.com
 
-This project was built with [Lovable](https://lovable.dev).
+## LIVE SITE
+https://nixorastudios.github.io/remix-of-nixora-studios-play/
 
-## Build with Lovable
+After rename: https://nixorastudios.github.io/nixora-studios/
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9053a68c-53d9-4eb5-a587-cb75342eb89c).
+## 10 MODULES
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+1.  **Text to Image** - Idea to Visual
+2.  **Photo to Video** - Still to Motion
+3.  **Text to Video** - Script to Scene
+4.  **Animation Studio** - Characters Alive
+5.  **Voice Over** - Human Narration
+6.  **Sound Effects** - World Sounds
+7.  **LipSync Engine** - Perfect Mouth Match
+8.  **Music Studio DAW** - Beat to Master
+9.  **Video Editor** - Cut and Compose
+10. **CODE Engine** - Build Anything
 
-## Development
+## 5 CHANNELS
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+*   NIXORA KIDS
+*   LIVING ALTAR
+*   AFRO TALES
+*   VIBRA XONA
+*   NIXOXTAR
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## SECURITY HASH
+`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+
+## TECH STACK
+Lovable + GitHub Pages + React + Tailwind
+
+## OWNER
+Nixora Studios © 2026
+Contact: anago.vincent.nnalue@gmail.com
+
+This is NOT a remix or play project. This is NIXORA STUDIOS official generative platform.
