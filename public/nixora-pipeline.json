@@ -1,0 +1,64 @@
+{
+  "architecture": "10 MODULES (Engine) -> 5 CHANNELS (Streaming Destinations) -> Owner Certificate",
+  "modules": [
+    { "id": "text-to-phone", "name": "Text to Phone (Script)", "role": "Script generation", "export": ["txt","srt"] },
+    { "id": "photo-to-video", "name": "Photo to Video", "role": "Animate images", "export": ["mp4"] },
+    { "id": "text-to-video", "name": "Text to Video", "role": "Prompt to video", "export": ["mp4"] },
+    { "id": "animation", "name": "Animation Engine", "role": "2D/3D cartoon", "export": ["mp4","mov"] },
+    { "id": "voice-over", "name": "Voice Over", "role": "AI voice + clone", "export": ["mp3","wav"] },
+    { "id": "sfx", "name": "Sound Effects", "role": "Effects library", "export": ["wav"] },
+    { "id": "lipsync", "name": "Lipsync", "role": "Lip sync to audio", "export": ["mp4"] },
+    { "id": "music-daw", "name": "Music Studio DAW", "role": "Music production DAW enabled", "export": ["wav","mp3","stems"] },
+    { "id": "video-editor", "name": "Video Editor", "role": "Timeline edit + auto", "export": ["mp4 master"] },
+    { "id": "code-engine", "name": "CODE Engine", "role": "Generate apps/code", "export": ["zip","js","html"] }
+  ],
+  "channels": [
+    {
+      "id": "nixora-kids",
+      "name": "NIXORA KIDS",
+      "platform": "YouTube Kids / TikTok Kids",
+      "allowed_modules": ["animation","voice-over","text-to-video","photo-to-video"],
+      "export_preset": "youtube-kids-1080p-safe",
+      "requires_certificate": true,
+      "monetization_note": "Paid owner content - not bulk AI spam - includes human supervision tag"
+    },
+    {
+      "id": "living-altar",
+      "name": "LIVING ALTAR",
+      "platform": "YouTube Music / Gospel",
+      "allowed_modules": ["music-daw","voice-over","lipsync","video-editor"],
+      "export_preset": "youtube-music-stereo-lyrics",
+      "requires_certificate": true,
+      "monetization_note": "Original gospel composition - DAW stems included"
+    },
+    {
+      "id": "nixora-learning",
+      "name": "NIXORA LEARNING",
+      "platform": "YouTube Edu / Udemy",
+      "allowed_modules": ["text-to-phone","voice-over","video-editor","code-engine"],
+      "export_preset": "edu-1080p",
+      "requires_certificate": true
+    },
+    {
+      "id": "nixora-stories",
+      "name": "NIXORA STORIES",
+      "platform": "YouTube / Reels / Shorts",
+      "allowed_modules": ["text-to-video","animation","voice-over","sfx","lipsync"],
+      "export_preset": "multi-aspect-9x16-16x9",
+      "requires_certificate": true
+    },
+    {
+      "id": "nixora-tech",
+      "name": "NIXORA TECH",
+      "platform": "GitHub / Dev.to",
+      "allowed_modules": ["code-engine","text-to-phone","video-editor"],
+      "export_preset": "code-zip-plus-tutorial",
+      "requires_certificate": true
+    }
+  ],
+  "export_pipeline": {
+    "description": "Direct compatible export from app to channel",
+    "each_export_contains": ["video.mp4 OR code.zip", "owner-certificate.json", "platform-metadata.json"],
+    "purpose": "Streaming platform understands content is PAID OWNER certified, not free-tier AI spam, avoiding demonetization flag"
+  }
+}
