@@ -42,6 +42,9 @@ const handlePlatformExport = (exportData: any, output: any) => {
   alert(`Exported to ${exportData.platform} - ${exportData.spec} - Signature embedded: NIXORA_PAID_SIGNATURE_v1 - Media sees PAID content`);
 };
   useEffect(() => {
+  if (output) setCurrentOutput(output);
+}, [output]);
+useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
