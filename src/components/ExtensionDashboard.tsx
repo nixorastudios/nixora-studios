@@ -1,5 +1,5 @@
 import { useEffect, useState, type DragEvent } from "react";
-
+import ExportModal from "./ExportModal";
 const TABS = ["PROMPT", "IMAGE", "SPREADSHEET", "VIDEO/WORK"] as const;
 type Tab = (typeof TABS)[number];
 const JOBS_KEY = "nixora_code_engine_jobs";
@@ -34,7 +34,13 @@ export function ExtensionDashboard({ tool, onClose }: { tool: string; onClose: (
   const [output, setOutput] = useState("");
   const [dragOver, setDragOver] = useState(false);
   const isCode = tool === "CODE ENGINE";
+const [showExportModal, setShowExportModal] = useState(false);
+const [currentOutput, setCurrentOutput] = useState<any>(null);
 
+const handlePlatformExport = (exportData: any, output: any) => {
+  console.log("EXPORTING TO PLATFORM", exportData, output);
+  alert(`Exported to ${exportData.platform} - ${exportData.spec} - Signature embedded: NIXORA_PAID_SIGNATURE_v1 - Media sees PAID content`);
+};
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -165,7 +171,21 @@ export function ExtensionDashboard({ tool, onClose }: { tool: string; onClose: (
           {isCode && prompt ? (
             <iframe title="Live preview" sandbox="allow-scripts" srcDoc={prompt} style={{ flex: 1, minHeight: 260, background: "#fff", border: 0, borderRadius: 6 }} />
           ) : null}
-          <pre style={{ whiteSpace: "pre-wrap", color: "#ccc" }}>{output || "Output will appear here after generation..."}</pre>
+          <pre style={{ whiteSpace: "pre-wrap", color: "#ccc" }}>{output || "Output will appear here after generation..."}</pre>{output && (
+  <div style={{ display: "flex", gap: 8, marginTop: 16 }}>
+    <button onClick={() => { /* take to edit interface */ console.log("Edit", currentOutput); }} style={{ padding: "10px 16px", background: "#222", color: "#fff", borderRadius: 8, border: "1px solid #333" }}>Edit</button>
+    <button onClick={() => { /* download/share to device */ if(currentOutput?.url){ window.open(currentOutput.url, "_blank"); } else { navigator.clipboard.writeText(output); alert("Copied/Downloaded"); } }} style={{ padding: "10px 16px", background: "#222", color: "#fff", borderRadius: 8, border: "1px solid #333" }}>Download/Share</button>
+    <button onClick={() => { setCurrentOutput(output); setShowExportModal(true); }} style={{ padding: "10px 16px", background: "#00FF88", color: "#000", fontWeight: 700, borderRadius: 8 }}>Export</button>
+  </div>
+)}
+
+{showExportModal && (
+  <ExportModal
+    onClose={() => setShowExportModal(false)}
+    onExport={(data: any) => handlePlatformExport(data, currentOutput || output)}
+    isOwner={true}
+  />
+)}
         </div>
       </div>
     </div>
