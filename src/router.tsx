@@ -8,7 +8,7 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: { queryClient },
-    basepath: "/nixora-studios/",
+    basepath: "/nixora-studios/", 
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
   });
