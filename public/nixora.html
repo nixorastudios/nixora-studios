@@ -89,7 +89,7 @@ NIXORA STUDIOS TERMS Oct 2026 - ACHIEVEMENT YESTERDAY ADDED
 Owner Email: anago.vincent.nnalue@gmail.com
 Domain: nixorastudios.com
 Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-OWNER STUDIO: Email + Hash + Domain locked - $0 UNLIMITED OWNER ONLY - GOD anago.vincent.nnalue@gmail.com - Admin nixorastudios@gmail.com - Support support@nixorastudios.com - Domain nixorastudios.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 locked
+God Mode: Email + Hash + Domain locked - $0 UNLIMITED OWNER ONLY
 Business: NIXORA STUDIOS ENTERPRISES BN new not sand mining
 Support: support@nixorastudios.com
 5 CHANNELS LOCKED FINAL:
@@ -196,10 +196,23 @@ function previewCoderCode(){ document.getElementById('coderPreview').innerText='
 <div class="tool-card" data-tool="lipsync"><div class="tool-icon">🗣️</div><b>LIPSYNC</b><small>Sync mouth to Voice Over audio with Web Audio AnalyserNode</small><button class="tool-go" onclick="openTool('Lipsync')">START</button></div>
 <div class="tool-card" data-tool="sound-effects"><div class="tool-icon">🔊</div><b>SOUND EFFECTS</b><small>Add realistic sound to scenes</small><button class="tool-go" onclick="openTool('Sound Effects')">START</button></div>
 <div class="tool-card" data-tool="music"><div class="tool-icon">🎵</div><b>MUSIC STUDIO</b><small>Make beats, songs and gospel music</small><button class="tool-go" onclick="openTool('Music Studio')">START</button></div>
-<div class="tool-card" data-tool="video-editor"><div class="tool-icon">✂️</div><b>VIDEO EDITOR</b><small>Cut, trim and polish clips</small><button class="tool-go" onclick="openTool('Video Editor')">START</button></div>
+<div class="tool-card" data-tool="video-editor"><div class="tool-icon">✂️</div><b>VIDEO EDITOR</b><small>Cut, trim and polish clips</small><button class="tool-go" onclick="openTool('Video Editor')">START</button><button class="tool-go" style="background:#00ff88;color:#000;margin-top:6px" onclick="exportVideo(this)">⬇ EXPORT VIDEO</button></div>
 <div class="tool-card" data-tool="code"><div class="tool-icon">💻</div><b>CODE ENGINE</b><small>Write and preview code live</small><button class="tool-go" onclick="openTool('Code Engine')">START</button></div>
 </div>
-<p id="toolStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:6px">Ready — click START on any tool to open its dashboard</p>
+<p id="toolStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:6px">No tool opened - Click START on any tool</p>
+<div style="margin-top:10px"><b style="color:#FF6B00">🚀 TOOL DASHBOARDS - 10 TOOLS</b>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:6px">
+<button class="tool-go" onclick="goTool('text-to-image')">TEXT TO IMAGE</button>
+<button class="tool-go" onclick="goTool('image-to-video')">IMAGE TO VIDEO</button>
+<button class="tool-go" onclick="goTool('text-to-video')">TEXT TO VIDEO</button>
+<button class="tool-go" onclick="goTool('image-to-image')">IMAGE TO IMAGE</button>
+<button class="tool-go" onclick="goTool('video-to-video')">VIDEO TO VIDEO</button>
+<button class="tool-go" onclick="goTool('audio-to-video')">AUDIO TO VIDEO</button>
+<button class="tool-go" onclick="goTool('lipsync')">LIPSYNC</button>
+<button class="tool-go" onclick="goTool('upscale')">UPSCALE</button>
+<button class="tool-go" onclick="goTool('background-remover')">BACKGROUND REMOVER</button>
+<button class="tool-go" onclick="goTool('motion-control')">MOTION CONTROL</button>
+</div></div>
 <div id="talkingAvatarPanel" class="avatar-panel hidden">
 <h3>🗣️ LIPSYNC - VOICE OVER AUDIO + AVATAR PREVIEW</h3>
 <div class="avatar-preview" id="audioAvatarPreview"></div>
@@ -348,6 +361,14 @@ function generate(){return {owner:"anago.vincent.nnalue@gmail.com",hash:"e3b0c44
 <p id="openStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:6px">No channel opened - Click OPEN on any card - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com</p>
 </div>
 
+<div id="footer" style="background:#000;border:2px solid #333;border-radius:10px;padding:12px;margin:8px 0;text-align:center">
+<h2>📮 CONTACT & SUPPORT</h2>
+<p style="margin:6px 0"><a href="mailto:support@nixorastudios.com" style="color:#00ff88;font-weight:bold;text-decoration:underline">📧 support@nixorastudios.com</a></p>
+<p style="margin:6px 0"><a href="https://nixorastudios.com" target="_blank" rel="noopener" style="color:#ff6a00;font-weight:bold;text-decoration:underline">🌐 nixorastudios.com</a></p>
+<p style="margin:6px 0"><a href="mailto:nixorastudios@gmail.com" style="color:#00ff88;font-weight:bold;text-decoration:underline">👑 Admin: nixorastudios@gmail.com</a></p>
+<small style="color:#888;display:block;margin-top:8px">NIXORA STUDIOS ENTERPRISES - 5 CHANNELS LOCKED - © 2026</small>
+</div>
+
 <script>
 function openChannel(ch){
   setChannel(ch);
@@ -357,12 +378,64 @@ function openChannel(ch){
   let s=document.getElementById('openStatus');
   if(s){ s.innerText='OPENED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 options each - Domain '+DOMAIN_LOCKED+' - Owner '+OWNER_EMAIL_PLAIN; }
 }
-function openTool(t,ev){
-  const e=ev||window.event;const card=e&&e.target&&e.target.closest?e.target.closest('.tool-card'):null;
-  const key=card?card.dataset.tool:t.toLowerCase().replace(/\s+/g,'-');
-  setActiveTool(key==='code'?'code-engine':key,t);setShowExtensionDashboard(true);
-  let s=document.getElementById('toolStatus');if(s){s.innerText='ACTIVE TOOL: '+t;}
-  let panel=document.getElementById('talkingAvatarPanel');if(panel){panel.classList.toggle('hidden',t!=='Lipsync');}
+function goTool(slug){ window.top.location.href='/tools/'+slug; }
+function openTool(t){
+  var routes={'Text to Image':'text-to-image','Images to Video':'image-to-video','Text to Video':'text-to-video','Lipsync':'lipsync'};
+  if(routes[t]){ goTool(routes[t]); return; }
+  let s=document.getElementById('toolStatus');
+  if(s){ s.innerText='OPENED TOOL: '+t+' - AI GENERATIVE ENGINES - 10 TOOLS'; }
+  let panel=document.getElementById('talkingAvatarPanel');
+  if(panel){ panel.classList.toggle('hidden',t!=='Lipsync'); }
+  if(t==='Lipsync'){
+    let input=document.getElementById('avatarAudio');
+    if(input){ input.click(); }
+    panel.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  if(t==='Video Editor'&&s){ s.innerText='OPENED TOOL: Video Editor - press ⬇ EXPORT VIDEO on the card to render and download a clip'; }
+}
+// Records a real video clip (animated channel title card) and downloads it.
+let exporting=false;
+function exportVideo(btn){
+  if(exporting) return;
+  const status=document.getElementById('toolStatus');
+  if(typeof MediaRecorder==='undefined'||!HTMLCanvasElement.prototype.captureStream){
+    if(status) status.textContent='Video export is not supported in this browser.';return;
+  }
+  exporting=true; btn.disabled=true; btn.textContent='⏺ RECORDING…';
+  const canvas=document.createElement('canvas'); canvas.width=1280; canvas.height=720;
+  const ctx=canvas.getContext('2d');
+  const stream=canvas.captureStream(30);
+  const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9')?'video/webm;codecs=vp9':'video/webm';
+  const rec=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:6_000_000});
+  const chunks=[]; rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+  rec.onstop=()=>{
+    const blob=new Blob(chunks,{type:'video/webm'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a'); a.href=url; a.download='nixora-studios-'+currentChannel.toLowerCase().replace(/_/g,'-')+'.webm';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),5000);
+    exporting=false; btn.disabled=false; btn.textContent='⬇ EXPORT VIDEO';
+    if(status) status.textContent='EXPORTED: nixora-studios clip downloaded ('+(blob.size/1024/1024).toFixed(1)+' MB) - '+DOMAIN_LOCKED;
+  };
+  const DUR=4000, t0=performance.now();
+  function draw(now){
+    const t=(now-t0)/1000, p=Math.min((now-t0)/DUR,1);
+    ctx.fillStyle='#0a0a0a'; ctx.fillRect(0,0,1280,720);
+    const g=ctx.createLinearGradient(0,0,1280,720);
+    g.addColorStop(0,'#FF6B00'); g.addColorStop(1,'#00ff88');
+    ctx.fillStyle=g; ctx.fillRect(0,680*Math.abs(Math.sin(t)),1280,40);
+    ctx.fillStyle='#fff'; ctx.font='bold 84px sans-serif'; ctx.textAlign='center';
+    ctx.fillText('NIXORA STUDIOS',640,320);
+    ctx.fillStyle='#FF6B00'; ctx.font='bold 56px sans-serif';
+    ctx.fillText(currentChannel.replace(/_/g,' '),640,420);
+    ctx.fillStyle='#00ff88'; ctx.font='32px sans-serif';
+    ctx.fillText('nixorastudios.com',640,500);
+    ctx.fillStyle='#151515'; ctx.fillRect(140,600,1000,14);
+    ctx.fillStyle='#FF6B00'; ctx.fillRect(140,600,1000*p,14);
+    if(p<1) requestAnimationFrame(draw); else rec.stop();
+  }
+  rec.start(250); requestAnimationFrame(draw);
+  if(status) status.textContent='RECORDING: rendering 4s clip for export…';
 }
 // Native speech synthesis has no MediaStream/output node: speech uses timing
 // and word-boundary events; uploaded media alone is measured by AnalyserNode.
@@ -500,80 +573,5 @@ if(localStorage.getItem('user')){ document.getElementById('gate').classList.add(
 console.log("NIXORA STUDIOS FINAL 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - God Mode $0 - International Standard - 350-500 styles 700-1000 photos - OPTION1+OPTION2 - Self-Recognition 100% - Award Polish - Edit Correction - Coding Light");
 </script>
 </div>
-<style>
-#xdash{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;display:flex;align-items:center;justify-content:center;padding:10px}
-#xdash.hidden{display:none}
-#xdash .xbox{background:#0a0a0a;border:2px solid #00ff88;border-radius:12px;width:100%;max-width:1100px;max-height:95vh;display:flex;flex-direction:column;overflow:hidden;color:#eee}
-#xdash header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid #00ff88;font-weight:bold;color:#00ff88}
-#xdash .xclose{background:none;border:1px solid #00ff88;color:#00ff88;font-size:18px;width:34px;height:34px;border-radius:6px;cursor:pointer}
-#xdash .xbody{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;flex:1;overflow:auto}
-@media(max-width:700px){#xdash .xbody{grid-template-columns:1fr}}
-#xdash .xtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
-#xdash .xtabs button{flex:1;padding:8px;background:#000;border:1px solid #333;color:#ccc;border-radius:6px;cursor:pointer;font-size:11px}
-#xdash .xtabs button.on{border-color:#00ff88;color:#00ff88;background:#001a0a}
-#xdash textarea{width:100%;min-height:220px;background:#000;color:#eee;border:1px solid #333;border-radius:6px;padding:8px;font-family:monospace;box-sizing:border-box}
-#xdash .xdrop{border:2px dashed #00ff88;border-radius:8px;padding:30px;text-align:center;cursor:pointer}
-#xdash .xpane.hidden{display:none}
-#xdash .xout{background:#000;border:1px solid #333;border-radius:6px;min-height:300px;height:100%;display:flex;flex-direction:column}
-#xdash .xout pre{margin:0;padding:8px;white-space:pre-wrap;font-size:11px;max-height:140px;overflow:auto;border-bottom:1px solid #333}
-#xdash iframe{flex:1;border:0;background:#fff;min-height:200px;border-radius:0 0 6px 6px}
-#xdash footer{display:flex;gap:8px;padding:10px;border-top:1px solid #333}
-#xdash footer button{flex:1;padding:12px;border-radius:8px;border:none;font-weight:bold;cursor:pointer;background:#00ff88;color:#000}
-#xdash footer button.alt{background:#000;color:#00ff88;border:1px solid #00ff88}
-</style>
-<div id="xdash" class="hidden" role="dialog" aria-modal="true"><div class="xbox">
-<header><span id="xdTitle">CODE ENGINE - GOD MODE ACTIVE</span><button class="xclose" aria-label="Close" onclick="setShowExtensionDashboard(false)">✕</button></header>
-<div class="xbody"><div>
-<div class="xtabs"><button data-t="prompt" class="on">PROMPT</button><button data-t="image">IMAGE</button><button data-t="sheet">SPREADSHEET</button><button data-t="video">VIDEO+WORK</button></div>
-<div class="xpane" data-p="prompt"><textarea id="xdPrompt" placeholder="Write your code or prompt here..."></textarea></div>
-<div class="xpane hidden" data-p="image"><div class="xdrop" id="xdDrop">Drag &amp; drop an image here, or click to choose<input type="file" id="xdImg" accept="image/*" hidden></div><img id="xdImgPrev" style="max-width:100%;margin-top:8px;border-radius:6px"></div>
-<div class="xpane hidden" data-p="sheet"><button class="xclose" style="width:auto;padding:0 12px" onclick="document.getElementById('xdSheet').click()">Upload CSV / Excel</button><input type="file" id="xdSheet" accept=".csv,.xlsx,.xls" hidden><p id="xdSheetName" style="font-size:11px"></p><pre id="xdSheetPrev" style="font-size:10px;max-height:200px;overflow:auto"></pre></div>
-<div class="xpane hidden" data-p="video"><input type="file" id="xdVid" accept="video/*"><video id="xdVidPrev" controls style="max-width:100%;margin:6px 0;display:none"></video><textarea id="xdWork" placeholder="Describe the work to be done..." style="min-height:120px"></textarea></div>
-</div>
-<div class="xout"><pre id="xdOut">Output will appear here.</pre><iframe id="xdFrame" sandbox="allow-scripts" title="Live preview"></iframe></div></div>
-<footer><button onclick="xdGenerate()">Generate Code</button><button class="alt" onclick="xdPreview()">Preview Live</button></footer>
-</div></div>
-<script>
-let activeTool=null,activeToolName='',showExtensionDashboard=false;
-function xdKey(){return activeTool==='code-engine'?'nixora_code_engine':'nixora_'+String(activeTool).replace(/-/g,'_');}
-function xdLoad(){try{return JSON.parse(localStorage.getItem(xdKey())||'{}')}catch(e){return {}}}
-function xdSave(patch){const d=Object.assign(xdLoad(),patch);try{localStorage.setItem(xdKey(),JSON.stringify(d))}catch(e){delete d.image;localStorage.setItem(xdKey(),JSON.stringify(d))}}
-function setActiveTool(key,name){activeTool=key;activeToolName=(name||key).toUpperCase();
-  document.getElementById('xdTitle').innerText=activeToolName+' - GOD MODE ACTIVE';
-  const d=xdLoad();document.getElementById('xdPrompt').value=d.prompt||'';document.getElementById('xdWork').value=d.work||'';
-  const im=document.getElementById('xdImgPrev');im.src=d.image||'';im.style.display=d.image?'block':'none';
-  document.getElementById('xdSheetName').innerText=d.sheetName?'Loaded: '+d.sheetName:'';document.getElementById('xdSheetPrev').innerText=d.sheetText||'';
-  document.getElementById('xdVidPrev').style.display='none';document.getElementById('xdOut').innerText=d.output||'Output will appear here.';
-  document.getElementById('xdFrame').srcdoc='';}
-function setShowExtensionDashboard(v){showExtensionDashboard=v;document.getElementById('xdash').classList.toggle('hidden',!v);}
-document.querySelectorAll('#xdash .xtabs button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#xdash .xtabs button').forEach(x=>x.classList.toggle('on',x===b));
-  document.querySelectorAll('#xdash .xpane').forEach(p=>p.classList.toggle('hidden',p.dataset.p!==b.dataset.t));xdSave({tab:b.dataset.t});});
-document.getElementById('xdPrompt').oninput=e=>{xdSave({prompt:e.target.value});if(activeTool==='code-engine')xdPreview();};
-document.getElementById('xdWork').oninput=e=>xdSave({work:e.target.value});
-function xdImage(f){if(!f||!f.type.startsWith('image/'))return;const r=new FileReader();r.onload=()=>{const im=document.getElementById('xdImgPrev');im.src=r.result;im.style.display='block';xdSave({image:r.result,imageName:f.name});};r.readAsDataURL(f);}
-const drop=document.getElementById('xdDrop');drop.onclick=()=>document.getElementById('xdImg').click();
-document.getElementById('xdImg').onchange=e=>xdImage(e.target.files[0]);
-drop.ondragover=e=>{e.preventDefault();drop.style.background='#001a0a'};drop.ondragleave=()=>drop.style.background='';
-drop.ondrop=e=>{e.preventDefault();drop.style.background='';xdImage(e.dataTransfer.files[0]);};
-document.getElementById('xdSheet').onchange=e=>{const f=e.target.files[0];if(!f)return;document.getElementById('xdSheetName').innerText='Loaded: '+f.name;
-  if(/\.csv$/i.test(f.name)){f.text().then(t=>{const s=t.slice(0,3000);document.getElementById('xdSheetPrev').innerText=s;xdSave({sheetName:f.name,sheetText:s});});}
-  else{document.getElementById('xdSheetPrev').innerText='Excel file attached (preview available for CSV files).';xdSave({sheetName:f.name,sheetText:''});}};
-document.getElementById('xdVid').onchange=e=>{const f=e.target.files[0];if(!f)return;const v=document.getElementById('xdVidPrev');v.src=URL.createObjectURL(f);v.style.display='block';xdSave({videoName:f.name});};
-function xdGenerate(){const d=xdLoad();let out;
-  if(activeTool==='code-engine'){out=d.prompt||'<!-- Write code in the PROMPT tab -->';}
-  else{out='// '+activeToolName+' job\nPrompt: '+(d.prompt||'(none)')+'\nImage: '+(d.imageName||'(none)')+'\nSpreadsheet: '+(d.sheetName||'(none)')+'\nVideo: '+(d.videoName||'(none)')+'\nWork: '+(d.work||'(none)');}
-  document.getElementById('xdOut').innerText=out;xdSave({output:out});xdPreview();}
-function xdPreview(){const d=xdLoad();const f=document.getElementById('xdFrame');
-  if(activeTool==='code-engine'){f.srcdoc=d.prompt||'<p style="font-family:sans-serif">Nothing to preview yet.</p>';}
-  else{f.srcdoc='<div style="font-family:sans-serif;padding:10px"><h3>'+activeToolName+'</h3>'+(d.image?'<img src="'+d.image+'" style="max-width:100%">':'')+'<p>'+(d.prompt||'').replace(/</g,'&lt;')+'</p></div>';}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&showExtensionDashboard)setShowExtensionDashboard(false);});
- // NIXORA PIPELINE LOADER - 10 MODULES -> 5 CHANNELS
-fetch('./owner-certificate.json').then(r=>r.json()).then(c=>{ console.log('OWNER CERT:',c); localStorage.setItem('nixora_owner', JSON.stringify(c)); });
-fetch('./nixora-pipeline.json').then(r=>r.json()).then(p=>{ console.log('PIPELINE:',p); localStorage.setItem('nixora_pipeline', JSON.stringify(p)); window.NIXORA_PIPELINE = p; });
-</script>
 </body>
-<!-- ADMIN + SUPPORT FOOTER -->
-<div>Admin: nixorastudios@gmail.com | Support: support@nixorastudios.com | Owner: anago.vincent.nnalue@gmail.com</div>
-<a href="https://nixorastudios.com">nixorastudios.com</a> | <a href="mailto:support@nixorastudios.com">Contact Support</a> | <a href="mailto:anago.vincent.nnalue@gmail.com">Correction</a> 
 </html>
