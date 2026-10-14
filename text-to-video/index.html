@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NIXORA - Text to Video</title>
+<style>
+body{background:#070707;color:#fff;font-family:Arial,sans-serif;margin:0;padding:20px;text-align:center}
+h1{color:#FF6600;font-size:28px}
+.box{max-width:750px;margin:20px auto;background:#141414;border:1px solid #222;border-radius:16px;padding:25px}
+textarea{width:95%;height:90px;background:#000;color:#fff;border:1px solid #333;border-radius:10px;padding:12px;font-size:14px}
+select,input{width:95%;padding:10px;background:#000;color:#fff;border:1px solid #333;border-radius:8px;margin:8px 0}
+button{background:#FF6600;color:#000;border:none;padding:14px 28px;border-radius:10px;font-weight:bold;font-size:16px;cursor:pointer;margin-top:15px;width:95%}
+button:hover{background:#ff8800}
+#output{width:100%;height:300px;background:#000;border:2px dashed #333;border-radius:12px;margin-top:20px;display:flex;align-items:center;justify-content:center;color:#888;flex-direction:column}
+.back{color:#FF6600;text-decoration:none;border:1px solid #333;padding:8px 16px;border-radius:20px;display:inline-block;margin-top:20px}
+.live{color:#00ff88;background:#003322;padding:4px 10px;border-radius:20px;font-size:11px}
+.tag{display:inline-block;background:#222;border:1px solid #333;padding:4px 10px;border-radius:20px;font-size:11px;margin:3px;color:#aaa}
+</style>
+</head>
+<body>
+<h1>TEXT TO VIDEO <span class="live">● LIVE GOD MODE</span></h1>
+<p style="color:#888">Module 3 - Turn Text to Cinematic Video</p>
+
+<div class="box">
+<p style="text-align:left;color:#FF6600;font-weight:bold">📝 Prompt</p>
+<textarea id="prompt" placeholder="e.g. A Nigerian boy with super powers flying over Port Harcourt, cinematic, 4K, Afro futuristic..."></textarea>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<div>
+<p style="text-align:left;color:#888;font-size:12px">Style</p>
+<select id="style">
+<option>Cinematic</option>
+<option>Anime</option>
+<option>Afro Tales</option>
+<option>Realistic 4K</option>
+<option>Cartoon - Nixora Kids</option>
+</select>
+</div>
+<div>
+<p style="text-align:left;color:#888;font-size:12px">Duration</p>
+<select id="duration">
+<option>5 seconds</option>
+<option>10 seconds</option>
+<option>15 seconds</option>
+<option>30 seconds</option>
+</select>
+</div>
+</div>
+
+<p style="text-align:left;color:#888;font-size:12px">Aspect Ratio</p>
+<select id="ratio">
+<option>16:9 - YouTube</option>
+<option>9:16 - TikTok / Shorts</option>
+<option>1:1 - Instagram</option>
+</select>
+
+<button onclick="generate()">🎬 GENERATE VIDEO</button>
+
+<div id="output">
+<span style="font-size:40px">🎥</span>
+<p id="outText">Your video will appear here<br><span style="font-size:11px">Engine: Free API + Local - No credit card</span></p>
+</div>
+
+<div style="margin-top:15px">
+<span class="tag">No Watermark</span>
+<span class="tag">4K Ready</span>
+<span class="tag">Free Forever</span>
+<span class="tag">Owner Mode</span>
+</div>
+</div>
+
+<a class="back" href="../">← Back to Dashboard</a>
+
+<script src="../config/engines.js"></script>
+<script>
+function generate(){
+  let p = document.getElementById('prompt').value || "Nixora cinematic video";
+  let s = document.getElementById('style').value;
+  let d = document.getElementById('duration').value;
+  document.getElementById('outText').innerHTML = "🔥 GENERATING...<br><b style='color:#FF6600'>" + p + "</b><br><span style='font-size:11px'>" + s + " | " + d + "</span><br><br>⚡ God Mode Active - Engine processing...";
+  document.getElementById('output').style.borderColor = "#FF6600";
+  
+  setTimeout(()=>{
+    document.getElementById('outText').innerHTML = "✅ READY!<br><b>" + p + "</b><br><br>🎬 Video generated (Demo Mode)<br><span style='font-size:11px'>Connect engines.js to real API to export MP4</span>";
+  }, 2000);
+}
+</script>
+</body>
+</html>
