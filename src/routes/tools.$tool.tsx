@@ -4,7 +4,7 @@ import { getTool } from "@/lib/tools";
 
 export const Route = createFileRoute("/tools/$tool")({
   loader: ({ params }) => {
-    const tool = getTool(params.tool);
+    const tool = params.tool ? getTool(params.tool) : undefined;
     if (!tool) throw notFound();
     return { tool };
   },

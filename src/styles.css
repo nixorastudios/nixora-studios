@@ -142,3 +142,22 @@
     color: var(--color-foreground);
   }
 }
+
+/* NIXORA launcher animations */
+@keyframes nixora-bg {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+@keyframes nixora-drift {
+  from { transform: translateY(0); opacity: 0.4; }
+  50% { opacity: 0.9; }
+  to { transform: translateY(-120px); opacity: 0; }
+}
+@keyframes nixora-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes nixora-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.75; }
+}
