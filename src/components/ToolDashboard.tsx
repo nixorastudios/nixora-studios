@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type { ToolConfig } from "@/lib/tools";
 
@@ -26,6 +26,21 @@ export function ToolDashboard({ tool }: { tool: ToolConfig }) {
     setStatus(`Generating ${tool.name} (${quality}, ${ratio}) for ${channel}… preview below.`);
   };
 
+  const draftKey = `nixora_draft_${tool.slug}`;
+
+  useEffect(() => {
+    const saved = localStorage.getItem(draftKey);
+    if (saved) {
+      setPrompt(saved);
+      setStatus("Draft loaded.");
+    }
+  }, [draftKey]);
+
+  const saveDraft = () => {
+    localStorage.setItem(draftKey, prompt);
+    setStatus("Draft saved on this device.");
+  };
+
   const field = "w-full rounded-md border border-[#333] bg-[#0a0a0a] p-2 text-sm text-white";
 
   return (
@@ -49,7 +64,10 @@ export function ToolDashboard({ tool }: { tool: ToolConfig }) {
                 onChange={(e) => onFile(e.target.files?.[0] ?? null)} />
             </label>
           )}
-          <button onClick={generate} className="h-12 w-full rounded-md bg-[#FF6B00] font-bold text-white">BUILD</button>
+          <div className="grid grid-cols-2 gap-3">
+            <button onClick={generate} className="h-12 rounded-md bg-[#FF6B00] font-bold text-white">GENERATE</button>
+            <button onClick={saveDraft} className="h-12 rounded-md border border-[#00ff88] font-bold text-[#00ff88]">SAVE DRAFT</button>
+          </div>
           <p className="text-xs text-[#00ff88]">{status}</p>
           <section className="flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-[#333] bg-black">
             {fileUrl && tool.input === "image" && <img src={fileUrl} alt="Upload preview" className="max-h-full" />}
