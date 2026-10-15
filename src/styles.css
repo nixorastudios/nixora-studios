@@ -161,3 +161,8 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0.75; }
 }
+
+/* Launcher motion must never block clicking: card settles on hover */
+[data-tool]:hover {
+  animation-play-state: paused;
+}
