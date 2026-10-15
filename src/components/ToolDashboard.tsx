@@ -49,7 +49,7 @@ export function ToolDashboard({ tool }: { tool: ToolConfig }) {
                 onChange={(e) => onFile(e.target.files?.[0] ?? null)} />
             </label>
           )}
-          <button onClick={generate} className="h-12 w-full rounded-md bg-[#FF6B00] font-bold text-white">GENERATE</button>
+          <button onClick={generate} className="h-12 w-full rounded-md bg-[#FF6B00] font-bold text-white">BUILD</button>
           <p className="text-xs text-[#00ff88]">{status}</p>
           <section className="flex aspect-video items-center justify-center overflow-hidden rounded-lg border border-[#333] bg-black">
             {fileUrl && tool.input === "image" && <img src={fileUrl} alt="Upload preview" className="max-h-full" />}
