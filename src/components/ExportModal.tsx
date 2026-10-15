@@ -11,7 +11,7 @@ const platforms = [
 ];
 
 export default function ExportModal({ onClose, onExport, isOwner = true }: any) {
-  const [selected, setSelected] = useState(platforms[0].id);
+  const [selected, setSelected] = useState(platforms[0]!.id);
 
   const handleExport = () => {
     const platform = platforms.find(p => p.id === selected);
