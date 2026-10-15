@@ -56,16 +56,17 @@ function Index() {
               to="/tools/$tool"
               params={{ tool: tool.slug }}
               data-tool={tool.slug}
-              className="group w-full rounded-xl border border-[#00ff88] bg-[#00ff88]/5 p-5 backdrop-blur transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#00ff88] sm:w-[calc(50%-1.25rem)] lg:w-[calc(25%-1.25rem)] animate-[nixora-float_6s_ease-in-out_infinite]"
-              style={{ animationDelay: `${(i % 4) * 0.6}s` }}
+              className="group w-full rounded-xl border border-[#00ff88] bg-[#00ff88]/5 p-5 backdrop-blur transition-all duration-300 hover:scale-105 hover:shadow-[0_0_30px_#00ff88] sm:w-[calc(50%-1.25rem)] lg:w-[calc(25%-1.25rem)]"
             >
-              <div className="text-xs text-[#00ff88]/60">ENGINE {String(i + 1).padStart(2, "0")}</div>
-              <div className="mt-2 text-3xl">{tool.icon}</div>
-              <h2 className="mt-2 text-lg font-bold [text-shadow:0_0_10px_#00ff88]">{tool.name}</h2>
-              <p className="mt-1 min-h-10 text-xs text-[#00ff88]/70">{tool.description}</p>
-              <span className="mt-4 block w-full rounded-md bg-[#00ff88] py-2 text-center font-bold text-black transition-all group-hover:bg-white group-hover:shadow-[0_0_20px_#00ff88] animate-[nixora-pulse_2s_ease-in-out_infinite]">
-                START
-              </span>
+              <div className="animate-[nixora-float_6s_ease-in-out_infinite] group-hover:[animation-play-state:paused]" style={{ animationDelay: `${(i % 4) * 0.6}s` }}>
+                <div className="text-xs text-[#00ff88]/60">ENGINE {String(i + 1).padStart(2, "0")}</div>
+                <div className="mt-2 text-3xl">{tool.icon}</div>
+                <h2 className="mt-2 text-lg font-bold [text-shadow:0_0_10px_#00ff88]">{tool.name}</h2>
+                <p className="mt-1 min-h-10 text-xs text-[#00ff88]/70">{tool.description}</p>
+                <span className="mt-4 block w-full rounded-md bg-[#00ff88] py-2 text-center font-bold text-black transition-all group-hover:bg-white group-hover:shadow-[0_0_20px_#00ff88] animate-[nixora-pulse_2s_ease-in-out_infinite]">
+                  START
+                </span>
+              </div>
             </Link>
           ))}
         </div>
