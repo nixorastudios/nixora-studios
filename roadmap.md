@@ -1,5 +1,9 @@
 # Roadmap
 
+- [ ] Coming-soon homepage, local early-access form, fixed launch countdown, locked ten-engine grid
+- [ ] Safe watermark/signature helpers and available engine/JSON settings (missing local source files must be identified)
+- [ ] Verify launch signup, countdown rules, watermark metadata, and existing routing
+
 - [x] Engine cards: exact 10 names, 4-4-2 centered layout
 - [x] Replace "GOD MODE" labels with owner wording in launcher and dashboard
 - [x] Check project files for Chukwumannalue3@gmail.com (none found)
