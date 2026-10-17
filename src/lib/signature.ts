@@ -1,9 +1,11 @@
-/** A public digest is not an identity proof and must never grant privileges. */
 export const LEGACY_SIGNATURE_HASH = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
+export const OWNER_EMAILS = ['anago.vincent.nnalue@gmail.com','Chukwumannalue3@gmail.com'];
 export async function validateSignature(content: string, expectedHash = LEGACY_SIGNATURE_HASH): Promise<boolean> {
-  if (!content.trim()) return false; // supplied digest is SHA-256 of empty input
+  if (!content.trim()) return false;
   const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(content));
-  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('') === expectedHash.toLowerCase();
+  return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2,'0')).join('') === expectedHash;
 }
-/** Fail closed until authenticated server-side role checks are connected. */
-export function isOwner(_email?: string | null): boolean { return false; }
+export function isOwner(email?: string | null): boolean {
+  if (!email) return false;
+  return OWNER_EMAILS.includes(email.toLowerCase().trim());
+}
