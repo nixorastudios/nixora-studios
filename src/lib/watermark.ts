@@ -53,8 +53,8 @@ export async function addWatermark(file: File, type: WatermarkType = 'both', own
       ctx.fillText(label, canvas.width - margin, canvas.height - margin, canvas.width - margin * 2);
     }
     const blob = await new Promise<Blob>((resolve, reject) => canvas.toBlob(value => value ? resolve(value) : reject(new Error('Image export failed.')), 'image/png'));
-    let bytes = new Uint8Array(await blob.arrayBuffer());
+    let bytes: Uint8Array<ArrayBufferLike> = new Uint8Array(await blob.arrayBuffer());
     if (type !== 'visible') bytes = addPngAttribution(bytes, ownerAttribution);
-    return new File([bytes], `${file.name.replace(/\.[^.]+$/, '')}-nixora.png`, { type: 'image/png' });
+    return new File([new Uint8Array(bytes).buffer], `${file.name.replace(/\.[^.]+$/, '')}-nixora.png`, { type: 'image/png' });
   } finally { bitmap.close(); }
 }
