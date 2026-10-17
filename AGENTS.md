@@ -11,3 +11,8 @@
 
 - Keep the embedded studio's avatar controller in its single HTML file; use AnalyserNode for uploaded audio and speech events for browser TTS because speech synthesis exposes no audio stream.
 - Identify engine cards with stable data-tool keys, not grid positions; in-session drag reordering must not change audio targets.
+- Scope the temporary launch theme to its page so existing studio surfaces retain their design tokens.
+- Keep launch timing and local signup normalization in a pure shared module with behavioral tests; never treat illustrative counters as analytics.
+- Browser config imports only explicitly selected public JSON; exclude certificates, credentials, private local files, and placeholder service URLs.
+- Watermark exports use PNG metadata plus canvas text, with attribution passed by the caller; metadata and public digests never authorize access.
+- Owner checks fail closed until a verified server-side role service exists; browser email comparisons must never grant privileges.
