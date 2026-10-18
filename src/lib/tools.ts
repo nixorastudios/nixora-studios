@@ -7,19 +7,23 @@ export interface ToolConfig {
   description: string;
   input: ToolInput;
   output: "image" | "video" | "audio";
+  work: string;
+  category: string;
 }
 
 export const TOOLS: ToolConfig[] = [
-  { slug: "text-to-image", name: "TEXT TO IMAGE", icon: "🖼️", description: "Turn words into photos and art.", input: null, output: "image" },
-  { slug: "text-to-video", name: "TEXT TO VIDEO", icon: "🎬", description: "Turn words into moving video.", input: null, output: "video" },
-  { slug: "photo-to-video", name: "IMAGES TO VIDEO", icon: "📼", description: "Bring still images to life.", input: "image", output: "video" },
-  { slug: "animation", name: "ANIMATION", icon: "✨", description: "Generate animated scenes and motion.", input: "image", output: "video" },
-  { slug: "sound-effects", name: "SOUND EFFECTS", icon: "🔊", description: "Create sound effects from a description.", input: null, output: "audio" },
-  { slug: "voice-over", name: "VOICE OVER", icon: "🎙️", description: "Turn scripts into spoken voice over.", input: null, output: "audio" },
-  { slug: "music-daw", name: "MUSIC STUDIO", icon: "🎹", description: "Compose beats and full tracks.", input: null, output: "audio" },
-  { slug: "lipsync", name: "LIPSYNC", icon: "🗣️", description: "Sync a face's mouth to voice audio.", input: "audio", output: "video" },
-  { slug: "video-editor", name: "VIDEO EDITOR", icon: "🎞️", description: "Cut, restyle and finish clips.", input: "video", output: "video" },
-  { slug: "code-engine", name: "CODE ENGINE", icon: "💻", description: "Generate code and live previews from a prompt.", input: null, output: "image" },
+  { slug: "text-to-image", name: "TEXT TO IMAGE", icon: "🖼️", description: "Generate visual concepts from text prompts", input: null, output: "image", work: "Generate Visual Concepts", category: "visual" },
+  { slug: "text-to-video", name: "TEXT TO VIDEO", icon: "🎬", description: "Create motion stories from text", input: null, output: "video", work: "Create Motion Stories", category: "video" },
+  { slug: "photo-to-video", name: "IMAGES TO VIDEO", icon: "📼", description: "Animate still images into motion", input: "image", output: "video", work: "Animate Still Images", category: "video" },
+  { slug: "animation", name: "ANIMATION", icon: "✨", description: "Create moving graphics and characters", input: "image", output: "video", work: "Create Moving Graphics", category: "visual" },
+  { slug: "sound-effects", name: "SOUND EFFECTS", icon: "🔊", description: "Produce audio effects and foley", input: null, output: "audio", work: "Produce Audio Effects", category: "audio" },
+  { slug: "voice-over", name: "VOICE OVER", icon: "🎙️", description: "Synthesize voice narrations for scenes", input: null, output: "audio", work: "Synthesize Voice Narrations", category: "audio" },
+  { slug: "music-daw", name: "MUSIC STUDIO", icon: "🎹", description: "Compose music tracks and beats", input: null, output: "audio", work: "Compose Music Tracks", category: "audio" },
+  { slug: "lipsync", name: "LIPSYNC", icon: "🗣️", description: "Sync lip movements to voice", input: "audio", output: "video", work: "Sync Lip Movements", category: "video" },
+  { slug: "video-editor", name: "VIDEO EDITOR", icon: "🎞️", description: "Edit final footage and cuts", input: "video", output: "video", work: "Edit Final Footage", category: "video" },
+  { slug: "code-engine", name: "CODE ENGINE", icon: "💻", description: "Integrate system logic - Final integration module", input: null, output: "image", work: "Integrate System Logic", category: "system" },
 ];
 
 export const getTool = (slug: string) => TOOLS.find((t) => t.slug === slug);
+
+export const TOTAL_MODULES = TOOLS.length; // 10
