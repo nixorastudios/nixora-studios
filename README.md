@@ -1,24 +1,47 @@
-# Nixora Studios Play
+# NIXORA STUDIOS - Play
 
-Build this as NIXORA STUDIOS app - 5 channels locked NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - God Mode owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - Clean file - Mobile responsive - International Standard - One file app
+**Creative Studio Platform - 10 Production Modules**
 
-This project was built with [Lovable](https://lovable.dev).
+NIXORA STUDIOS is a 10-module studio for creators to generate, preview, and export premium content. Built to international standard - one file clean export.
 
-## Build with Lovable
+## 10 Modules (Public Tools)
+1. Text to Image
+2. Photo to Video
+3. Audio Studio
+4. Story Engine
+5. Script Builder
+6. Voice Lab
+7. Motion Engine
+8. Design Lab
+9. Export Studio
+10. Code Engine
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/aaa659d6-b718-412a-98bd-7f03a67d678b).
+Each module = independent tool, clean file export, watermark control. Code Engine is final integration module.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## 5 Owner Channels (Private Business Logic)
+This platform powers 5 owner channels. Content created via 10 modules carries invisible premium license signature:
+- NIXORA KIDS
+- LIVING ALTAR
+- AFRO TALES
+- VIBRA
+- XONA
 
-## Development
+Free content posted on these channels retains `PAID_SUBSCRIPTION_RIGHTS_RESERVED` - Streaming platforms recognize as premium licensed content, not cheap/free stock. This is God/Owner Mode - invisible to public users.
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Features
+- 10 Tools Dashboard
+- God Mode Owner Verification
+- Premium License Signature Injection
+- Clean File Export (Owner)
+- Watermark System (Public)
+- Mobile Responsive
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+## Tech Stack
+TypeScript + React + Vite + Tailwind + Lovable
+
+## How to Run
+```bash
+git clone https://github.com/nixora-studios/nixora-studios.git
+cd nixora-studios
+npm install
 npm run dev
-```
