@@ -80,13 +80,13 @@ html::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb,.gate::-webkit-scrol
 <h1>NIXORA STUDIOS - OWNER DASHBOARD</h1>
 <div class="card" style="max-width:520px;width:100%">
 <h2>WELCOME BACK</h2>
-<input id="gateEmail" placeholder="Email 3 names anago.vincent.nnalue@gmail.com">
+<input id="gateEmail" placeholder="Email">
 <input id="gatePass" type="password" placeholder="Password min 8">
 <input id="gateName" placeholder="Full Name 3 Names NIN exact">
 <div style="background:#111;padding:10px;border-radius:6px;margin:6px 0;border:1px solid #333">
 <pre style="white-space:pre-wrap;font-size:9px;background:#000;padding:8px;border-radius:6px;max-height:220px;overflow:auto">
 NIXORA STUDIOS TERMS Oct 2026 - ACHIEVEMENT YESTERDAY ADDED
-Owner Email: anago.vincent.nnalue@gmail.com
+Owner Email: support@nixorastudios.com
 Domain: nixorastudios.com
 Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 God Mode: Email + Hash + Domain locked - $0 UNLIMITED OWNER ONLY
@@ -112,11 +112,11 @@ Domain nixorastudios.com locked + Business locked + God mode email hash locked b
 <div id="app" class="hidden">
 <h1>NIXORA STUDIOS FINAL - 5 CHANNELS LOCKED - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - DOMAIN LOCKED</h1>
 <script>
-const OWNER_EMAIL_PLAIN = "anago.vincent.nnalue@gmail.com";
+const OWNER_EMAIL_PLAIN = "";
+const OWNER_CONTACT = "support@nixorastudios.com";
 const OWNER_EMAIL_HASH = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
 const DOMAIN_LOCKED = "nixorastudios.com";
 const BUSINESS_LOCKED = "NIXORA STUDIOS ENTERPRISES";
-const OWNER_FULL_3 = "ANAGO VINCENT NNALUE";
 let characterLock = JSON.parse(localStorage.getItem('charLock')||'null');
 let castLocks = JSON.parse(localStorage.getItem('castLocks')||'{}');
 let castCount = parseInt(localStorage.getItem('castCount')||'8');
@@ -128,7 +128,7 @@ let awardTiming = localStorage.getItem('awardTiming')||'1min';
 let currentChannel = localStorage.getItem('currentChannel')||'NIXORA_KIDS';
 let lockMode = localStorage.getItem('lockMode')||'single';
 function checkId(e){
-  if(e && e.toLowerCase()===OWNER_EMAIL_PLAIN.toLowerCase()) return {app:"NIXORA STUDIOS 5 CHANNELS", id:"GOD MODE $0 UNLIMITED OWNER ONLY - DOMAIN "+DOMAIN_LOCKED+" - HASH "+OWNER_EMAIL_HASH+" - 5 CHANNELS LOCKED", badge:"GOD - anago.vincent.nnalue@gmail.com + e3b0c44... - All 5 Channels NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR 350-500 styles + OPTION1 single + OPTION2 team 8+ excellent lock + Self-Recognition 100% + Award Polish + Domain "+DOMAIN_LOCKED+" locked", color:"green"};
+  if(e && e.toLowerCase()===OWNER_EMAIL_PLAIN.toLowerCase()) return {app:"NIXORA STUDIOS 5 CHANNELS", id:"GOD MODE $0 UNLIMITED OWNER ONLY - DOMAIN "+DOMAIN_LOCKED+" - HASH "+OWNER_EMAIL_HASH+" - 5 CHANNELS LOCKED", badge:"GOD - support@nixorastudios.com + e3b0c44... - All 5 Channels NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR 350-500 styles + OPTION1 single + OPTION2 team 8+ excellent lock + Self-Recognition 100% + Award Polish + Domain "+DOMAIN_LOCKED+" locked", color:"green"};
   if(localStorage.getItem('isUltra')==='true') return {app:"NIXORA STUDIOS", id:"ULTRA $19/mo UNLIMITED 45min 8K - 5 CHANNELS", badge:"ULTRA - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR", color:"red"};
   if(localStorage.getItem('isPro')==='true') return {app:"NIXORA STUDIOS", id:"PRO $9/mo BEST ALL ACCESS - 5 CHANNELS LOCKED", badge:"PRO $9 BEST - 5 CHANNELS NIXORA KIDS (Kids Learning Adventure Comedy Action) + LIVING ALTAR (Gospel) + AFRO TALES (Netflix YouTube Amazon Epic) + VIBRA XONA (Spotify Amazon Afrobeats) + NIXOXTAR (International Standard)", color:"orange"};
   return {app:"NIXORA STUDIOS", id:"FREE $0 TRIAL - 5 CHANNELS", badge:"FREE - 5 CHANNELS LOCKED - 20 styles", color:"gray"};
@@ -141,7 +141,7 @@ function updateSelfRecognition(){
   let singleChar=characterLock?characterLock.hash+' '+characterLock.name+' 98% OPTION1':'none';
   let castHashes=Object.values(castLocks).map(l=>l.hash).join('_'); let castNames=Object.values(castLocks).map(l=>l.name).join(' + '); let castCountLocal=Object.keys(castLocks).length;
   let charPart=lockMode==='single'?singleChar:(castCountLocal+' cast '+castNames+' '+castHashes+' OPTION2');
-  document.getElementById('selfRecogOut').innerText='SELF-RECOGNITION 100% - 5 CHANNELS LOCKED:\n1.NIXORA KIDS 2.LIVING ALTAR 3.AFRO TALES 4.VIBRA XONA 5.NIXOXTAR\nModel '+m+' identifies 100% anything:\n- Style '+s+' Channel '+ch+' + Character '+charPart+' + Realism '+r+' + Voice '+v+' + Timing '+t+'\n- Domain '+DOMAIN_LOCKED+' Hash '+OWNER_EMAIL_HASH+' Owner '+OWNER_EMAIL_PLAIN+'\n- 5 CHANNELS 350-500 styles Many options each time';
+  document.getElementById('selfRecogOut').innerText='SELF-RECOGNITION 100% - 5 CHANNELS LOCKED:\n1.NIXORA KIDS 2.LIVING ALTAR 3.AFRO TALES 4.VIBRA XONA 5.NIXOXTAR\nModel '+m+' identifies 100% anything:\n- Style '+s+' Channel '+ch+' + Character '+charPart+' + Realism '+r+' + Voice '+v+' + Timing '+t+'\n- Domain '+DOMAIN_LOCKED+' Hash '+OWNER_EMAIL_HASH+' Owner '+OWNER_CONTACT+'\n- 5 CHANNELS 350-500 styles Many options each time';
 }
 function setAwardTiming(t){ awardTiming=t; localStorage.setItem('awardTiming',t); document.querySelectorAll('.timing-card').forEach(c=>c.classList.remove('selected')); event.currentTarget.classList.add('selected'); document.getElementById('awardOut').innerText=getAwardPrompt(t,document.getElementById('prompt').value||'VIBRA LOVE'); }
 function getAwardPrompt(t,p){
@@ -154,12 +154,12 @@ function getAwardPrompt(t,p){
 function doGenerate(){
   let p=document.getElementById('prompt').value||'VIBRA LOVE'; let t=awardTiming;
   let charPart=lockMode==='single'?(characterLock?characterLock.name+' '+characterLock.hash+' OPTION1':'no lock OPTION1'):('Team '+Object.keys(castLocks).length+' OPTION2');
-  let out='GENERATED OUTPUT - '+new Date().toLocaleString()+'\nPrompt: '+p+'\nLock Mode: '+lockMode+'\n5 CHANNELS LOCKED FINAL:\n1. NIXORA KIDS = Kids Learning Adventure Comedy Action All in One Made for Kids YES\n2. LIVING ALTAR = Gospel Song For All\n3. AFRO TALES = Netflix YouTube Amazon Epic Village City Drama\n4. VIBRA XONA = Spotify Amazon Afrobeats Neon\n5. NIXOXTAR = International Standard Global Blockbuster + Vibrant Musical Clean\nChannel: '+currentChannel+'\nStyle: '+selectedStyle+'\nCharacter: '+charPart+'\nDomain: '+DOMAIN_LOCKED+' Owner: '+OWNER_EMAIL_PLAIN+' Hash: '+OWNER_EMAIL_HASH+'\nSelf-Recognition 100%\nAward: '+t;
+  let out='GENERATED OUTPUT - '+new Date().toLocaleString()+'\nPrompt: '+p+'\nLock Mode: '+lockMode+'\n5 CHANNELS LOCKED FINAL:\n1. NIXORA KIDS = Kids Learning Adventure Comedy Action All in One Made for Kids YES\n2. LIVING ALTAR = Gospel Song For All\n3. AFRO TALES = Netflix YouTube Amazon Epic Village City Drama\n4. VIBRA XONA = Spotify Amazon Afrobeats Neon\n5. NIXOXTAR = International Standard Global Blockbuster + Vibrant Musical Clean\nChannel: '+currentChannel+'\nStyle: '+selectedStyle+'\nCharacter: '+charPart+'\nDomain: '+DOMAIN_LOCKED+' Owner: '+OWNER_CONTACT+' Hash: '+OWNER_EMAIL_HASH+'\nSelf-Recognition 100%\nAward: '+t;
   document.getElementById('mainOutput').innerText=out; document.getElementById('editSection').classList.remove('hidden'); document.getElementById('correctionPrompt').value=p+' + Keep face(s) 98% same + Realism ON + Style '+selectedStyle+' + 5 CHANNELS LOCKED';
 }
 function doCorrection(){
   let cp=document.getElementById('correctionPrompt').value; if(!cp){alert('Type correction'); return;}
-  let corrected='CORRECTED EXCELLENT - '+new Date().toLocaleString()+'\nCorrection: '+cp+'\n5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain '+DOMAIN_LOCKED+' + Hash '+OWNER_EMAIL_HASH+' + Owner '+OWNER_EMAIL_PLAIN;
+  let corrected='CORRECTED EXCELLENT - '+new Date().toLocaleString()+'\nCorrection: '+cp+'\n5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain '+DOMAIN_LOCKED+' + Hash '+OWNER_EMAIL_HASH+' + Owner '+OWNER_CONTACT;
   document.getElementById('correctedOutput').innerText=corrected; document.getElementById('correctedOutput').classList.remove('hidden');
 }
 function lockCast(num,input){
@@ -177,14 +177,14 @@ function updateAllCastStatus(){ let locks=castLocks; let count=Object.keys(locks
 function setChannel(ch){ currentChannel=ch; localStorage.setItem('currentChannel',ch); document.querySelectorAll('#chNixoraKids,#chLivingAltar,#chAfroTales,#chVibraXona,#chNixoxtar').forEach(c=>{c.classList.remove('selected'); c.style.borderColor='#333'; c.style.background='#000';}); let map={NIXORA_KIDS:'chNixoraKids',LIVING_ALTAR:'chLivingAltar',AFRO_TALES:'chAfroTales',VIBRA_XONA:'chVibraXona',NIXOXTAR:'chNixoxtar'}; let el=document.getElementById(map[ch]); if(el){el.classList.add('selected'); el.style.borderColor='#00ff88'; el.style.background='#001a0a';} document.getElementById('channelStatus').innerText='CHANNEL LOCKED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 styles each - Domain '+DOMAIN_LOCKED; document.querySelectorAll('.channel-group').forEach(g=>g.classList.add('hidden')); let grp=document.getElementById('group-'+ch); if(grp) grp.classList.remove('hidden'); updateSelfRecognition(); }
 function generateCoderCode(){
   let p=document.getElementById('coderPrompt').value||'Generate code';
-  let code='// NIXORA 5 CHANNELS LOCKED FINAL - '+new Date().toLocaleString()+'\n// Owner: '+OWNER_EMAIL_PLAIN+' Hash: '+OWNER_EMAIL_HASH+' Domain: '+DOMAIN_LOCKED+'\n// 5 CHANNELS: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR\nfunction generate(){return {owner:"'+OWNER_EMAIL_PLAIN+'",hash:"'+OWNER_EMAIL_HASH+'",domain:"'+DOMAIN_LOCKED+'",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}';
+  let code='// NIXORA 5 CHANNELS LOCKED FINAL - '+new Date().toLocaleString()+'\n// Owner: '+OWNER_CONTACT+' Hash: '+OWNER_EMAIL_HASH+' Domain: '+DOMAIN_LOCKED+'\n// 5 CHANNELS: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR\nfunction generate(){return {owner:"'+OWNER_CONTACT+'",hash:"'+OWNER_EMAIL_HASH+'",domain:"'+DOMAIN_LOCKED+'",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}';
   document.getElementById('coderOutput').innerText=code;
 }
 function copyCoderCode(){ navigator.clipboard.writeText(document.getElementById('coderOutput').innerText).then(()=>alert('Copied - 5 CHANNELS LOCKED')); }
 function previewCoderCode(){ document.getElementById('coderPreview').innerText='Preview 5 CHANNELS LOCKED - Domain '+DOMAIN_LOCKED+' - Hash '+OWNER_EMAIL_HASH; }
 </script>
 
-<div class="card"><h2>🔐 STATUS - 5 CHANNELS LOCKED FINAL - DOMAIN + HASH + EMAIL GOD MODE</h2><p id="status"></p><p id="gateStatus"></p><small>5 CHANNELS LOCKED: NIXORA KIDS (Kids Learning Adventure Comedy Action All in One) + LIVING ALTAR (Gospel Song For All) + AFRO TALES (Netflix YouTube Amazon) + VIBRA XONA (Spotify Amazon) + NIXOXTAR (International Standard) - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode $0 - Clean file</small></div>
+<div class="card"><h2>🔐 STATUS - 5 CHANNELS LOCKED FINAL - DOMAIN + HASH + EMAIL GOD MODE</h2><p id="status"></p><p id="gateStatus"></p><small>5 CHANNELS LOCKED: NIXORA KIDS (Kids Learning Adventure Comedy Action All in One) + LIVING ALTAR (Gospel Song For All) + AFRO TALES (Netflix YouTube Amazon) + VIBRA XONA (Spotify Amazon) + NIXOXTAR (International Standard) - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44... - God Mode $0 - Clean file</small></div>
 
 <div class="card" style="border-left-color:#00ff88"><h2>🛠️ AI GENERATIVE ENGINES - 10 TOOLS</h2>
 <div class="tool-grid">
@@ -225,9 +225,9 @@ function previewCoderCode(){ document.getElementById('coderPreview').innerText='
 <div class="card" style="border-left-color:#ff6a00"><h2>💰 PRICING - 5 CHANNELS LOCKED</h2>
 <div class="grid">
 <div class="style-card" style="border-color:#888"><b>FREE $0 TRIAL</b><br><small>5 videos 720p 1min - 5 CHANNELS</small><br><span class="badge badge-green">FREE $0</span></div>
-<div class="style-card selected" style="border-color:#00ff88;background:#001a0a"><b>PRO $9/mo BEST - 5 CHANNELS LOCKED - 350-500 STYLES + OPTION1+OPTION2 + CODING LIGHT</b><br><small>100 videos 10min 4K - 5 CHANNELS: NIXORA KIDS + LIVING ALTAR + AFRO TALES + VIBRA XONA + NIXOXTAR - Domain nixorastudios.com locked - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode</small><br><span class="badge badge-green">BEST $9 - 5 CHANNELS LOCKED</span><br><button class="btn green" onclick="localStorage.setItem('isPro','true'); localStorage.setItem('isUltra',''); location.reload();">PRO $9 BEST - 5 CHANNELS LOCKED</button></div>
+<div class="style-card selected" style="border-color:#00ff88;background:#001a0a"><b>PRO $9/mo BEST - 5 CHANNELS LOCKED - 350-500 STYLES + OPTION1+OPTION2 + CODING LIGHT</b><br><small>100 videos 10min 4K - 5 CHANNELS: NIXORA KIDS + LIVING ALTAR + AFRO TALES + VIBRA XONA + NIXOXTAR - Domain nixorastudios.com locked - Owner support@nixorastudios.com - Hash e3b0c44... - God Mode</small><br><span class="badge badge-green">BEST $9 - 5 CHANNELS LOCKED</span><br><button class="btn green" onclick="localStorage.setItem('isPro','true'); localStorage.setItem('isUltra',''); location.reload();">PRO $9 BEST - 5 CHANNELS LOCKED</button></div>
 <div class="style-card" style="border-color:#ff6a00"><b>ULTRA $19/mo UNLIMITED</b><br><small>Unlimited 45min 8K - 5 CHANNELS LOCKED</small><br><span class="badge badge-orange">ULTRA $19</span></div>
-<div class="style-card" style="border-color:#00ff88;background:#001a0a"><b>GOD MODE $0 OWNER ONLY - anago.vincent.nnalue@gmail.com + e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 + nixorastudios.com</b><br><small>Unlimited - God Mode locked - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 350-500 styles</small><br><span class="badge badge-green">GOD MODE $0 - LOCKED</span></div>
+<div class="style-card" style="border-color:#00ff88;background:#001a0a"><b>GOD MODE $0 OWNER ONLY - support@nixorastudios.com + e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 + nixorastudios.com</b><br><small>Unlimited - God Mode locked - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 350-500 styles</small><br><span class="badge badge-green">GOD MODE $0 - LOCKED</span></div>
 </div>
 </div>
 
@@ -270,7 +270,7 @@ function previewCoderCode(){ document.getElementById('coderPreview').innerText='
 <div class="card"><h2>👤 REALISM + VOICE + PROMPT</h2>
 <label><input type="checkbox" id="realismToggle" onchange="realismLock=this.checked; localStorage.setItem('realismLock',realismLock); updateSelfRecognition();"> Realism ON 8K pores</label><p id="realismStatus"></p>
 <label><input type="checkbox" id="voiceToggle" onchange="voiceCloned=this.checked; localStorage.setItem('voiceCloned',voiceCloned); updateSelfRecognition();"> Voice Clone 95%</label><p id="voiceStatus"></p>
-<textarea id="prompt" placeholder="Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com" style="height:60px"></textarea>
+<textarea id="prompt" placeholder="Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com" style="height:60px"></textarea>
 </div>
 
 <div class="card" style="border-left-color:#00ff88;background:#001a0a">
@@ -282,19 +282,19 @@ function previewCoderCode(){ document.getElementById('coderPreview').innerText='
 <div class="style-card" id="chVibraXona" onclick="setChannel('VIBRA_XONA')"><b>CH4: VIBRA XONA - SPOTIFY AMAZON - Afrobeats Neon</b><br><small>Neon dance Ankara, Studio recording, Live concert, Street market yellow bus, Amapiano rooftop, Highlife sax, Pop neon - Afrobeats Music - Spotify Amazon - 70-100 options - Many options</small><br><span class="badge badge-orange">70-100 Options - VIBRA XONA - Spotify</span></div>
 <div class="style-card" id="chNixoxtar" onclick="setChannel('NIXOXTAR')"><b>CH5: NIXOXTAR - INTERNATIONAL STANDARD - Global Blockbuster + Vibrant Musical Clean No Trademark</b><br><small>Action blockbuster helicopter explosion, Romance Eiffel Tower Paris, Sci-Fi space astronaut, Superhero city skyline cape, Horror forest haunted house, Comedy coffee shop, Drama courtroom judge flag, Thriller mystery detective rain Hotel neon IMAX 8K 35mm Netflix Original 4K HDR Dolby Atmos + Colorful dance festival dhol sari Romance garden roses Wedding red gold bride groom garlands Action rain explosion leather jacket Drama family samosa tea Comedy musical harmonium colorful vest - International Standard - 70-100 options - Clean No Trademark</small><br><span class="badge badge-red">70-100 Options - NIXOXTAR - International</span></div>
 </div>
-<p id="channelStatus" style="background:#000;padding:6px;border-radius:6px">CHANNEL LOCKED: NIXORA_KIDS - 70-100 style options - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com</p>
+<p id="channelStatus" style="background:#000;padding:6px;border-radius:6px">CHANNEL LOCKED: NIXORA_KIDS - 70-100 style options - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com</p>
 <div id="group-NIXORA_KIDS" class="channel-group"><h3>CH1 NIXORA KIDS 70-100 OPTIONS - FOR KIDS LEARNING ADVENTURE COMEDY ACTION ALL IN ONE - Made for Kids YES</h3><div class="grid"><div class="style-card" onclick="selectStyle('Nixora Kids Pastel Read Learn ABC 123 1')"><div style="height:60px;background:linear-gradient(45deg,#ff99cc,#99ccff);border-radius:4px"></div><b>Read Learn ABC 123 1 - Made for Kids YES</b></div><div class="style-card" onclick="selectStyle('Nixora Kids Adventure Comedy Action 1')"><div style="height:60px;background:linear-gradient(45deg,#00ff88,#ffcc00);border-radius:4px"></div><b>Adventure Comedy Action 1 - Made for Kids YES</b></div></div></div>
 <div id="group-LIVING_ALTAR" class="channel-group hidden"><h3>CH2 LIVING ALTAR 70-100 OPTIONS - GOSPEL SONG FOR ALL</h3><div class="grid"><div class="style-card" onclick="selectStyle('Living Altar Classical Choir Robes Cathedral 1')"><div style="height:60px;background:linear-gradient(45deg,#fff,#999);border-radius:4px"></div><b>Classical Choir Robes Cathedral 1 - Gospel Full</b></div><div class="style-card" onclick="selectStyle('Living Altar Individual Solo Mic Intimate 1')"><div style="height:60px;background:linear-gradient(45deg,#333,#666);border-radius:4px"></div><b>Solo Mic Intimate 1 - Gospel</b></div><div class="style-card" onclick="selectStyle('Living Altar Group Band Full 5-8 Members 1')"><div style="height:60px;background:linear-gradient(45deg,#222,#555);border-radius:4px"></div><b>Group Band Full 5-8 Members 1 - Same Band 98% OPTION2 Team</b></div></div></div>
 <div id="group-AFRO_TALES" class="channel-group hidden"><h3>CH3 AFRO TALES 70-100 OPTIONS - NETFLIX YOUTUBE AMAZON - Epic Village City Drama</h3><div class="grid"><div class="style-card" onclick="selectStyle('Afro Tales Village Drama Thatch 1 Netflix')"><div style="height:60px;background:linear-gradient(45deg,#996633,#cc9966);border-radius:4px"></div><b>Village Drama Thatch 1 - Netflix YouTube Amazon - OPTION2 Team 8 Cast</b></div><div class="style-card" onclick="selectStyle('Afro Tales City Drama Market Yellow Bus 1 Netflix')"><div style="height:60px;background:linear-gradient(45deg,#333,#999);border-radius:4px"></div><b>City Drama Market Yellow Bus 1 - Netflix</b></div></div></div>
 <div id="group-VIBRA_XONA" class="channel-group hidden"><h3>CH4 VIBRA XONA 70-100 OPTIONS - SPOTIFY AMAZON - Afrobeats</h3><div class="grid"><div class="style-card" onclick="selectStyle('Vibra Xona Neon Dance Ankara 1 Spotify')"><div style="height:60px;background:linear-gradient(45deg,#ff00ff,#00ff88);border-radius:4px"></div><b>Neon Dance Ankara 1 - Spotify Amazon - Afrobeats</b></div><div class="style-card" onclick="selectStyle('Vibra Xona Studio Recording Live 1 Spotify')"><div style="height:60px;background:linear-gradient(45deg,#ff6a00,#00ff88);border-radius:4px"></div><b>Studio Recording Live 1 - Spotify</b></div></div></div>
 <div id="group-NIXOXTAR" class="channel-group hidden"><h3>CH5 NIXOXTAR 70-100 OPTIONS - INTERNATIONAL STANDARD - Global Blockbuster + Vibrant Musical Clean No Trademark</h3><div class="grid"><div class="style-card" onclick="selectStyle('Nixoxtar Global Blockbuster Action Helicopter Explosion 1 International')"><div style="height:60px;background:linear-gradient(45deg,#111,#ff6600);border-radius:4px"></div><b>Action Blockbuster Helicopter Explosion 1 - International Standard - IMAX 8K</b></div><div class="style-card" onclick="selectStyle('Nixoxtar Vibrant Musical Colorful Dance Festival Dhol Sari 1 International')"><div style="height:60px;background:linear-gradient(45deg,#ff0066,#ffcc00);border-radius:4px"></div><b>Colorful Dance Festival Dhol Sari 1 - International - Vibrant Musical Clean</b></div><div class="style-card" onclick="selectStyle('Nixoxtar Romance Eiffel Tower Paris Cafe 1 International')"><div style="height:60px;background:linear-gradient(45deg,#ffcc99,#cc6666);border-radius:4px"></div><b>Romance Eiffel Tower Paris Cafe 1 - International Standard</b></div></div></div>
-<p id="styleStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:5px">No style - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Click photo 350-500 sets 700-1000 photos 2 per type - OPTION1+OPTION2 team - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash locked</p>
+<p id="styleStatus" style="background:#000;padding:6px;border-radius:6px;margin-top:5px">No style - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Click photo 350-500 sets 700-1000 photos 2 per type - OPTION1+OPTION2 team - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash locked</p>
 </div>
 
 <div class="card polish"><h2>🏆 AWARD WINNING FINISH - 1MIN 10MINS - 5 CHANNELS LOCKED</h2>
 <div class="grid">
 <div class="style-card timing-card" onclick="setAwardTiming('1min')"><div style="height:50px;background:linear-gradient(45deg,#00ff88,#0088ff);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold">1 MIN</div><b>1 MIN - SHORTS VIRAL - AI 2 MIN - 5 CHANNELS</b><br><small>Hook 0-3sec big 3 words safe 80% - 30 cuts - CTR 11% - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR</small></div>
-<div class="style-card timing-card" onclick="setAwardTiming('10min')"><div style="height:50px;background:linear-gradient(45deg,#6600ff,#00ff88);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold">10 MINS</div><b>10 MINS - DOCUMENTARY FULL - AWARD WINNING FINISH - 5 CHANNELS LOCKED - INTERNATIONAL STANDARD</b><br><small>Hook 0-15 + Setup + Conflict + Insight + CTA - 100 cuts - IMAX 8K - Master 8K ProRes - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Hash e3b0c44... - Owner anago.vincent.nnalue@gmail.com - Excellent after correction</small></div>
+<div class="style-card timing-card" onclick="setAwardTiming('10min')"><div style="height:50px;background:linear-gradient(45deg,#6600ff,#00ff88);border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:bold">10 MINS</div><b>10 MINS - DOCUMENTARY FULL - AWARD WINNING FINISH - 5 CHANNELS LOCKED - INTERNATIONAL STANDARD</b><br><small>Hook 0-15 + Setup + Conflict + Insight + CTA - 100 cuts - IMAX 8K - Master 8K ProRes - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Hash e3b0c44... - Owner support@nixorastudios.com - Excellent after correction</small></div>
 </div>
 <button class="btn orange" onclick="let t=awardTiming; let p=document.getElementById('prompt').value||'VIBRA LOVE'; document.getElementById('awardOut').innerText=getAwardPrompt(t,p);">🏆 Generate Award Polish Prompt - 5 CHANNELS LOCKED</button>
 <p id="awardOut" style="background:#000;padding:7px;border-radius:6px;white-space:pre-wrap;margin-top:6px">No timing - Click 1min / 10mins - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR</p>
@@ -302,26 +302,26 @@ function previewCoderCode(){ document.getElementById('coderPreview').innerText='
 
 <div class="card" style="border-left-color:#0088ff;background:#000a1a">
 <h2>💻 CODING ENGINE LIGHT - 5 CHANNELS LOCKED - DOMAIN + HASH</h2>
-<textarea id="coderPrompt" placeholder="Coder Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain nixorastudios.com + Owner anago.vincent.nnalue@gmail.com + Hash e3b0c44... + OPTION1+OPTION2" style="height:80px;border-color:#0088ff"></textarea>
+<textarea id="coderPrompt" placeholder="Coder Prompt 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR + Domain nixorastudios.com + Owner support@nixorastudios.com + Hash e3b0c44... + OPTION1+OPTION2" style="height:80px;border-color:#0088ff"></textarea>
 <div style="display:flex;gap:5px;flex-wrap:wrap">
 <button class="btn blue" onclick="generateCoderCode();">💻 Generate Code - 5 CHANNELS LOCKED</button>
 <button class="btn green" onclick="copyCoderCode();">📋 Copy Code</button>
 <button class="btn orange" onclick="previewCoderCode();">👁️ Preview</button>
 </div>
-<div style="background:#000;color:#0f0;padding:8px;border-radius:6px;font-family:monospace;font-size:10px;white-space:pre-wrap;min-height:120px;max-height:300px;overflow:auto" id="coderOutput">// Coding engine - 5 CHANNELS LOCKED FINAL - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-function generate(){return {owner:"anago.vincent.nnalue@gmail.com",hash:"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",domain:"nixorastudios.com",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}
+<div style="background:#000;color:#0f0;padding:8px;border-radius:6px;font-family:monospace;font-size:10px;white-space:pre-wrap;min-height:120px;max-height:300px;overflow:auto" id="coderOutput">// Coding engine - 5 CHANNELS LOCKED FINAL - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+function generate(){return {owner:"support@nixorastudios.com",hash:"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",domain:"nixorastudios.com",channels:["NIXORA KIDS","LIVING ALTAR","AFRO TALES","VIBRA XONA","NIXOXTAR"]}}
 </div>
 <div id="coderPreview" style="background:#000;border:1px solid #333;border-radius:6px;padding:8px;margin:6px 0;min-height:60px;white-space:pre-wrap">Preview 5 CHANNELS LOCKED</div>
 </div>
 
 <div class="card card-blue"><h2>⚡ GENERATE - 5 CHANNELS LOCKED FINAL - EDIT/CORRECTION</h2>
 <button class="btn blue" onclick="doGenerate();">⚡ GENERATE - 5 CHANNELS LOCKED - NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain + Hash + Email</button>
-<div id="mainOutput" class="output-box">No output yet - 5 CHANNELS LOCKED FINAL: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode - International Standard</div>
+<div id="mainOutput" class="output-box">No output yet - 5 CHANNELS LOCKED FINAL: NIXORA KIDS, LIVING ALTAR, AFRO TALES, VIBRA XONA, NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44... - God Mode - International Standard</div>
 <div id="editSection" class="hidden">
 <h3>✏️ EDIT / CORRECTION - DOWN PROMPT BOX EXACT CORRECTION - 5 CHANNELS LOCKED</h3>
 <div style="background:#0a1a0a;border:2px solid #00ff88;border-radius:8px;padding:10px;margin:6px 0">
 <p><span class="badge badge-orange">EDIT / CORRECTION - IF BAD MUST BECOME EXCELLENT - 5 CHANNELS LOCKED</span></p>
-<textarea id="correctionPrompt" placeholder="Down Prompt Box Exact Correction - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44..." style="height:90px;border-color:#00ff88"></textarea>
+<textarea id="correctionPrompt" placeholder="Down Prompt Box Exact Correction - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44..." style="height:90px;border-color:#00ff88"></textarea>
 <button class="btn green" onclick="doCorrection();">✏️ EDIT / CORRECT EXCELLENT - 5 CHANNELS LOCKED</button>
 <button class="btn orange" onclick="let cp=document.getElementById('correctionPrompt').value; if(cp){ document.getElementById('prompt').value=cp; alert('Copied to main prompt - 5 CHANNELS LOCKED'); } else {alert('Type correction first');}">📋 Copy Correction to Main Prompt + Regenerate - 5 CHANNELS</button>
 </div>
@@ -337,7 +337,7 @@ function generate(){return {owner:"anago.vincent.nnalue@gmail.com",hash:"e3b0c44
 <div class="style-card" onclick="selectModel('VIBRA-XONA-PREMIUM-98',50)"><div style="height:60px;background:linear-gradient(45deg,#ff00ff,#00ff88);border-radius:4px"></div><b>VIBRA-XONA-PREMIUM-98 - Spotify Amazon</b><br><small>Premium 98% - VIBRA XONA - Spotify Amazon</small><br><span class="badge badge-orange">$50 - VIBRA XONA</span></div>
 <div class="style-card" onclick="selectModel('NIXOXTAR-TEAM-8-PREMIUM-98-INTERNATIONAL',50)"><div style="height:60px;background:linear-gradient(45deg,#111,#ff6600);border-radius:4px"></div><b>NIXOXTAR-TEAM-8-PREMIUM-98-INTERNATIONAL</b><br><small>Team 8+ 98% - NIXOXTAR International Standard - Global Blockbuster + Vibrant Musical Clean No Trademark</small><br><span class="badge badge-orange">$50 - NIXOXTAR International</span></div>
 </div>
-<p id="modelStatus" style="background:#000;padding:6px;border-radius:6px">No model - Choose - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... locked</p>
+<p id="modelStatus" style="background:#000;padding:6px;border-radius:6px">No model - Choose - 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44... locked</p>
 </div>
 
 <div class="card"><h2>📍 EXPORTS - 5 CHANNELS LOCKED - INTERNATIONAL STANDARD</h2>
@@ -345,10 +345,10 @@ function generate(){return {owner:"anago.vincent.nnalue@gmail.com",hash:"e3b0c44
 <button class="btn orange">[LIVING ALTAR Master] Gospel Full - Classical Choir - 5 CHANNELS LOCKED - Domain nixorastudios.com</button>
 <button class="btn orange">[AFRO TALES Master] Netflix YouTube Amazon Epic Village City Drama - Team 8+ - 5 CHANNELS LOCKED</button>
 <button class="btn orange">[VIBRA XONA Master] Spotify Amazon Afrobeats Neon - 5 CHANNELS LOCKED</button>
-<button class="btn red">[NIXOXTAR Master 45min 4K Dolby Atmos International Standard] Global Blockbuster + Vibrant Musical Clean No Trademark - Team 8+ - 5 CHANNELS LOCKED FINAL - Domain nixorastudios.com + Hash e3b0c44... + Owner anago.vincent.nnalue@gmail.com - God Mode $0 - International Standard - Excellent</button>
+<button class="btn red">[NIXOXTAR Master 45min 4K Dolby Atmos International Standard] Global Blockbuster + Vibrant Musical Clean No Trademark - Team 8+ - 5 CHANNELS LOCKED FINAL - Domain nixorastudios.com + Hash e3b0c44... + Owner support@nixorastudios.com - God Mode $0 - International Standard - Excellent</button>
 </div>
 
-<div class="card"><h2>💳 BILLING - 5 CHANNELS LOCKED FINAL</h2><label><input type="checkbox" id="consent"> I consent auto debit - Domain nixorastudios.com + Hash e3b0c44... + Owner anago.vincent.nnalue@gmail.com - God Mode - 5 CHANNELS LOCKED</label><button class="btn green" onclick="if(!document.getElementById('consent').checked){alert('Tick consent - 5 CHANNELS LOCKED'); return;} localStorage.setItem('consent',JSON.stringify([{time:new Date().toISOString(),business:BUSINESS_LOCKED,domain:DOMAIN_LOCKED,owner:OWNER_EMAIL_PLAIN,hash:OWNER_EMAIL_HASH,channels:['NIXORA KIDS','LIVING ALTAR','AFRO TALES','VIBRA XONA','NIXOXTAR']} ])); localStorage.setItem('isPro','true'); document.getElementById('billOut').innerText='Consent logged - 5 CHANNELS LOCKED FINAL NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44... - God Mode $0 - PRO $9 BEST - International Standard';">💳 Subscribe PRO $9 - 5 CHANNELS LOCKED FINAL - Domain + Hash + Email God Mode</button><p id="billOut" style="background:#000;padding:6px;border-radius:6px;white-space:pre-wrap"></p><button class="btn dark" onclick="localStorage.clear(); alert('Fixed - 5 CHANNELS LOCKED FINAL'); location.reload();">🛠️ Fix My Account - 5 CHANNELS LOCKED</button></div>
+<div class="card"><h2>💳 BILLING - 5 CHANNELS LOCKED FINAL</h2><label><input type="checkbox" id="consent"> I consent auto debit - Domain nixorastudios.com + Hash e3b0c44... + Owner support@nixorastudios.com - God Mode - 5 CHANNELS LOCKED</label><button class="btn green" onclick="if(!document.getElementById('consent').checked){alert('Tick consent - 5 CHANNELS LOCKED'); return;} localStorage.setItem('consent',JSON.stringify([{time:new Date().toISOString(),business:BUSINESS_LOCKED,domain:DOMAIN_LOCKED,owner:OWNER_EMAIL_PLAIN,hash:OWNER_EMAIL_HASH,channels:['NIXORA KIDS','LIVING ALTAR','AFRO TALES','VIBRA XONA','NIXOXTAR']} ])); localStorage.setItem('isPro','true'); document.getElementById('billOut').innerText='Consent logged - 5 CHANNELS LOCKED FINAL NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com locked - Owner support@nixorastudios.com - Hash e3b0c44... - God Mode $0 - PRO $9 BEST - International Standard';">💳 Subscribe PRO $9 - 5 CHANNELS LOCKED FINAL - Domain + Hash + Email God Mode</button><p id="billOut" style="background:#000;padding:6px;border-radius:6px;white-space:pre-wrap"></p><button class="btn dark" onclick="localStorage.clear(); alert('Fixed - 5 CHANNELS LOCKED FINAL'); location.reload();">🛠️ Fix My Account - 5 CHANNELS LOCKED</button></div>
 
 <div class="card" style="border-left-color:#ff6a00"><h2>📺 5 CHANNELS - OPEN</h2>
 <div class="open-grid">
@@ -376,7 +376,7 @@ function openChannel(ch){
   let el=document.getElementById(map[ch]);
   if(el){ el.scrollIntoView({behavior:'smooth',block:'center'}); }
   let s=document.getElementById('openStatus');
-  if(s){ s.innerText='OPENED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 options each - Domain '+DOMAIN_LOCKED+' - Owner '+OWNER_EMAIL_PLAIN; }
+  if(s){ s.innerText='OPENED: '+ch+' - 5 CHANNELS NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - 70-100 options each - Domain '+DOMAIN_LOCKED+' - Owner '+OWNER_CONTACT; }
 }
 function goTool(slug){ window.top.location.href='/tools/'+slug; }
 function openTool(t){
@@ -570,7 +570,7 @@ let savedLockMode=localStorage.getItem('lockMode')||'single'; setLockMode(savedL
 let savedChannel=localStorage.getItem('currentChannel')||'NIXORA_KIDS'; setChannel(savedChannel);
 updateSelfRecognition();
 if(localStorage.getItem('user')){ document.getElementById('gate').classList.add('hidden'); document.getElementById('app').classList.remove('hidden'); document.getElementById('createAccountBtn').style.display='none'; }
-console.log("NIXORA STUDIOS FINAL 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner anago.vincent.nnalue@gmail.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - God Mode $0 - International Standard - 350-500 styles 700-1000 photos - OPTION1+OPTION2 - Self-Recognition 100% - Award Polish - Edit Correction - Coding Light");
+console.log("NIXORA STUDIOS FINAL 5 CHANNELS LOCKED NIXORA KIDS LIVING ALTAR AFRO TALES VIBRA XONA NIXOXTAR - Domain nixorastudios.com - Owner support@nixorastudios.com - Hash e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 - God Mode $0 - International Standard - 350-500 styles 700-1000 photos - OPTION1+OPTION2 - Self-Recognition 100% - Award Polish - Edit Correction - Coding Light");
 </script>
 </div>
 </body>

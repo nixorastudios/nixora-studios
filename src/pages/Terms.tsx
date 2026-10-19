@@ -6,13 +6,13 @@ export default function Terms() {
   return (
     <div className="p-8 max-w-5xl mx-auto text-sm leading-6">
       <h1 className="text-4xl font-bold mb-2">Terms of Service - NIXORA STUDIOS</h1>
-      <p className="mb-6 text-gray-500">Effective: Oct 19, 2026 | Owner: NIXORA STUDIOS | Hash: NX-OWNER-2026-PREMIUM | Location: Asaba, Delta State, Nigeria | Contact: nixorastudios.com | anago.vincent.nnalue@gmail.com | License: PAID_SUBSCRIPTION_RIGHTS_RESERVED</p>
+      <p className="mb-6 text-gray-500">Effective: Oct 19, 2026 | Owner: NIXORA STUDIOS | Hash: NX-OWNER-2026-PREMIUM | Location: Asaba, Delta State, Nigeria | Contact: nixorastudios.com | support@nixorastudios.com | License: PAID_SUBSCRIPTION_RIGHTS_RESERVED</p>
 
       <h2 className="text-xl font-bold mt-6">1. DEFINITIONS</h2>
       <p><b>Platform:</b> NIXORA STUDIOS AI SaaS including 10 tools (animation, lipsync, face-engine, avatar, music-daw, code-engine, video, image, voice, export). <b>Owner Channels:</b> 5 private channels locked to NIXORA STUDIOS - NX_KIDS_001, NX_ALTAR_002, NX_TALES_003, NX_VIBRA_004, NX_XONA_005. <b>Generative Credits:</b> Paid units consumed per AI generation. <b>God Mode Signature:</b> v1.0-GOD-MODE injection - NIXORA STUDIOS | Premium Content | nixorastudios.com | timestamp via signature.ts / ownerChannels.ts / watermark.ts.</p>
 
       <h2 className="text-xl font-bold mt-6">2. ACCOUNT & ELIGIBILITY</h2>
-      <p>Must be 18+. One account per user. You are responsible for security. We may suspend if: fake email, multiple free abuse, chargeback fraud, using `e3b0c44...` null hash attempt, bypassing owner gate anago.vincent.nnalue@gmail.com. We log IP, device, hash for anti-abuse. Business account requires CAC verification if partnership.</p>
+      <p>Must be 18+. One account per user. You are responsible for security. We may suspend if: fake email, multiple free abuse, chargeback fraud, using `e3b0c44...` null hash attempt, bypassing the owner access gate. We log IP, device, hash for anti-abuse. Business account requires CAC verification if partnership.</p>
 
       <h2 className="text-xl font-bold mt-6">3. SUBSCRIPTION, CREDITS, FREE CREDITS</h2>
       <p><b>Free Credits:</b> Demo only, limited, watermarked, non-commercial, expires 7 days, cannot stack. Abuse of free credits via multiple accounts = permanent ban, no refund. <b>Generative Credits (Paid):</b> Purchased credits - 1 credit = 1 standard export (animation 10s, image 4k, etc). Heavy tools (code-engine, music-daw) may cost 3-5 credits. Credits non-transferable, non-refundable after use. Unused paid credits roll over max 90 days if subscription active. <b>Subscription:</b> Monthly/Yearly. Auto-renew. Cancel anytime, access remains until end of period. Downgrade does not refund difference.</p>
