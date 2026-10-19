@@ -3,10 +3,10 @@ import { createGodModeExport, isOwner, OWNER_EMAILS, validateSignature } from '@
 
 describe('Signature safeguards', () => {
   it.each([
-    'anago.vincent.nnalue@gmail.com',
-    'anago.vincent.nnalu@gmail.com',
-    'Chukwumannalue3@gmail.com',
-    ' ANAGO.VINCENT.NNALUE@GMAIL.COM ',
+    'owner.personal@example.com',
+    'owner.personal.alt@example.com',
+    'second.personal@example.com',
+    ' OWNER.PERSONAL@EXAMPLE.COM ',
     'anyone@example.com',
     '',
     null,
