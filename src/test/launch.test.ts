@@ -1,10 +1,30 @@
 import { describe, expect, it } from 'vitest';
-import { addSignup, countdown, LAUNCH_AT, VISITOR_BASE, WAITLIST_BASE } from '@/lib/launch';
+import { addSignup, countdown, LAUNCH_AT, VISITOR_BASE, WAITLIST_BASE, saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
 import { isOwner, validateSignature } from '@/lib/signature';
 import { ENGINES } from '@/lib/engines';
 import { addPngAttribution } from '@/lib/watermark';
 
 describe('Launch rules', () => {
+  it('saves tool, prompt and date in nixora_draft', () => {
+    const saved = new Map<string, string>();
+    saveLaunchDraft({ setItem: (key, value) => saved.set(key, value) }, 'TEXT TO IMAGE', 'A cinematic camera', new Date('2026-10-20T14:10:00Z'));
+    expect(JSON.parse(saved.get('nixora_draft') ?? 'null')).toEqual({ tool: 'TEXT TO IMAGE', prompt: 'A cinematic camera', date: '2026-10-20T14:10:00.000Z' });
+  });
+  it('rejects empty prompts before writing a draft', () => {
+    let writes = 0;
+    expect(() => saveLaunchDraft({ setItem: () => { writes++; } }, 'TEXT TO IMAGE', '   ', new Date())).toThrow('Enter prompt first');
+    expect(writes).toBe(0);
+  });
+  it('stores the normalized email in nixora_waitlist', () => {
+    const saved = new Map<string, string>();
+    saveLocalWaitlist({ setItem: (key, value) => saved.set(key, value) }, ' TEST@Example.com ');
+    expect(saved.get('nixora_waitlist')).toBe('test@example.com');
+  });
+  it('does not save an invalid waitlist email', () => {
+    let writes = 0;
+    expect(() => saveLocalWaitlist({ setItem: () => { writes++; } }, 'invalid')).toThrow();
+    expect(writes).toBe(0);
+  });
   it('launches exactly seven days after the requested UTC date', () => {
     expect(LAUNCH_AT - Date.parse('2026-10-17T10:31:00Z')).toBe(7 * 86400000);
     expect(countdown(Date.parse('2026-10-17T10:31:00Z'))).toEqual([7, 0, 0, 0]);
