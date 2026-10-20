@@ -14,7 +14,7 @@ export interface ToolConfig {
 export const TOOLS: ToolConfig[] = [
   { slug: "text-to-image", name: "TEXT TO IMAGE", icon: "🖼️", description: "Generate visual concepts from text prompts", input: null, output: "image", work: "Generate Visual Concepts", category: "visual" },
   { slug: "text-to-video", name: "TEXT TO VIDEO", icon: "🎬", description: "Create motion stories from text", input: null, output: "video", work: "Create Motion Stories", category: "video" },
-  { slug: "photo-to-video", name: "IMAGES TO VIDEO", icon: "📼", description: "Animate still images into motion", input: "image", output: "video", work: "Animate Still Images", category: "video" },
+  { slug: "photo-to-video", name: "IMAGE TO VIDEO", icon: "📼", description: "Animate still images into motion", input: "image", output: "video", work: "Animate Still Images", category: "video" },
   { slug: "animation", name: "ANIMATION", icon: "✨", description: "Create moving graphics and characters", input: "image", output: "video", work: "Create Moving Graphics", category: "visual" },
   { slug: "sound-effects", name: "SOUND EFFECTS", icon: "🔊", description: "Produce audio effects and foley", input: null, output: "audio", work: "Produce Audio Effects", category: "audio" },
   { slug: "voice-over", name: "VOICE OVER", icon: "🎙️", description: "Synthesize voice narrations for scenes", input: null, output: "audio", work: "Synthesize Voice Narrations", category: "audio" },

@@ -180,19 +180,21 @@
   --border: oklch(0.985 0 0 / 15%);
   --input: oklch(0.985 0 0 / 25%);
   --ring: var(--primary);
-  --launch-scrim: linear-gradient(90deg, oklch(0.145 0 0 / 90%), oklch(0.145 0 0 / 60%) 46%, oklch(0.145 0 0 / 5%) 80%);
+  --launch-scrim: oklch(0.17 0.035 265 / 80%);
+  --launch-navy: oklch(0.17 0.035 265);
   font-family: var(--font-launch);
   letter-spacing: 0;
 }
 .launch-heading { font-size: 80px; line-height: 1.04; }
-.launch-hero { min-height: 650px; }
+.launch-hero { min-height: 650px; background-color: var(--launch-navy); background-size: cover; background-position: center; background-attachment: fixed; }
+@media (max-width: 1024px) { .launch-hero { background-attachment: scroll; } }
 .launch-scrim { background: var(--launch-scrim); }
 .launch-dot { animation: nixora-pulse 2s ease-in-out infinite; }
 .launch-engine { min-height: 158px; }
 @media (max-width: 767px) {
   .launch-heading { font-size: 52px; }
   .launch-hero { min-height: 660px; }
-  .launch-hero > img { object-position: 64% center; opacity: 0.45; }
+  .launch-hero { background-position: center; }
 }
 @media (max-width: 360px) { .launch-heading { font-size: 44px; } }
 @media (prefers-reduced-motion: reduce) {

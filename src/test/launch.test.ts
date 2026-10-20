@@ -10,7 +10,7 @@ describe('Launch rules', () => {
     expect(countdown(Date.parse('2026-10-17T10:31:00Z'))).toEqual([7, 0, 0, 0]);
   });
   it('never shows negative time after launch', () => expect(countdown(LAUNCH_AT + 1000)).toEqual([0, 0, 0, 0]));
-  it('starts illustrative counters at the requested values', () => { expect(VISITOR_BASE).toBe(3318); expect(WAITLIST_BASE).toBe(847); });
+  it('starts illustrative counters at the requested values', () => { expect(VISITOR_BASE).toBe(1365); expect(WAITLIST_BASE).toBe(847); });
   it('gives the first local signup number 848 and deduplicates email', () => {
     const first = addSignup([], ' Test@Example.com ');
     expect(first).toEqual({ emails: ['test@example.com'], position: 848 });

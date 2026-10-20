@@ -1,5 +1,5 @@
 export const LAUNCH_AT = Date.parse('2026-10-24T10:31:00Z');
-export const VISITOR_BASE = 3318;
+export const VISITOR_BASE = 1365;
 export const WAITLIST_BASE = 847;
 export const WAITLIST_KEY = 'nixora_early_access';
 export function countdown(now: number) {
