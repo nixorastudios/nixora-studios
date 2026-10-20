@@ -1,10 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
 import cameraHero from '@/assets/launch-studio.jpg';
 import { Button } from '@/components/ui/button';
-import { saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
+import { readLocalWaitlist, saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
+import models from '@/lib/models.json';
+
+const homepageTools = models.flatMap(model => {
+  const tool = TOOLS.find(tool => tool.slug === model.slug);
+  return tool ? [tool] : [];
+});
 
 const title = 'NIXORA STUDIOS — Coming Soon · Global AI Video Studio';
 const description = 'Ten creative AI engines. One global studio. NIXORA STUDIOS launches October 24, 2026.';
@@ -21,8 +27,13 @@ function Index() {
   const [notice, setNotice] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [email, setEmail] = useState('');
+  const [waitlistCount, setWaitlistCount] = useState(0);
   const triggerRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    try { setWaitlistCount(readLocalWaitlist(localStorage).length); } catch { /* Browser storage may be unavailable. */ }
+  }, []);
 
   const closeTool = () => {
     setSelectedTool(null);
@@ -74,7 +85,8 @@ function Index() {
   const joinWaitlist = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      saveLocalWaitlist(localStorage, email);
+      const emails = saveLocalWaitlist(localStorage, email);
+      setWaitlistCount(emails.length);
       window.alert('Your email and idea are saved on this device only. They have not been sent to NIXORA STUDIOS, and no launch email will be sent.');
       closeTool();
       setPrompt('');
@@ -100,7 +112,7 @@ function Index() {
           <h2 className="mb-2 text-center text-3xl font-bold md:text-4xl">One studio. Ten engines.</h2>
           <p className="mb-12 text-center text-primary">TOOLS TO BUILD YOUR WORLD</p>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {TOOLS.map(tool => <button type="button" key={tool.slug} data-tool={tool.slug} aria-haspopup="dialog" onClick={e => openTool(tool, e.currentTarget)} className="camera-engine flex min-h-24 w-full cursor-pointer flex-wrap items-center justify-between gap-3 rounded-2xl bg-card p-6 text-left text-card-foreground">
+            {homepageTools.map(tool => <button type="button" key={tool.slug} data-tool={tool.slug} aria-haspopup="dialog" onClick={e => openTool(tool, e.currentTarget)} className="camera-engine flex min-h-24 w-full cursor-pointer flex-wrap items-center justify-between gap-3 rounded-2xl bg-card p-6 text-left text-card-foreground">
               <h3 className="font-bold">{tool.name}</h3>
               <span className="flex items-center gap-2 text-sm text-launch-card-muted">Coming soon <LockKeyhole className="size-4 shrink-0" aria-label="Locked" /></span>
             </button>)}
@@ -109,7 +121,7 @@ function Index() {
       </section>
     </main>
     <footer className="camera-footer border-t border-border px-8 py-10 text-center">
-      <p>Nixora Studios © 2026 - GOD MODE ACTIVE</p>
+      <p>Nixora Studios © 2026 - GOD MODE ACTIVE | <Link to="/terms" className="hover:underline">Terms</Link> | <Link to="/privacy" className="hover:underline">Privacy</Link></p>
       <a href="mailto:support@nixorastudios.com" className="mt-2 inline-block text-primary hover:underline">support@nixorastudios.com</a>
     </footer>
     {selectedTool && <div className="fixed inset-0 z-50 flex items-center justify-center bg-camera-scrim p-4 backdrop-blur-sm" onClick={closeTool}>
@@ -126,6 +138,7 @@ function Index() {
           <p className="mt-3 font-bold text-primary">Want us to build this first on Oct 24 launch?</p>
           <input type="email" required aria-label="Email for early access" placeholder="Enter email for early access" value={email} onChange={e => setEmail(e.target.value)} className="mt-3 w-full rounded-xl border-2 border-primary/25 bg-card p-3 text-card-foreground outline-none focus:border-primary" />
           <p className="mt-2 text-sm text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
+          <p role="status" className="mt-2 text-sm text-launch-card-muted">Local waitlist: {waitlistCount} {waitlistCount === 1 ? 'email' : 'emails'} saved on this device.</p>
           <Button type="submit" className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist + Lock My Idea 🚀</Button>
         </form> : <div className="mt-6 flex gap-3">
           <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Oct 24</Button>

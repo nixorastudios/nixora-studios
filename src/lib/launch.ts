@@ -8,11 +8,21 @@ export function saveLaunchDraft(storage: Pick<Storage, 'setItem'>, tool: string,
   if (!prompt.trim()) throw new Error('Enter prompt first');
   storage.setItem(PROMPT_DRAFT_KEY, JSON.stringify({ tool, prompt, date }));
 }
-export function saveLocalWaitlist(storage: Pick<Storage, 'setItem'>, input: string) {
-  const { emails } = addSignup([], input);
-  const email = emails[0];
-  if (!email) throw new Error('Enter a valid email address.');
-  storage.setItem(PROMPT_WAITLIST_KEY, email);
+export function readLocalWaitlist(storage: Pick<Storage, 'getItem'>): string[] {
+  const raw = storage.getItem(PROMPT_WAITLIST_KEY);
+  if (!raw) return [];
+  let values: unknown;
+  try { values = JSON.parse(raw); } catch { values = raw; }
+  const candidates = Array.isArray(values) ? values : [values];
+  return candidates.reduce<string[]>((emails, value) => {
+    if (typeof value !== 'string') return emails;
+    try { return addSignup(emails, value).emails; } catch { return emails; }
+  }, []);
+}
+export function saveLocalWaitlist(storage: Pick<Storage, 'getItem' | 'setItem'>, input: string) {
+  const { emails } = addSignup(readLocalWaitlist(storage), input);
+  storage.setItem(PROMPT_WAITLIST_KEY, JSON.stringify(emails));
+  return emails;
 }
 export function countdown(now: number) {
   const seconds = Math.max(0, Math.floor((LAUNCH_AT - now) / 1000));

@@ -1,5 +1,6 @@
 # Roadmap
 
+- [ ] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
 - [x] Prompt board: local draft confirmation and validated device-only email saving
 
 - [x] Coming-soon homepage, local early-access form, fixed launch countdown, locked ten-engine grid
