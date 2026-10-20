@@ -220,6 +220,8 @@
 .camera-engine { box-shadow: var(--camera-shadow); transition: transform 200ms ease, box-shadow 200ms ease; }
 .camera-engine:hover { transform: translateY(-3px); }
 .camera-footer { background: var(--camera-footer); }
+.camera-single-hero { --camera-overlay-top: oklch(0 0 0 / 20%); --camera-overlay-bottom: oklch(0 0 0 / 70%); }
+.camera-hero-shade { background: linear-gradient(to bottom, var(--camera-overlay-top), var(--camera-overlay-bottom)); }
 @media (max-width: 767px) {
   .camera-wordmark { font-size: 32px; }
   .camera-hero { min-height: 490px; }
