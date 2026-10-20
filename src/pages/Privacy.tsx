@@ -14,7 +14,7 @@ export default function Privacy() {
       <h2 className="text-xl font-bold mt-6">3. SHARING & SECURITY</h2>
       <p>Shared with: Supabase (DB), Vercel (hosting), Stripe/Paystack (payment), no sale of data. We hash owner data with NX-OWNER-2026-PREMIUM. Security: bcrypt passwords, RLS on Supabase, signature.ts immutable. Breach notification within 72h.</p>
 
-      <p className="mt-6">Contact: nixorastudios.com | Asaba 2026 | All rights Commercial Premium - Not Free Content</p>
+      <p className="mt-6">Contact: support@nixorastudios.com | nixorastudios.com/privacy | Asaba 2026</p>
     </div>
   )
 }
