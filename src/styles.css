@@ -191,6 +191,8 @@
 .launch-scrim { background: var(--launch-scrim); }
 .launch-dot { animation: nixora-pulse 2s ease-in-out infinite; }
 .launch-engine { min-height: 158px; }
+.launch-theme { --launch-card: oklch(0.21 0.034 264.7); --launch-bg-from: oklch(0.17 0.035 265); --launch-bg-to: oklch(0 0 0); }
+.launch-backdrop { background: linear-gradient(180deg, var(--launch-bg-from), var(--launch-bg-to)); }
 @media (max-width: 767px) {
   .launch-heading { font-size: 52px; }
   .launch-hero { min-height: 660px; }
