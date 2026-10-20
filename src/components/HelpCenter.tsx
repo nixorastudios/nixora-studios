@@ -183,14 +183,7 @@ export function HelpCenter() {
                 </a>
               </p>
               <p style={{ margin: "6px 0", fontSize: "12px" }}>
-                {"\uD83D\uDC51"} Admin:{" "}
-                <a
-                  href="mailto:nixorastudios@gmail.com"
-                  style={{ color: "#00ff88", fontWeight: "bold" }}
-                >
-                  nixorastudios@gmail.com
-                </a>{" "}
-                (Admin)
+                Privacy: nixorastudios.com/privacy
               </p>
             </div>
           </div>
