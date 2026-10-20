@@ -1,8 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
-import { Aperture, LockKeyhole } from 'lucide-react';
+import { Image, Clapperboard, Film, Sparkles, Volume2, Mic, Piano, Speech, Scissors, Code2, LockKeyhole } from 'lucide-react';
 import { TOOLS } from '@/lib/tools';
-import { LAUNCH_AT, VISITOR_BASE, WAITLIST_BASE } from '@/lib/launch';
+import { LAUNCH_AT } from '@/lib/launch';
+import cameraHero from '@/assets/launch-studio.jpg';
 
 const title = 'NIXORA STUDIOS — Coming Soon · Global AI Video Studio';
 const description = 'Ten creative AI engines. One global studio. NIXORA STUDIOS launches October 24, 2026.';
@@ -17,37 +18,45 @@ function timer(now: number) {
   return `${p(Math.floor(s / 3600))}:${p(Math.floor(s / 60) % 60)}:${p(s % 60)}`;
 }
 
+const engineIcons = [Image, Clapperboard, Film, Sparkles, Volume2, Mic, Piano, Speech, Scissors, Code2];
+
 function Index() {
   const [now, setNow] = useState<number | null>(null);
   useEffect(() => { setNow(Date.now()); const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, []);
-  return <div className="launch-theme launch-backdrop min-h-screen text-foreground">
-    <div className="mx-auto max-w-5xl px-5 py-6 md:px-10">
-      <header className="flex items-center gap-2 text-sm font-bold text-primary"><Aperture className="size-6" />NIXORA STUDIOS</header>
+  return <div className="launch-theme camera-home min-h-screen text-foreground">
+    <div className="camera-wallpaper" style={{ backgroundImage: `url(${cameraHero})` }} aria-hidden="true" />
+    <div className="camera-overlay" aria-hidden="true" />
+    <div className="relative mx-auto max-w-6xl px-6 md:px-10">
+      <header className="pt-9 md:pt-12"><p className="camera-wordmark font-extrabold">NIXORASTUDIOS</p></header>
       <main>
-        <section className="py-16 text-center md:py-24">
-          <span className="inline-block rounded-full border border-primary px-4 py-1 text-xs font-medium uppercase text-primary">A new era of storytelling</span>
-          <h1 className="mt-6 text-5xl font-bold md:text-[64px] md:leading-tight">NIXORA STUDIOS.</h1>
-          <h2 className="mt-4 text-xl font-medium md:text-2xl">Coming Soon - Global AI Video Studio</h2>
-          <p className="mt-6 text-sm text-muted-foreground"><span className="tabular-nums">{VISITOR_BASE.toLocaleString('en-US')}</span> visitors | <span className="tabular-nums">{WAITLIST_BASE}</span> on waitlist</p>
-          <p className="mt-8 text-xs uppercase text-muted-foreground">Launching October 24, 2026</p>
-          <p className="mt-2 font-mono text-4xl tabular-nums text-primary" aria-label="Launch countdown">{now === null ? '--:--:--' : timer(now)}</p>
+        <section className="camera-hero flex items-center py-16 md:py-24">
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold uppercase text-primary">A NEW ERA OF STORYTELLING</p>
+            <h1 className="mt-5 text-5xl leading-tight font-extrabold md:text-[72px]">NIXORA<br className="hidden md:block" /> STUDIOS.</h1>
+            <p className="mt-5 text-base text-foreground/85 md:text-lg">Coming Soon — Global AI Video Studio</p>
+            <p className="mt-10 text-xs uppercase text-foreground/70">Launching October 24, 2026</p>
+            <p className="mt-3 font-mono text-4xl tabular-nums text-primary md:text-5xl" aria-label="Launch countdown">{now === null ? '--:--:--' : timer(now)}</p>
+          </div>
         </section>
-        <section className="pb-12">
-          <p className="text-center text-xs uppercase text-primary">Tools to build your world</p>
-          <h2 className="mt-2 text-center text-2xl font-medium">One studio. Ten engines.</h2>
-          <div className="mt-8 grid grid-cols-2 gap-3">
-            {TOOLS.map((tool, i) => <article key={tool.slug} data-tool={tool.slug} className="flex items-center justify-between rounded-lg border border-border bg-[var(--launch-card)] p-4">
-              <div><span className="font-mono text-xs text-primary">{i + 1}</span><h3 className="text-sm font-semibold">{tool.name}</h3><p className="text-xs text-muted-foreground">Coming soon</p></div>
-              <LockKeyhole className="size-4 text-muted-foreground" />
-            </article>)}
+        <section className="pb-16 md:pb-20">
+          <h2 className="text-center text-sm font-bold uppercase text-primary">TOOLS TO BUILD YOUR WORLD</h2>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {TOOLS.map((tool, i) => {
+              const Icon = engineIcons[i] ?? Sparkles;
+              return <article key={tool.slug} data-tool={tool.slug} className="camera-engine flex min-h-32 items-center gap-5 rounded-[20px] bg-card p-6 text-card-foreground">
+                <Icon className="size-8 shrink-0 text-primary" strokeWidth={1.6} aria-hidden="true" />
+                <div className="min-w-0 flex-1"><h3 className="text-base font-extrabold">{tool.name}</h3><p className="mt-2 text-sm text-launch-card-muted">Coming soon</p></div>
+                <LockKeyhole className="size-4 shrink-0 text-launch-card-muted" aria-label="Locked" />
+              </article>;
+            })}
           </div>
         </section>
       </main>
-      <footer className="flex flex-col items-center gap-2 border-t border-border py-6 text-center text-xs text-muted-foreground">
-        <p>Nixora Studios © 2026 - GOD MODE ACTIVE</p>
+    </div>
+      <footer className="camera-footer relative flex flex-col items-center gap-3 py-8 text-center text-xs text-muted-foreground">
+        <p>© 2026 NIXORA STUDIOS</p>
         <a href="mailto:support@nixorastudios.com" className="text-primary hover:underline">support@nixorastudios.com</a>
         <p className="flex items-center gap-2"><span className="launch-dot size-1.5 rounded-full bg-primary" />Coming Soon</p>
       </footer>
-    </div>
   </div>;
 }
