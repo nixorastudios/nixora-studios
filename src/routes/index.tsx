@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react';
 import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
 import cameraHero from '@/assets/launch-studio.jpg';
+import { Button } from '@/components/ui/button';
+import { saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
 
 const title = 'NIXORA STUDIOS — Coming Soon · Global AI Video Studio';
 const description = 'Ten creative AI engines. One global studio. NIXORA STUDIOS launches October 24, 2026.';
@@ -17,11 +19,15 @@ function Index() {
   const [selectedTool, setSelectedTool] = useState<ToolConfig | null>(null);
   const [prompt, setPrompt] = useState('');
   const [notice, setNotice] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [email, setEmail] = useState('');
   const triggerRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
   const closeTool = () => {
     setSelectedTool(null);
+    setShowSuccess(false);
+    setEmail('');
     triggerRef.current?.focus();
   };
 
@@ -42,6 +48,8 @@ function Index() {
   const openTool = (tool: ToolConfig, trigger: HTMLElement) => {
     triggerRef.current = trigger;
     setNotice('');
+    setShowSuccess(false);
+    setEmail('');
     setPrompt(localStorage.getItem(draftKey(tool.slug)) ?? '');
     setSelectedTool(tool);
   };
@@ -49,6 +57,30 @@ function Index() {
   const saveDraft = (value: string) => {
     setPrompt(value);
     if (selectedTool) localStorage.setItem(draftKey(selectedTool.slug), value);
+  };
+
+  const confirmDraft = () => {
+    if (!selectedTool) return;
+    if (!prompt.trim()) return window.alert('Enter prompt first');
+    try {
+      saveLaunchDraft(localStorage, selectedTool.name, prompt, new Date());
+      setNotice('');
+      setShowSuccess(true);
+    } catch {
+      setNotice('Your draft could not be saved. Please allow browser storage and try again.');
+    }
+  };
+
+  const joinWaitlist = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      saveLocalWaitlist(localStorage, email);
+      window.alert('Your email and idea are saved on this device only. They have not been sent to NIXORA STUDIOS, and no launch email will be sent.');
+      closeTool();
+      setPrompt('');
+    } catch (error) {
+      setNotice(error instanceof Error && error.message === 'Enter a valid email address.' ? error.message : 'Your email could not be saved. Please allow browser storage and try again.');
+    }
   };
 
   return <div className="launch-theme camera-home min-h-screen text-foreground">
@@ -84,13 +116,20 @@ function Index() {
       <div ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="tool-title" onClick={e => e.stopPropagation()} className="camera-modal max-h-[90svh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-8 text-card-foreground outline-none">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h3 id="tool-title" className="text-2xl font-black">{selectedTool.name}</h3>
-          <button type="button" onClick={closeTool} aria-label="Close" className="cursor-pointer text-launch-card-muted hover:text-card-foreground"><X className="size-6" /></button>
+          <Button type="button" variant="ghost" size="icon" onClick={closeTool} aria-label="Close" className="text-launch-card-muted hover:text-card-foreground"><X className="size-6" /></Button>
         </div>
         <p className="mb-4 text-launch-card-muted">What do you want to create?</p>
-        <textarea value={prompt} onChange={e => saveDraft(e.target.value)} placeholder={`Describe your ${selectedTool.name.toLowerCase()} idea... e.g., A cinematic shot of...`} className="h-32 w-full rounded-xl border-2 border-camera-line bg-card p-4 text-card-foreground outline-none focus:border-primary" />
-        <div className="mt-6 flex gap-3">
-          <button type="button" onClick={() => setNotice(`${selectedTool.name} opens October 24, 2026. Nothing was generated — your draft stays on this device.`)} className="w-full cursor-pointer rounded-xl bg-primary py-3 font-bold text-primary-foreground hover:opacity-90">Generate with {selectedTool.name} — Coming Oct 24</button>
-        </div>
+        <textarea aria-label="What do you want to create?" value={prompt} readOnly={showSuccess} onChange={e => saveDraft(e.target.value)} placeholder={`Describe your ${selectedTool.name.toLowerCase()} idea... e.g., A cinematic shot of...`} className="h-32 w-full rounded-xl border-2 border-camera-line bg-card p-4 text-card-foreground outline-none focus:border-primary" />
+        {showSuccess ? <form onSubmit={joinWaitlist} className="mt-4 rounded-xl border border-launch-success-line bg-launch-success p-4 text-center">
+          <p role="status" className="text-lg font-bold text-launch-success-foreground">✅ Draft Saved on this device!</p>
+          <p className="mt-1 break-words text-sm text-launch-card-muted">Your idea: “{prompt.slice(0, 50)}{prompt.length > 50 ? '…' : ''}”</p>
+          <p className="mt-3 font-bold text-primary">Want us to build this first on Oct 24 launch?</p>
+          <input type="email" required aria-label="Email for early access" placeholder="Enter email for early access" value={email} onChange={e => setEmail(e.target.value)} className="mt-3 w-full rounded-xl border-2 border-primary/25 bg-card p-3 text-card-foreground outline-none focus:border-primary" />
+          <p className="mt-2 text-sm text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
+          <Button type="submit" className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist + Lock My Idea 🚀</Button>
+        </form> : <div className="mt-6 flex gap-3">
+          <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Oct 24</Button>
+        </div>}
         {notice && <p role="status" className="mt-4 text-center text-sm text-primary">{notice}</p>}
         <p className="mt-4 flex items-center justify-center gap-2 text-center text-sm text-launch-card-muted"><LockKeyhole className="size-4 shrink-0" aria-hidden="true" /> Module launches Oct 24, 2026.</p>
       </div>

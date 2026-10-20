@@ -34,6 +34,11 @@
   --color-launch-card-muted: var(--launch-card-muted);
   --color-camera-line: var(--camera-line);
   --color-camera-scrim: var(--camera-scrim);
+  --color-launch-success: var(--launch-success);
+  --color-launch-success-line: var(--launch-success-line);
+  --color-launch-success-foreground: var(--launch-success-foreground);
+  --color-launch-join: var(--launch-join);
+  --color-launch-join-foreground: var(--launch-join-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -209,6 +214,11 @@
   --launch-card-muted: oklch(0.5 0 0);
   --camera-line: oklch(0.9 0 0);
   --camera-scrim: oklch(0 0 0 / 80%);
+  --launch-success: oklch(0.982 0.018 155.826);
+  --launch-success-line: oklch(0.925 0.084 155.995);
+  --launch-success-foreground: oklch(0.527 0.154 150.069);
+  --launch-join: oklch(0.145 0 0);
+  --launch-join-foreground: oklch(1 0 0);
   --camera-overlay-top: oklch(0 0 0 / 15%);
   --camera-overlay-bottom: oklch(0 0 0 / 60%);
   --camera-footer: oklch(0 0 0);
