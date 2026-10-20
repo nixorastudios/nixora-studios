@@ -9,5 +9,6 @@
 - [x] Replace "GOD MODE" labels with owner wording in launcher and dashboard
 - [x] Check project files for Chukwumannalue3@gmail.com (none found)
 - [x] Remove the hash header and every visible Gmail address; use support@nixorastudios.com
+- [x] Engine cards open a local prompt popup (draft saved in browser only, no generation claim)
 - [ ] Project member roles (owner/admin, requested restored admin) — set by the user in Lovable project settings, not in code
 - [ ] Real owner/admin sign-in inside the app — waits on user approval to enable Lovable Cloud
