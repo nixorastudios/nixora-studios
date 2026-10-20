@@ -31,6 +31,7 @@
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+  --color-launch-card-muted: var(--launch-card-muted);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
@@ -199,6 +200,33 @@
   .launch-hero { background-position: center; }
 }
 @media (max-width: 360px) { .launch-heading { font-size: 44px; } }
+.camera-home {
+  --primary: oklch(0.704 0.201 45.3);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --launch-card-muted: oklch(0.5 0 0);
+  --camera-overlay-top: oklch(0 0 0 / 15%);
+  --camera-overlay-bottom: oklch(0 0 0 / 60%);
+  --camera-footer: oklch(0 0 0);
+  --camera-shadow: 0 12px 30px oklch(0 0 0 / 18%);
+  isolation: isolate;
+  background: var(--background);
+}
+.camera-wallpaper, .camera-overlay { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+.camera-wallpaper { background-size: cover; background-position: center; background-attachment: fixed; }
+.camera-overlay { background: linear-gradient(to bottom, var(--camera-overlay-top) 0%, var(--camera-overlay-bottom) 100%); }
+.camera-wordmark { font-size: 60px; line-height: 1.1; letter-spacing: 0; }
+.camera-hero { min-height: 540px; }
+.camera-engine { box-shadow: var(--camera-shadow); transition: transform 200ms ease, box-shadow 200ms ease; }
+.camera-engine:hover { transform: translateY(-3px); }
+.camera-footer { background: var(--camera-footer); }
+@media (max-width: 767px) {
+  .camera-wordmark { font-size: 32px; }
+  .camera-hero { min-height: 490px; }
+  .camera-wallpaper { background-position: 78% center; }
+}
+@media (max-width: 360px) { .camera-wordmark { font-size: 28px; } }
+@media (max-aspect-ratio: 1/1) { .camera-wallpaper { background-position: 78% center; } }
 @media (prefers-reduced-motion: reduce) {
   .launch-theme *, .launch-theme *::before, .launch-theme *::after { animation: none; transition: none; }
 }
