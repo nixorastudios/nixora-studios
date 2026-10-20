@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Prompt board: local draft confirmation and validated device-only email saving
+- [x] Prompt board: local draft confirmation and validated device-only email saving
 
 - [x] Coming-soon homepage, local early-access form, fixed launch countdown, locked ten-engine grid
 - [x] Safe watermark/signature helpers and available engine/JSON settings
