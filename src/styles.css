@@ -226,6 +226,7 @@
   .camera-wallpaper { background-position: 78% center; }
 }
 @media (max-width: 360px) { .camera-wordmark { font-size: 28px; } }
+@media (max-aspect-ratio: 1/1) { .camera-wallpaper { background-position: 78% center; } }
 @media (prefers-reduced-motion: reduce) {
   .launch-theme *, .launch-theme *::before, .launch-theme *::after { animation: none; transition: none; }
 }
