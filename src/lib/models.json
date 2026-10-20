@@ -1,0 +1,12 @@
+[
+  { "slug": "text-to-image", "model": null, "status": "placeholder" },
+  { "slug": "text-to-video", "model": null, "status": "placeholder" },
+  { "slug": "photo-to-video", "model": null, "status": "placeholder" },
+  { "slug": "animation", "model": null, "status": "placeholder" },
+  { "slug": "sound-effects", "model": null, "status": "placeholder" },
+  { "slug": "voice-over", "model": null, "status": "placeholder" },
+  { "slug": "music-daw", "model": null, "status": "placeholder" },
+  { "slug": "lipsync", "model": null, "status": "placeholder" },
+  { "slug": "video-editor", "model": null, "status": "placeholder" },
+  { "slug": "code-engine", "model": null, "status": "placeholder" }
+]
