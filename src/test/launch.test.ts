@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { addSignup, countdown, LAUNCH_AT, VISITOR_BASE, WAITLIST_BASE, saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
+import { addSignup, countdown, LAUNCH_AT, VISITOR_BASE, WAITLIST_BASE, saveLaunchDraft, saveLocalWaitlist, readLocalWaitlist } from '@/lib/launch';
+import models from '@/lib/models.json';
+import { TOOLS } from '@/lib/tools';
 import { isOwner, validateSignature } from '@/lib/signature';
 import { ENGINES } from '@/lib/engines';
 import { addPngAttribution } from '@/lib/watermark';
@@ -15,14 +17,38 @@ describe('Launch rules', () => {
     expect(() => saveLaunchDraft({ setItem: () => { writes++; } }, 'TEXT TO IMAGE', '   ', new Date())).toThrow('Enter prompt first');
     expect(writes).toBe(0);
   });
-  it('stores the normalized email in nixora_waitlist', () => {
+  it('stores normalized emails as a JSON array in nixora_waitlist', () => {
     const saved = new Map<string, string>();
-    saveLocalWaitlist({ setItem: (key, value) => saved.set(key, value) }, ' TEST@Example.com ');
-    expect(saved.get('nixora_waitlist')).toBe('test@example.com');
+    const storage = { getItem: (key: string) => saved.get(key) ?? null, setItem: (key: string, value: string) => { saved.set(key, value); } };
+    saveLocalWaitlist(storage, ' TEST@Example.com ');
+    expect(JSON.parse(saved.get('nixora_waitlist') ?? 'null')).toEqual(['test@example.com']);
+    expect(saveLocalWaitlist(storage, 'second@example.com')).toEqual(['test@example.com', 'second@example.com']);
+    expect(readLocalWaitlist(storage).length).toBe(2);
+  });
+  it('preserves a legacy email when appending a new signup', () => {
+    let value = 'old@example.com';
+    const storage = { getItem: () => value, setItem: (_key: string, next: string) => { value = next; } };
+    saveLocalWaitlist(storage, 'new@example.com');
+    expect(JSON.parse(value)).toEqual(['old@example.com', 'new@example.com']);
+  });
+  it('counts a repeated normalized email only once', () => {
+    let value = '["test@example.com"]';
+    const storage = { getItem: () => value, setItem: (_key: string, next: string) => { value = next; } };
+    expect(saveLocalWaitlist(storage, ' TEST@EXAMPLE.COM ')).toEqual(['test@example.com']);
+    expect(readLocalWaitlist(storage).length).toBe(1);
+  });
+  it('handles malformed local waitlist data without throwing', () => {
+    expect(readLocalWaitlist({ getItem: () => '{broken' })).toEqual([]);
+    expect(readLocalWaitlist({ getItem: () => '[null, 5, "valid@example.com"]' })).toEqual(['valid@example.com']);
+  });
+  it('provides ten unconnected model placeholders for the existing cards', () => {
+    expect(models).toHaveLength(10);
+    expect(models.map(model => model.slug)).toEqual(TOOLS.map(tool => tool.slug));
+    expect(models.every(model => model.model === null && model.status === 'placeholder')).toBe(true);
   });
   it('does not save an invalid waitlist email', () => {
     let writes = 0;
-    expect(() => saveLocalWaitlist({ setItem: () => { writes++; } }, 'invalid')).toThrow();
+    expect(() => saveLocalWaitlist({ getItem: () => null, setItem: () => { writes++; } }, 'invalid')).toThrow();
     expect(writes).toBe(0);
   });
   it('launches exactly seven days after the requested UTC date', () => {
