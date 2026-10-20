@@ -1,8 +1,31 @@
+import { Link } from '@tanstack/react-router'
+
 export default function Terms() {
   return (
     <div className="p-8 max-w-5xl mx-auto text-sm leading-6">
       <h1 className="text-4xl font-bold mb-2">Nixora Studios Terms</h1>
-      <p>All designs are device-only, no emails promised at launch. Contact support@nixorastudios.com</p>
+      <p>
+        All designs are device-only, no emails promised at launch. Contact{' '}
+        <a
+          href="mailto:support@nixorastudios.com"
+          className="underline text-link hover:text-link/80"
+        >
+          support@nixorastudios.com
+        </a>
+      </p>
+      <p className="mt-6">
+        <Link to="/privacy" className="underline text-link hover:text-link/80">
+          Read Privacy Policy
+        </Link>
+      </p>
+      <div className="mt-8">
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+        >
+          ← Back to Home
+        </Link>
+      </div>
     </div>
   );
 }
