@@ -103,8 +103,8 @@ function Index() {
         <div className="relative max-w-4xl">
           <p className="mb-4 text-sm text-primary">A NEW ERA OF STORYTELLING</p>
           <h1 className="mb-4 text-5xl leading-tight font-black sm:text-6xl md:text-8xl">NIXORA STUDIOS.</h1>
-          <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio · 10 Engines in 1</p>
-          <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026</p>
+          <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio</p>
+          <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026 - 10 ENGINES IN 1</p>
         </div>
       </section>
       <section className="bg-background px-8 py-20">
@@ -121,8 +121,7 @@ function Index() {
       </section>
     </main>
     <footer className="camera-footer border-t border-border px-8 py-10 text-center">
-      <p>Nixora Studios © 2026 - GOD MODE ACTIVE | <Link to="/terms" className="hover:underline">Terms</Link> | <Link to="/privacy" className="hover:underline">Privacy</Link></p>
-      <a href="mailto:support@nixorastudios.com" className="mt-2 inline-block text-primary hover:underline">support@nixorastudios.com</a>
+      <p>Nixora Studios © 2026</p>
     </footer>
     {selectedTool && <div className="fixed inset-0 z-50 flex items-center justify-center bg-camera-scrim p-4 backdrop-blur-sm" onClick={closeTool}>
       <div ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="tool-title" onClick={e => e.stopPropagation()} className="camera-modal max-h-[90svh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-8 text-card-foreground outline-none">
