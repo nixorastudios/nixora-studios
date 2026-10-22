@@ -13,7 +13,7 @@ const homepageTools = models.flatMap(model => {
 });
 
 const title = 'NIXORA STUDIOS — Coming Soon · Global AI Video Studio';
-const description = 'Ten creative AI engines. One global studio. NIXORA STUDIOS launches October 24, 2026.';
+const description = '10 engines in 1. One global studio. NIXORA STUDIOS launches November 23, 2026.';
 export const Route = createFileRoute('/')({
   head: () => ({ meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
   component: Index,
@@ -103,8 +103,8 @@ function Index() {
         <div className="relative max-w-4xl">
           <p className="mb-4 text-sm text-primary">A NEW ERA OF STORYTELLING</p>
           <h1 className="mb-4 text-5xl leading-tight font-black sm:text-6xl md:text-8xl">NIXORA STUDIOS.</h1>
-          <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio</p>
-          <p className="text-foreground/60">LAUNCHING OCTOBER 24, 2026</p>
+          <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio · 10 Engines in 1</p>
+          <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026</p>
         </div>
       </section>
       <section className="bg-background px-8 py-20">
@@ -135,16 +135,16 @@ function Index() {
         {showSuccess ? <form onSubmit={joinWaitlist} className="mt-4 rounded-xl border border-launch-success-line bg-launch-success p-4 text-center">
           <p role="status" className="text-lg font-bold text-launch-success-foreground">✅ Draft Saved on this device!</p>
           <p className="mt-1 break-words text-sm text-launch-card-muted">Your idea: “{prompt.slice(0, 50)}{prompt.length > 50 ? '…' : ''}”</p>
-          <p className="mt-3 font-bold text-primary">Want us to build this first on Oct 24 launch?</p>
+          <p className="mt-3 font-bold text-primary">Want us to build this first on Nov 23 launch?</p>
           <input type="email" required aria-label="Email for early access" placeholder="Enter email for early access" value={email} onChange={e => setEmail(e.target.value)} className="mt-3 w-full rounded-xl border-2 border-primary/25 bg-card p-3 text-card-foreground outline-none focus:border-primary" />
           <p className="mt-2 text-sm text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
           <p role="status" className="mt-2 text-sm text-launch-card-muted">Local waitlist: {waitlistCount} {waitlistCount === 1 ? 'email' : 'emails'} saved on this device.</p>
           <Button type="submit" className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist + Lock My Idea 🚀</Button>
         </form> : <div className="mt-6 flex gap-3">
-          <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Oct 24</Button>
+          <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Nov 23</Button>
         </div>}
         {notice && <p role="status" className="mt-4 text-center text-sm text-primary">{notice}</p>}
-        <p className="mt-4 flex items-center justify-center gap-2 text-center text-sm text-launch-card-muted"><LockKeyhole className="size-4 shrink-0" aria-hidden="true" /> Module launches Oct 24, 2026.</p>
+        <p className="mt-4 flex items-center justify-center gap-2 text-center text-sm text-launch-card-muted"><LockKeyhole className="size-4 shrink-0" aria-hidden="true" /> Module launches Nov 23, 2026.</p>
       </div>
     </div>}
   </div>;

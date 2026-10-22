@@ -51,9 +51,9 @@ describe('Launch rules', () => {
     expect(() => saveLocalWaitlist({ getItem: () => null, setItem: () => { writes++; } }, 'invalid')).toThrow();
     expect(writes).toBe(0);
   });
-  it('launches exactly seven days after the requested UTC date', () => {
-    expect(LAUNCH_AT - Date.parse('2026-10-17T10:31:00Z')).toBe(7 * 86400000);
-    expect(countdown(Date.parse('2026-10-17T10:31:00Z'))).toEqual([7, 0, 0, 0]);
+  it('launches November 23, 2026 at 10:31 UTC', () => {
+    expect(LAUNCH_AT).toBe(Date.parse('2026-11-23T10:31:00Z'));
+    expect(countdown(Date.parse('2026-11-16T10:31:00Z'))).toEqual([7, 0, 0, 0]);
   });
   it('never shows negative time after launch', () => expect(countdown(LAUNCH_AT + 1000)).toEqual([0, 0, 0, 0]));
   it('starts illustrative counters at the requested values', () => { expect(VISITOR_BASE).toBe(1365); expect(WAITLIST_BASE).toBe(847); });
