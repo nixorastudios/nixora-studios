@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
+import { createFileRoute } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
