@@ -3,6 +3,7 @@
 - [x] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
 - [x] Prompt board: local draft confirmation and validated device-only email saving
 - [x] Homepage footer: Terms, Privacy and Refund Policy links
+- [ ] AI video-prompt polish: visitor describes a video idea, a model turns it into a polished prompt for the video engines (AI Gateway)
 
 - [x] Coming-soon homepage, local early-access form, fixed launch countdown, locked ten-engine grid
 - [x] Safe watermark/signature helpers and available engine/JSON settings
