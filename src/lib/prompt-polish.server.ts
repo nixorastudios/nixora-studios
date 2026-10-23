@@ -82,8 +82,8 @@ export async function polishVideoPrompt(options: {
   idea: string;
   engine: string;
   apiKey: string;
-  runId?: string;
-  signal?: AbortSignal;
+  runId: string | undefined;
+  signal: AbortSignal | undefined;
 }): Promise<PolishedPrompt> {
   const runIdFetch = createLovableAiGatewayRunIdFetch(options.runId);
   const provider = createOpenAI({
@@ -104,7 +104,7 @@ export async function polishVideoPrompt(options: {
         },
       ],
       output: Output.object({ schema: polishedPromptSchema }),
-      abortSignal: options.signal,
+      ...(options.signal ? { abortSignal: options.signal } : {}),
       providerOptions: {
         openai: {
           store: false,
