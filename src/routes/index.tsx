@@ -33,6 +33,7 @@ function Index() {
   const [email, setEmail] = useState('');
   const [waitlistCount, setWaitlistCount] = useState(0);
   const [polishing, setPolishing] = useState(false);
+  const runPolish = useServerFn(polishVideoPrompt);
   const triggerRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
