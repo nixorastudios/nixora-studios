@@ -13,6 +13,8 @@ describe("Homepage footer", () => {
       context: { queryClient: new QueryClient() },
     });
 
+    await router.load();
+
     render(<RouterProvider router={router} />);
 
     const nav = await screen.findByRole("navigation", { name: "Legal pages" });
