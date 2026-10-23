@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { useServerFn } from '@tanstack/react-start';
+import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
 import { useEffect, useRef, useState } from 'react';
 import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
@@ -21,6 +23,8 @@ export const Route = createFileRoute('/')({
 
 const draftKey = (slug: string) => `nixora_launch_prompt_${slug}`;
 
+const VIDEO_ENGINES = new Set(['text-to-video', 'photo-to-video', 'animation', 'lipsync', 'video-editor']);
+
 function Index() {
   const [selectedTool, setSelectedTool] = useState<ToolConfig | null>(null);
   const [prompt, setPrompt] = useState('');
@@ -28,6 +32,7 @@ function Index() {
   const [showSuccess, setShowSuccess] = useState(false);
   const [email, setEmail] = useState('');
   const [waitlistCount, setWaitlistCount] = useState(0);
+  const [polishing, setPolishing] = useState(false);
   const triggerRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,6 +44,7 @@ function Index() {
     setSelectedTool(null);
     setShowSuccess(false);
     setEmail('');
+    setPolishing(false);
     triggerRef.current?.focus();
   };
 
@@ -61,6 +67,7 @@ function Index() {
     setNotice('');
     setShowSuccess(false);
     setEmail('');
+    setPolishing(false);
     setPrompt(localStorage.getItem(draftKey(tool.slug)) ?? '');
     setSelectedTool(tool);
   };
@@ -79,6 +86,26 @@ function Index() {
       setShowSuccess(true);
     } catch {
       setNotice('Your draft could not be saved. Please allow browser storage and try again.');
+    }
+  };
+
+  const polishIdea = async () => {
+    if (!selectedTool) return;
+    if (!prompt.trim()) { setNotice('Enter your idea first'); return; }
+    setPolishing(true);
+    setNotice('');
+    try {
+      const result = await runPolish({ data: { idea: prompt, engine: selectedTool.name } });
+      if (result.ok) {
+        saveDraft(result.prompt);
+        setNotice(`AI wrote a fuller version (“${result.title}”). Edit it freely — nothing has been generated.`);
+      } else {
+        setNotice(result.error);
+      }
+    } catch {
+      setNotice('The AI could not finish this prompt. Please try again.');
+    } finally {
+      setPolishing(false);
     }
   };
 
@@ -146,7 +173,8 @@ function Index() {
           <p className="mt-2 text-sm text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
           <p role="status" className="mt-2 text-sm text-launch-card-muted">Local waitlist: {waitlistCount} {waitlistCount === 1 ? 'email' : 'emails'} saved on this device.</p>
           <Button type="submit" className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist + Lock My Idea 🚀</Button>
-        </form> : <div className="mt-6 flex gap-3">
+        </form> : <div className="mt-6 flex flex-col gap-3">
+          {VIDEO_ENGINES.has(selectedTool.slug) && <Button type="button" variant="outline" onClick={polishIdea} disabled={polishing} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">{polishing ? 'Writing your prompt…' : '✨ Polish my idea with AI'}</Button>}
           <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Nov 23</Button>
         </div>}
         {notice && <p role="status" className="mt-4 text-center text-sm text-primary">{notice}</p>}
