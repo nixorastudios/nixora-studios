@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomepageRouteImport } from './routes/homepage'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as RefundRouteImport } from './routes/refund'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
 
@@ -30,6 +31,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -45,6 +51,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
@@ -52,6 +59,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
@@ -60,21 +68,31 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/homepage' | '/privacy' | '/terms' | '/tools/$tool'
+  fullPaths:
+    '/' | '/homepage' | '/privacy' | '/refund' | '/terms' | '/tools/$tool'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/homepage' | '/privacy' | '/terms' | '/tools/$tool'
-  id: '__root__' | '/' | '/homepage' | '/privacy' | '/terms' | '/tools/$tool'
+  to: '/' | '/homepage' | '/privacy' | '/refund' | '/terms' | '/tools/$tool'
+  id:
+    | '__root__'
+    | '/'
+    | '/homepage'
+    | '/privacy'
+    | '/refund'
+    | '/terms'
+    | '/tools/$tool'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   HomepageRoute: typeof HomepageRoute
   PrivacyRoute: typeof PrivacyRoute
+  RefundRoute: typeof RefundRoute
   TermsRoute: typeof TermsRoute
   ToolsToolRoute: typeof ToolsToolRoute
 }
@@ -102,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -123,6 +148,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   HomepageRoute: HomepageRoute,
   PrivacyRoute: PrivacyRoute,
+  RefundRoute: RefundRoute,
   TermsRoute: TermsRoute,
   ToolsToolRoute: ToolsToolRoute,
 }
