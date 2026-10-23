@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
 import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
@@ -122,6 +122,13 @@ function Index() {
     </main>
     <footer className="camera-footer border-t border-border px-8 py-10 text-center">
       <p>Nixora Studios © 2026</p>
+      <nav aria-label="Legal pages" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
+        <Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link>
+        <span aria-hidden="true" className="text-launch-card-muted">|</span>
+        <Link to="/privacy" className="underline text-link hover:text-link/80">Privacy</Link>
+        <span aria-hidden="true" className="text-launch-card-muted">|</span>
+        <Link to="/refund" className="underline text-link hover:text-link/80">Refund Policy</Link>
+      </nav>
     </footer>
     {selectedTool && <div className="fixed inset-0 z-50 flex items-center justify-center bg-camera-scrim p-4 backdrop-blur-sm" onClick={closeTool}>
       <div ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="tool-title" onClick={e => e.stopPropagation()} className="camera-modal max-h-[90svh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-8 text-card-foreground outline-none">
