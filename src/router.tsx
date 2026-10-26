@@ -8,8 +8,6 @@ export const getRouter = () => {
   const router = createRouter({
     routeTree,
     context: { queryClient },
-    // Lovable preview serves at "/", GitHub Pages at "/nixora-studios/".
-    basepath: import.meta.env.PROD ? "/nixora-studios" : "/",
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
   });
