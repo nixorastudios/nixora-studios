@@ -149,7 +149,7 @@ function Index() {
       </section>
     </main>
     <footer className="camera-footer border-t border-border px-8 py-10 text-center">
-      <p>Nixora Studios © 2026</p>
+      <p>Nixora Studios © 2026.</p>
       <nav aria-label="Legal pages" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
         <Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link>
         <span aria-hidden="true" className="text-launch-card-muted">|</span>
