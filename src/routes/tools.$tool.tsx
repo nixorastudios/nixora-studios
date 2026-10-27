@@ -23,6 +23,7 @@ export const Route = createFileRoute("/tools/$tool")({
       ],
     };
   },
+  staticData: { sitemap: false },
   component: ToolPage,
 });
 
