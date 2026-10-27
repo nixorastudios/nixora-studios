@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as HomepageRouteImport } from './routes/homepage'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundRouteImport } from './routes/refund'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
 
@@ -36,6 +37,11 @@ const RefundRoute = RefundRouteImport.update({
   path: '/refund',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
@@ -69,21 +77,36 @@ export interface FileRoutesById {
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/homepage' | '/privacy' | '/refund' | '/terms' | '/tools/$tool'
+    | '/'
+    | '/homepage'
+    | '/privacy'
+    | '/refund'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/tools/$tool'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/homepage' | '/privacy' | '/refund' | '/terms' | '/tools/$tool'
+  to:
+    | '/'
+    | '/homepage'
+    | '/privacy'
+    | '/refund'
+    | '/sitemap.xml'
+    | '/terms'
+    | '/tools/$tool'
   id:
     | '__root__'
     | '/'
     | '/homepage'
     | '/privacy'
     | '/refund'
+    | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
   fileRoutesById: FileRoutesById
@@ -93,6 +116,7 @@ export interface RootRouteChildren {
   HomepageRoute: typeof HomepageRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ToolsToolRoute: typeof ToolsToolRoute
 }
@@ -127,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RefundRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -149,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   HomepageRoute: HomepageRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ToolsToolRoute: ToolsToolRoute,
 }
