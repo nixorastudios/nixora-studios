@@ -179,18 +179,20 @@ function Index() {
             <div className="relative flex flex-col rounded-2xl border-2 border-primary bg-card p-8 text-card-foreground">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">Most Popular</span>
               <h3 className="text-xl font-bold">Creator</h3>
-              <p className="mt-1 text-3xl font-black text-primary">500 Credits</p>
+              <p className="mt-1 text-3xl font-black text-primary">500 Credits + 100 Bonus</p>
               <p className="mt-2 text-sm text-launch-card-muted">For creators &amp; YouTubers</p>
               <p className="mt-4 font-bold">Early value ₦20,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF + 100 Bonus Credits</p>
+              <p className="text-sm text-launch-card-muted">$20 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-center font-bold text-primary-foreground transition-colors hover:bg-primary/90">Join Waitlist — Priority Access</a>
             </div>
             <div className="flex flex-col rounded-2xl bg-card p-8 text-card-foreground">
               <h3 className="text-xl font-bold">Studio</h3>
-              <p className="mt-1 text-3xl font-black text-primary">2000 Credits</p>
+              <p className="mt-1 text-3xl font-black text-primary">2000 Credits + 500 Bonus</p>
               <p className="mt-2 text-sm text-launch-card-muted">For agencies &amp; teams</p>
               <p className="mt-4 font-bold">Early value ₦60,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF + 500 Bonus Credits + Priority Support</p>
+              <p className="text-sm text-launch-card-muted">$60 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF + Priority Support</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
             </div>
           </div>
