@@ -6,8 +6,8 @@
 - [x] Publish sitemap to nixorastudios.com (all 6 URLs live)
 - [x] Restructure 5 legal pages global-first: global intro first, Nigeria address/governing law only at bottom; no street address in page headers
 - [x] Hero: remove any city name, keep "Global AI Video Studio" (no city was present)
-- [ ] Early Access section: 3 credit bundles (Starter ₦5,000 / Creator ₦20,000 / Studio ₦60,000), waitlist buttons scroll to email form
-- [ ] Publish and submit sitemap to Google Search Console
+- [x] Early Access section: 3 credit bundles (Starter ₦5,000 / Creator ₦20,000 / Studio ₦60,000), waitlist buttons scroll to email form — published live
+- [ ] Submit sitemap to Google Search Console — blocked: user declined the Google connection card; ask to retry
 
 - [x] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
 - [x] Prompt board: local draft confirmation and validated device-only email saving
