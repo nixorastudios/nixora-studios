@@ -172,7 +172,8 @@ function Index() {
               <p className="mt-1 text-3xl font-black text-primary">100 Credits</p>
               <p className="mt-2 text-sm text-launch-card-muted">Perfect to explore</p>
               <p className="mt-4 font-bold">Early value ₦5,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF</p>
+              <p className="text-sm text-launch-card-muted">$5 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF on launch</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
             </div>
             <div className="relative flex flex-col rounded-2xl border-2 border-primary bg-card p-8 text-card-foreground">
@@ -198,7 +199,7 @@ function Index() {
             <Button type="submit" className="h-auto whitespace-normal rounded-xl bg-launch-join px-6 py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist 🚀</Button>
           </form>
           <p className="mt-3 text-center text-xs text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-launch-card-muted">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Secure payments via Paystack when we launch. USD payments coming soon. Launching November 23, 2026.</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-launch-footer">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Paystack (NGN) + Stripe (USD) at launch Nov 23.</p>
         </div>
       </section>
     <footer className="camera-footer border-t border-border px-8 py-12">
