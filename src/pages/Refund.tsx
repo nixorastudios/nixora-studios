@@ -28,7 +28,10 @@ export default function Refund() {
           is deducted from your balance at the moment the generation starts — not when it finishes. This matters for
           refunds because a credit that has been spent on a running or completed generation has already consumed real
           computing power. You can always see your remaining balance in your account, and every deduction is recorded
-          so we can trace exactly what happened if something goes wrong.
+          so we can trace exactly what happened if something goes wrong. Credits are sold in bundles at the prices
+          shown on the site before you pay, all payments are processed by Paystack in Nigerian Naira, and credits do
+          not expire while your account remains active. If we ever change how credits work, we will announce the
+          change before it affects a balance you have already paid for.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">3. Unused Credits — Refundable</h2>
