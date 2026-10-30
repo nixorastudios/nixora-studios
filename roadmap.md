@@ -1,9 +1,12 @@
 # Roadmap
 
-- [ ] Footer: 4-column layout (brand, product, legal, contact) on homepage
-- [ ] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
-- [ ] New /security and /contact pages, dark theme, Back to Home
-- [ ] Publish sitemap to nixorastudios.com and submit to Google Search Console
+- [x] Footer: 4-column layout (brand, product, legal, contact) on homepage
+- [x] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
+- [x] New /security and /contact pages, dark theme, Back to Home
+- [x] Publish sitemap to nixorastudios.com (all 6 URLs live)
+- [ ] Restructure 5 legal pages global-first: global intro first, Nigeria address/governing law only at bottom; no street address in page headers
+- [ ] Hero: remove any city name, keep "Global AI Video Studio"
+- [ ] Publish and submit sitemap to Google Search Console
 
 - [x] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
 - [x] Prompt board: local draft confirmation and validated device-only email saving
