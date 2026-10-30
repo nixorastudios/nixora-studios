@@ -1,61 +1,108 @@
 import { Link } from "@tanstack/react-router";
+
 export default function Refund() {
   return (
-    <div className="p-8 max-w-5xl mx-auto text-sm leading-6">
-      <h1 className="text-4xl font-bold mb-2">Nixora Studios Refund Policy</h1>
-      <p className="mb-6 text-muted-foreground">
-        Last Updated: Oct 23, 2026 | NIXORASTUDIOS LTD | support@nixorastudios.com
-      </p>
+    <div className="launch-theme min-h-screen bg-background text-foreground">
+      <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
+        <h1 className="mb-2 text-4xl font-bold">Refund Policy</h1>
+        <p className="mb-8 text-muted-foreground">
+          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>
+        </p>
 
-      <h2 className="font-bold mt-6">1. Unused Credits</h2>
-      <p>
-        Unused credits are refundable within 7 days of purchase. Email{" "}
-        <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
-          support@nixorastudios.com
-        </a>{" "}
-        with your account email and the payment reference to request a refund.
-      </p>
+        <h2 className="mt-8 text-lg font-bold">1. Overview</h2>
+        <p>
+          This Refund Policy explains when and how NIXORASTUDIOS LTD returns money to you. It applies to credit
+          purchases made on nixorastudios.com and forms part of our Terms of Service. During the Coming Soon period
+          there are no subscriptions and no recurring charges of any kind — the only payments possible are one-off
+          credit purchases, so this policy currently covers credits only. If we introduce subscriptions later, we
+          will update this page before they go on sale. Our goal is simple: you should never pay for something you
+          did not receive.
+        </p>
 
-      <h2 className="font-bold mt-6">2. Used Credits</h2>
-      <p>Used credits are non-refundable because GPU compute is already spent when a generation runs.</p>
+        <h2 className="mt-8 text-lg font-bold">2. How the Credit System Works</h2>
+        <p>
+          Generations on NIXORA STUDIOS are paid for with credits. One credit equals one generation, and the credit
+          is deducted from your balance at the moment the generation starts — not when it finishes. This matters for
+          refunds because a credit that has been spent on a running or completed generation has already consumed real
+          computing power. You can always see your remaining balance in your account, and every deduction is recorded
+          so we can trace exactly what happened if something goes wrong.
+        </p>
 
-      <h2 className="font-bold mt-6">3. Failed Generations</h2>
-      <p>Failed generations are auto-refunded to your credit balance within 24 hours. No request is needed.</p>
+        <h2 className="mt-8 text-lg font-bold">3. Unused Credits — Refundable</h2>
+        <p>
+          Credits you have bought but not spent can be refunded within 7 days of purchase. To request a refund,
+          email{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>{" "}
+          from the email address on your account and include your payment reference. We will confirm the request,
+          check that the credits are unused, and return the money to your original payment method. After 7 days,
+          unused credits are no longer refundable but remain valid in your account while it is active.
+        </p>
 
-      <h2 className="font-bold mt-6">4. Subscriptions</h2>
-      <p>
-        Subscriptions can be cancelled anytime. Cancelling stops the next billing cycle; the current month is not
-        refunded.
-      </p>
+        <h2 className="mt-8 text-lg font-bold">4. Used Credits — Non-Refundable</h2>
+        <p>
+          Credits that have been spent on a generation cannot be refunded. Each generation runs on GPU computing
+          power that is paid for and consumed the moment your generation starts, whether or not you like the final
+          result. AI output is naturally unpredictable, so we encourage you to test ideas with small generations
+          first. A result you simply do not like is not grounds for a refund — but a generation that technically
+          failed is covered by the next section.
+        </p>
 
-      <h2 className="font-bold mt-6">5. Processing</h2>
-      <p>
-        Approved refunds are processed in 5-7 days back to the original payment method via Paystack (NGN) or Stripe
-        (USD).
-      </p>
+        <h2 className="mt-8 text-lg font-bold">5. Failed Generations — Automatic Refund</h2>
+        <p>
+          If a generation fails on our side — for example the engine errors out, times out, or returns no usable
+          output — the credit is automatically returned to your balance within 24 hours. You do not need to contact
+          us or fill in any form; the system detects the failure and reverses the deduction itself. If 24 hours pass
+          and your credit has not come back, email us with the generation details and we will fix it manually.
+        </p>
 
-      <h2 className="font-bold mt-6">6. Contact</h2>
-      <p>Questions? Contact:</p>
-      <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
-        support@nixorastudios.com
-      </a>
+        <h2 className="mt-8 text-lg font-bold">6. Mistaken or Double Charges</h2>
+        <p>
+          If you were charged twice for the same purchase, charged the wrong amount, or charged for something you
+          never bought, contact us within 7 days of the charge at{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>{" "}
+          with your payment reference and a screenshot if you have one. Verified mistaken or duplicate charges are
+          refunded in full. Please contact us first before going to your bank — we resolve these quickly, and it is
+          almost always faster than a formal dispute.
+        </p>
 
-      <p className="mt-6">
-        <Link to="/terms" className="underline text-link hover:text-link/80">
-          Read Terms of Service
-        </Link>
-        <span className="mx-2 text-muted-foreground">|</span>
-        <Link to="/privacy" className="underline text-link hover:text-link/80">
-          Read Privacy Policy
-        </Link>
-      </p>
-      <div className="mt-8">
-        <Link
-          to="/"
-          className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-        >
-          Back to Home
-        </Link>
+        <h2 className="mt-8 text-lg font-bold">7. How to Request a Refund &amp; Chargebacks</h2>
+        <p>
+          Every refund request goes through{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>
+          . Include the email on your account, the payment reference, the date of purchase, and a short description
+          of the issue. Approved refunds are processed within 5–7 business days back to the original payment method
+          via Paystack. If you file a chargeback with your bank instead of contacting us, we will share the
+          transaction and generation records with the bank as evidence. Accounts that abuse chargebacks — for
+          example disputing charges for credits that were genuinely used — may be suspended, and repeated abuse leads
+          to a permanent ban. We would always rather solve the problem with you directly, so please reach out first.
+        </p>
+
+        <p className="mt-8">
+          <Link to="/terms" className="underline text-link hover:text-link/80">
+            Read Terms of Service
+          </Link>
+          <span className="mx-2 text-muted-foreground">|</span>
+          <Link to="/privacy" className="underline text-link hover:text-link/80">
+            Read Privacy Policy
+          </Link>
+        </p>
+        <div className="mt-8 pb-8">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent"
+          >
+            ← Back to Home
+          </Link>
+        </div>
       </div>
     </div>
   );
