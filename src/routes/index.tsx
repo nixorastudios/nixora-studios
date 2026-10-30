@@ -209,36 +209,45 @@ function Index() {
         <div>
           <p className="text-lg font-black text-foreground">NIXORA STUDIOS.</p>
           <p className="mt-1 text-primary">Global AI Video Studio</p>
-          <p className="mt-3 text-launch-card-muted">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
+          <p className="mt-3 text-launch-footer">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
         </div>
         <nav aria-label="Product">
           <p className="mb-3 font-bold text-foreground">Product</p>
-          <ul className="flex flex-col gap-2 text-launch-card-muted">
-            <li><a href="#engines" className="hover:text-primary">Text to Video</a></li>
-            <li><a href="#engines" className="hover:text-primary">Image to Video</a></li>
-            <li><a href="#engines" className="hover:text-primary">Animation</a></li>
-            <li><a href="#engines" className="hover:text-primary">Music Studio</a></li>
-            <li><a href="#engines" className="hover:text-primary">Code Engine</a></li>
-          </ul>
+          <div className="grid grid-cols-2 gap-x-4 text-launch-footer">
+            <ul className="flex flex-col gap-2">
+              <li><a href="#engines" className="hover:text-primary">Text to Image</a></li>
+              <li><a href="#engines" className="hover:text-primary">Text to Video</a></li>
+              <li><a href="#engines" className="hover:text-primary">Image to Video</a></li>
+              <li><a href="#engines" className="hover:text-primary">Animation</a></li>
+              <li><a href="#engines" className="hover:text-primary">Sound Effects</a></li>
+            </ul>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#engines" className="hover:text-primary">Voice Over</a></li>
+              <li><a href="#engines" className="hover:text-primary">Music Studio</a></li>
+              <li><a href="#engines" className="hover:text-primary">Lipsync</a></li>
+              <li><a href="#engines" className="hover:text-primary">Video Editor</a></li>
+              <li><a href="#engines" className="hover:text-primary">Code Engine</a></li>
+            </ul>
+          </div>
         </nav>
         <nav aria-label="Legal pages">
           <p className="mb-3 font-bold text-foreground">Legal</p>
-          <ul className="flex flex-col gap-2 text-launch-card-muted">
-            <li><Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link></li>
-            <li><Link to="/privacy" className="underline text-link hover:text-link/80">Privacy</Link></li>
-            <li><Link to="/refund" className="underline text-link hover:text-link/80">Refund</Link></li>
-            <li><Link to="/security" className="underline text-link hover:text-link/80">Security</Link></li>
-            <li><Link to="/contact" className="underline text-link hover:text-link/80">Contact</Link></li>
+          <ul className="flex flex-col gap-2 text-launch-footer">
+            <li><Link to="/terms" className="underline text-launch-footer-link hover:text-primary">Terms</Link></li>
+            <li><Link to="/privacy" className="underline text-launch-footer-link hover:text-primary">Privacy</Link></li>
+            <li><Link to="/refund" className="underline text-launch-footer-link hover:text-primary">Refund</Link></li>
+            <li><Link to="/security" className="underline text-launch-footer-link hover:text-primary">Security</Link></li>
+            <li><Link to="/contact" className="underline text-launch-footer-link hover:text-primary">Contact</Link></li>
           </ul>
         </nav>
         <div>
           <p className="mb-3 font-bold text-foreground">Contact</p>
-          <p><a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">support@nixorastudios.com</a></p>
-          <p className="mt-1"><a href="mailto:hello@nixorastudios.com" className="underline text-link hover:text-link/80">hello@nixorastudios.com</a></p>
-          <p className="mt-3 text-launch-card-muted">81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria</p>
+          <p><a href="mailto:support@nixorastudios.com" className="underline text-launch-footer hover:text-primary">support@nixorastudios.com</a></p>
+          <p className="mt-1"><a href="mailto:hello@nixorastudios.com" className="underline text-launch-footer hover:text-primary">hello@nixorastudios.com</a></p>
+          <p className="mt-3 text-launch-footer">81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria</p>
           <p className="mt-3 flex flex-wrap gap-2" aria-label="Security badges">
-            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">SSL Secured</span>
-            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">Paystack Secured</span>
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-footer">SSL Secured</span>
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-footer">Paystack Secured</span>
           </p>
         </div>
       </div>
