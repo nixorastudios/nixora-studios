@@ -10,9 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HomepageRouteImport } from './routes/homepage'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RefundRouteImport } from './routes/refund'
+import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
@@ -20,6 +22,11 @@ import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HomepageRoute = HomepageRouteImport.update({
@@ -35,6 +42,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const RefundRoute = RefundRouteImport.update({
   id: '/refund',
   path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityRoute = SecurityRouteImport.update({
+  id: '/security',
+  path: '/security',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -55,18 +67,22 @@ const ToolsToolRoute = ToolsToolRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
@@ -74,9 +90,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
+  '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
@@ -85,27 +103,33 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contact'
     | '/homepage'
     | '/privacy'
     | '/refund'
+    | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contact'
     | '/homepage'
     | '/privacy'
     | '/refund'
+    | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
   id:
     | '__root__'
     | '/'
+    | '/contact'
     | '/homepage'
     | '/privacy'
     | '/refund'
+    | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
@@ -113,9 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   HomepageRoute: typeof HomepageRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
+  SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ToolsToolRoute: typeof ToolsToolRoute
@@ -128,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/homepage': {
@@ -149,6 +182,13 @@ declare module '@tanstack/react-router' {
       path: '/refund'
       fullPath: '/refund'
       preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security': {
+      id: '/security'
+      path: '/security'
+      fullPath: '/security'
+      preLoaderRoute: typeof SecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -177,9 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   HomepageRoute: HomepageRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
+  SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ToolsToolRoute: ToolsToolRoute,
