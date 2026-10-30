@@ -12,33 +12,33 @@ export default function Terms() {
           </a>
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">1. Introduction</h2>
+        <h2 className="mt-8 text-lg font-bold">1. About NIXORA STUDIOS</h2>
         <p>
-          These Terms of Service ("Terms") form a binding agreement between you and NIXORASTUDIOS LTD, a company
-          registered in the Federal Republic of Nigeria with registration number RC 9950450, whose registered address
-          is 81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria ("NIXORA STUDIOS",
-          "we", "us", "our"). By visiting nixorastudios.com, joining our waitlist, purchasing credits, or using any of
-          our AI generation engines, you agree to these Terms. If you do not agree, please do not use the service.
-          These Terms apply from the moment you access the site, including during our Coming Soon period before the
-          full launch on November 23, 2026.
+          NIXORA STUDIOS is a global AI video studio serving creators, filmmakers, marketers, and businesses
+          worldwide — ten AI engines in one platform. Wherever you are in the world, the same service, the same
+          engines, and the same terms apply to you. These Terms of Service ("Terms") form a binding agreement
+          between you and NIXORASTUDIOS LTD ("NIXORA STUDIOS", "we", "us", "our"). By visiting nixorastudios.com,
+          joining our waitlist, purchasing credits, or using any of our AI generation engines, you agree to these
+          Terms. If you do not agree, please do not use the service. These Terms apply from the moment you access
+          the site, including during our Coming Soon period before the full launch on November 23, 2026.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">2. Services</h2>
         <p>
-          NIXORA STUDIOS is a global AI video studio offering ten generative engines in one platform: Text to Image,
-          Text to Video, Image to Video, Animation, Sound Effects, Voice Over, Music Studio, Lipsync, Video Editor,
-          and Code Engine. During the Coming Soon period, the engines are shown as locked previews and any prompts or
-          email addresses you enter are stored on your own device only. After launch, each engine lets you generate
-          creative content by spending credits. We may add, change, or retire engines over time, and we will do our
-          best to announce material changes in advance.
+          The studio offers ten generative engines in one platform: Text to Image, Text to Video, Image to Video,
+          Animation, Sound Effects, Voice Over, Music Studio, Lipsync, Video Editor, and Code Engine. During the
+          Coming Soon period, the engines are shown as locked previews and any prompts or email addresses you enter
+          are stored on your own device only. After launch, each engine lets you generate creative content by
+          spending credits. We may add, change, or retire engines over time, and we will do our best to announce
+          material changes in advance.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">3. Eligibility</h2>
         <p>
           You must be at least 18 years old to use NIXORA STUDIOS, join the waitlist, or purchase credits. By using
-          the service you confirm that you are 18 or older and legally able to enter into this agreement. If we learn
-          that someone under 18 has created an account or made a purchase, we will close that account and refund any
-          unused credits in line with our Refund Policy.
+          the service you confirm that you are 18 or older and legally able to enter into this agreement in your
+          country. If we learn that someone under 18 has created an account or made a purchase, we will close that
+          account and refund any unused credits in line with our Refund Policy.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">4. Accounts</h2>
@@ -53,31 +53,30 @@ export default function Terms() {
         <h2 className="mt-8 text-lg font-bold">5. Credits &amp; Payments</h2>
         <p>
           Generations are paid for with credits: one credit equals one generation, and the credit is deducted when
-          the generation starts. Payments are processed by Paystack in Nigerian Naira (NGN) only. Your bank statement
-          may show the payment under the name NIXORASTUDIOS LTD via GTB. We do not store your card details on our own
-          servers. Stripe is not available yet; we will announce it if and when it is added. During the Coming Soon
-          period there is no automatic subscription and no recurring billing of any kind — you only ever pay for the
-          credits you choose to buy. Prices are shown before you pay, and credits do not expire while your account
-          remains active.
+          the generation starts. Payments are processed securely by Paystack, and your bank statement may show the
+          payment under the name NIXORASTUDIOS LTD. We do not store your card details on our own servers. During the
+          Coming Soon period there is no automatic subscription and no recurring billing of any kind — you only ever
+          pay for the credits you choose to buy. Prices are shown before you pay, and credits do not expire while
+          your account remains active.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">6. Acceptable Use</h2>
         <p>
           You must not use NIXORA STUDIOS to create, request, or distribute pornography, nudity, or sexual content;
-          hate speech or content that attacks people based on who they are; illegal content of any kind; content that
-          infringes copyright, trademarks, or other people's rights; or content intended to deceive, defraud, or harm
-          others. You must not attempt to break, probe, or overload the service, scrape it at scale, or resell access
-          without our written permission. Breaking these rules can lead to immediate suspension or a permanent ban,
-          and used credits will not be refunded in that case.
+          hate speech or content that attacks people based on who they are; illegal content of any kind; content
+          that infringes copyright, trademarks, or other people's rights; or content intended to deceive, defraud,
+          or harm others. You must not attempt to break, probe, or overload the service, scrape it at scale, or
+          resell access without our written permission. Breaking these rules can lead to immediate suspension or a
+          permanent ban, and used credits will not be refunded in that case.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">7. Intellectual Property &amp; Ownership</h2>
         <p>
           You own the videos, images, audio, and other content you generate with our engines, and you may use them
-          commercially — in client work, advertising, social media, films, and products you sell. You keep all rights
-          to the prompts and materials you provide. We keep all rights to the NIXORA STUDIOS name, logo, website,
-          and the engines themselves. You may not claim our platform, models, or branding as your own, and you may
-          not use our name or logo to imply endorsement without permission.
+          commercially — in client work, advertising, social media, films, and products you sell, anywhere in the
+          world. You keep all rights to the prompts and materials you provide. We keep all rights to the NIXORA
+          STUDIOS name, logo, website, and the engines themselves. You may not claim our platform, models, or
+          branding as your own, and you may not use our name or logo to imply endorsement without permission.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">8. Refunds</h2>
@@ -102,11 +101,11 @@ export default function Terms() {
 
         <h2 className="mt-8 text-lg font-bold">10. Disclaimer</h2>
         <p>
-          The service is provided "as is" and "as available". AI-generated content can be unpredictable: results may
-          contain errors, artefacts, or content that does not match your prompt, and it is your responsibility to
-          review anything you generate before publishing or using it commercially. We do not promise that the service
-          will always be available, uninterrupted, or error-free, especially during the Coming Soon period and early
-          launch phase.
+          The service is provided "as is" and "as available". AI-generated content can be unpredictable: results
+          may contain errors, artefacts, or content that does not match your prompt, and it is your responsibility
+          to review anything you generate before publishing or using it commercially. We do not promise that the
+          service will always be available, uninterrupted, or error-free, especially during the Coming Soon period
+          and early launch phase.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">11. Limitation of Liability</h2>
@@ -114,25 +113,25 @@ export default function Terms() {
           To the fullest extent permitted by law, NIXORASTUDIOS LTD will not be liable for indirect, incidental, or
           consequential losses — such as lost profits, lost data, or lost business — arising from your use of the
           service. Our total liability to you for any claim is limited to the amount you paid us in the three months
-          before the claim arose. Nothing in these Terms removes rights you have under Nigerian consumer protection
-          law that cannot lawfully be removed.
+          before the claim arose. Nothing in these Terms removes rights you have under applicable consumer
+          protection law that cannot lawfully be removed.
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">12. Governing Law</h2>
+        <h2 className="mt-8 text-lg font-bold">12. Contact &amp; Legal Entity</h2>
         <p>
-          These Terms are governed by the laws of the Federal Republic of Nigeria. Any dispute that we cannot resolve
-          together will be handled by the courts of Nigeria, and you agree to their jurisdiction. If any part of
-          these Terms is found unenforceable, the rest remains in force.
-        </p>
-
-        <h2 className="mt-8 text-lg font-bold">13. Contact</h2>
-        <p>
-          Questions about these Terms? Email{" "}
+          NIXORA STUDIOS is operated by NIXORASTUDIOS LTD, RC 9950450. Registered address: 81 Friday Momomi
+          Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria. Questions about these Terms:{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
-          </a>{" "}
-          or write to NIXORASTUDIOS LTD, 81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State,
-          Nigeria.
+          </a>
+          .
+        </p>
+
+        <h2 className="mt-8 text-lg font-bold">13. Governing Law</h2>
+        <p>
+          These Terms are governed by the laws of the Federal Republic of Nigeria. Any dispute that we cannot
+          resolve together will be handled by the courts of Nigeria, and you agree to their jurisdiction. If any
+          part of these Terms is found unenforceable, the rest remains in force.
         </p>
 
         <p className="mt-8">

@@ -12,13 +12,13 @@ export default function Privacy() {
           </a>
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">1. Data Controller</h2>
+        <h2 className="mt-8 text-lg font-bold">1. About NIXORA STUDIOS</h2>
         <p>
-          The data controller for your personal information is NIXORASTUDIOS LTD, registered in the Federal Republic
-          of Nigeria with registration number RC 9950450, at 81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam,
-          Asaba, Delta State, Nigeria. As data controller, we decide why and how your personal data is processed and
-          we are responsible for keeping it safe. You can reach us about anything in this policy at
-          support@nixorastudios.com.
+          NIXORA STUDIOS is a global AI video studio serving creators worldwide — ten AI engines in one platform.
+          This Privacy Policy explains, in plain language, what information we collect from visitors and customers
+          anywhere in the world, why we collect it, how we protect it, and the rights you have over it. The short
+          version: during our Coming Soon period, your waitlist email and draft prompts never leave your own device;
+          after launch, we collect only what we need to run the studio, and we never sell your data.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">2. Data We Collect</h2>
@@ -26,9 +26,9 @@ export default function Privacy() {
           We collect only what we need to run the studio. During the Coming Soon period, the waitlist email address
           and any draft prompts you enter are stored on your own device, in your browser's local storage — they are
           not sent to us. After launch, we collect your account email address, the prompts you submit, the content
-          you generate, and payment information. Payments are processed by Paystack; we never see or store your full
-          card number, and no card details are kept on our servers. We also keep basic technical logs (such as error
-          reports) that help us keep the service running and secure.
+          you generate, and payment information. Payments are processed by Paystack; we never see or store your
+          full card number, and no card details are kept on our servers. We also keep basic technical logs (such as
+          error reports) that help us keep the service running and secure.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">3. How We Use Your Data</h2>
@@ -42,11 +42,11 @@ export default function Privacy() {
 
         <h2 className="mt-8 text-lg font-bold">4. Legal Basis</h2>
         <p>
-          We process your data on two main legal bases under the Nigeria Data Protection Act (NDPA): your consent —
-          for example when you join the waitlist or contact us — and contract — when processing is necessary to
-          provide the service you signed up for, such as running your generations and processing your payments. In
-          limited cases we also rely on our legitimate interest in keeping the platform secure and preventing abuse.
-          Where we rely on consent, you can withdraw it at any time.
+          We process your data on two main legal bases: your consent — for example when you join the waitlist or
+          contact us — and contract — when processing is necessary to provide the service you signed up for, such as
+          running your generations and processing your payments. In limited cases we also rely on our legitimate
+          interest in keeping the platform secure and preventing abuse. Where we rely on consent, you can withdraw
+          it at any time.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">5. Storage &amp; Security</h2>
@@ -70,16 +70,15 @@ export default function Privacy() {
         <p>
           We share data with a small number of providers that help us run the service: Paystack, which processes
           payments under its own PCI-DSS compliant security program; Supabase, which hosts our database; and
-          Cloudflare, which helps deliver and protect the website. Stripe is not used yet. Each provider processes
-          data only as needed to deliver its service to us and under its own privacy terms. We may also disclose data
-          if the law requires it.
+          Cloudflare, which helps deliver and protect the website. Each provider processes data only as needed to
+          deliver its service to us and under its own privacy terms. We may also disclose data if the law requires
+          it.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">8. Your Rights</h2>
         <p>
-          Under the NDPA you have the right to access the personal data we hold about you, to correct it, and to ask
-          us to delete it. You can also object to certain processing or withdraw consent. To use any of these rights,
-          email{" "}
+          You have the right to access the personal data we hold about you, to correct it, and to ask us to delete
+          it. You can also object to certain processing or withdraw consent. To use any of these rights, email{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>{" "}
@@ -100,14 +99,16 @@ export default function Privacy() {
           change means you accept the updated policy.
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">11. Contact</h2>
+        <h2 className="mt-8 text-lg font-bold">11. Contact &amp; Legal Entity</h2>
         <p>
-          Privacy questions or requests:{" "}
+          The data controller for your personal information is NIXORASTUDIOS LTD, RC 9950450. Registered address:
+          81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria. Privacy questions or
+          requests:{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
-          , or write to NIXORASTUDIOS LTD, 81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State,
-          Nigeria.
+          . We handle data protection requests in line with the Nigeria Data Protection Act (NDPA) and respond
+          within 30 days.
         </p>
 
         <p className="mt-8">

@@ -18,10 +18,20 @@ export default function Contact() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Contact</h1>
         <p className="mb-8 text-muted-foreground">
-          NIXORASTUDIOS LTD (RC 9950450) — we reply within 24 hours.
+          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">Email</h2>
+        <h2 className="mt-8 text-lg font-bold">1. About NIXORA STUDIOS</h2>
+        <p>
+          NIXORA STUDIOS is a global AI video studio serving creators worldwide — ten AI engines in one platform.
+          Wherever you are, we are happy to hear from you: questions about the launch, help with your account,
+          partnership ideas, or press enquiries. We reply within 24 hours.
+        </p>
+
+        <h2 className="mt-8 text-lg font-bold">2. Email</h2>
         <p>
           Support:{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
@@ -34,16 +44,7 @@ export default function Contact() {
           </a>
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">Address</h2>
-        <p>
-          NIXORASTUDIOS LTD
-          <br />
-          81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam
-          <br />
-          Asaba, Delta State, Nigeria
-        </p>
-
-        <h2 className="mt-8 text-lg font-bold">Send Us a Message</h2>
+        <h2 className="mt-8 text-lg font-bold">3. Send Us a Message</h2>
         <p className="mb-4 text-muted-foreground">
           Fill this in and it opens in your own email app, addressed to our support team.
         </p>
@@ -80,6 +81,12 @@ export default function Contact() {
             Send Message
           </button>
         </form>
+
+        <h2 className="mt-8 text-lg font-bold">4. Contact &amp; Legal Entity</h2>
+        <p>
+          NIXORA STUDIOS is operated by NIXORASTUDIOS LTD, RC 9950450. Registered address: 81 Friday Momomi
+          Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria.
+        </p>
 
         <div className="mt-8 pb-8">
           <Link
