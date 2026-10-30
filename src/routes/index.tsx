@@ -124,6 +124,19 @@ function Index() {
     }
   };
 
+  const [earlyEmail, setEarlyEmail] = useState('');
+  const joinEarlyAccess = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const emails = saveLocalWaitlist(localStorage, earlyEmail);
+      setWaitlistCount(emails.length);
+      window.alert('Your email is saved on this device only. It has not been sent to NIXORA STUDIOS, and no launch email will be sent.');
+      setEarlyEmail('');
+    } catch (error) {
+      window.alert(error instanceof Error && error.message === 'Enter a valid email address.' ? error.message : 'Your email could not be saved. Please allow browser storage and try again.');
+    }
+  };
+
   return <div className="launch-theme camera-home min-h-screen text-foreground">
     <main>
       <section className="camera-single-hero relative flex min-h-[80svh] items-center px-8 py-16 md:px-16">
@@ -149,6 +162,45 @@ function Index() {
         </div>
       </section>
     </main>
+      <section id="early-access" className="border-t border-border bg-background px-8 py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="mb-2 text-center text-3xl font-bold md:text-4xl">Early Access — One Studio, Ten Engines</h2>
+          <p className="mx-auto mb-12 max-w-2xl text-center text-foreground/70">Why juggle multiple subscriptions? NIXORA brings text-to-image, video, animation, voice, music, sound, lipsync, editing and code into one credit wallet.</p>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="flex flex-col rounded-2xl bg-card p-8 text-card-foreground">
+              <h3 className="text-xl font-bold">Starter</h3>
+              <p className="mt-1 text-3xl font-black text-primary">100 Credits</p>
+              <p className="mt-2 text-sm text-launch-card-muted">Perfect to explore</p>
+              <p className="mt-4 font-bold">Early value ₦5,000</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF</p>
+              <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
+            </div>
+            <div className="relative flex flex-col rounded-2xl border-2 border-primary bg-card p-8 text-card-foreground">
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">Most Popular</span>
+              <h3 className="text-xl font-bold">Creator</h3>
+              <p className="mt-1 text-3xl font-black text-primary">500 Credits</p>
+              <p className="mt-2 text-sm text-launch-card-muted">For creators &amp; YouTubers</p>
+              <p className="mt-4 font-bold">Early value ₦20,000</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF + 100 Bonus Credits</p>
+              <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-center font-bold text-primary-foreground transition-colors hover:bg-primary/90">Join Waitlist — Priority Access</a>
+            </div>
+            <div className="flex flex-col rounded-2xl bg-card p-8 text-card-foreground">
+              <h3 className="text-xl font-bold">Studio</h3>
+              <p className="mt-1 text-3xl font-black text-primary">2000 Credits</p>
+              <p className="mt-2 text-sm text-launch-card-muted">For agencies &amp; teams</p>
+              <p className="mt-4 font-bold">Early value ₦60,000</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF + 500 Bonus Credits + Priority Support</p>
+              <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
+            </div>
+          </div>
+          <form id="early-access-form" onSubmit={joinEarlyAccess} className="mx-auto mt-10 flex max-w-xl flex-col gap-3 sm:flex-row">
+            <input type="email" required aria-label="Email for early access" placeholder="Enter your email for early access" value={earlyEmail} onChange={e => setEarlyEmail(e.target.value)} className="flex-1 rounded-xl border-2 border-camera-line bg-card p-3 text-card-foreground outline-none focus:border-primary" />
+            <Button type="submit" className="h-auto whitespace-normal rounded-xl bg-launch-join px-6 py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist 🚀</Button>
+          </form>
+          <p className="mt-3 text-center text-xs text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-launch-card-muted">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Secure payments via Paystack when we launch. USD payments coming soon. Launching November 23, 2026.</p>
+        </div>
+      </section>
     <footer className="camera-footer border-t border-border px-8 py-12">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 text-sm sm:grid-cols-2 lg:grid-cols-4">
         <div>

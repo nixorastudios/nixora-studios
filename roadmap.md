@@ -4,8 +4,9 @@
 - [x] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
 - [x] New /security and /contact pages, dark theme, Back to Home
 - [x] Publish sitemap to nixorastudios.com (all 6 URLs live)
-- [ ] Restructure 5 legal pages global-first: global intro first, Nigeria address/governing law only at bottom; no street address in page headers
-- [ ] Hero: remove any city name, keep "Global AI Video Studio"
+- [x] Restructure 5 legal pages global-first: global intro first, Nigeria address/governing law only at bottom; no street address in page headers
+- [x] Hero: remove any city name, keep "Global AI Video Studio" (no city was present)
+- [ ] Early Access section: 3 credit bundles (Starter ₦5,000 / Creator ₦20,000 / Studio ₦60,000), waitlist buttons scroll to email form
 - [ ] Publish and submit sitemap to Google Search Console
 
 - [x] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
