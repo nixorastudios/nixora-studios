@@ -172,24 +172,27 @@ function Index() {
               <p className="mt-1 text-3xl font-black text-primary">100 Credits</p>
               <p className="mt-2 text-sm text-launch-card-muted">Perfect to explore</p>
               <p className="mt-4 font-bold">Early value ₦5,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF</p>
+              <p className="text-sm text-launch-card-muted">$5 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF on launch</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
             </div>
             <div className="relative flex flex-col rounded-2xl border-2 border-primary bg-card p-8 text-card-foreground">
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-xs font-bold text-primary-foreground">Most Popular</span>
               <h3 className="text-xl font-bold">Creator</h3>
-              <p className="mt-1 text-3xl font-black text-primary">500 Credits</p>
+              <p className="mt-1 text-3xl font-black text-primary">500 Credits + 100 Bonus</p>
               <p className="mt-2 text-sm text-launch-card-muted">For creators &amp; YouTubers</p>
               <p className="mt-4 font-bold">Early value ₦20,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF + 100 Bonus Credits</p>
+              <p className="text-sm text-launch-card-muted">$20 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl bg-primary px-4 py-3 text-center font-bold text-primary-foreground transition-colors hover:bg-primary/90">Join Waitlist — Priority Access</a>
             </div>
             <div className="flex flex-col rounded-2xl bg-card p-8 text-card-foreground">
               <h3 className="text-xl font-bold">Studio</h3>
-              <p className="mt-1 text-3xl font-black text-primary">2000 Credits</p>
+              <p className="mt-1 text-3xl font-black text-primary">2000 Credits + 500 Bonus</p>
               <p className="mt-2 text-sm text-launch-card-muted">For agencies &amp; teams</p>
               <p className="mt-4 font-bold">Early value ₦60,000</p>
-              <p className="text-sm text-primary">Waitlist: 50% OFF + 500 Bonus Credits + Priority Support</p>
+              <p className="text-sm text-launch-card-muted">$60 USD</p>
+              <p className="text-sm text-primary">Waitlist: 50% OFF + Priority Support</p>
               <a href="#early-access-form" className="mt-6 inline-flex items-center justify-center rounded-xl border-2 border-primary px-4 py-3 text-center font-bold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">Join Waitlist — Priority Access</a>
             </div>
           </div>
@@ -198,7 +201,7 @@ function Index() {
             <Button type="submit" className="h-auto whitespace-normal rounded-xl bg-launch-join px-6 py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist 🚀</Button>
           </form>
           <p className="mt-3 text-center text-xs text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-launch-card-muted">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Secure payments via Paystack when we launch. USD payments coming soon. Launching November 23, 2026.</p>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-launch-footer">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Paystack (NGN) + Stripe (USD) at launch Nov 23.</p>
         </div>
       </section>
     <footer className="camera-footer border-t border-border px-8 py-12">
@@ -206,36 +209,45 @@ function Index() {
         <div>
           <p className="text-lg font-black text-foreground">NIXORA STUDIOS.</p>
           <p className="mt-1 text-primary">Global AI Video Studio</p>
-          <p className="mt-3 text-launch-card-muted">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
+          <p className="mt-3 text-launch-footer">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
         </div>
         <nav aria-label="Product">
           <p className="mb-3 font-bold text-foreground">Product</p>
-          <ul className="flex flex-col gap-2 text-launch-card-muted">
-            <li><a href="#engines" className="hover:text-primary">Text to Video</a></li>
-            <li><a href="#engines" className="hover:text-primary">Image to Video</a></li>
-            <li><a href="#engines" className="hover:text-primary">Animation</a></li>
-            <li><a href="#engines" className="hover:text-primary">Music Studio</a></li>
-            <li><a href="#engines" className="hover:text-primary">Code Engine</a></li>
-          </ul>
+          <div className="grid grid-cols-2 gap-x-4 text-launch-footer">
+            <ul className="flex flex-col gap-2">
+              <li><a href="#engines" className="hover:text-primary">Text to Image</a></li>
+              <li><a href="#engines" className="hover:text-primary">Text to Video</a></li>
+              <li><a href="#engines" className="hover:text-primary">Image to Video</a></li>
+              <li><a href="#engines" className="hover:text-primary">Animation</a></li>
+              <li><a href="#engines" className="hover:text-primary">Sound Effects</a></li>
+            </ul>
+            <ul className="flex flex-col gap-2">
+              <li><a href="#engines" className="hover:text-primary">Voice Over</a></li>
+              <li><a href="#engines" className="hover:text-primary">Music Studio</a></li>
+              <li><a href="#engines" className="hover:text-primary">Lipsync</a></li>
+              <li><a href="#engines" className="hover:text-primary">Video Editor</a></li>
+              <li><a href="#engines" className="hover:text-primary">Code Engine</a></li>
+            </ul>
+          </div>
         </nav>
         <nav aria-label="Legal pages">
           <p className="mb-3 font-bold text-foreground">Legal</p>
-          <ul className="flex flex-col gap-2 text-launch-card-muted">
-            <li><Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link></li>
-            <li><Link to="/privacy" className="underline text-link hover:text-link/80">Privacy</Link></li>
-            <li><Link to="/refund" className="underline text-link hover:text-link/80">Refund</Link></li>
-            <li><Link to="/security" className="underline text-link hover:text-link/80">Security</Link></li>
-            <li><Link to="/contact" className="underline text-link hover:text-link/80">Contact</Link></li>
+          <ul className="flex flex-col gap-2 text-launch-footer">
+            <li><Link to="/terms" className="underline text-launch-footer-link hover:text-primary">Terms</Link></li>
+            <li><Link to="/privacy" className="underline text-launch-footer-link hover:text-primary">Privacy</Link></li>
+            <li><Link to="/refund" className="underline text-launch-footer-link hover:text-primary">Refund</Link></li>
+            <li><Link to="/security" className="underline text-launch-footer-link hover:text-primary">Security</Link></li>
+            <li><Link to="/contact" className="underline text-launch-footer-link hover:text-primary">Contact</Link></li>
           </ul>
         </nav>
         <div>
           <p className="mb-3 font-bold text-foreground">Contact</p>
-          <p><a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">support@nixorastudios.com</a></p>
-          <p className="mt-1"><a href="mailto:hello@nixorastudios.com" className="underline text-link hover:text-link/80">hello@nixorastudios.com</a></p>
-          <p className="mt-3 text-launch-card-muted">81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria</p>
+          <p><a href="mailto:support@nixorastudios.com" className="underline text-launch-footer hover:text-primary">support@nixorastudios.com</a></p>
+          <p className="mt-1"><a href="mailto:hello@nixorastudios.com" className="underline text-launch-footer hover:text-primary">hello@nixorastudios.com</a></p>
+          <p className="mt-3 text-launch-footer">81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria</p>
           <p className="mt-3 flex flex-wrap gap-2" aria-label="Security badges">
-            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">SSL Secured</span>
-            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">Paystack Secured</span>
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-footer">SSL Secured</span>
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-footer">Paystack Secured</span>
           </p>
         </div>
       </div>

@@ -32,6 +32,8 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-launch-card-muted: var(--launch-card-muted);
+  --color-launch-footer: var(--launch-footer);
+  --color-launch-footer-link: var(--launch-footer-link);
   --color-camera-line: var(--camera-line);
   --color-camera-scrim: var(--camera-scrim);
   --color-launch-success: var(--launch-success);
@@ -215,6 +217,8 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --launch-card-muted: oklch(0.5 0 0);
+  --launch-footer: oklch(0.917 0.006 260); /* #E5E7EB — white 90% footer text */
+  --launch-footer-link: oklch(0.836 0.055 235); /* #93C5FD — brighter footer link blue */
   --camera-line: oklch(0.9 0 0);
   --camera-scrim: oklch(0 0 0 / 80%);
   --launch-success: oklch(0.982 0.018 155.826);
