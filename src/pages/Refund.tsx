@@ -12,9 +12,10 @@ export default function Refund() {
           </a>
         </p>
 
-        <h2 className="mt-8 text-lg font-bold">1. Overview</h2>
+        <h2 className="mt-8 text-lg font-bold">1. About NIXORA STUDIOS</h2>
         <p>
-          This Refund Policy explains when and how NIXORASTUDIOS LTD returns money to you. It applies to credit
+          NIXORA STUDIOS is a global AI video studio serving creators worldwide — ten AI engines in one platform.
+          This Refund Policy explains when and how we return money to you, wherever you are. It applies to credit
           purchases made on nixorastudios.com and forms part of our Terms of Service. During the Coming Soon period
           there are no subscriptions and no recurring charges of any kind — the only payments possible are one-off
           credit purchases, so this policy currently covers credits only. If we introduce subscriptions later, we
@@ -27,10 +28,10 @@ export default function Refund() {
         <p>
           Generations on NIXORA STUDIOS are paid for with credits. One credit equals one generation, and the credit
           is deducted from your balance at the moment the generation starts — not when it finishes. This matters for
-          refunds because a credit that has been spent on a running or completed generation has already consumed real
-          computing power. You can always see your remaining balance in your account, and every deduction is recorded
-          so we can trace exactly what happened if something goes wrong. Credits are sold in bundles at the prices
-          shown on the site before you pay, all payments are processed by Paystack in Nigerian Naira, and credits do
+          refunds because a credit that has been spent on a running or completed generation has already consumed
+          real computing power. You can always see your remaining balance in your account, and every deduction is
+          recorded so we can trace exactly what happened if something goes wrong. Credits are sold in bundles at the
+          prices shown on the site before you pay, all payments are processed securely by Paystack, and credits do
           not expire while your account remains active. If we ever change how credits work, we will announce the
           change before it affects a balance you have already paid for.
         </p>
@@ -60,8 +61,8 @@ export default function Refund() {
         <p>
           If a generation fails on our side — for example the engine errors out, times out, or returns no usable
           output — the credit is automatically returned to your balance within 24 hours. You do not need to contact
-          us or fill in any form; the system detects the failure and reverses the deduction itself. If 24 hours pass
-          and your credit has not come back, email us with the generation details and we will fix it manually.
+          us or fill in any form; the system detects the failure and reverses the deduction itself. If 24 hours
+          pass and your credit has not come back, email us with the generation details and we will fix it manually.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">6. Mistaken or Double Charges</h2>
@@ -73,9 +74,9 @@ export default function Refund() {
           </a>{" "}
           with your payment reference and a screenshot if you have one. Verified mistaken or duplicate charges are
           refunded in full to the original payment method. Please contact us first before going to your bank — we
-          resolve these quickly, and it is almost always faster than a formal dispute. If a payment you made does not
-          appear in your account at all, that is also covered here: send us the receipt and we will either credit
-          your account or refund you in full.
+          resolve these quickly, and it is almost always faster than a formal dispute. If a payment you made does
+          not appear in your account at all, that is also covered here: send us the receipt and we will either
+          credit your account or refund you in full.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">7. How to Request a Refund &amp; Chargebacks</h2>
@@ -88,8 +89,19 @@ export default function Refund() {
           of the issue. Approved refunds are processed within 5–7 business days back to the original payment method
           via Paystack. If you file a chargeback with your bank instead of contacting us, we will share the
           transaction and generation records with the bank as evidence. Accounts that abuse chargebacks — for
-          example disputing charges for credits that were genuinely used — may be suspended, and repeated abuse leads
-          to a permanent ban. We would always rather solve the problem with you directly, so please reach out first.
+          example disputing charges for credits that were genuinely used — may be suspended, and repeated abuse
+          leads to a permanent ban. We would always rather solve the problem with you directly, so please reach out
+          first.
+        </p>
+
+        <h2 className="mt-8 text-lg font-bold">8. Contact &amp; Legal Entity</h2>
+        <p>
+          NIXORA STUDIOS is operated by NIXORASTUDIOS LTD, RC 9950450. Registered address: 81 Friday Momomi
+          Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria. Refund requests and questions:{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
+            support@nixorastudios.com
+          </a>
+          . This policy is governed by the laws of the Federal Republic of Nigeria.
         </p>
 
         <p className="mt-8">
