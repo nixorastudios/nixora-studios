@@ -136,7 +136,7 @@ function Index() {
           <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026 - 10 ENGINES IN 1</p>
         </div>
       </section>
-      <section className="bg-background px-8 py-20">
+      <section id="engines" className="bg-background px-8 py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="mb-2 text-center text-3xl font-bold md:text-4xl">One studio. Ten engines.</h2>
           <p className="mb-12 text-center text-primary">TOOLS TO BUILD YOUR WORLD</p>
@@ -149,15 +149,44 @@ function Index() {
         </div>
       </section>
     </main>
-    <footer className="camera-footer border-t border-border px-8 py-10 text-center">
-      <p>Nixora Studios © 2026.</p>
-      <nav aria-label="Legal pages" className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm">
-        <Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link>
-        <span aria-hidden="true" className="text-launch-card-muted">|</span>
-        <Link to="/privacy" className="underline text-link hover:text-link/80">Privacy</Link>
-        <span aria-hidden="true" className="text-launch-card-muted">|</span>
-        <Link to="/refund" className="underline text-link hover:text-link/80">Refund Policy</Link>
-      </nav>
+    <footer className="camera-footer border-t border-border px-8 py-12">
+      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 text-sm sm:grid-cols-2 lg:grid-cols-4">
+        <div>
+          <p className="text-lg font-black text-foreground">NIXORA STUDIOS.</p>
+          <p className="mt-1 text-primary">Global AI Video Studio</p>
+          <p className="mt-3 text-launch-card-muted">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
+        </div>
+        <nav aria-label="Product">
+          <p className="mb-3 font-bold text-foreground">Product</p>
+          <ul className="flex flex-col gap-2 text-launch-card-muted">
+            <li><a href="#engines" className="hover:text-primary">Text to Video</a></li>
+            <li><a href="#engines" className="hover:text-primary">Image to Video</a></li>
+            <li><a href="#engines" className="hover:text-primary">Animation</a></li>
+            <li><a href="#engines" className="hover:text-primary">Music Studio</a></li>
+            <li><a href="#engines" className="hover:text-primary">Code Engine</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Legal pages">
+          <p className="mb-3 font-bold text-foreground">Legal</p>
+          <ul className="flex flex-col gap-2 text-launch-card-muted">
+            <li><Link to="/terms" className="underline text-link hover:text-link/80">Terms</Link></li>
+            <li><Link to="/privacy" className="underline text-link hover:text-link/80">Privacy</Link></li>
+            <li><Link to="/refund" className="underline text-link hover:text-link/80">Refund</Link></li>
+            <li><Link to="/security" className="underline text-link hover:text-link/80">Security</Link></li>
+            <li><Link to="/contact" className="underline text-link hover:text-link/80">Contact</Link></li>
+          </ul>
+        </nav>
+        <div>
+          <p className="mb-3 font-bold text-foreground">Contact</p>
+          <p><a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">support@nixorastudios.com</a></p>
+          <p className="mt-1"><a href="mailto:hello@nixorastudios.com" className="underline text-link hover:text-link/80">hello@nixorastudios.com</a></p>
+          <p className="mt-3 text-launch-card-muted">81 Friday Momomi Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria</p>
+          <p className="mt-3 flex flex-wrap gap-2" aria-label="Security badges">
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">SSL Secured</span>
+            <span className="rounded-md border border-border px-2 py-1 text-xs text-launch-card-muted">Paystack Secured</span>
+          </p>
+        </div>
+      </div>
     </footer>
     {selectedTool && <div className="fixed inset-0 z-50 flex items-center justify-center bg-camera-scrim p-4 backdrop-blur-sm" onClick={closeTool}>
       <div ref={panelRef} tabIndex={-1} role="dialog" aria-modal="true" aria-labelledby="tool-title" onClick={e => e.stopPropagation()} className="camera-modal max-h-[90svh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-card p-8 text-card-foreground outline-none">

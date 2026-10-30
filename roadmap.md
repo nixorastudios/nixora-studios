@@ -1,5 +1,10 @@
 # Roadmap
 
+- [ ] Footer: 4-column layout (brand, product, legal, contact) on homepage
+- [ ] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
+- [ ] New /security and /contact pages, dark theme, Back to Home
+- [ ] Publish sitemap to nixorastudios.com and submit to Google Search Console
+
 - [x] Final update: simple legal pages, footer links, JSON-array local waitlist/count, ten placeholder models, verification
 - [x] Prompt board: local draft confirmation and validated device-only email saving
 - [x] Homepage footer: Terms, Privacy and Refund Policy links
