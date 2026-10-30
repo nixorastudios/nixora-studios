@@ -19,7 +19,8 @@ export default function Refund() {
           there are no subscriptions and no recurring charges of any kind — the only payments possible are one-off
           credit purchases, so this policy currently covers credits only. If we introduce subscriptions later, we
           will update this page before they go on sale. Our goal is simple: you should never pay for something you
-          did not receive.
+          did not receive, and you should always know exactly where your money went. Every rule below is written to
+          be fair to you while covering the real computing costs behind each generation.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">2. How the Credit System Works</h2>
