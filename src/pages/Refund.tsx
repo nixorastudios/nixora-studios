@@ -71,8 +71,10 @@ export default function Refund() {
             support@nixorastudios.com
           </a>{" "}
           with your payment reference and a screenshot if you have one. Verified mistaken or duplicate charges are
-          refunded in full. Please contact us first before going to your bank — we resolve these quickly, and it is
-          almost always faster than a formal dispute.
+          refunded in full to the original payment method. Please contact us first before going to your bank — we
+          resolve these quickly, and it is almost always faster than a formal dispute. If a payment you made does not
+          appear in your account at all, that is also covered here: send us the receipt and we will either credit
+          your account or refund you in full.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">7. How to Request a Refund &amp; Chargebacks</h2>
