@@ -124,6 +124,19 @@ function Index() {
     }
   };
 
+  const [earlyEmail, setEarlyEmail] = useState('');
+  const joinEarlyAccess = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const emails = saveLocalWaitlist(localStorage, earlyEmail);
+      setWaitlistCount(emails.length);
+      window.alert('Your email is saved on this device only. It has not been sent to NIXORA STUDIOS, and no launch email will be sent.');
+      setEarlyEmail('');
+    } catch (error) {
+      window.alert(error instanceof Error && error.message === 'Enter a valid email address.' ? error.message : 'Your email could not be saved. Please allow browser storage and try again.');
+    }
+  };
+
   return <div className="launch-theme camera-home min-h-screen text-foreground">
     <main>
       <section className="camera-single-hero relative flex min-h-[80svh] items-center px-8 py-16 md:px-16">
