@@ -15,6 +15,13 @@
       "when": 1793445105558,
       "tag": "0001_restrict_waitlist_table_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793467884119,
+      "tag": "0002_studio_video_jobs",
+      "breakpoints": true
     }
   ]
 }
