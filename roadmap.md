@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Professional text-to-video workspace: shot direction, authenticated generation, private saved videos, progress, downloads, tests and browser verification
+
 - [x] Real private waitlist: both signup forms save to Cloud; privacy wording updated; database read-back confirms both sources and deduplication
 
 - [x] Footer: 4-column layout (brand, product, legal, contact) on homepage
