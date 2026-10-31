@@ -36,10 +36,10 @@ describe('image-to-video start frames', () => {
   });
   it('sends a chosen frame as the opening image with the image_to_video task', () => {
     const body = buildGatewayBody({ ...valid, startFrame: frame });
-    expect(Array.isArray(body.input)).toBe(true);
-    expect(body.input[0]).toMatchObject({ type: 'image', data: 'AAAA', mime_type: 'image/jpeg' });
-    expect(body.generation_config.video_config.task).toBe('image_to_video');
-    expect(body.input[1].text).toContain('opening frame');
+    const parts = body.input as Array<{ type: string; data?: string; mime_type?: string; text?: string }>;
+    expect(parts[0]).toMatchObject({ type: 'image', data: 'AAAA', mime_type: 'image/jpeg' });
+    expect(body.generation_config?.video_config.task).toBe('image_to_video');
+    expect(parts[1]?.text).toContain('opening frame');
   });
   it('keeps plain text-to-video when no frame is chosen', () => {
     const body = buildGatewayBody(valid);
