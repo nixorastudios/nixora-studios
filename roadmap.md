@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Real private waitlist: connect both signup forms to Cloud, update privacy wording, verify saved signups and duplicate handling
+- [x] Real private waitlist: both signup forms save to Cloud; privacy wording updated; database read-back confirms both sources and deduplication
 
 - [x] Footer: 4-column layout (brand, product, legal, contact) on homepage
 - [x] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
@@ -28,4 +28,4 @@
 - [x] Engine cards open a local prompt popup (draft saved in browser only, no generation claim)
 - [x] Terms and Privacy pages: clickable support email, cross-links, Back to Home button
 - [ ] Project member roles (owner/admin, requested restored admin) — set by the user in Lovable project settings, not in code
-- [ ] Real owner/admin sign-in inside the app — waits on user approval to enable Lovable Cloud
+- [ ] Real owner/admin sign-in inside the app — waits on separate sign-in scope and verified role assignment; Cloud is now connected

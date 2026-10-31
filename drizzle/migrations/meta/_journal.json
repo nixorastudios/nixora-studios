@@ -8,6 +8,13 @@
       "when": 1793444988853,
       "tag": "0000_create_private_waitlist",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793445105558,
+      "tag": "0001_restrict_waitlist_table_access",
+      "breakpoints": true
     }
   ]
 }
