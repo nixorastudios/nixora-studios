@@ -70,6 +70,7 @@ export function VideoStudio() {
   const update = <K extends keyof VideoSettings>(key: K, value: VideoSettings[K]) => setSettings(old => ({ ...old, [key]: value }));
   const save = () => { try { localStorage.setItem('nixora_video_studio_draft', JSON.stringify(stripStartFrame(settings))); setNotice('Shot draft saved on this device.'); } catch { setNotice('Your browser could not save this draft.'); } };
   const onFramePicked = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('DEBUG onFramePicked fired');
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
