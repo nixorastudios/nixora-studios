@@ -1,5 +1,6 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ToolDashboard } from "@/components/ToolDashboard";
+import { VideoStudio } from "@/components/VideoStudio";
 import { getTool } from "@/lib/tools";
 
 export const Route = createFileRoute("/tools/$tool")({
@@ -29,5 +30,5 @@ export const Route = createFileRoute("/tools/$tool")({
 
 function ToolPage() {
   const { tool } = Route.useLoaderData();
-  return <ToolDashboard tool={tool} />;
+  return tool.slug === 'text-to-video' ? <VideoStudio /> : <ToolDashboard tool={tool} />;
 }
