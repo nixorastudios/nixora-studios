@@ -6,7 +6,9 @@ import { LockKeyhole, X } from 'lucide-react';
 import { TOOLS, type ToolConfig } from '@/lib/tools';
 import cameraHero from '@/assets/launch-studio.jpg';
 import { Button } from '@/components/ui/button';
-import { readLocalWaitlist, saveLaunchDraft, saveLocalWaitlist } from '@/lib/launch';
+import { saveLaunchDraft } from '@/lib/launch';
+import { joinLaunchWaitlist } from '@/lib/waitlist.functions';
+import { waitlistSchema } from '@/lib/waitlist';
 import models from '@/lib/models.json';
 
 const homepageTools = models.flatMap(model => {
@@ -32,15 +34,13 @@ function Index() {
   const [notice, setNotice] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
   const [email, setEmail] = useState('');
-  const [waitlistCount, setWaitlistCount] = useState(0);
+  const [joining, setJoining] = useState(false);
+  const [earlyNotice, setEarlyNotice] = useState('');
+  const runJoin = useServerFn(joinLaunchWaitlist);
   const [polishing, setPolishing] = useState(false);
   const runPolish = useServerFn(polishVideoPrompt);
   const triggerRef = useRef<HTMLElement | null>(null);
   const panelRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    try { setWaitlistCount(readLocalWaitlist(localStorage).length); } catch { /* Browser storage may be unavailable. */ }
-  }, []);
 
   const closeTool = () => {
     setSelectedTool(null);
@@ -111,29 +111,40 @@ function Index() {
     }
   };
 
-  const joinWaitlist = (event: React.FormEvent<HTMLFormElement>) => {
+  const joinWaitlist = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (joining) return;
+    const parsed = waitlistSchema.safeParse({ email, source: 'prompt-board' });
+    if (!parsed.success) { setNotice('Enter a valid email address.'); return; }
+    setJoining(true);
+    setNotice('');
     try {
-      const emails = saveLocalWaitlist(localStorage, email);
-      setWaitlistCount(emails.length);
-      window.alert('Your email and idea are saved on this device only. They have not been sent to NIXORA STUDIOS, and no launch email will be sent.');
-      closeTool();
-      setPrompt('');
-    } catch (error) {
-      setNotice(error instanceof Error && error.message === 'Enter a valid email address.' ? error.message : 'Your email could not be saved. Please allow browser storage and try again.');
+      const result = await runJoin({ data: parsed.data });
+      setNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. Your idea stays on this device; no email has been sent.' : result.error);
+      if (result.ok) setEmail('');
+    } catch {
+      setNotice('We could not save your signup. Please check your connection and try again.');
+    } finally {
+      setJoining(false);
     }
   };
 
   const [earlyEmail, setEarlyEmail] = useState('');
-  const joinEarlyAccess = (event: React.FormEvent<HTMLFormElement>) => {
+  const joinEarlyAccess = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (joining) return;
+    const parsed = waitlistSchema.safeParse({ email: earlyEmail, source: 'early-access' });
+    if (!parsed.success) { setEarlyNotice('Enter a valid email address.'); return; }
+    setJoining(true);
+    setEarlyNotice('');
     try {
-      const emails = saveLocalWaitlist(localStorage, earlyEmail);
-      setWaitlistCount(emails.length);
-      window.alert('Your email is saved on this device only. It has not been sent to NIXORA STUDIOS, and no launch email will be sent.');
-      setEarlyEmail('');
-    } catch (error) {
-      window.alert(error instanceof Error && error.message === 'Enter a valid email address.' ? error.message : 'Your email could not be saved. Please allow browser storage and try again.');
+      const result = await runJoin({ data: parsed.data });
+      setEarlyNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. No email has been sent.' : result.error);
+      if (result.ok) setEarlyEmail('');
+    } catch {
+      setEarlyNotice('We could not save your signup. Please check your connection and try again.');
+    } finally {
+      setJoining(false);
     }
   };
 
@@ -197,10 +208,11 @@ function Index() {
             </div>
           </div>
           <form id="early-access-form" onSubmit={joinEarlyAccess} className="mx-auto mt-10 flex max-w-xl flex-col gap-3 sm:flex-row">
-            <input type="email" required aria-label="Email for early access" placeholder="Enter your email for early access" value={earlyEmail} onChange={e => setEarlyEmail(e.target.value)} className="flex-1 rounded-xl border-2 border-camera-line bg-card p-3 text-card-foreground outline-none focus:border-primary" />
-            <Button type="submit" className="h-auto whitespace-normal rounded-xl bg-launch-join px-6 py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist 🚀</Button>
+            <input type="email" required maxLength={254} aria-label="Email for early access" placeholder="Enter your email for early access" value={earlyEmail} onChange={e => setEarlyEmail(e.target.value)} className="flex-1 rounded-xl border-2 border-camera-line bg-card p-3 text-card-foreground outline-none focus:border-primary" />
+            <Button type="submit" disabled={joining} className="h-auto whitespace-normal rounded-xl bg-launch-join px-6 py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">{joining ? 'Saving…' : 'Join Waitlist 🚀'}</Button>
           </form>
-          <p className="mt-3 text-center text-xs text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
+          {earlyNotice && <p role="status" className="mt-3 text-center text-sm text-primary">{earlyNotice}</p>}
+          <p className="mt-3 text-center text-xs text-launch-footer">By joining, you agree to let NIXORA STUDIOS store your email for early access. <Link to="/privacy" className="underline text-launch-footer-link">Privacy Policy</Link>. No automatic emails are sent.</p>
           <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-launch-footer">No payment today. Join waitlist to lock your discount. 1 credit = 1 generation. Failed generations auto-refunded in 24h. Paystack (NGN) + Stripe (USD) at launch Nov 23.</p>
         </div>
       </section>
@@ -264,10 +276,9 @@ function Index() {
           <p role="status" className="text-lg font-bold text-launch-success-foreground">✅ Draft Saved on this device!</p>
           <p className="mt-1 break-words text-sm text-launch-card-muted">Your idea: “{prompt.slice(0, 50)}{prompt.length > 50 ? '…' : ''}”</p>
           <p className="mt-3 font-bold text-primary">Want us to build this first on Nov 23 launch?</p>
-          <input type="email" required aria-label="Email for early access" placeholder="Enter email for early access" value={email} onChange={e => setEmail(e.target.value)} className="mt-3 w-full rounded-xl border-2 border-primary/25 bg-card p-3 text-card-foreground outline-none focus:border-primary" />
-          <p className="mt-2 text-sm text-launch-card-muted">Saved on this device only. Not sent to NIXORA STUDIOS; no launch email will be sent.</p>
-          <p role="status" className="mt-2 text-sm text-launch-card-muted">Local waitlist: {waitlistCount} {waitlistCount === 1 ? 'email' : 'emails'} saved on this device.</p>
-          <Button type="submit" className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">Join Waitlist + Lock My Idea 🚀</Button>
+          <input type="email" required maxLength={254} aria-label="Email for early access" placeholder="Enter email for early access" value={email} onChange={e => setEmail(e.target.value)} className="mt-3 w-full rounded-xl border-2 border-primary/25 bg-card p-3 text-card-foreground outline-none focus:border-primary" />
+          <p className="mt-2 text-sm text-launch-card-muted">By joining, you agree to store your email securely with NIXORA STUDIOS for early access. Your idea stays on this device. <Link to="/privacy" className="underline">Privacy Policy</Link>. No automatic emails are sent.</p>
+          <Button type="submit" disabled={joining} className="mt-3 h-auto w-full whitespace-normal rounded-xl bg-launch-join py-3 font-bold text-launch-join-foreground hover:bg-launch-join/90">{joining ? 'Saving…' : 'Join Waitlist + Lock My Idea 🚀'}</Button>
         </form> : <div className="mt-6 flex flex-col gap-3">
           {VIDEO_ENGINES.has(selectedTool.slug) && <Button type="button" variant="outline" onClick={polishIdea} disabled={polishing} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">{polishing ? 'Writing your prompt…' : '✨ Polish my idea with AI'}</Button>}
           <Button type="button" onClick={confirmDraft} className="h-auto w-full whitespace-normal rounded-xl py-3 font-bold">Generate with {selectedTool.name} — Coming Nov 23</Button>

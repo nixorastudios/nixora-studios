@@ -6,7 +6,7 @@ export default function Privacy() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Privacy Policy</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: October 31, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -17,15 +17,14 @@ export default function Privacy() {
           NIXORA STUDIOS is a global AI video studio serving creators worldwide — ten AI engines in one platform.
           This Privacy Policy explains, in plain language, what information we collect from visitors and customers
           anywhere in the world, why we collect it, how we protect it, and the rights you have over it. The short
-          version: during our Coming Soon period, your waitlist email and draft prompts never leave your own device;
+          version: during our Coming Soon period, we securely store the email you submit to our waitlist, while draft prompts remain on your device;
           after launch, we collect only what we need to run the studio, and we never sell your data.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">2. Data We Collect</h2>
         <p>
           We collect only what we need to run the studio. During the Coming Soon period, the waitlist email address
-          and any draft prompts you enter are stored on your own device, in your browser's local storage — they are
-          not sent to us. After launch, we collect your account email address, the prompts you submit, the content
+          is stored in our private Lovable Cloud database, along with signup time, consent time, and whether you joined from the early-access form or prompt board. We use it to manage early access before November 23, 2026. Joining does not trigger an automatic email. Draft prompts stay in browser storage unless you explicitly use the AI prompt-polishing feature, which sends that idea for processing. Older device-only email lists are not uploaded automatically; submit your own email again to join the shared waitlist. After launch, we collect your account email address, the prompts you submit, the content
           you generate, and payment information. Payments are processed by Paystack; we never see or store your
           full card number, and no card details are kept on our servers. We also keep basic technical logs (such as
           error reports) that help us keep the service running and secure.
@@ -33,7 +32,7 @@ export default function Privacy() {
 
         <h2 className="mt-8 text-lg font-bold">3. How We Use Your Data</h2>
         <p>
-          We use your data to provide the ten AI engines and deliver your generations; to process your payments,
+          We use waitlist emails to maintain our early-access signup list. We retain them until launch and early-access administration is complete, or until you request deletion. We use your data to provide the ten AI engines and deliver your generations; to process your payments,
           which appear on your statement as NIXORA STUDIOS; to send you receipts and important service messages; to
           prevent fraud, abuse, and misuse of the platform; and to fix problems and improve the service. We do not
           sell your personal data to anyone, and we do not use your prompts or generated content to advertise to you
@@ -51,7 +50,7 @@ export default function Privacy() {
 
         <h2 className="mt-8 text-lg font-bold">5. Storage &amp; Security</h2>
         <p>
-          Account and generation data is stored on Supabase infrastructure with encryption in transit and at rest.
+          Waitlist emails are stored privately in Lovable Cloud. Public visitors and ordinary app accounts cannot read the list; authorized project operators can manage it. Future account and generation data will use the same managed infrastructure.
           Connections to nixorastudios.com are protected with SSL/HTTPS. We limit access to personal data to the
           people and systems that need it to operate the service. No method of storage is perfectly secure, but we
           work to protect your information and will tell you promptly if a breach affects your data, as the law
@@ -62,14 +61,13 @@ export default function Privacy() {
         <p>
           We use essential cookies and browser storage only — the ones needed to keep you signed in, remember your
           preferences, and keep the site working. We do not use advertising or cross-site tracking cookies. During
-          the Coming Soon period, your waitlist email and drafts live in your browser's local storage, which you can
-          clear at any time through your browser settings.
+          the Coming Soon period, drafts and legacy device-only email lists live in your browser storage, which you can clear at any time. Clearing browser storage does not delete a signup already submitted to our shared waitlist.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">7. Third Parties</h2>
         <p>
           We share data with a small number of providers that help us run the service: Paystack, which processes
-          payments under its own PCI-DSS compliant security program; Supabase, which hosts our database; and
+          payments under its own PCI-DSS compliant security program; Lovable Cloud, which hosts our waitlist database; and
           Cloudflare, which helps deliver and protect the website. Each provider processes data only as needed to
           deliver its service to us and under its own privacy terms. We may also disclose data if the law requires
           it.
@@ -82,8 +80,7 @@ export default function Privacy() {
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>{" "}
-          and we will respond within 30 days. Because Coming Soon data is stored only on your device, you can delete
-          it yourself at any time by clearing your browser storage — no request needed.
+          and we will respond within 30 days. To remove your shared waitlist signup, email us from the address you registered so we can verify the request. Local drafts can be deleted by clearing browser storage; this does not remove your database signup.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">9. Children</h2>

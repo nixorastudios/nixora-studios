@@ -6,7 +6,7 @@ export default function Terms() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Terms of Service</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: October 31, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -27,8 +27,7 @@ export default function Terms() {
         <p>
           The studio offers ten generative engines in one platform: Text to Image, Text to Video, Image to Video,
           Animation, Sound Effects, Voice Over, Music Studio, Lipsync, Video Editor, and Code Engine. During the
-          Coming Soon period, the engines are shown as locked previews and any prompts or email addresses you enter
-          are stored on your own device only. After launch, each engine lets you generate creative content by
+          Coming Soon period, the engines are shown as locked previews. Draft prompts stay on your device, except ideas you explicitly send for AI prompt polishing. Waitlist emails you submit are stored securely with NIXORA STUDIOS for early-access administration; joining sends no automatic email and does not guarantee a completed generation or priority production of your idea. After launch, each engine lets you generate creative content by
           spending credits. We may add, change, or retire engines over time, and we will do our best to announce
           material changes in advance.
         </p>
