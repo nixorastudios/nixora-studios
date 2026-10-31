@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Real private waitlist: connect both signup forms to Cloud, update privacy wording, verify saved signups and duplicate handling
+
 - [x] Footer: 4-column layout (brand, product, legal, contact) on homepage
 - [x] Rewrite Terms, Privacy, Refund to 800+ words each (Oct 30, 2026, RC 9950450)
 - [x] New /security and /contact pages, dark theme, Back to Home
