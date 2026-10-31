@@ -20,3 +20,4 @@
 - Owner checks fail closed until a verified server-side role service exists; browser email comparisons must never grant privileges.
 - AI gateway calls live in a server-only `*.server.ts` module behind a `createServerFn` wrapper in a `*.functions.ts` file, because only handler bodies are stripped from client bundles and the key must never reach the browser.
 - Launch waitlist uses a validated, public insert-only server function and a service-role-only table; no visitor or signed-in user can read emails, duplicates return identical success, and owners manage signups through Lovable Cloud rather than an unverified owner dashboard.
+- Text-to-video lives on the existing tool route; authenticated server functions reserve one active project job before submission, verify ownership on reads, and persist completed MP4s privately before issuing short-lived signed URLs, preventing duplicate paid submissions and cross-user access.

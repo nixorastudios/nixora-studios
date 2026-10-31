@@ -256,3 +256,26 @@
 @media (prefers-reduced-motion: reduce) {
   .launch-theme *, .launch-theme *::before, .launch-theme *::after { animation: none; transition: none; }
 }
+
+.video-studio {
+  --background: oklch(0.155 0.003 260);
+  --foreground: oklch(0.96 0.003 260);
+  --card: oklch(0.205 0.004 260);
+  --card-foreground: var(--foreground);
+  --primary: oklch(0.704 0.201 45.3);
+  --primary-foreground: oklch(1 0 0);
+  --muted: oklch(0.24 0.004 260);
+  --muted-foreground: oklch(0.71 0.006 260);
+  --accent: oklch(0.27 0.004 260);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.34 0.004 260);
+  --input: var(--border);
+  --ring: var(--primary);
+  --video-success: oklch(0.76 0.14 155);
+  font-family: var(--font-launch);
+  letter-spacing: 0;
+  color-scheme: dark;
+}
+@theme inline { --color-video-success: var(--video-success); }
+.video-active-tab { color: var(--foreground); border-bottom: 2px solid var(--primary); border-radius: 0; }
+@media (prefers-reduced-motion: reduce) { .video-studio * { animation: none; transition: none; } }

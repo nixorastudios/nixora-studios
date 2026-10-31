@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      studio_video_jobs: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          gateway_id: string | null
+          id: string
+          progress: number
+          prompt: string
+          settings: Json
+          status: string
+          storage_path: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          gateway_id?: string | null
+          id?: string
+          progress?: number
+          prompt: string
+          settings: Json
+          status?: string
+          storage_path?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          gateway_id?: string | null
+          id?: string
+          progress?: number
+          prompt?: string
+          settings?: Json
+          status?: string
+          storage_path?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      studio_video_service_state: {
+        Row: {
+          blocked: boolean
+          id: string
+          message: string | null
+          status_code: number | null
+          updated_at: string
+        }
+        Insert: {
+          blocked?: boolean
+          id: string
+          message?: string | null
+          status_code?: number | null
+          updated_at?: string
+        }
+        Update: {
+          blocked?: boolean
+          id?: string
+          message?: string | null
+          status_code?: number | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       waitlist_signups: {
         Row: {
           consent_at: string
