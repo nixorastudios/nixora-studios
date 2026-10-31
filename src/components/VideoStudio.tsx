@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useServerFn } from '@tanstack/react-start';
-import { ArrowLeft, ArrowUpRight, Check, Clapperboard, Download, Film, Loader2, LogOut, Maximize, Play, RefreshCw, Save, Sparkles, Volume2 } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, Clapperboard, Download, Film, ImagePlus, Loader2, LogOut, Maximize, Play, RefreshCw, Save, Sparkles, Volume2, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
 import { generateStudioVideo, getStudioVideo, listStudioVideos } from '@/lib/video-studio.functions';
 import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
-import { DEFAULT_VIDEO_SETTINGS, videoSettingsSchema, type StudioJob, type VideoSettings } from '@/lib/video-studio';
+import { DEFAULT_VIDEO_SETTINGS, loadStartFrameDataUrl, stripStartFrame, videoSettingsSchema, type StudioJob, type VideoSettings } from '@/lib/video-studio';
 import sample from '@/assets/video-studio-sample.jpg';
 
 const samples = [
@@ -28,6 +28,7 @@ export function VideoStudio() {
   const [consent, setConsent] = useState(false);
   const [view, setView] = useState<'preview' | 'library'>('preview');
   const [sampleIndex, setSampleIndex] = useState(0);
+  const [frameBusy, setFrameBusy] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const create = useServerFn(generateStudioVideo);
   const refresh = useServerFn(getStudioVideo);
@@ -67,7 +68,23 @@ export function VideoStudio() {
   }, [active?.id, userId]);
 
   const update = <K extends keyof VideoSettings>(key: K, value: VideoSettings[K]) => setSettings(old => ({ ...old, [key]: value }));
-  const save = () => { try { localStorage.setItem('nixora_video_studio_draft', JSON.stringify(settings)); setNotice('Shot draft saved on this device.'); } catch { setNotice('Your browser could not save this draft.'); } };
+  const save = () => { try { localStorage.setItem('nixora_video_studio_draft', JSON.stringify(stripStartFrame(settings))); setNotice('Shot draft saved on this device.'); } catch { setNotice('Your browser could not save this draft.'); } };
+  const onFramePicked = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    try { update('startFrame', await loadStartFrameDataUrl(file)); setNotice(''); }
+    catch { setNotice('That image could not be prepared. Try a JPG, PNG or WebP photo instead.'); }
+  };
+  const animateStill = async () => {
+    setFrameBusy(true);
+    try {
+      const blob = await (await fetch(sample)).blob();
+      update('startFrame', await loadStartFrameDataUrl(blob));
+      setNotice('The concept still is set as your opening frame. Describe the motion, then generate.');
+    } catch { setNotice('The still could not be prepared as a start frame.'); }
+    finally { setFrameBusy(false); }
+  };
   const signIn = async (provider: 'google' | 'lovable') => {
     save();
     try { const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: `${window.location.origin}/tools/text-to-video` }); if (result.error) setNotice(result.error.message); }
