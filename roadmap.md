@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Professional text-to-video workspace: shot direction, authenticated generation, private saved videos, progress, downloads, tests and browser verification
+- [x] Professional text-to-video workspace: shot direction, authenticated generation, private saved videos, progress and downloads; 45 tests pass, real gateway MP4 verified, desktop/phone UI verified
+- [ ] Text-to-video signed-in end-to-end verification — blocked: no app auth users exist; sign in with Google or Lovable in the studio, then verify generation and private library read-back
 
 - [x] Real private waitlist: both signup forms save to Cloud; privacy wording updated; database read-back confirms both sources and deduplication
 

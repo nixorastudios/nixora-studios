@@ -35,6 +35,8 @@ async function recordBlock(admin: Admin, error: unknown) {
 export async function startStudioVideo(admin: Admin, userId: string, key: string, settings: VideoSettings) {
   const { data: block } = await admin.from('studio_video_service_state').select('*').eq('id', 'video').maybeSingle();
   if (block?.blocked) throw new VideoError(block.status_code || 403, block.message || 'Video generation is paused until service access is restored.');
+  const { data: unresolved } = await admin.from('studio_video_jobs').select('id').eq('status', 'submission_unknown').limit(1);
+  if (unresolved?.length) throw new Error('An earlier video submission could not be confirmed. Generation is paused to prevent duplicate charges; its status must be reviewed in Lovable Cloud.');
   const { data: reservation, error } = await admin.from('studio_video_jobs').insert({ user_id: userId, prompt: settings.prompt, settings, status: 'submitting' }).select().single();
   if (error || !reservation) throw new Error('Another video is already rendering. Please wait for it to finish.');
   try {
