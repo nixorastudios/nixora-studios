@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
-import { composeVideoPrompt, type VideoSettings, type StudioJob } from './video-studio';
+import { composeVideoPrompt, stripStartFrame, type VideoSettings, type StudioJob } from './video-studio';
 
 const BASE = 'https://ai.gateway.lovable.dev/v1';
 const MODEL = 'google/gemini-omni-1.1-flash';
@@ -21,11 +21,25 @@ async function request(key: string, path: string, body?: unknown) {
   }
   return response;
 }
+function splitStartFrame(dataUrl: string) {
+  const match = /^data:(image\/(?:png|jpeg|webp));base64,(.+)$/.exec(dataUrl);
+  if (!match) throw new VideoError(400, 'The start frame image could not be read. Please choose it again.');
+  return { mime: match[1], data: match[2] };
+}
+export function buildGatewayBody(settings: VideoSettings) {
+  const response_format = { type: 'video', resolution: settings.resolution, duration: `${settings.duration}s`, aspect_ratio: settings.ratio };
+  if (!settings.startFrame) return { input: composeVideoPrompt(settings), response_format };
+  const frame = splitStartFrame(settings.startFrame);
+  const prompt = `${composeVideoPrompt(settings)}\nUse the provided image as the opening frame. Keep its subject, colors and composition unchanged, and let the described motion continue naturally from it.`;
+  return {
+    input: [{ type: 'image', data: frame.data, mime_type: frame.mime }, { type: 'text', text: prompt }],
+    response_format,
+    generation_config: { video_config: { task: 'image_to_video' } },
+  };
+}
 export async function createGatewayVideo(key: string, settings: VideoSettings) {
-  return (await request(key, '', {
-    model: MODEL, input: composeVideoPrompt(settings),
-    response_format: { type: 'video', resolution: settings.resolution, duration: `${settings.duration}s`, aspect_ratio: settings.ratio },
-  })).json() as Promise<{ id: string; status: string; progress?: number }>;
+  return (await request(key, '', { model: MODEL, ...buildGatewayBody(settings) }))
+    .json() as Promise<{ id: string; status: string; progress?: number }>;
 }
 async function recordBlock(admin: Admin, error: unknown) {
   if (error instanceof VideoError && [402, 403].includes(error.status)) {
@@ -37,7 +51,7 @@ export async function startStudioVideo(admin: Admin, userId: string, key: string
   if (block?.blocked) throw new VideoError(block.status_code || 403, block.message || 'Video generation is paused until service access is restored.');
   const { data: unresolved } = await admin.from('studio_video_jobs').select('id').eq('status', 'submission_unknown').limit(1);
   if (unresolved?.length) throw new Error('An earlier video submission could not be confirmed. Generation is paused to prevent duplicate charges; its status must be reviewed in Lovable Cloud.');
-  const { data: reservation, error } = await admin.from('studio_video_jobs').insert({ user_id: userId, prompt: settings.prompt, settings, status: 'submitting' }).select().single();
+  const { data: reservation, error } = await admin.from('studio_video_jobs').insert({ user_id: userId, prompt: settings.prompt, settings: stripStartFrame(settings), status: 'submitting' }).select().single();
   if (error || !reservation) throw new Error('Another video is already rendering. Please wait for it to finish.');
   try {
     const job = await createGatewayVideo(key, settings);

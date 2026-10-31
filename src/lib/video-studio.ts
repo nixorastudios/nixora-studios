@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+const startFrameSchema = z
+  .string()
+  .regex(/^data:image\/(?:png|jpeg|webp);base64,/, 'The start frame must be a PNG, JPEG or WebP image.')
+  .max(3_500_000, 'The start frame image is too large even after compression.');
+
 export const videoSettingsSchema = z.object({
   prompt: z.string().trim().min(10, 'Describe your scene in at least 10 characters.').max(4000),
   duration: z.number().int().min(3).max(10),
@@ -10,6 +15,7 @@ export const videoSettingsSchema = z.object({
   lighting: z.enum(['Golden hour', 'Natural daylight', 'Studio softbox', 'Neon night', 'Moody low-key']),
   audio: z.string().max(500),
   exclusions: z.string().max(500),
+  startFrame: startFrameSchema.optional(),
   consent: z.literal(true, { errorMap: () => ({ message: 'Confirm generation usage before continuing.' }) }),
 });
 export type VideoSettings = z.infer<typeof videoSettingsSchema>;
@@ -25,3 +31,33 @@ export type StudioJob = {
   id: string; prompt: string; settings: VideoSettings; status: string; progress: number;
   createdAt: string; url?: string | undefined; error?: string | undefined;
 };
+// Keeps large frame data out of device drafts and database rows.
+export function stripStartFrame(settings: VideoSettings): VideoSettings {
+  const { startFrame: _frame, ...rest } = settings;
+  return rest;
+}
+const MAX_START_FRAME_CHARS = 3_200_000;
+// Client-side downscale/compress so the frame fits the generation request comfortably.
+export async function loadStartFrameDataUrl(source: File | Blob) {
+  const objectUrl = URL.createObjectURL(source);
+  try {
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const element = new Image();
+      element.onload = () => resolve(element);
+      element.onerror = () => reject(new Error('The image could not be decoded.'));
+      element.src = objectUrl;
+    });
+    const scale = Math.min(1, 1600 / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    canvas.getContext('2d')?.drawImage(image, 0, 0, canvas.width, canvas.height);
+    for (const quality of [0.9, 0.8, 0.7, 0.6]) {
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      if (dataUrl.length <= MAX_START_FRAME_CHARS) return dataUrl;
+    }
+    throw new Error('The image is too large to use as a start frame.');
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+}
