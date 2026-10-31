@@ -6,7 +6,7 @@ export default function Security() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Security</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: October 31, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -38,9 +38,7 @@ export default function Security() {
 
         <h2 className="mt-8 text-lg font-bold">4. Encrypted Data Storage</h2>
         <p>
-          Account data and your generated content are stored on Supabase infrastructure with encryption in transit
-          and at rest. Access to production data is restricted to the systems and people that need it to operate
-          the service, and we use row-level security rules so that each account can only reach its own data.
+          Waitlist emails are stored in our private Lovable Cloud database. Visitors and ordinary app accounts cannot read or update the signup list. The signup form validates each email before storing it, and repeated submissions do not create duplicate entries. Authorized project operators can manage the list. Draft ideas remain on your device unless you explicitly use AI prompt polishing.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">5. Abuse Monitoring</h2>
