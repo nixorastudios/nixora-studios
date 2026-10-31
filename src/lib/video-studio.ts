@@ -23,5 +23,5 @@ export function composeVideoPrompt(settings: VideoSettings) {
 }
 export type StudioJob = {
   id: string; prompt: string; settings: VideoSettings; status: string; progress: number;
-  createdAt: string; url?: string; error?: string;
+  createdAt: string; url?: string | undefined; error?: string | undefined;
 };
