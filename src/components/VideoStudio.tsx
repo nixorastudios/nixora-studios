@@ -75,7 +75,7 @@ export function VideoStudio() {
     event.target.value = '';
     if (!file) return;
     try { update('startFrame', await loadStartFrameDataUrl(file)); setNotice(''); }
-    catch { setNotice('That image could not be prepared. Try a JPG, PNG or WebP photo instead.'); }
+    catch (error) { setNotice(`That image could not be prepared. Try a JPG, PNG or WebP photo instead. (${error instanceof Error ? error.message : 'unknown'})`); }
   };
   const animateStill = async () => {
     setFrameBusy(true);
