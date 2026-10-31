@@ -1,6 +1,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/integrations/supabase/types';
-import { stripStartFrame, type VideoSettings, type StudioJob } from './video-studio';
+import { composeVideoPrompt, stripStartFrame, type VideoSettings, type StudioJob } from './video-studio';
 
 const BASE = 'https://ai.gateway.lovable.dev/v1';
 const MODEL = 'google/gemini-omni-1.1-flash';
