@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Audit fixes: legal aliases, private payment/evidence records, atomic credit operations, signed webhooks, protected failed-credit reconciliation, refund/contact wording and regression checks
+- [ ] Activate payment webhooks and reconciliation — blocked until payment signing keys, provider setup and publication are available; support-mailbox monitoring requires an operator
+
 - [x] Professional text-to-video workspace: shot direction, authenticated generation, private saved videos, progress and downloads, optional image-to-video start frame; 49 tests pass, real gateway MP4 verified, desktop/phone UI verified
 - [ ] Text-to-video signed-in end-to-end verification — blocked: no app auth users exist; sign in with Google or Lovable in the studio, then verify generation and private library read-back
 
