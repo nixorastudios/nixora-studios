@@ -17,9 +17,13 @@ export const verifySquadWebhook = verifyPaymentSignature;
 export async function logPaymentAttempt(admin: Admin, request: Request, input: PaymentAttempt) {
   // Inputs must come from a future authenticated checkout with server-selected prices, not a browser payload.
   const order = paymentAttemptSchema.parse(input);
+  if (!order.emailVerified || !order.termsAccepted || !order.privacyAccepted) {
+    throw new Error('BLOCKED: email not verified or terms not accepted - cannot charge');
+  }
   const { data, error } = await admin.from('payments').insert({
     user_id: order.userId, email: order.email, provider: order.provider, reference: order.reference,
     amount_kobo: order.amountKobo, currency: order.currency, expected_credits: order.credits,
+    terms_version: order.termsVersion,
     ip: request.headers.get('x-forwarded-for')?.split(',')[0]?.trim().slice(0, 128) || null,
     user_agent: request.headers.get('user-agent')?.slice(0, 1024) || null,
   }).select('id').single();

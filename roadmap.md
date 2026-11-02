@@ -1,5 +1,6 @@
 # Roadmap
 
+- [x] Terms enforcement layer: terms_acceptance records (365-day validity), checkout schema requires terms/privacy acceptance + verified email, credit delivery blocked without fresh acceptance and verified email, future TermsCheckoutGuard component; 64 tests pass, real-database block verified; payments still not connected
 - [x] Audit-fix preparation: legal aliases, private payment/evidence records, atomic credit operations, verified-signature Paystack handler, fail-closed Squad endpoint, protected reconciliation and truthful legal wording; 59 tests pass, real transaction/deduplication/refund checks pass, video preview unchanged
 - [ ] Activate payment webhooks and reconciliation — blocked: Paystack signing key and authenticated checkout, Squad current signature/payload contract plus merchant setup, and publication before managed hourly scheduling; staffed support-mailbox monitoring needs an operator. See docs/payment-launch-readiness.md.
 

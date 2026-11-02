@@ -194,6 +194,7 @@ export type Database = {
           provider: string
           reference: string
           status: string
+          terms_version: string | null
           user_agent: string | null
           user_id: string
         }
@@ -209,6 +210,7 @@ export type Database = {
           provider: string
           reference: string
           status?: string
+          terms_version?: string | null
           user_agent?: string | null
           user_id: string
         }
@@ -224,6 +226,7 @@ export type Database = {
           provider?: string
           reference?: string
           status?: string
+          terms_version?: string | null
           user_agent?: string | null
           user_id?: string
         }
@@ -289,6 +292,39 @@ export type Database = {
           message?: string | null
           status_code?: number | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      terms_acceptance: {
+        Row: {
+          accepted_at: string
+          id: string
+          ip: string | null
+          privacy_version: string
+          refund_version: string
+          terms_version: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          accepted_at?: string
+          id?: string
+          ip?: string | null
+          privacy_version?: string
+          refund_version?: string
+          terms_version?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          accepted_at?: string
+          id?: string
+          ip?: string | null
+          privacy_version?: string
+          refund_version?: string
+          terms_version?: string
+          user_agent?: string | null
+          user_id?: string
         }
         Relationships: []
       }

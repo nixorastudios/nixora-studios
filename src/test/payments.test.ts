@@ -8,7 +8,14 @@ import type { Database } from '../integrations/supabase/types';
 
 function mockedAdmin() {
   const rpc = vi.fn().mockResolvedValue({ data: 1, error: null });
-  return { rpc, admin: { rpc } as unknown as SupabaseClient<Database> };
+  const from = vi.fn((table: string) => {
+    if (table === 'payments') {
+      return { select: () => ({ eq: () => ({ eq: () => ({ maybeSingle: () => Promise.resolve({ data: { user_id: 'u1' }, error: null }) }) }) }) };
+    }
+    return { select: () => ({ eq: () => ({ order: () => ({ limit: () => ({ maybeSingle: () => Promise.resolve({ data: { accepted_at: new Date().toISOString() }, error: null }) }) }) }) }) };
+  });
+  const auth = { admin: { getUserById: vi.fn().mockResolvedValue({ data: { user: { email_confirmed_at: '2026-11-01T00:00:00Z' } }, error: null }) } };
+  return { rpc, admin: { rpc, from, auth } as unknown as SupabaseClient<Database> };
 }
 describe('payment and dispute safeguards', () => {
   const key = 'synthetic-webhook-test-fixture';
@@ -36,9 +43,13 @@ describe('payment and dispute safeguards', () => {
     expect(FAILED_REFUND_HOURS).toBe(24);
   });
   it('rejects invalid amounts and normalizes order emails', () => {
-    const valid = { userId: '11111111-1111-4111-8111-111111111111', email: ' Creator@Example.com ', provider: 'paystack', reference: 'order_123456', amountKobo: 500000, currency: 'NGN', credits: 100 };
+    const valid = { userId: '11111111-1111-4111-8111-111111111111', email: ' Creator@Example.com ', provider: 'paystack', reference: 'order_123456', amountKobo: 500000, currency: 'NGN', credits: 100, termsAccepted: true, privacyAccepted: true, termsVersion: 'v1.0-Nov2026', emailVerified: true };
     expect(paymentAttemptSchema.parse(valid).email).toBe('creator@example.com');
     expect(paymentAttemptSchema.safeParse({ ...valid, amountKobo: -1 }).success).toBe(false);
+    expect(paymentAttemptSchema.safeParse({ ...valid, termsAccepted: false }).success).toBe(false);
+    expect(paymentAttemptSchema.safeParse({ ...valid, privacyAccepted: false }).success).toBe(false);
+    expect(paymentAttemptSchema.safeParse({ ...valid, emailVerified: false }).success).toBe(false);
+    expect(paymentAttemptSchema.safeParse({ ...valid, termsVersion: '' }).success).toBe(false);
   });
   it('ignores non-success events and rejects invalid successful transactions before granting credits', async () => {
     const { rpc, admin } = mockedAdmin();
