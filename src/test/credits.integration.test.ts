@@ -40,6 +40,9 @@ describe.skipIf(!client)('real database credit invariants (isolated fixtures, no
     const created = await client.auth.admin.createUser({ email: `audit-fixture-${crypto.randomUUID()}@example.invalid`, password: crypto.randomUUID(), email_confirm: true });
     if (created.error || !created.data.user) throw new Error('Test user creation failed');
     userId = created.data.user.id;
+    const uid = userId;
+    const terms = await client.from('terms_acceptance').insert({ user_id: uid });
+    if (terms.error) throw new Error('Test terms acceptance insert failed');
     const reference = `audit_test_${crypto.randomUUID()}`;
     const inserted = await client.from('payments').insert({ user_id: userId, email: 'audit-fixture@example.invalid', provider: 'paystack', reference, amount_kobo: 500000, expected_credits: 100 }).select('id').single();
     if (inserted.error || !inserted.data) throw new Error('Test order insert failed');
