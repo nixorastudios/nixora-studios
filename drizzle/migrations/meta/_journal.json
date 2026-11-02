@@ -29,6 +29,13 @@
       "when": 1793609169738,
       "tag": "0003_payments_credits_disputes",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793615058861,
+      "tag": "0004_terms_enforcement",
+      "breakpoints": true
     }
   ]
 }
