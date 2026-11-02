@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight, Check, Clapperboard, Download, Film, ImagePlus
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
+import { variantPrompt } from '@/lib/video-studio';
 import { generateStudioVideo, getStudioVideo, listStudioVideos } from '@/lib/video-studio.functions';
 import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
 import { DEFAULT_VIDEO_SETTINGS, loadStartFrameDataUrl, stripStartFrame, videoSettingsSchema, type StudioJob, type VideoSettings } from '@/lib/video-studio';
@@ -99,7 +100,9 @@ export function VideoStudio({ variant = 'video' }: { variant?: StudioVariant } =
     catch { setNotice('Sign-in could not finish. Please try again.'); }
   };
   const generate = async () => {
-    const parsed = videoSettingsSchema.safeParse({ ...settings, consent });
+    if (variant !== 'video' && !settings.startFrame) { setNotice('Add a character or image first — it is the starting frame for this engine.'); return; }
+    if (variant === 'lipsync' && settings.audio.trim().length < 2) { setNotice('Type the exact line the character should say.'); return; }
+    const parsed = videoSettingsSchema.safeParse({ ...settings, prompt: variantPrompt(variant, settings), consent });
     if (!parsed.success) { setNotice(parsed.error.issues[0]?.message || 'Check your shot settings.'); return; }
     if (!userId) { setNotice('Sign in to generate and keep your videos private.'); return; }
     setBusy(true); setNotice('');
