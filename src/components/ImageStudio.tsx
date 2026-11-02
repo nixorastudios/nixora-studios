@@ -175,7 +175,7 @@ export function ImageStudio() {
       <aside className="relative">
         <Button variant="outline" size="icon" title="Image types" onClick={() => setMenuOpen((v) => !v)} aria-expanded={menuOpen}><MoreVertical /></Button>
         {menuOpen && <div className="absolute left-0 top-12 z-30 max-h-[70vh] w-72 overflow-auto rounded-lg border border-border bg-popover p-3 shadow-xl">
-          <div className="mb-2 flex items-center gap-2 rounded-md border border-border px-2"><Search className="size-4 text-muted-foreground" /><input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search 120+ image types" className="w-full bg-transparent py-2 text-sm outline-none" /></div>
+          <div className="mb-2 flex items-center gap-2 rounded-md border border-border px-2"><Search className="size-4 text-muted-foreground" /><input autoFocus value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search 110 image types" className="w-full bg-transparent py-2 text-sm outline-none" /></div>
           {filtered.map((g) => <div key={g.group} className="mb-2"><p className="px-1 py-1 text-[11px] font-semibold text-primary">{g.group.toUpperCase()}</p>{g.modes.map((m) => <button key={m} onClick={() => { setMode(m); setMenuOpen(false); }} className={`block w-full rounded px-2 py-1.5 text-left text-sm hover:bg-accent ${m === mode ? "bg-accent text-primary" : ""}`}>{m}</button>)}</div>)}
         </div>}
       </aside>
