@@ -14,7 +14,7 @@ const client = url && key ? createClient<Database>(url, key, {
     return fetch(input, { ...init, headers });
   } },
 }) : undefined;
-const userId = crypto.randomUUID();
+let userId: string | undefined;
 let paymentId: string | undefined;
 let jobId: string | undefined;
 
@@ -27,12 +27,19 @@ afterAll(async () => {
     await client.from('payments').delete().eq('id', paymentId);
   }
   if (jobId) await client.from('studio_video_jobs').delete().eq('id', jobId);
-  await client.from('credit_balances').delete().eq('user_id', userId);
+  if (userId) {
+    await client.from('terms_acceptance').delete().eq('user_id', userId);
+    await client.from('credit_balances').delete().eq('user_id', userId);
+    await client.auth.admin.deleteUser(userId);
+  }
 });
 
 describe.skipIf(!client)('real database credit invariants (isolated fixtures, no provider calls)', () => {
   it('fulfills once, debits one credit once, rejects cross-user use, and refunds an older failed job once', async () => {
     if (!client) throw new Error('Integration configuration missing');
+    const created = await client.auth.admin.createUser({ email: `audit-fixture-${crypto.randomUUID()}@example.invalid`, password: crypto.randomUUID(), email_confirm: true });
+    if (created.error || !created.data.user) throw new Error('Test user creation failed');
+    userId = created.data.user.id;
     const reference = `audit_test_${crypto.randomUUID()}`;
     const inserted = await client.from('payments').insert({ user_id: userId, email: 'audit-fixture@example.invalid', provider: 'paystack', reference, amount_kobo: 500000, expected_credits: 100 }).select('id').single();
     if (inserted.error || !inserted.data) throw new Error('Test order insert failed');
