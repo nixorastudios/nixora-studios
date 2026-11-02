@@ -28,8 +28,8 @@ afterAll(async () => {
   }
   if (jobId) await client.from('studio_video_jobs').delete().eq('id', jobId);
   if (userId) {
-    await client.from('terms_acceptance').delete().eq('user_id', uid);
-    await client.from('credit_balances').delete().eq('user_id', uid);
+    await client.from('terms_acceptance').delete().eq('user_id', userId);
+    await client.from('credit_balances').delete().eq('user_id', userId);
     await client.auth.admin.deleteUser(userId);
   }
 });
