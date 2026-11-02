@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowUpRight, Check, Clapperboard, Download, Film, ImagePlus
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { lovable } from '@/integrations/lovable';
+import { variantPrompt } from '@/lib/video-studio';
 import { generateStudioVideo, getStudioVideo, listStudioVideos } from '@/lib/video-studio.functions';
 import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
 import { DEFAULT_VIDEO_SETTINGS, loadStartFrameDataUrl, stripStartFrame, videoSettingsSchema, type StudioJob, type VideoSettings } from '@/lib/video-studio';
@@ -16,8 +17,15 @@ const samples = [
   { name: 'Into the city', tag: 'COMMERCIAL · URBAN', prompt: 'A cyclist rides through a rain-soaked city at blue hour. The camera tracks alongside, reflections ripple on the road, warm shop lights contrast against the cool evening sky.' },
 ];
 const field = 'w-full rounded-md border border-border bg-background p-3 text-sm text-foreground outline-none focus:border-primary';
-export function VideoStudio() {
-  const [settings, setSettings] = useState<VideoSettings>(DEFAULT_VIDEO_SETTINGS);
+export type StudioVariant = 'video' | 'animation' | 'lipsync';
+const VARIANTS = {
+  video: { tag: 'ENGINE 02 / MOTION', title: 'Text to video', label: 'SCENE DESCRIPTION', ph: 'Describe the subject, setting, and what happens…', audio: 'Sound direction', draft: 'nixora_video_studio_draft', preset: {} },
+  animation: { tag: 'ENGINE 04 / ANIMATION', title: 'Animation', label: 'HOW SHOULD IT MOVE?', ph: 'e.g. the character turns, smiles and waves while leaves drift past…', audio: 'Sound direction', draft: 'nixora_animation_draft', preset: { style: 'Animation' as const, camera: 'Locked-off' as const } },
+  lipsync: { tag: 'ENGINE 08 / LIPSYNC', title: 'Lipsync', label: 'SCENE & PERFORMANCE', ph: 'e.g. the woman looks into the camera and speaks warmly…', audio: 'Spoken line (exact words the character says)', draft: 'nixora_lipsync_draft', preset: { camera: 'Locked-off' as const, audio: '' } },
+};
+export function VideoStudio({ variant = 'video' }: { variant?: StudioVariant } = {}) {
+  const V = VARIANTS[variant];
+  const [settings, setSettings] = useState<VideoSettings>({ ...DEFAULT_VIDEO_SETTINGS, ...V.preset });
   const [userId, setUserId] = useState<string | null>(null);
   const [authReady, setAuthReady] = useState(false);
   const [jobs, setJobs] = useState<StudioJob[]>([]);
@@ -37,8 +45,8 @@ export function VideoStudio() {
   const active = jobs.find(job => ['submitting', 'queued', 'in_progress'].includes(job.status));
 
   useEffect(() => {
-    try { const draft = localStorage.getItem('nixora_video_studio_draft'); if (draft) setSettings({ ...DEFAULT_VIDEO_SETTINGS, ...JSON.parse(draft) }); } catch { /* Default settings remain usable. */ }
-    try { const handoff = sessionStorage.getItem('nixora_handoff_image'); if (handoff) { sessionStorage.removeItem('nixora_handoff_image'); fetch(handoff).then(r => r.blob()).then(loadStartFrameDataUrl).then(frame => { setSettings(s => ({ ...s, startFrame: frame })); setNotice('Your image from Text to Image is set as the opening frame. Describe the motion, then generate.'); }).catch(() => {}); } } catch { /* no handoff */ }
+    try { const draft = localStorage.getItem(V.draft); if (draft) setSettings({ ...DEFAULT_VIDEO_SETTINGS, ...V.preset, ...JSON.parse(draft) }); } catch { /* Default settings remain usable. */ }
+    try { const handoff = sessionStorage.getItem('nixora_handoff_image'); if (handoff) { sessionStorage.removeItem('nixora_handoff_image'); fetch(handoff).then(r => r.blob()).then(loadStartFrameDataUrl).then(frame => { setSettings(s => ({ ...s, startFrame: frame })); setNotice(variant === 'lipsync' ? 'Your image is loaded as the speaking character. Type the exact line they should say, then generate.' : 'Your image from Text to Image is set as the opening frame. Describe the motion, then generate.'); }).catch(() => {}); } } catch { /* no handoff */ }
     supabase.auth.getSession().then(({ data }) => { setUserId(data.session?.user.id || null); setAuthReady(true); });
     const { data } = supabase.auth.onAuthStateChange((_event, session) => { setUserId(session?.user.id || null); setAuthReady(true); });
     return () => data.subscription.unsubscribe();
@@ -69,7 +77,7 @@ export function VideoStudio() {
   }, [active?.id, userId]);
 
   const update = <K extends keyof VideoSettings>(key: K, value: VideoSettings[K]) => setSettings(old => ({ ...old, [key]: value }));
-  const save = () => { try { localStorage.setItem('nixora_video_studio_draft', JSON.stringify(stripStartFrame(settings))); setNotice('Shot draft saved on this device.'); } catch { setNotice('Your browser could not save this draft.'); } };
+  const save = () => { try { localStorage.setItem(V.draft, JSON.stringify(stripStartFrame(settings))); setNotice('Shot draft saved on this device.'); } catch { setNotice('Your browser could not save this draft.'); } };
   const onFramePicked = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = '';
@@ -92,7 +100,9 @@ export function VideoStudio() {
     catch { setNotice('Sign-in could not finish. Please try again.'); }
   };
   const generate = async () => {
-    const parsed = videoSettingsSchema.safeParse({ ...settings, consent });
+    if (variant !== 'video' && !settings.startFrame) { setNotice('Add a character or image first — it is the starting frame for this engine.'); return; }
+    if (variant === 'lipsync' && settings.audio.trim().length < 2) { setNotice('Type the exact line the character should say.'); return; }
+    const parsed = videoSettingsSchema.safeParse({ ...settings, prompt: variantPrompt(variant, settings), consent });
     if (!parsed.success) { setNotice(parsed.error.issues[0]?.message || 'Check your shot settings.'); return; }
     if (!userId) { setNotice('Sign in to generate and keep your videos private.'); return; }
     setBusy(true); setNotice('');
@@ -128,11 +138,11 @@ export function VideoStudio() {
       <div className="flex items-center gap-3"><span className="text-xs text-muted-foreground">TEXT TO VIDEO · EARLY PREVIEW</span>{userId && <Button variant="ghost" size="icon" title="Sign out" onClick={() => supabase.auth.signOut()}><LogOut /></Button>}</div>
     </header>
     <div className="mx-auto max-w-[1600px] px-5 py-7 lg:px-8">
-      <div className="mb-7 flex items-end justify-between gap-4"><div><p className="mb-2 flex items-center gap-2 text-xs font-semibold text-primary"><Clapperboard className="size-4" /> ENGINE 02 / MOTION</p><h1 className="text-3xl font-bold sm:text-4xl">Text to video<span className="text-primary">.</span></h1></div><span className="hidden text-sm text-muted-foreground md:block">Your vision. Every frame.</span></div>
+      <div className="mb-7 flex items-end justify-between gap-4"><div><p className="mb-2 flex items-center gap-2 text-xs font-semibold text-primary"><Clapperboard className="size-4" /> {V.tag}</p><h1 className="text-3xl font-bold sm:text-4xl">{V.title}<span className="text-primary">.</span></h1></div><span className="hidden text-sm text-muted-foreground md:block">Your vision. Every frame.</span></div>
       <div className="grid gap-7 xl:grid-cols-[390px_minmax(0,1fr)]">
         <section aria-label="Shot direction" className="min-w-0 space-y-5">
           <div className="flex items-center justify-between"><h2 className="text-sm font-semibold">01 / Shot direction</h2><Button variant="ghost" size="icon" onClick={save} title="Save shot draft"><Save /></Button></div>
-          <div className="rounded-lg border border-border bg-card p-4"><label htmlFor="video-prompt" className="text-xs font-semibold text-muted-foreground">SCENE DESCRIPTION</label><textarea id="video-prompt" className="mt-3 min-h-40 w-full resize-y bg-transparent text-sm leading-6 outline-none" placeholder="Describe the subject, setting, and what happens…" maxLength={4000} value={settings.prompt} onChange={e => update('prompt', e.target.value)} /><div className="flex items-center justify-between border-t border-border pt-2"><span className="text-xs text-muted-foreground">{settings.prompt.length}/4000</span><Button variant="ghost" size="sm" onClick={polishIdea} disabled={polishing || settings.prompt.length > 1200}><Sparkles />{polishing ? 'Polishing…' : 'Polish my idea with AI'}</Button></div></div>
+          <div className="rounded-lg border border-border bg-card p-4"><label htmlFor="video-prompt" className="text-xs font-semibold text-muted-foreground">{V.label}</label><textarea id="video-prompt" className="mt-3 min-h-40 w-full resize-y bg-transparent text-sm leading-6 outline-none" placeholder={V.ph} maxLength={4000} value={settings.prompt} onChange={e => update('prompt', e.target.value)} /><div className="flex items-center justify-between border-t border-border pt-2"><span className="text-xs text-muted-foreground">{settings.prompt.length}/4000</span><Button variant="ghost" size="sm" onClick={polishIdea} disabled={polishing || settings.prompt.length > 1200}><Sparkles />{polishing ? 'Polishing…' : 'Polish my idea with AI'}</Button></div></div>
           <div className="rounded-lg border border-border bg-card p-4">
             <div className="flex items-center justify-between"><span className="text-xs font-semibold text-muted-foreground">START FRAME · OPTIONAL</span>{settings.startFrame && <Button variant="ghost" size="icon" title="Remove start frame" onClick={() => update('startFrame', undefined)}><X /></Button>}</div>
             {settings.startFrame ? <img src={settings.startFrame} alt="Chosen opening frame" className="mt-3 max-h-44 w-full rounded object-cover" /> : <label className="mt-3 flex cursor-pointer flex-col items-center gap-2 rounded-md border border-dashed border-border p-5 text-center text-xs text-muted-foreground transition-colors hover:border-primary"><ImagePlus className="size-5 text-primary" />Choose an image — it becomes the opening frame<input type="file" accept="image/png,image/jpeg,image/webp" className="hidden" onChange={onFramePicked} /></label>}
@@ -140,7 +150,7 @@ export function VideoStudio() {
           </div>
           <div className="grid grid-cols-2 gap-3">{(['style', 'camera', 'lighting'] as const).map(key => <label key={key} className={key === 'lighting' ? 'col-span-2 text-xs text-muted-foreground' : 'text-xs text-muted-foreground'}>{key === 'camera' ? 'Camera movement' : key === 'style' ? 'Visual treatment' : 'Lighting'}<select value={settings[key]} onChange={e => update(key, e.target.value as VideoSettings[typeof key])} className={`${field} mt-2`}>{(key === 'style' ? ['Cinematic','Documentary','Animation','Commercial'] : key === 'camera' ? ['Slow dolly','Locked-off','Tracking','Aerial','Handheld'] : ['Golden hour','Natural daylight','Studio softbox','Neon night','Moody low-key']).map(option => <option key={option}>{option}</option>)}</select></label>)}</div>
           <div className="border-t border-border pt-5"><h2 className="mb-4 text-sm font-semibold">02 / Output settings</h2><div className="grid grid-cols-2 gap-3"><label className="text-xs text-muted-foreground">Aspect ratio<select className={`${field} mt-2`} value={settings.ratio} onChange={e => update('ratio', e.target.value as VideoSettings['ratio'])}><option value="16:9">16:9 · Landscape</option><option value="9:16">9:16 · Portrait</option></select></label><label className="text-xs text-muted-foreground">Resolution<select className={`${field} mt-2`} value={settings.resolution} onChange={e => update('resolution', e.target.value as VideoSettings['resolution'])}><option>720p</option><option>1080p</option></select></label></div><label className="mt-4 block text-xs text-muted-foreground">Duration <span className="float-right text-foreground">{settings.duration} seconds</span><input type="range" min={3} max={10} step={1} value={settings.duration} onChange={e => update('duration', Number(e.target.value))} className="mt-3 w-full accent-primary" /></label></div>
-          <label className="block text-xs text-muted-foreground"><span className="mb-2 flex items-center gap-2"><Volume2 className="size-3" /> Sound direction</span><input value={settings.audio} onChange={e => update('audio', e.target.value)} maxLength={500} className={field} /></label>
+          <label className="block text-xs text-muted-foreground"><span className="mb-2 flex items-center gap-2"><Volume2 className="size-3" /> {V.audio}</span><input value={settings.audio} placeholder={variant === 'lipsync' ? 'e.g. Welcome to NIXORA STUDIOS.' : undefined} onChange={e => update('audio', e.target.value)} maxLength={500} className={field} /></label>
           <details className="text-xs text-muted-foreground"><summary className="cursor-pointer">Exclusions</summary><textarea aria-label="Exclusions" value={settings.exclusions} onChange={e => update('exclusions', e.target.value)} maxLength={500} className={`${field} mt-3`} /></details>
           <label className="flex gap-3 text-xs leading-5 text-muted-foreground"><input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)} className="mt-1 accent-primary" />AI processing consent: I agree to send this prompt and any chosen start frame image to the video provider. Generation uses workspace AI credits; this is not the launch credit wallet.</label>
           {authReady && !userId && <div className="flex flex-wrap gap-2"><Button variant="outline" onClick={() => signIn('google')}>Sign in with Google</Button><Button variant="outline" onClick={() => signIn('lovable')}>Sign in with Lovable</Button></div>}

@@ -61,3 +61,11 @@ export async function loadStartFrameDataUrl(source: File | Blob) {
     URL.revokeObjectURL(objectUrl);
   }
 }
+
+// Engine-specific direction layered over the creator's prompt; the opening frame keeps identity.
+export function variantPrompt(variant: 'video' | 'animation' | 'lipsync', settings: Pick<VideoSettings, 'prompt' | 'audio'>) {
+  const base = settings.prompt.trim();
+  if (variant === 'animation') return `Animate the provided opening image. Keep the same characters, design, colours and composition; bring them to life with smooth, expressive animated motion. ${base}`.slice(0, 4000);
+  if (variant === 'lipsync') return `The person in the provided opening image speaks directly, with accurate lip-sync, natural facial expression and blinking, keeping their exact identity and appearance. They say exactly: "${settings.audio.trim()}". ${base}`.slice(0, 4000);
+  return base;
+}

@@ -50,3 +50,9 @@ describe('image-to-video start frames', () => {
     expect(stripStartFrame({ ...valid, startFrame: frame })).toEqual(valid);
   });
 });
+import { variantPrompt as vp } from '@/lib/video-studio';
+describe('engine variants', () => {
+  it('lipsync quotes the exact spoken line', () => { expect(vp('lipsync', { prompt: 'smiles', audio: 'Hello world' })).toContain('"Hello world"'); });
+  it('animation keeps the opening image', () => { expect(vp('animation', { prompt: 'waves', audio: '' })).toMatch(/^Animate the provided opening image/); });
+  it('text to video is unchanged', () => { expect(vp('video', { prompt: ' a shot ', audio: '' })).toBe('a shot'); });
+});
