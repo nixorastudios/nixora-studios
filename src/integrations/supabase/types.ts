@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      cookie_consent: {
+        Row: {
+          analytics: boolean
+          created_at: string
+          essential: boolean
+          id: string
+          ip: string | null
+          marketing: boolean
+          user_id: string | null
+        }
+        Insert: {
+          analytics?: boolean
+          created_at?: string
+          essential?: boolean
+          id?: string
+          ip?: string | null
+          marketing?: boolean
+          user_id?: string | null
+        }
+        Update: {
+          analytics?: boolean
+          created_at?: string
+          essential?: boolean
+          id?: string
+          ip?: string | null
+          marketing?: boolean
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       credit_balances: {
         Row: {
           balance: number
