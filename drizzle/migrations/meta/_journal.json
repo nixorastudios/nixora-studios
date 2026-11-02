@@ -22,6 +22,13 @@
       "when": 1793467884119,
       "tag": "0002_studio_video_jobs",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793609169738,
+      "tag": "0003_payments_credits_disputes",
+      "breakpoints": true
     }
   ]
 }

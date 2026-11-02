@@ -6,7 +6,7 @@ export default function Terms() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Terms of Service</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 31, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -80,8 +80,10 @@ export default function Terms() {
 
         <h2 className="mt-8 text-lg font-bold">8. Refunds</h2>
         <p>
-          Unused credits can be refunded within 7 days of purchase; used credits cannot be refunded because the
-          computing cost is already spent; and failed generations are automatically refunded within 24 hours. The
+          Unused credits can be refunded in credits within 7 days of purchase; cash refunds apply where required by
+          law or a payment-provider dispute decision. Used credits are non-refundable, subject to mandatory consumer
+          rights, because computing cost is already spent. Deducted credits for failed generations are restored in
+          credits within 24 hours through reconciliation when customer billing is activated. The
           full rules, including how to request a refund and how long processing takes, are in our{" "}
           <Link to="/refund" className="underline text-link hover:text-link/80">
             Refund Policy

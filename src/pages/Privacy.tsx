@@ -6,7 +6,7 @@ export default function Privacy() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Privacy Policy</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 31, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -27,7 +27,12 @@ export default function Privacy() {
           is stored in our private Lovable Cloud database, along with signup time, consent time, and whether you joined from the early-access form or prompt board. We use it to manage early access before November 23, 2026. Joining does not trigger an automatic email. Draft prompts stay in browser storage unless you explicitly use the AI prompt-polishing feature, which sends that idea for processing. Older device-only email lists are not uploaded automatically; submit your own email again to join the shared waitlist. After launch, we collect your account email address, the prompts you submit, the content
           you generate, and payment information. Payments are processed by Paystack; we never see or store your
           full card number, and no card details are kept on our servers. We also keep basic technical logs (such as
-          error reports) that help us keep the service running and secure.
+          error reports) that help us keep the service running and secure. When payment checkout is activated,
+          payment-attempt records include account email, the request's forwarded IP address (which is not proof
+          of identity), user-agent/device description, provider, reference, amount, and timestamps. Credit delivery,
+          deductions and failed-credit refunds are linked to generation identifiers, prompt hashes and outcomes.
+          Relevant records may be assembled privately as evidence for fraud reviews or payment disputes. Webhook
+          delivery IPs belong to the provider and are not recorded as a customer's IP.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">3. How We Use Your Data</h2>
@@ -70,7 +75,10 @@ export default function Privacy() {
           payments under its own PCI-DSS compliant security program; Lovable Cloud, which hosts our waitlist database; and
           Cloudflare, which helps deliver and protect the website. Each provider processes data only as needed to
           deliver its service to us and under its own privacy terms. We may also disclose data if the law requires
-          it.
+          it. Payment and generation evidence is restricted to authorized operators and used for fulfillment,
+          fraud prevention and dispute handling. We retain it only as needed for applicable legal obligations,
+          accounting and provider dispute windows; a documented retention schedule and deletion procedures must
+          be finalized before payment checkout opens. No indefinite retention commitment is made here.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">8. Your Rights</h2>

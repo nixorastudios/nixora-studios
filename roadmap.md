@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Audit-fix preparation: legal aliases, private payment/evidence records, atomic credit operations, verified-signature Paystack handler, fail-closed Squad endpoint, protected reconciliation and truthful legal wording; 59 tests pass, real transaction/deduplication/refund checks pass, video preview unchanged
+- [ ] Activate payment webhooks and reconciliation — blocked: Paystack signing key and authenticated checkout, Squad current signature/payload contract plus merchant setup, and publication before managed hourly scheduling; staffed support-mailbox monitoring needs an operator. See docs/payment-launch-readiness.md.
+
 - [x] Professional text-to-video workspace: shot direction, authenticated generation, private saved videos, progress and downloads, optional image-to-video start frame; 49 tests pass, real gateway MP4 verified, desktop/phone UI verified
 - [ ] Text-to-video signed-in end-to-end verification — blocked: no app auth users exist; sign in with Google or Lovable in the studio, then verify generation and private library read-back
 

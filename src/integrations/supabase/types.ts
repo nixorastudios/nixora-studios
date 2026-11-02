@@ -14,6 +14,221 @@ export type Database = {
   }
   public: {
     Tables: {
+      credit_balances: {
+        Row: {
+          balance: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          balance?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          balance?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      credit_ledger: {
+        Row: {
+          balance_after: number
+          created_at: string
+          credits: number
+          id: string
+          job_id: string | null
+          metadata: Json
+          payment_id: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          balance_after: number
+          created_at?: string
+          credits: number
+          id?: string
+          job_id?: string | null
+          metadata?: Json
+          payment_id: string
+          type: string
+          user_id: string
+        }
+        Update: {
+          balance_after?: number
+          created_at?: string
+          credits?: number
+          id?: string
+          job_id?: string | null
+          metadata?: Json
+          payment_id?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "credit_ledger_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "credit_ledger_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      disputes: {
+        Row: {
+          created_at: string
+          deadline_at: string
+          evidence_bundle_json: Json
+          id: string
+          payment_id: string
+          provider_event_id: string
+          status: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          deadline_at: string
+          evidence_bundle_json?: Json
+          id?: string
+          payment_id: string
+          provider_event_id: string
+          status?: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          deadline_at?: string
+          evidence_bundle_json?: Json
+          id?: string
+          payment_id?: string
+          provider_event_id?: string
+          status?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "disputes_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      generation_evidence: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          credits_used: number
+          failed_at: string | null
+          id: string
+          job_id: string
+          payment_id: string
+          prompt_hash: string
+          refunded_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          credits_used?: number
+          failed_at?: string | null
+          id?: string
+          job_id: string
+          payment_id: string
+          prompt_hash: string
+          refunded_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          credits_used?: number
+          failed_at?: string | null
+          id?: string
+          job_id?: string
+          payment_id?: string
+          prompt_hash?: string
+          refunded_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "generation_evidence_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: true
+            referencedRelation: "studio_video_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "generation_evidence_payment_id_fkey"
+            columns: ["payment_id"]
+            isOneToOne: false
+            referencedRelation: "payments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      payments: {
+        Row: {
+          amount_kobo: number
+          created_at: string
+          credit_delivered_at: string | null
+          currency: string
+          email: string
+          expected_credits: number
+          id: string
+          ip: string | null
+          provider: string
+          reference: string
+          status: string
+          user_agent: string | null
+          user_id: string
+        }
+        Insert: {
+          amount_kobo: number
+          created_at?: string
+          credit_delivered_at?: string | null
+          currency?: string
+          email: string
+          expected_credits: number
+          id?: string
+          ip?: string | null
+          provider: string
+          reference: string
+          status?: string
+          user_agent?: string | null
+          user_id: string
+        }
+        Update: {
+          amount_kobo?: number
+          created_at?: string
+          credit_delivered_at?: string | null
+          currency?: string
+          email?: string
+          expected_credits?: number
+          id?: string
+          ip?: string | null
+          provider?: string
+          reference?: string
+          status?: string
+          user_agent?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       studio_video_jobs: {
         Row: {
           created_at: string
@@ -106,7 +321,21 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      auto_refund_failed: { Args: never; Returns: number }
+      purchase_credits: {
+        Args: {
+          p_amount: number
+          p_currency: string
+          p_email: string
+          p_provider: string
+          p_reference: string
+        }
+        Returns: number
+      }
+      use_credit: {
+        Args: { p_job_id: string; p_payment_id: string; p_user_id: string }
+        Returns: number
+      }
     }
     Enums: {
       [_ in never]: never
