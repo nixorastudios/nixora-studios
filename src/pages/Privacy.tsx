@@ -64,9 +64,36 @@ export default function Privacy() {
 
         <h2 className="mt-8 text-lg font-bold">6. Cookies</h2>
         <p>
-          We use essential cookies and browser storage only — the ones needed to keep you signed in, remember your
-          preferences, and keep the site working. We do not use advertising or cross-site tracking cookies. During
-          the Coming Soon period, drafts and legacy device-only email lists live in your browser storage, which you can clear at any time. Clearing browser storage does not delete a signup already submitted to our shared waitlist.
+          We use essential cookies and browser storage only. We do NOT use Google Analytics, Meta Pixel, or any
+          marketing cookies. No tracking until you consent. If we add analytics in future, we will show a cookie
+          banner and ask opt-in first per NDPA 2023.
+        </p>
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-left text-sm border border-border">
+            <thead>
+              <tr className="border-b border-border">
+                <th className="p-2">Name</th><th className="p-2">Purpose</th><th className="p-2">Type</th>
+                <th className="p-2">Duration</th><th className="p-2">Lawful basis</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ["Sign-in session (sb-…-auth-token)", "Keep you signed in", "Essential · browser storage", "Until you sign out", "Contract"],
+                ["nixora_video_studio_draft and prompt drafts", "Save your drafts on this device", "Essential · browser storage", "Until you delete them", "Contract"],
+                ["cookie_notice_dismissed", "Remember you closed the cookie notice", "Essential · browser storage", "Until you clear storage", "Legitimate interest"],
+                ["sidebar_state", "Remember sidebar preference (if shown)", "Essential · cookie", "7 days", "Legitimate interest"],
+                ["Error reports (no cookie)", "Site stability; sent only when an error occurs", "Essential", "Not stored in your browser", "Legitimate interest"],
+                ["Payment reference (server-side, when live)", "Link a payment to delivery", "Essential · record, not a cookie", "As required by law", "Legal obligation"],
+              ].map((r) => (
+                <tr key={r[0]} className="border-b border-border align-top">
+                  {r.map((c) => <td key={c} className="p-2">{c}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-4">
+          Clearing browser storage removes local drafts but does not delete a signup already submitted to our shared waitlist.
         </p>
 
         <h2 className="mt-8 text-lg font-bold">7. Third Parties</h2>
@@ -113,7 +140,8 @@ export default function Privacy() {
             support@nixorastudios.com
           </a>
           . We handle data protection requests in line with the Nigeria Data Protection Act (NDPA) and respond
-          within 30 days.
+          within 30 days. Cookie lawful basis: essential cookies per NDPA Section 25(1)(b) – contract performance
+          and Section 25(1)(f) – legitimate interest for security.
         </p>
 
         <p className="mt-8">
