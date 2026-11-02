@@ -6,7 +6,7 @@ export default function Refund() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Refund Policy</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -15,10 +15,10 @@ export default function Refund() {
         <h2 className="mt-8 text-lg font-bold">1. About NIXORA STUDIOS</h2>
         <p>
           NIXORA STUDIOS is a global AI video studio serving creators worldwide — ten AI engines in one platform.
-          This Refund Policy explains when and how we return money to you, wherever you are. It applies to credit
+          This Refund Policy explains credit refunds and mandatory cash-refund exceptions, wherever you are. It applies to credit
           purchases made on nixorastudios.com and forms part of our Terms of Service. During the Coming Soon period
-          there are no subscriptions and no recurring charges of any kind — the only payments possible are one-off
-          credit purchases, so this policy currently covers credits only. If we introduce subscriptions later, we
+          no payments are taken, and there are no subscriptions or recurring charges. This policy sets out the rules
+          for future one-off credit purchases. If we introduce subscriptions later, we
           will update this page before they go on sale. Our goal is simple: you should never pay for something you
           did not receive, and you should always know exactly where your money went. Every rule below is written to
           be fair to you while covering the real computing costs behind each generation.
@@ -30,8 +30,9 @@ export default function Refund() {
           is deducted from your balance at the moment the generation starts — not when it finishes. This matters for
           refunds because a credit that has been spent on a running or completed generation has already consumed
           real computing power. You can always see your remaining balance in your account, and every deduction is
-          recorded so we can trace exactly what happened if something goes wrong. Credits are sold in bundles at the
-          prices shown on the site before you pay, all payments are processed securely by Paystack, and credits do
+          recorded once customer credit billing is activated so we can trace what happened if something goes wrong.
+          Customer checkout and credit billing are not yet active; the current video preview does not deduct a customer wallet.
+          Credits will be sold in bundles at the prices shown before you pay, and credits do
           not expire while your account remains active. If we ever change how credits work, we will announce the
           change before it affects a balance you have already paid for.
         </p>
@@ -44,7 +45,10 @@ export default function Refund() {
             support@nixorastudios.com
           </a>{" "}
           from the email address on your account and include your payment reference. We will confirm the request,
-          check that the credits are unused, and return the money to your original payment method. After 7 days,
+          check that the credits are unused, and resolve an eligible request in credits. Unused credits are refundable
+          within 7 days in credits, not cash. Cash refunds apply only where required by law or a payment-provider
+          dispute decision. This policy does not restrict mandatory consumer rights, including applicable rights
+          to cancel or receive a cash remedy. After 7 days,
           unused credits are no longer refundable but remain valid in your account while it is active.
         </p>
 
@@ -60,8 +64,9 @@ export default function Refund() {
         <h2 className="mt-8 text-lg font-bold">5. Failed Generations — Automatic Refund</h2>
         <p>
           If a generation fails on our side — for example the engine errors out, times out, or returns no usable
-          output — the credit is automatically returned to your balance within 24 hours. You do not need to contact
-          us or fill in any form; the system detects the failure and reverses the deduction itself. If 24 hours
+          output — a deducted customer credit will be returned in credits within 24 hours through reconciliation
+          when customer billing is activated. Only credits actually deducted for that failed job are restored,
+          once per job; a free preview or uncertain submission does not create extra credits. If 24 hours
           pass and your credit has not come back, email us with the generation details and we will fix it manually.
         </p>
 
@@ -86,9 +91,11 @@ export default function Refund() {
             support@nixorastudios.com
           </a>
           . Include the email on your account, the payment reference, the date of purchase, and a short description
-          of the issue. Approved refunds are processed within 5–7 business days back to the original payment method
-          via Paystack. If you file a chargeback with your bank instead of contacting us, we will share the
-          transaction and generation records with the bank as evidence. Accounts that abuse chargebacks — for
+          of the issue. Approved cash refunds required by law or a payment-provider dispute decision are processed
+          within 5–7 business days to the original payment method, subject to the provider's processing time.
+          Ordinary eligible unused-credit requests are resolved in credits. If you file a chargeback with your bank, we will share the
+          relevant transaction and generation records with the bank as evidence. A good-faith dispute does not
+          itself constitute abuse. Accounts that fraudulently abuse chargebacks — for
           example disputing charges for credits that were genuinely used — may be suspended, and repeated abuse
           leads to a permanent ban. We would always rather solve the problem with you directly, so please reach out
           first.

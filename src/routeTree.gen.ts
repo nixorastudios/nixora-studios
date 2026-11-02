@@ -13,11 +13,16 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HomepageRouteImport } from './routes/homepage'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundRouteImport } from './routes/refund'
+import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
+import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
+import { Route as ApiPublicReconcileRouteImport } from './routes/api/public/reconcile'
+import { Route as ApiPublicSquadWebhookRouteImport } from './routes/api/public/squad-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,9 +44,19 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RefundRoute = RefundRouteImport.update({
   id: '/refund',
   path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundPolicyRoute = RefundPolicyRouteImport.update({
+  id: '/refund-policy',
+  path: '/refund-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SecurityRoute = SecurityRouteImport.update({
@@ -64,28 +79,54 @@ const ToolsToolRoute = ToolsToolRouteImport.update({
   path: '/tools/$tool',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicPaystackWebhookRoute =
+  ApiPublicPaystackWebhookRouteImport.update({
+    id: '/api/public/paystack-webhook',
+    path: '/api/public/paystack-webhook',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiPublicReconcileRoute = ApiPublicReconcileRouteImport.update({
+  id: '/api/public/reconcile',
+  path: '/api/public/reconcile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicSquadWebhookRoute = ApiPublicSquadWebhookRouteImport.update({
+  id: '/api/public/squad-webhook',
+  path: '/api/public/squad-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/api/public/reconcile': typeof ApiPublicReconcileRoute
+  '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/api/public/reconcile': typeof ApiPublicReconcileRoute
+  '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -93,11 +134,16 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/privacy': typeof PrivacyRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
+  '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
+  '/api/public/reconcile': typeof ApiPublicReconcileRoute
+  '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -106,33 +152,48 @@ export interface FileRouteTypes {
     | '/contact'
     | '/homepage'
     | '/privacy'
+    | '/privacy-policy'
     | '/refund'
+    | '/refund-policy'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
+    | '/api/public/paystack-webhook'
+    | '/api/public/reconcile'
+    | '/api/public/squad-webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/contact'
     | '/homepage'
     | '/privacy'
+    | '/privacy-policy'
     | '/refund'
+    | '/refund-policy'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
+    | '/api/public/paystack-webhook'
+    | '/api/public/reconcile'
+    | '/api/public/squad-webhook'
   id:
     | '__root__'
     | '/'
     | '/contact'
     | '/homepage'
     | '/privacy'
+    | '/privacy-policy'
     | '/refund'
+    | '/refund-policy'
     | '/security'
     | '/sitemap.xml'
     | '/terms'
     | '/tools/$tool'
+    | '/api/public/paystack-webhook'
+    | '/api/public/reconcile'
+    | '/api/public/squad-webhook'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -140,11 +201,16 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HomepageRoute: typeof HomepageRoute
   PrivacyRoute: typeof PrivacyRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundRoute: typeof RefundRoute
+  RefundPolicyRoute: typeof RefundPolicyRoute
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ToolsToolRoute: typeof ToolsToolRoute
+  ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
+  ApiPublicReconcileRoute: typeof ApiPublicReconcileRoute
+  ApiPublicSquadWebhookRoute: typeof ApiPublicSquadWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -177,11 +243,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/refund': {
       id: '/refund'
       path: '/refund'
       fullPath: '/refund'
       preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund-policy': {
+      id: '/refund-policy'
+      path: '/refund-policy'
+      fullPath: '/refund-policy'
+      preLoaderRoute: typeof RefundPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/security': {
@@ -212,6 +292,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/paystack-webhook': {
+      id: '/api/public/paystack-webhook'
+      path: '/api/public/paystack-webhook'
+      fullPath: '/api/public/paystack-webhook'
+      preLoaderRoute: typeof ApiPublicPaystackWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/reconcile': {
+      id: '/api/public/reconcile'
+      path: '/api/public/reconcile'
+      fullPath: '/api/public/reconcile'
+      preLoaderRoute: typeof ApiPublicReconcileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/squad-webhook': {
+      id: '/api/public/squad-webhook'
+      path: '/api/public/squad-webhook'
+      fullPath: '/api/public/squad-webhook'
+      preLoaderRoute: typeof ApiPublicSquadWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -220,11 +321,16 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HomepageRoute: HomepageRoute,
   PrivacyRoute: PrivacyRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundRoute: RefundRoute,
+  RefundPolicyRoute: RefundPolicyRoute,
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ToolsToolRoute: ToolsToolRoute,
+  ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
+  ApiPublicReconcileRoute: ApiPublicReconcileRoute,
+  ApiPublicSquadWebhookRoute: ApiPublicSquadWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

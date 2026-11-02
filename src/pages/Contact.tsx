@@ -18,7 +18,7 @@ export default function Contact() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Contact</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: October 30, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -45,6 +45,14 @@ export default function Contact() {
         </p>
 
         <h2 className="mt-8 text-lg font-bold">3. Send Us a Message</h2>
+        <p className="mb-4">
+          Disputes &amp; Chargebacks:{" "}
+          <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">support@nixorastudios.com</a>.
+          Include your payment reference and account email, never card details. Our operational target is to
+          check this inbox every 8 hours and respond within Paystack's applicable 16-hour chargeback window.
+          Automated inbox monitoring is not enabled; staffed monitoring must be confirmed before payments open.
+          Squad response deadlines follow the merchant's provider agreement, not an assumed 16-hour rule.
+        </p>
         <p className="mb-4 text-muted-foreground">
           Fill this in and it opens in your own email app, addressed to our support team.
         </p>
