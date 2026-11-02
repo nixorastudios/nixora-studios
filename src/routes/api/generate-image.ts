@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { validateImagePrompt } from "@/lib/image-studio";
 
 export const Route = createFileRoute("/api/generate-image")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {

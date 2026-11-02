@@ -4,6 +4,7 @@ import { validateImagePrompt } from "@/lib/image-studio";
 const MAX_FILE = 12 * 1024 * 1024;
 
 export const Route = createFileRoute("/api/edit-image")({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {
