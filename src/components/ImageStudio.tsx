@@ -155,7 +155,7 @@ export function ImageStudio() {
     } catch { setNotice("The image could not be sent to that engine."); }
   };
 
-  return <div className="min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
+  return <div className="video-studio min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
     <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 lg:px-8">
       <div className="flex items-center gap-3"><Button asChild variant="ghost" size="icon" title="Back to home"><Link to="/"><ArrowLeft /></Link></Button><Link to="/" className="text-lg font-extrabold">NIXORA<span className="text-primary">.</span></Link><span className="hidden border-l border-border pl-3 text-xs text-muted-foreground sm:block">ENGINE 01 · TEXT TO IMAGE</span></div>
       <div className="flex flex-wrap items-center gap-2">
