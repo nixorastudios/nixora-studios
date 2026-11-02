@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { ToolDashboard } from "@/components/ToolDashboard";
 import { VideoStudio } from "@/components/VideoStudio";
 import { ImageStudio } from "@/components/ImageStudio";
+import { StillEditor } from "@/components/StillEditor";
 import { getTool } from "@/lib/tools";
 
 export const Route = createFileRoute("/tools/$tool")({
@@ -32,5 +33,8 @@ export const Route = createFileRoute("/tools/$tool")({
 function ToolPage() {
   const { tool } = Route.useLoaderData();
   if (tool.slug === 'text-to-image') return <ImageStudio />;
+  if (tool.slug === 'animation') return <VideoStudio key="animation" variant="animation" />;
+  if (tool.slug === 'lipsync') return <VideoStudio key="lipsync" variant="lipsync" />;
+  if (tool.slug === 'video-editor') return <StillEditor />;
   return tool.slug === 'text-to-video' ? <VideoStudio /> : <ToolDashboard tool={tool} />;
 }
