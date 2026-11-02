@@ -38,6 +38,7 @@ export function VideoStudio() {
 
   useEffect(() => {
     try { const draft = localStorage.getItem('nixora_video_studio_draft'); if (draft) setSettings({ ...DEFAULT_VIDEO_SETTINGS, ...JSON.parse(draft) }); } catch { /* Default settings remain usable. */ }
+    try { const handoff = sessionStorage.getItem('nixora_handoff_image'); if (handoff) { sessionStorage.removeItem('nixora_handoff_image'); fetch(handoff).then(r => r.blob()).then(loadStartFrameDataUrl).then(frame => { setSettings(s => ({ ...s, startFrame: frame })); setNotice('Your image from Text to Image is set as the opening frame. Describe the motion, then generate.'); }).catch(() => {}); } } catch { /* no handoff */ }
     supabase.auth.getSession().then(({ data }) => { setUserId(data.session?.user.id || null); setAuthReady(true); });
     const { data } = supabase.auth.onAuthStateChange((_event, session) => { setUserId(session?.user.id || null); setAuthReady(true); });
     return () => data.subscription.unsubscribe();

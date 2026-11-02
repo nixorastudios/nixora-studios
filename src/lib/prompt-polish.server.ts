@@ -6,7 +6,7 @@ const LOVABLE_AIG_RUN_ID_HEADER = "X-Lovable-AIG-Run-ID";
 const GATEWAY_BASE_URL = "https://ai.gateway.lovable.dev/v1";
 const MODEL_ID = "openai/gpt-6-astra";
 
-function createLovableAiGatewayRunIdFetch(initialRunId?: string) {
+export function createLovableAiGatewayRunIdFetch(initialRunId?: string) {
   let runId = initialRunId?.trim() || undefined;
   let resolveRunId: (value: string | undefined) => void = () => {};
   let runIdResolved = false;
