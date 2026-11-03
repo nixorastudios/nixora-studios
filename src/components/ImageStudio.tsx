@@ -79,7 +79,7 @@ export function ImageStudio() {
     try {
       const p = readPreferences(localStorage.getItem(PREFS_KEY));
       setPrefs(p);
-      if (p.liked_styles.length) setSuggest(p.liked_styles[p.liked_styles.length - 1]);
+      if (p.liked_styles.length) setSuggest(p.liked_styles[p.liked_styles.length - 1] ?? null);
     } catch { /* private mode */ }
     supabase.auth.getSession().then(({ data }) => setUserId(data.session?.user.id || null));
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setUserId(s?.user.id || null));
