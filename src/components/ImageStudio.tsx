@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { streamImage } from "@/lib/stream-image";
+import { isImageEnginePreviewHost } from "@/lib/featureFlags";
 import { imagePromptAction } from "@/lib/image-prompt.functions";
 import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, buildImagePrompt, exportSize, generationSize, type Aspect, type Resolution } from "@/lib/image-studio";
 
@@ -58,6 +59,9 @@ export function ImageStudio() {
   const [showEdit, setShowEdit] = useState(false);
   const [drop, setDrop] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+  const [previewMode, setPreviewMode] = useState<boolean | null>(null);
+  const [used, setUsed] = useState(0);
+  useEffect(() => { setPreviewMode(isImageEnginePreviewHost(window.location.hostname)); }, []);
 
   useEffect(() => {
     try { const d = JSON.parse(localStorage.getItem("nixora_image_draft") || "{}"); if (d.prompt) setPrompt(d.prompt); if (d.mode) setMode(d.mode); } catch { /* fresh draft */ }
@@ -114,11 +118,11 @@ export function ImageStudio() {
       } else {
         await streamImage("/api/generate-image", { prompt: full, size: generationSize(aspect) }, onFrame, undefined, headers);
       }
-      if (last) setHistory((h) => [last, ...h].slice(0, 12));
+      if (last) { setHistory((h) => [last, ...h].slice(0, 12)); setUsed((n) => { console.info(`[NIXORA preview] image generated — ${n + 1} this session, billed to workspace AI credits`); return n + 1; }); }
       setShowEdit(false); setEditText("");
     } catch (e) {
       const msg = e instanceof Error ? e.message : "";
-      setNotice(msg.includes("401") ? "Please sign in again." : msg.includes("402") ? "AI credits are unavailable right now." : msg.includes("429") ? "The engine is busy. Try again shortly." : "The image could not be generated. Please try again.");
+      setNotice(msg.includes("AI is not connected") ? "API key missing: the AI connection is not set up on the server." : msg.includes("403") ? "Text to Image is waitlist-only here until Nov 23." : msg.includes("401") ? "Please sign in again." : msg.includes("402") ? "AI credits are unavailable right now." : msg.includes("429") ? "The engine is busy. Try again shortly." : "The image could not be generated. Please try again.");
     } finally { setBusy(null); }
   };
 
@@ -155,7 +159,12 @@ export function ImageStudio() {
     } catch { setNotice("The image could not be sent to that engine."); }
   };
 
-  return <div className="video-studio min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
+  if (previewMode === false) return <div className="video-studio flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-6 text-center text-foreground">
+    <h1 className="text-3xl font-black">Text to Image</h1>
+    <p className="max-w-md text-muted-foreground">This engine launches Nov 23, 2026. Join the waitlist for priority access.</p>
+    <Button asChild><Link to="/" hash="early-access-form">Join Waitlist — Priority Access</Link></Button>
+  </div>;
+  return <>{previewMode && <div className="sticky top-0 z-40 bg-primary px-4 py-1.5 text-center text-xs font-bold text-primary-foreground">PREVIEW TEST MODE — real AI generation · {used} image{used === 1 ? "" : "s"} made this session (uses workspace AI credits) · not live on nixorastudios.com</div>}<div className="video-studio min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
     <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 lg:px-8">
       <div className="flex items-center gap-3"><Button asChild variant="ghost" size="icon" title="Back to home"><Link to="/"><ArrowLeft /></Link></Button><Link to="/" className="text-lg font-extrabold">NIXORA<span className="text-primary">.</span></Link><span className="hidden border-l border-border pl-3 text-xs text-muted-foreground sm:block">ENGINE 01 · TEXT TO IMAGE</span></div>
       <div className="flex flex-wrap items-center gap-2">
