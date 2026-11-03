@@ -3,11 +3,29 @@ import { Link } from "@tanstack/react-router";
 
 const KEY = "cookie_notice_dismissed";
 
+/** The notice is for public visitors on nixorastudios.com only — never on
+ *  preview/editor hosts or owner/admin areas. */
+function shouldShow(): boolean {
+  try {
+    const host = window.location.hostname.toLowerCase();
+    const path = window.location.pathname;
+    const isPreview =
+      host.includes("lovable.app") ||
+      host.includes("lovableproject") ||
+      host.includes("gpt-eng.com") ||
+      host.includes("gptengineer.run") ||
+      host === "localhost" ||
+      host === "127.0.0.1";
+    const isOwnerArea = /^\/(admin|owner|dashboard)(\/|$)/.test(path);
+    return !isPreview && !isOwnerArea && localStorage.getItem(KEY) !== "1";
+  } catch {
+    return false;
+  }
+}
+
 export function CookieNotice() {
   const [show, setShow] = useState(false);
-  useEffect(() => {
-    try { setShow(localStorage.getItem(KEY) !== "1"); } catch { setShow(false); }
-  }, []);
+  useEffect(() => { setShow(shouldShow()); }, []);
   if (!show) return null;
   const dismiss = () => {
     try { localStorage.setItem(KEY, "1"); } catch { /* ignore */ }
