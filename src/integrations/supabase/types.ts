@@ -44,6 +44,36 @@ export type Database = {
         }
         Relationships: []
       }
+      creator_feedback: {
+        Row: {
+          created_at: string
+          feedback: string
+          id: string
+          preference: string | null
+          prompt: string
+          style_used: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          feedback: string
+          id?: string
+          preference?: string | null
+          prompt: string
+          style_used: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          feedback?: string
+          id?: string
+          preference?: string | null
+          prompt?: string
+          style_used?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       credit_balances: {
         Row: {
           balance: number
