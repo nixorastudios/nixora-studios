@@ -17,7 +17,7 @@ const VIDEO_SIZES = ["16:9", "9:16", "1:1"];
 export const ENGINES_CONFIG: EngineEntry[] = [
   { id: "text-to-image", name: "Text to Image", models: ["gpt-image-2.5"], styles: ["realistic", "anime", "3d", "typography"], sizes: IMAGE_SIZES, acceptsImageHandoff: false },
   { id: "text-to-video", name: "Text to Video", models: ["gemini-omni-1.1-flash"], styles: ["cinematic", "realistic", "anime", "3d"], sizes: VIDEO_SIZES, acceptsImageHandoff: true },
-  { id: "photo-to-video", name: "Image to Video", models: ["gemini-omni-1.1-flash"], styles: ["cinematic", "realistic", "3d"], sizes: VIDEO_SIZES, acceptsImageHandoff: true },
+  { id: "photo-to-video", name: "Image to Video", models: ["gemini-omni-1.1-flash"], styles: ["cinematic", "realistic", "3d"], sizes: VIDEO_SIZES, acceptsImageHandoff: false },
   { id: "animation", name: "Animation", models: ["gemini-omni-1.1-flash"], styles: ["anime", "cartoon", "3d", "motion-graphics"], sizes: VIDEO_SIZES, acceptsImageHandoff: true },
   { id: "sound-effects", name: "Sound Effects", models: [], styles: ["foley", "cinematic"], sizes: [], acceptsImageHandoff: false },
   { id: "voice-over", name: "Voice Over", models: [], styles: ["narration", "character"], sizes: [], acceptsImageHandoff: false },
