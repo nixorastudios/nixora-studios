@@ -1,23 +1,29 @@
 import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, Clapperboard, Download, FolderOpen, ImagePlus, Layers, Loader2, LogOut, MoreVertical, Pencil, RefreshCw, Search, Share2, Sparkles, Split, Users, Wand2, X } from "lucide-react";
+import { ArrowLeft, Clapperboard, Download, FolderOpen, ImagePlus, Layers, Loader2, LogOut, MoreVertical, Pencil, RefreshCw, Search, Share2, Sparkles, Split, ThumbsDown, ThumbsUp, Users, Wand2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { streamImage } from "@/lib/stream-image";
 import { isImageEnginePreviewHost } from "@/lib/featureFlags";
 import { imagePromptAction } from "@/lib/image-prompt.functions";
-import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, buildImagePrompt, exportSize, generationSize, type Aspect, type Resolution } from "@/lib/image-studio";
+import { HANDOFF_ENGINES } from "@/lib/engines.config";
+import { PREFS_KEY, applyFeedback, readPreferences, type CreatorPreferences } from "@/lib/creator-feedback";
+import { recordCreatorFeedback } from "@/lib/creator-feedback.functions";
+import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, appendStyleHint, buildImagePrompt, exportSize, generationSize, isVaguePrompt, parsePromptHints, type Aspect, type Resolution } from "@/lib/image-studio";
 
 type Ref = { id: string; name: string; file: File; url: string };
 type Scene = { title: string; prompt: string };
 const field = "w-full rounded-md border border-border bg-background p-2.5 text-sm text-foreground outline-none focus:border-primary";
-const ENGINES = [
-  { slug: "text-to-video", label: "Image to video" },
-  { slug: "animation", label: "Animation" },
-  { slug: "lipsync", label: "Lipsync" },
-  { slug: "video-editor", label: "Video editor" },
+const QUICK_STYLES = [
+  { id: "realistic", label: "Realistic", hint: "realistic style" },
+  { id: "anime", label: "Anime", hint: "anime style" },
+  { id: "3d", label: "3D", hint: "3D render" },
+] as const;
+const QUICK_SIZES = [
+  { id: "16:9", label: "16:9", hint: "16:9 aspect ratio" },
+  { id: "9:16", label: "9:16", hint: "9:16 aspect ratio" },
 ] as const;
 export const HANDOFF_KEY = "nixora_handoff_image";
 
@@ -61,14 +67,39 @@ export function ImageStudio() {
   const fileInput = useRef<HTMLInputElement>(null);
   const [previewMode, setPreviewMode] = useState<boolean | null>(null);
   const [used, setUsed] = useState(0);
+  const [prefs, setPrefs] = useState<CreatorPreferences>({ liked_styles: [], disliked_styles: [] });
+  const [suggest, setSuggest] = useState<string | null>(null);
+  const [feedbackDone, setFeedbackDone] = useState(false);
+  const [helperOff, setHelperOff] = useState(false);
   useEffect(() => { setPreviewMode(isImageEnginePreviewHost(window.location.hostname)); }, []);
 
   useEffect(() => {
     try { const d = JSON.parse(localStorage.getItem("nixora_image_draft") || "{}"); if (d.prompt) setPrompt(d.prompt); if (d.mode) setMode(d.mode); } catch { /* fresh draft */ }
+    try {
+      const p = readPreferences(localStorage.getItem(PREFS_KEY));
+      setPrefs(p);
+      if (p.liked_styles.length) setSuggest(p.liked_styles[p.liked_styles.length - 1]);
+    } catch { /* private mode */ }
     supabase.auth.getSession().then(({ data }) => setUserId(data.session?.user.id || null));
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setUserId(s?.user.id || null));
     return () => data.subscription.unsubscribe();
   }, []);
+
+  // Smart prompt: style/size words in the prompt auto-set the matching
+  // controls once; the creator can still override them manually afterwards.
+  const hints = useMemo(() => parsePromptHints(prompt), [prompt]);
+  const appliedHints = useRef("");
+  useEffect(() => {
+    const sig = JSON.stringify(hints);
+    if (sig === appliedHints.current) return;
+    appliedHints.current = sig;
+    if (hints.aspect) setAspect(hints.aspect);
+    if (hints.style === "3d") setDimension("3D");
+    if (hints.style === "realistic") setMode("Realistic");
+    if (hints.style === "anime") setMode("Anime");
+  }, [hints]);
+  const vague = isVaguePrompt(prompt, hints);
+  const addHint = (hint: string) => setPrompt((p) => appendStyleHint(p, hint));
   useEffect(() => { localStorage.setItem("nixora_image_draft", JSON.stringify({ prompt, mode })); }, [prompt, mode]);
 
   const filtered = useMemo(() => MODE_GROUPS.map((g) => ({ ...g, modes: g.modes.filter((m) => m.toLowerCase().includes(query.toLowerCase())) })).filter((g) => g.modes.length), [query]);
