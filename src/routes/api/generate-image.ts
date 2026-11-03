@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { validateImagePrompt } from "@/lib/image-studio";
+import { isImageEnginePreviewHost } from "@/lib/featureFlags";
 
 export const Route = createFileRoute("/api/generate-image")({
   staticData: { sitemap: false },
   server: {
     handlers: {
       POST: async ({ request }) => {
+        if (!isImageEnginePreviewHost(new URL(request.url).hostname)) return new Response("Text to Image launches Nov 23, 2026. Join the waitlist.", { status: 403 });
         const { verifyCaller, generateImage, passThrough, safeSize } = await import("@/lib/image-gateway.server");
         if (!(await verifyCaller(request))) return new Response("Please sign in to generate images.", { status: 401 });
         const apiKey = process.env["LOVABLE_API_KEY"];

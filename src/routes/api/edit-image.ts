@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { validateImagePrompt } from "@/lib/image-studio";
+import { isImageEnginePreviewHost } from "@/lib/featureFlags";
 
 const MAX_FILE = 12 * 1024 * 1024;
 
@@ -8,6 +9,7 @@ export const Route = createFileRoute("/api/edit-image")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        if (!isImageEnginePreviewHost(new URL(request.url).hostname)) return new Response("Text to Image launches Nov 23, 2026. Join the waitlist.", { status: 403 });
         const { verifyCaller, editImage, passThrough } = await import("@/lib/image-gateway.server");
         if (!(await verifyCaller(request))) return new Response("Please sign in to edit images.", { status: 401 });
         const apiKey = process.env["LOVABLE_API_KEY"];

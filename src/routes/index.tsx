@@ -1,3 +1,4 @@
+import { isImageEnginePreviewHost } from '@/lib/featureFlags';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useServerFn } from '@tanstack/react-start';
 import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
@@ -30,6 +31,8 @@ const VIDEO_ENGINES = new Set(['text-to-video', 'photo-to-video', 'animation', '
 
 function Index() {
   const [selectedTool, setSelectedTool] = useState<ToolConfig | null>(null);
+  const [imagePreview, setImagePreview] = useState(false);
+  useEffect(() => { setImagePreview(isImageEnginePreviewHost(window.location.hostname)); }, []);
   const [prompt, setPrompt] = useState('');
   const [notice, setNotice] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -271,6 +274,7 @@ function Index() {
           <Button type="button" variant="ghost" size="icon" onClick={closeTool} aria-label="Close" className="text-launch-card-muted hover:text-card-foreground"><X className="size-6" /></Button>
         </div>
         <p className="mb-4 text-launch-card-muted">What do you want to create?</p>
+        {selectedTool.slug === 'text-to-image' && imagePreview && <Button asChild className="mb-4 h-auto w-full whitespace-normal py-3"><Link to="/tools/$tool" params={{ tool: 'text-to-image' }}>Open Text to Image — Preview Test (real AI)</Link></Button>}
         {selectedTool.slug === 'text-to-video' && <Button asChild className="mb-4 h-auto w-full whitespace-normal py-3"><Link to="/tools/$tool" params={{ tool: 'text-to-video' }}>Open Text to Video — Studio Preview</Link></Button>}
         <textarea aria-label="What do you want to create?" value={prompt} readOnly={showSuccess} onChange={e => saveDraft(e.target.value)} placeholder={`Describe your ${selectedTool.name.toLowerCase()} idea... e.g., A cinematic shot of...`} className="h-32 w-full rounded-xl border-2 border-camera-line bg-card p-4 text-card-foreground outline-none focus:border-primary" />
         {showSuccess ? <form onSubmit={joinWaitlist} className="mt-4 rounded-xl border border-launch-success-line bg-launch-success p-4 text-center">
