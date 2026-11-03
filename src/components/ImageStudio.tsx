@@ -294,7 +294,17 @@ export function ImageStudio() {
             <Button variant="outline" onClick={share}><Share2 />Share</Button>
           </div>
           {showEdit && <div className="flex gap-2"><input value={editText} onChange={(e) => setEditText(e.target.value)} placeholder="e.g. change the jacket to red, add a city skyline" className={field} /><Button disabled={!!busy || !editText.trim()} onClick={() => generate(prompt, image, editText)}>Apply</Button></div>}
-          <div className="rounded-lg border border-border bg-card p-3"><p className="mb-2 text-xs font-semibold text-muted-foreground">PUSH TO A NIXORA ENGINE</p><div className="flex flex-wrap gap-2">{ENGINES.map((e) => <Button key={e.slug} size="sm" variant="ghost" onClick={() => pushTo(e.slug)}>{e.label} →</Button>)}</div><p className="mt-2 text-[11px] text-muted-foreground">Tip: drag the image straight out to your desktop or another app.</p></div>
+          <div className="rounded-lg border border-border bg-card p-3">
+            {feedbackDone ? <p className="text-xs text-muted-foreground">Thanks — your style preference was saved on this device.</p> : <>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button size="sm" variant="outline" onClick={() => sendFeedback("up")}><ThumbsUp />Helpful</Button>
+                <Button size="sm" variant="outline" onClick={() => sendFeedback("down")}><ThumbsDown />Not my style</Button>
+                <span className="text-xs text-muted-foreground">What would you prefer?</span>
+                {["More realistic", "More vibrant", "Other"].map((p) => <button key={p} type="button" onClick={() => sendFeedback("down", p)} className="rounded-full border border-border px-2.5 py-1 text-xs hover:border-primary">{p}</button>)}
+              </div>
+            </>}
+          </div>
+          <div className="rounded-lg border border-border bg-card p-3"><p className="mb-2 text-xs font-semibold text-muted-foreground">PUSH TO A NIXORA ENGINE</p><div className="flex flex-wrap gap-2">{HANDOFF_ENGINES.map((e) => <Button key={e.id} size="sm" variant="ghost" onClick={() => pushTo(e.id)}>{e.name} →</Button>)}</div><p className="mt-2 text-[11px] text-muted-foreground">Tip: drag the image straight out to your desktop or another app.</p></div>
         </div>}
 
         {history.length > 1 && <div><p className="mb-2 text-xs font-semibold text-muted-foreground">THIS SESSION</p><div className="grid grid-cols-4 gap-2 sm:grid-cols-6">{history.map((h, i) => <button key={i} onClick={() => { setImage(h); setFinal(true); }}><img src={h} alt={`Earlier result ${i + 1}`} className="aspect-square w-full rounded object-cover" /></button>)}</div></div>}
