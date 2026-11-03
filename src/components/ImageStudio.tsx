@@ -249,5 +249,5 @@ export function ImageStudio() {
         {MODE_GROUPS.map((g) => <div key={g.group} className="mb-3"><p className="mb-1 text-xs font-semibold text-primary">{g.group}</p><div className="flex flex-wrap gap-1.5">{g.modes.map((m) => <button key={m} onClick={() => { setMode(m); setBrowseOpen(false); }} className={`rounded-full border px-2.5 py-1 text-xs ${m === mode ? "border-primary text-primary" : "border-border hover:border-primary"}`}>{m}</button>)}</div></div>)}
       </div>
     </div>}
-  </div>;
+  </div></>;
 }
