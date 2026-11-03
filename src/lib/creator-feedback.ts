@@ -14,7 +14,7 @@ export type CreatorFeedbackInput = z.infer<typeof feedbackSchema>;
 export interface CreatorPreferences {
   liked_styles: string[];
   disliked_styles: string[];
-  last_feedback?: string;
+  last_feedback?: string | undefined;
 }
 
 export const PREFS_KEY = "creator_preferences";
