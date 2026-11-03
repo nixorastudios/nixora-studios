@@ -71,3 +71,38 @@ export function validateImagePrompt(prompt: unknown): string {
   if (prompt.length > MAX_PROMPT + 400) throw new Error("Your prompt is too long. Please shorten it.");
   return prompt.trim();
 }
+
+// ---- Smart prompt auto-setting ----
+
+export type PromptStyleHint = "realistic" | "anime" | "3d";
+export interface PromptHints { style?: PromptStyleHint; aspect?: Aspect; }
+
+/** Read style and aspect hints straight out of the creator's own words. */
+export function parsePromptHints(prompt: string): PromptHints {
+  const t = prompt.toLowerCase();
+  const style: PromptStyleHint | undefined =
+    /\b(3d|three[- ]dimensional)\b/.test(t) ? "3d"
+    : /\b(anime|cartoon|manga|illustration|illustrated)\b/.test(t) ? "anime"
+    : /\b(realistic|photorealistic|photo[- ]?real|hyperrealistic|8k)\b/.test(t) ? "realistic"
+    : undefined;
+  const aspect: Aspect | undefined =
+    /\b(16:9|widescreen|landscape)\b/.test(t) ? "16:9"
+    : /\b(9:16|vertical|portrait orientation|tall)\b/.test(t) ? "9:16"
+    : /\b4:5\b/.test(t) ? "4:5"
+    : /\b(3:1|panorama|panoramic)\b/.test(t) ? "3:1"
+    : /\b(1:1|square)\b/.test(t) ? "1:1"
+    : undefined;
+  return { style, aspect };
+}
+
+/** Vague = short and carries no style or size hint of its own. */
+export function isVaguePrompt(prompt: string, hints: PromptHints = parsePromptHints(prompt)): boolean {
+  const words = prompt.trim().split(/\s+/).filter(Boolean).length;
+  return words > 0 && words < 10 && !hints.style && !hints.aspect;
+}
+
+/** Append a manual setting (e.g. "realistic style") to the prompt text. */
+export function appendStyleHint(prompt: string, hint: string): string {
+  const base = prompt.trim().replace(/[.,\s]+$/, "");
+  return base ? `${base}, ${hint}` : hint;
+}
