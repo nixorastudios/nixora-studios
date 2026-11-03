@@ -262,6 +262,8 @@
   --foreground: oklch(0.96 0.003 260);
   --card: oklch(0.205 0.004 260);
   --card-foreground: var(--foreground);
+  --popover: oklch(0.205 0.004 260);
+  --popover-foreground: var(--foreground);
   --primary: oklch(0.704 0.201 45.3);
   --primary-foreground: oklch(1 0 0);
   --muted: oklch(0.24 0.004 260);
@@ -275,6 +277,43 @@
   font-family: var(--font-launch);
   letter-spacing: 0;
   color-scheme: dark;
+}
+
+/* Text to Image studio: light by default, dark only when the system is dark. */
+.image-studio {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.19 0.01 260);
+  --card: oklch(0.98 0.002 260);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.66 0.22 34);
+  --primary-foreground: oklch(1 0 0);
+  --muted: oklch(0.96 0.003 260);
+  --muted-foreground: oklch(0.45 0.02 260);
+  --accent: oklch(0.94 0.004 260);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.9 0.005 260);
+  --input: var(--border);
+  --ring: var(--primary);
+  --video-success: oklch(0.55 0.15 155);
+  font-family: var(--font-launch);
+  letter-spacing: 0;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  .image-studio {
+    --background: oklch(0.155 0.003 260);
+    --foreground: oklch(0.96 0.003 260);
+    --card: oklch(0.205 0.004 260);
+    --popover: oklch(0.205 0.004 260);
+    --muted: oklch(0.24 0.004 260);
+    --muted-foreground: oklch(0.71 0.006 260);
+    --accent: oklch(0.27 0.004 260);
+    --border: oklch(0.34 0.004 260);
+    --video-success: oklch(0.76 0.14 155);
+    color-scheme: dark;
+  }
 }
 @theme inline { --color-video-success: var(--video-success); }
 .video-active-tab { color: var(--foreground); border-bottom: 2px solid var(--primary); border-radius: 0; }

@@ -1,23 +1,29 @@
 import { useEffect, useMemo, useRef, useState, type DragEvent } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowLeft, Clapperboard, Download, FolderOpen, ImagePlus, Layers, Loader2, LogOut, MoreVertical, Pencil, RefreshCw, Search, Share2, Sparkles, Split, Users, Wand2, X } from "lucide-react";
+import { ArrowLeft, Clapperboard, Download, FolderOpen, ImagePlus, Layers, Loader2, LogOut, MoreVertical, Pencil, RefreshCw, Search, Share2, Sparkles, Split, ThumbsDown, ThumbsUp, Users, Wand2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable";
 import { streamImage } from "@/lib/stream-image";
 import { isImageEnginePreviewHost } from "@/lib/featureFlags";
 import { imagePromptAction } from "@/lib/image-prompt.functions";
-import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, buildImagePrompt, exportSize, generationSize, type Aspect, type Resolution } from "@/lib/image-studio";
+import { HANDOFF_ENGINES } from "@/lib/engines.config";
+import { PREFS_KEY, applyFeedback, readPreferences, type CreatorPreferences } from "@/lib/creator-feedback";
+import { recordCreatorFeedback } from "@/lib/creator-feedback.functions";
+import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, appendStyleHint, buildImagePrompt, exportSize, generationSize, isVaguePrompt, parsePromptHints, type Aspect, type Resolution } from "@/lib/image-studio";
 
 type Ref = { id: string; name: string; file: File; url: string };
 type Scene = { title: string; prompt: string };
 const field = "w-full rounded-md border border-border bg-background p-2.5 text-sm text-foreground outline-none focus:border-primary";
-const ENGINES = [
-  { slug: "text-to-video", label: "Image to video" },
-  { slug: "animation", label: "Animation" },
-  { slug: "lipsync", label: "Lipsync" },
-  { slug: "video-editor", label: "Video editor" },
+const QUICK_STYLES = [
+  { id: "realistic", label: "Realistic", hint: "realistic style" },
+  { id: "anime", label: "Anime", hint: "anime style" },
+  { id: "3d", label: "3D", hint: "3D render" },
+] as const;
+const QUICK_SIZES = [
+  { id: "16:9", label: "16:9", hint: "16:9 aspect ratio" },
+  { id: "9:16", label: "9:16", hint: "9:16 aspect ratio" },
 ] as const;
 export const HANDOFF_KEY = "nixora_handoff_image";
 
@@ -35,6 +41,7 @@ async function renderTo(url: string, w: number, h: number, mime: string, q = 0.9
 export function ImageStudio() {
   const navigate = useNavigate();
   const promptFn = useServerFn(imagePromptAction);
+  const feedbackFn = useServerFn(recordCreatorFeedback);
   const [userId, setUserId] = useState<string | null>(null);
   const [prompt, setPrompt] = useState("");
   const [change, setChange] = useState("");
@@ -61,14 +68,39 @@ export function ImageStudio() {
   const fileInput = useRef<HTMLInputElement>(null);
   const [previewMode, setPreviewMode] = useState<boolean | null>(null);
   const [used, setUsed] = useState(0);
+  const [prefs, setPrefs] = useState<CreatorPreferences>({ liked_styles: [], disliked_styles: [] });
+  const [suggest, setSuggest] = useState<string | null>(null);
+  const [feedbackDone, setFeedbackDone] = useState(false);
+  const [helperOff, setHelperOff] = useState(false);
   useEffect(() => { setPreviewMode(isImageEnginePreviewHost(window.location.hostname)); }, []);
 
   useEffect(() => {
     try { const d = JSON.parse(localStorage.getItem("nixora_image_draft") || "{}"); if (d.prompt) setPrompt(d.prompt); if (d.mode) setMode(d.mode); } catch { /* fresh draft */ }
+    try {
+      const p = readPreferences(localStorage.getItem(PREFS_KEY));
+      setPrefs(p);
+      if (p.liked_styles.length) setSuggest(p.liked_styles[p.liked_styles.length - 1] ?? null);
+    } catch { /* private mode */ }
     supabase.auth.getSession().then(({ data }) => setUserId(data.session?.user.id || null));
     const { data } = supabase.auth.onAuthStateChange((_e, s) => setUserId(s?.user.id || null));
     return () => data.subscription.unsubscribe();
   }, []);
+
+  // Smart prompt: style/size words in the prompt auto-set the matching
+  // controls once; the creator can still override them manually afterwards.
+  const hints = useMemo(() => parsePromptHints(prompt), [prompt]);
+  const appliedHints = useRef("");
+  useEffect(() => {
+    const sig = JSON.stringify(hints);
+    if (sig === appliedHints.current) return;
+    appliedHints.current = sig;
+    if (hints.aspect) setAspect(hints.aspect);
+    if (hints.style === "3d") setDimension("3D");
+    if (hints.style === "realistic") setMode("Realistic");
+    if (hints.style === "anime") setMode("Anime");
+  }, [hints]);
+  const vague = isVaguePrompt(prompt, hints);
+  const addHint = (hint: string) => setPrompt((p) => appendStyleHint(p, hint));
   useEffect(() => { localStorage.setItem("nixora_image_draft", JSON.stringify({ prompt, mode })); }, [prompt, mode]);
 
   const filtered = useMemo(() => MODE_GROUPS.map((g) => ({ ...g, modes: g.modes.filter((m) => m.toLowerCase().includes(query.toLowerCase())) })).filter((g) => g.modes.length), [query]);
@@ -119,11 +151,22 @@ export function ImageStudio() {
         await streamImage("/api/generate-image", { prompt: full, size: generationSize(aspect) }, onFrame, undefined, headers);
       }
       if (last) { setHistory((h) => [last, ...h].slice(0, 12)); setUsed((n) => { console.info(`[NIXORA preview] image generated — ${n + 1} this session, billed to workspace AI credits`); return n + 1; }); }
-      setShowEdit(false); setEditText("");
+      setShowEdit(false); setEditText(""); setFeedbackDone(false);
     } catch (e) {
       const msg = e instanceof Error ? e.message : "";
       setNotice(msg.includes("AI is not connected") ? "API key missing: the AI connection is not set up on the server." : msg.includes("403") ? "Text to Image is waitlist-only here until Nov 23." : msg.includes("401") ? "Please sign in again." : msg.includes("402") ? "AI credits are unavailable right now." : msg.includes("429") ? "The engine is busy. Try again shortly." : "The image could not be generated. Please try again.");
     } finally { setBusy(null); }
+  };
+
+  const sendFeedback = (feedback: "up" | "down", preference?: string) => {
+    try {
+      const next = applyFeedback(readPreferences(localStorage.getItem(PREFS_KEY)), mode, feedback, preference);
+      localStorage.setItem(PREFS_KEY, JSON.stringify(next));
+      setPrefs(next);
+    } catch { /* private mode */ }
+    setFeedbackDone(true);
+    // Insert-only, fire and forget: feedback must never block creation.
+    void feedbackFn({ data: { prompt: (prompt || "image").slice(0, 3400), styleUsed: mode, feedback, preference } }).catch(() => { /* ignore */ });
   };
 
   const download = async () => {
@@ -159,12 +202,12 @@ export function ImageStudio() {
     } catch { setNotice("The image could not be sent to that engine."); }
   };
 
-  if (previewMode === false) return <div className="video-studio flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-6 text-center text-foreground">
+  if (previewMode === false) return <div className="image-studio flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-6 text-center text-foreground">
     <h1 className="text-3xl font-black">Text to Image</h1>
     <p className="max-w-md text-muted-foreground">This engine launches Nov 23, 2026. Join the waitlist for priority access.</p>
     <Button asChild><Link to="/" hash="early-access-form">Join Waitlist — Priority Access</Link></Button>
   </div>;
-  return <>{previewMode && <div className="sticky top-0 z-40 bg-primary px-4 py-1.5 text-center text-xs font-bold text-primary-foreground">PREVIEW TEST MODE — real AI generation · {used} image{used === 1 ? "" : "s"} made this session (uses workspace AI credits) · not live on nixorastudios.com</div>}<div className="video-studio min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
+  return <>{previewMode && <div className="sticky top-0 z-40 bg-primary px-4 py-1.5 text-center text-xs font-bold text-primary-foreground">PREVIEW TEST MODE — real AI generation · {used} image{used === 1 ? "" : "s"} made this session (uses workspace AI credits) · not live on nixorastudios.com</div>}<div className="image-studio min-h-screen bg-background text-foreground" onDragOver={(e) => { if (e.dataTransfer.types.includes("Files")) { e.preventDefault(); setDrop(true); } }} onDragLeave={(e) => { if (e.currentTarget === e.target) setDrop(false); }} onDrop={onDrop}>
     <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3 lg:px-8">
       <div className="flex items-center gap-3"><Button asChild variant="ghost" size="icon" title="Back to home"><Link to="/"><ArrowLeft /></Link></Button><Link to="/" className="text-lg font-extrabold">NIXORA<span className="text-primary">.</span></Link><span className="hidden border-l border-border pl-3 text-xs text-muted-foreground sm:block">ENGINE 01 · TEXT TO IMAGE</span></div>
       <div className="flex flex-wrap items-center gap-2">
@@ -199,6 +242,17 @@ export function ImageStudio() {
             <Button size="sm" variant="ghost" disabled={!!busy} onClick={() => runPrompt("scenes")}><Split />{busy === "scenes" ? "Splitting…" : "Divide into scenes"}</Button>
           </div>
           <div className="mt-2 flex gap-2"><input value={change} onChange={(e) => setChange(e.target.value)} placeholder="Modify: e.g. make it night, add rain" className={field} /><Button size="sm" variant="outline" disabled={!!busy || !change.trim()} onClick={() => runPrompt("modify")}><Wand2 />Modify</Button></div>
+          <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-border pt-2">
+            <span className="text-[11px] font-semibold text-muted-foreground">QUICK STYLE</span>
+            {QUICK_STYLES.map((s) => <button key={s.id} type="button" onClick={() => { addHint(s.hint); if (s.id === "3d") setDimension("3D"); if (s.id === "realistic") setMode("Realistic"); if (s.id === "anime") setMode("Anime"); }} className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${hints.style === s.id ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-primary"}`}>{s.label}</button>)}
+            {QUICK_SIZES.map((s) => <button key={s.id} type="button" onClick={() => { addHint(s.hint); setAspect(s.id); }} className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${hints.aspect === s.id ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-primary"}`}>{s.label}</button>)}
+          </div>
+          {vague && !helperOff && <div className="mt-2 flex flex-wrap items-center gap-2 rounded-md border border-border bg-muted p-2 text-xs">
+            <span>Your prompt doesn't include style or size. For best outcome, add?</span>
+            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { addHint("realistic style"); setMode("Realistic"); setHelperOff(true); }}>Add Realistic</Button>
+            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { addHint("16:9 aspect ratio"); setAspect("16:9"); setHelperOff(true); }}>Add 16:9</Button>
+            <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setHelperOff(true)}>Keep as is</Button>
+          </div>}
         </div>
 
         <div className="rounded-lg border border-border bg-card p-3">
@@ -216,6 +270,11 @@ export function ImageStudio() {
         <p className="text-[11px] text-muted-foreground">Images are created in high quality, then enlarged to your export size when you download. 8K and 16K may be too big for some phones.</p>
 
         <Button className="h-12 w-full text-base" disabled={!!busy} onClick={() => generate()}>{busy === "generate" ? <Loader2 className="animate-spin" /> : <Sparkles />}1 · Generate</Button>
+        {suggest && <div className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-card p-2 text-xs">
+          <span>Last time you liked <strong>{suggest}</strong> — apply again?</span>
+          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { setMode(suggest); setSuggest(null); }}>Apply</Button>
+          <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setSuggest(null)}>Dismiss</Button>
+        </div>}
         {notice && <p role="status" className="rounded-md border border-border bg-card p-3 text-sm">{notice}</p>}
 
         {scenes.length > 0 && <div className="space-y-2"><p className="text-xs font-semibold text-muted-foreground"><Clapperboard className="mr-1 inline size-3" />MOVIE SCENES</p>{scenes.map((s, i) => <div key={i} className="rounded-lg border border-border bg-card p-3"><p className="text-sm font-semibold">{String(i + 1).padStart(2, "0")} · {s.title}</p><p className="mt-1 text-xs text-muted-foreground">{s.prompt}</p><div className="mt-2 flex gap-2"><Button size="sm" disabled={!!busy} onClick={() => generate(s.prompt)}>Generate scene</Button><Button size="sm" variant="ghost" onClick={() => setPrompt(s.prompt)}>Use as prompt</Button></div></div>)}</div>}
@@ -235,7 +294,17 @@ export function ImageStudio() {
             <Button variant="outline" onClick={share}><Share2 />Share</Button>
           </div>
           {showEdit && <div className="flex gap-2"><input value={editText} onChange={(e) => setEditText(e.target.value)} placeholder="e.g. change the jacket to red, add a city skyline" className={field} /><Button disabled={!!busy || !editText.trim()} onClick={() => generate(prompt, image, editText)}>Apply</Button></div>}
-          <div className="rounded-lg border border-border bg-card p-3"><p className="mb-2 text-xs font-semibold text-muted-foreground">PUSH TO A NIXORA ENGINE</p><div className="flex flex-wrap gap-2">{ENGINES.map((e) => <Button key={e.slug} size="sm" variant="ghost" onClick={() => pushTo(e.slug)}>{e.label} →</Button>)}</div><p className="mt-2 text-[11px] text-muted-foreground">Tip: drag the image straight out to your desktop or another app.</p></div>
+          <div className="rounded-lg border border-border bg-card p-3">
+            {feedbackDone ? <p className="text-xs text-muted-foreground">Thanks — your style preference was saved on this device.</p> : <>
+              <div className="flex flex-wrap items-center gap-2">
+                <Button size="sm" variant="outline" onClick={() => sendFeedback("up")}><ThumbsUp />Helpful</Button>
+                <Button size="sm" variant="outline" onClick={() => sendFeedback("down")}><ThumbsDown />Not my style</Button>
+                <span className="text-xs text-muted-foreground">What would you prefer?</span>
+                {["More realistic", "More vibrant", "Other"].map((p) => <button key={p} type="button" onClick={() => sendFeedback("down", p)} className="rounded-full border border-border px-2.5 py-1 text-xs hover:border-primary">{p}</button>)}
+              </div>
+            </>}
+          </div>
+          <div className="rounded-lg border border-border bg-card p-3"><p className="mb-2 text-xs font-semibold text-muted-foreground">PUSH TO A NIXORA ENGINE</p><div className="flex flex-wrap gap-2">{HANDOFF_ENGINES.map((e) => <Button key={e.id} size="sm" variant="ghost" onClick={() => pushTo(e.id)}>{e.name} →</Button>)}</div><p className="mt-2 text-[11px] text-muted-foreground">Tip: drag the image straight out to your desktop or another app.</p></div>
         </div>}
 
         {history.length > 1 && <div><p className="mb-2 text-xs font-semibold text-muted-foreground">THIS SESSION</p><div className="grid grid-cols-4 gap-2 sm:grid-cols-6">{history.map((h, i) => <button key={i} onClick={() => { setImage(h); setFinal(true); }}><img src={h} alt={`Earlier result ${i + 1}`} className="aspect-square w-full rounded object-cover" /></button>)}</div></div>}
