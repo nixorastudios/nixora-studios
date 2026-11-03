@@ -242,6 +242,17 @@ export function ImageStudio() {
             <Button size="sm" variant="ghost" disabled={!!busy} onClick={() => runPrompt("scenes")}><Split />{busy === "scenes" ? "Splitting…" : "Divide into scenes"}</Button>
           </div>
           <div className="mt-2 flex gap-2"><input value={change} onChange={(e) => setChange(e.target.value)} placeholder="Modify: e.g. make it night, add rain" className={field} /><Button size="sm" variant="outline" disabled={!!busy || !change.trim()} onClick={() => runPrompt("modify")}><Wand2 />Modify</Button></div>
+          <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-border pt-2">
+            <span className="text-[11px] font-semibold text-muted-foreground">QUICK STYLE</span>
+            {QUICK_STYLES.map((s) => <button key={s.id} type="button" onClick={() => { addHint(s.hint); if (s.id === "3d") setDimension("3D"); if (s.id === "realistic") setMode("Realistic"); if (s.id === "anime") setMode("Anime"); }} className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${hints.style === s.id ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-primary"}`}>{s.label}</button>)}
+            {QUICK_SIZES.map((s) => <button key={s.id} type="button" onClick={() => { addHint(s.hint); setAspect(s.id); }} className={`rounded-full border px-2.5 py-1 text-xs transition-colors ${hints.aspect === s.id ? "border-primary bg-primary text-primary-foreground" : "border-border hover:border-primary"}`}>{s.label}</button>)}
+          </div>
+          {vague && !helperOff && <div className="mt-2 flex flex-wrap items-center gap-2 rounded-md border border-border bg-muted p-2 text-xs">
+            <span>Your prompt doesn't include style or size. For best outcome, add?</span>
+            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { addHint("realistic style"); setMode("Realistic"); setHelperOff(true); }}>Add Realistic</Button>
+            <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { addHint("16:9 aspect ratio"); setAspect("16:9"); setHelperOff(true); }}>Add 16:9</Button>
+            <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setHelperOff(true)}>Keep as is</Button>
+          </div>}
         </div>
 
         <div className="rounded-lg border border-border bg-card p-3">
@@ -259,6 +270,11 @@ export function ImageStudio() {
         <p className="text-[11px] text-muted-foreground">Images are created in high quality, then enlarged to your export size when you download. 8K and 16K may be too big for some phones.</p>
 
         <Button className="h-12 w-full text-base" disabled={!!busy} onClick={() => generate()}>{busy === "generate" ? <Loader2 className="animate-spin" /> : <Sparkles />}1 · Generate</Button>
+        {suggest && <div className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-card p-2 text-xs">
+          <span>Last time you liked <strong>{suggest}</strong> — apply again?</span>
+          <Button size="sm" variant="outline" className="h-7 text-xs" onClick={() => { setMode(suggest); setSuggest(null); }}>Apply</Button>
+          <Button size="sm" variant="ghost" className="h-7 text-xs" onClick={() => setSuggest(null)}>Dismiss</Button>
+        </div>}
         {notice && <p role="status" className="rounded-md border border-border bg-card p-3 text-sm">{notice}</p>}
 
         {scenes.length > 0 && <div className="space-y-2"><p className="text-xs font-semibold text-muted-foreground"><Clapperboard className="mr-1 inline size-3" />MOVIE SCENES</p>{scenes.map((s, i) => <div key={i} className="rounded-lg border border-border bg-card p-3"><p className="text-sm font-semibold">{String(i + 1).padStart(2, "0")} · {s.title}</p><p className="mt-1 text-xs text-muted-foreground">{s.prompt}</p><div className="mt-2 flex gap-2"><Button size="sm" disabled={!!busy} onClick={() => generate(s.prompt)}>Generate scene</Button><Button size="sm" variant="ghost" onClick={() => setPrompt(s.prompt)}>Use as prompt</Button></div></div>)}</div>}
