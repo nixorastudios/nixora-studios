@@ -75,7 +75,7 @@ export function validateImagePrompt(prompt: unknown): string {
 // ---- Smart prompt auto-setting ----
 
 export type PromptStyleHint = "realistic" | "anime" | "3d";
-export interface PromptHints { style?: PromptStyleHint; aspect?: Aspect; }
+export interface PromptHints { style?: PromptStyleHint | undefined; aspect?: Aspect | undefined; }
 
 /** Read style and aspect hints straight out of the creator's own words. */
 export function parsePromptHints(prompt: string): PromptHints {
