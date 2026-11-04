@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HomepageRouteImport } from './routes/homepage'
+import { Route as OwnerRouteImport } from './routes/owner'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundRouteImport } from './routes/refund'
@@ -39,6 +40,11 @@ const ContactRoute = ContactRouteImport.update({
 const HomepageRoute = HomepageRouteImport.update({
   id: '/homepage',
   path: '/homepage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OwnerRoute = OwnerRouteImport.update({
+  id: '/owner',
+  path: '/owner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
+  '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
+  '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
+  '/owner': typeof OwnerRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/homepage'
+    | '/owner'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/homepage'
+    | '/owner'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/'
     | '/contact'
     | '/homepage'
+    | '/owner'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ContactRoute: typeof ContactRoute
   HomepageRoute: typeof HomepageRoute
+  OwnerRoute: typeof OwnerRoute
   PrivacyRoute: typeof PrivacyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundRoute: typeof RefundRoute
@@ -260,6 +273,13 @@ declare module '@tanstack/react-router' {
       path: '/homepage'
       fullPath: '/homepage'
       preLoaderRoute: typeof HomepageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/owner': {
+      id: '/owner'
+      path: '/owner'
+      fullPath: '/owner'
+      preLoaderRoute: typeof OwnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -360,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ContactRoute: ContactRoute,
   HomepageRoute: HomepageRoute,
+  OwnerRoute: OwnerRoute,
   PrivacyRoute: PrivacyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundRoute: RefundRoute,
