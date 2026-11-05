@@ -46,7 +46,7 @@ export function CodeEngine() {
   const approveFn = useServerFn(approveCodePlan);
   const historyFn = useServerFn(listCodeVersions);
 
-  const decodeProject = (row: Record<string, unknown>): CodeProject => ({ id: String(row.id), name: String(row.name), profession: String(row.profession), idea: String(row.idea), plan: row.plan ? codePlanSchema.parse(row.plan) : null, approved: row.approved === true, files: Array.isArray(row.files) ? row.files as CodeFile[] : [] });
+  const decodeProject = (row: Record<string, unknown>): CodeProject => ({ id: String(row['id']), name: String(row['name']), profession: String(row['profession']), idea: String(row['idea']), plan: row['plan'] ? codePlanSchema.parse(row['plan']) : null, approved: row['approved'] === true, files: Array.isArray(row['files']) ? row['files'] as CodeFile[] : [] });
   useEffect(() => {
     let active = true;
     try { const rows = JSON.parse(localStorage.getItem(LOCAL_KEY) ?? '[]'); if (Array.isArray(rows)) { const saved=rows.map(decodeProject);setProjects(saved);setProject(saved[0] ?? freshProject()); } else setProject(freshProject()); } catch { setProject(freshProject()); }
@@ -81,7 +81,8 @@ export function CodeEngine() {
     setBusy(action);setError('');setSummary('');setActivity(action==='plan'?'Understanding your idea…':'Working on your project…');
     controller.current=new AbortController();
     try {
-      await save();
+      const saved = await save();
+      if (saved === false) throw new Error('Save your project successfully before starting AI work.');
       const {data}=await supabase.auth.getSession();const token=data.session?.access_token;if(!token)throw new Error('Sign in again to continue.');
       const response=await fetch('/api/code-engine',{method:'POST',headers:{'Content-Type':'application/json',Authorization:`Bearer ${token}`},body:JSON.stringify({id:p.id,action,instruction:override??instruction,reference:reference?.data??null}),signal:controller.current.signal});
       if(!response.ok)throw new Error(await response.text());

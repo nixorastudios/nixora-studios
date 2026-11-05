@@ -6,11 +6,11 @@ import { PROFESSIONS, projectFileSchema } from './code-engine';
 const saveSchema = z.object({ id: z.string().uuid(), name: z.string().trim().min(1).max(100), profession: z.enum(PROFESSIONS), idea: z.string().max(12000), files: z.array(projectFileSchema).max(30) });
 export const saveCodeProject = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(v => saveSchema.parse(v)).handler(async ({ data, context }) => {
   if (JSON.stringify(data.files).length > 1_000_000) throw new Error('Project exceeds the 1 MB save limit.');
-  const { data: row, error } = await context.supabase.from('code_engine_projects').select('id,user_id,idea,profession').eq('id', data.id).maybeSingle();
+  const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
+  const { data: row, error } = await supabaseAdmin.from('code_engine_projects').select('id,user_id,idea,profession').eq('id', data.id).maybeSingle();
   if (error) throw new Error('Could not check project access.');
   if (row && row.user_id !== context.userId) throw new Error('Project access denied.');
   const reset = row && (row.idea !== data.idea || row.profession !== data.profession);
-  const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
   const { error: saveError } = await supabaseAdmin.from('code_engine_projects').upsert({ ...data, files: data.files, user_id: context.userId, updated_at: new Date().toISOString(), ...(reset ? { plan: null, approved: false } : {}) });
   if (saveError) throw new Error('Cloud save failed. Your local copy is unchanged.');
   return { ok: true };

@@ -50,7 +50,11 @@ export function previewDocument(files: CodeFile[], bridge = false) {
   let html = files.find(f => f.path === 'index.html')?.content ?? '';
   for (const f of files) {
     if (f.path.endsWith('.css')) html = html.replace(new RegExp(`<link[^>]*href=["'](?:\\./)?${f.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*>`, 'gi'), `<style>${f.content}</style>`);
-    if (f.path.endsWith('.js')) html = html.replace(new RegExp(`<script[^>]*src=["'](?:\\./)?${f.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*>\\s*</script>`, 'gi'), `<script>${f.content.replace(/<\/script/gi, '<\\/script')}</script>`);
+    if (f.path.endsWith('.js')) html = html.replace(new RegExp(`<script[^>]*src=["'](?:\\./)?${f.path.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}["'][^>]*>\\s*</script>`, 'gi'), (tag) => {
+      const content = f.content.replace(/<\/script/gi, '<\\/script');
+      if (/type=["']module["']/i.test(tag)) return `<script type="module">${content}</script>`;
+      return /\bdefer\b/i.test(tag) ? `<script>window.addEventListener('DOMContentLoaded',()=>{${content}\n});</script>` : `<script>${content}</script>`;
+    });
   }
   const policy = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">`;
   const reporter = bridge ? `<script>window.addEventListener('error',e=>parent.postMessage({nixoraPreview:true,error:e.message},'*'));window.addEventListener('unhandledrejection',e=>parent.postMessage({nixoraPreview:true,error:String(e.reason)},'*'));window.addEventListener('load',()=>parent.postMessage({nixoraPreview:true,loaded:true},'*'));</script>` : '';
