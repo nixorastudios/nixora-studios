@@ -38,4 +38,5 @@
 - [x] Engine cards open a local prompt popup (draft saved in browser only, no generation claim)
 - [x] Terms and Privacy pages: clickable support email, cross-links, Back to Home button
 - [ ] Project member roles (owner/admin, requested restored admin) — set by the user in Lovable project settings, not in code
-- [ ] Real owner/admin sign-in inside the app — waits on separate sign-in scope and verified role assignment; Cloud is now connected
+- [x] Real owner sign-in inside the app — database owner role, /owner page, owner-gated Code Engine Connections
+- [x] Code Engine Connections + Triple Save — owner-gated Connections page, GitHub connector push/commits, 10s local + 30s Cloud sync, save status bar, My Projects versions/ZIP/delete, Publish Live at /projects/[slug]
