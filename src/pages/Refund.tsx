@@ -6,7 +6,7 @@ export default function Refund() {
       <div className="mx-auto max-w-3xl p-8 text-sm leading-7">
         <h1 className="mb-2 text-4xl font-bold">Refund Policy</h1>
         <p className="mb-8 text-muted-foreground">
-          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (RC 9950450) |{" "}
+          Last Updated: November 2, 2026 | NIXORASTUDIOS LTD (CR 9950450) |{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
           </a>
@@ -103,7 +103,7 @@ export default function Refund() {
 
         <h2 className="mt-8 text-lg font-bold">8. Contact &amp; Legal Entity</h2>
         <p>
-          NIXORA STUDIOS is operated by NIXORASTUDIOS LTD, RC 9950450. Registered address: 81 Friday Momomi
+          NIXORA STUDIOS is operated by NIXORASTUDIOS LTD, CR 9950450. Registered address: 81 Friday Momomi
           Egwuogwu Street, Amachai 2, Okpanam, Asaba, Delta State, Nigeria. Refund requests and questions:{" "}
           <a href="mailto:support@nixorastudios.com" className="underline text-link hover:text-link/80">
             support@nixorastudios.com
