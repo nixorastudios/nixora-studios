@@ -58,13 +58,14 @@ export function CodeEngine() {
   },[listFn]);
 
   const save = async (cloud = true) => {
-    const p = current.current;if(!p)return;
+    const p = current.current;if(!p)return false;
     try {
       const stored = JSON.parse(localStorage.getItem(LOCAL_KEY) ?? '[]');
       const rows=[p,...(Array.isArray(stored)?stored:[]).filter((r:CodeProject)=>r.id!==p.id)].slice(0,50);
       localStorage.setItem(LOCAL_KEY,JSON.stringify(rows));setProjects(rows);setSaveStatus('Saved locally');
       if(signedIn&&cloud){setSaveStatus('Syncing…');await saveFn({data:{id:p.id,name:p.name||'Untitled project',profession:p.profession as typeof PROFESSIONS[number],idea:p.idea,files:p.files}});setSaveStatus('Cloud synced');}
-    } catch(e){setSaveStatus('Save needs attention');setError(e instanceof Error?e.message:'Could not save this draft.');}
+      return true;
+    } catch(e){setSaveStatus('Save needs attention');setError(e instanceof Error?e.message:'Could not save this draft.');return false;}
   };
   const saveRef=useRef(save);saveRef.current=save;
   useEffect(()=>{if(!ready)return;const timer=setInterval(()=>saveRef.current(),CODE_AUTOSAVE_MS);const onLeave=()=>{void saveRef.current(false);};window.addEventListener('pagehide',onLeave);return()=>{clearInterval(timer);window.removeEventListener('pagehide',onLeave);};},[ready]);
@@ -89,7 +90,7 @@ export function CodeEngine() {
       const reader=response.body?.getReader();if(!reader)throw new Error('The AI response was empty.');
       const decoder=new TextDecoder();let buffer='';let fixErrors:string[]=[];
       for(;;){const part=await reader.read();if(part.done)break;buffer+=decoder.decode(part.value,{stream:true});let boundary=buffer.indexOf('\n\n');while(boundary>=0){const chunk=buffer.slice(0,boundary);buffer=buffer.slice(boundary+2);const event=chunk.match(/^event: (.+)$/m)?.[1];const raw=chunk.match(/^data: (.+)$/m)?.[1];if(raw){const value=JSON.parse(raw);if(event==='error')throw new Error(value.message);if(event==='status')setActivity(value.message);if(event==='summary')setSummary(prev=>(prev+value.text).slice(-5000));if(event==='usage')setUsage(`${value.inputTokens??0} input · ${value.outputTokens??0} output tokens · workspace credits billed`);if(event==='result'){if(value.type==='plan'){const plan=codePlanSchema.parse(value.data);if(action==='suggest')setActivity(`Next steps: ${plan.needs.join(' · ')}`);else{change({plan,approved:false,name:p.name==='Untitled project'?plan.title:p.name});setActivity('Plan ready — your approval is required.');}}else{const b=codeBuildSchema.parse(value.data);change({files:b.files});setBuild(b);setFilePath('index.html');setView('Preview');const checked=checkCodeFiles(b.files);setActivity(checked.passed?'Version saved. Syntax checks passed — preview testing required.':'Check failed. Publishing is blocked.');fixErrors=checked.errors;setRuntimeErrors([]);setPreviewKey(prev=>prev+1);}}}boundary=buffer.indexOf('\n\n');}}
-      if(fixErrors.length&&!automaticFix){setActivity('Check found errors. Starting one automatic repair…');setBusy('');queueMicrotask(()=>void runRef.current('fix',fixErrors.join('\n'),true));}
+      if(fixErrors.length&&!automaticFix){setActivity('Check found errors. Starting one automatic repair…');setBusy('');setTimeout(()=>void runRef.current('fix',fixErrors.join('\n'),true),0);}
     }catch(e){setError(e instanceof Error&&e.name==='AbortError'?'Generation stopped. Your saved project is unchanged.':e instanceof Error?e.message:'Generation failed.');}finally{setBusy('');}
   };
   const runRef=useRef(run);runRef.current=run;
