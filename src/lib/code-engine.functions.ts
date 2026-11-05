@@ -33,3 +33,37 @@ export const listCodeVersions = createServerFn({ method: 'POST' }).middleware([r
   if (error) throw new Error('Could not load project history.');
   return rows ?? [];
 });
+
+export const deleteCodeProject = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(v => z.object({ id: z.string().uuid() }).parse(v)).handler(async ({ data, context }) => {
+  const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
+  await supabaseAdmin.from('code_engine_versions').delete().eq('project_id', data.id).eq('user_id', context.userId);
+  const { error } = await supabaseAdmin.from('code_engine_projects').delete().eq('id', data.id).eq('user_id', context.userId);
+  if (error) throw new Error('Could not delete the project.');
+  return { ok: true };
+});
+
+export const publishCodeProject = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(v => z.object({ id: z.string().uuid() }).parse(v)).handler(async ({ data, context }) => {
+  const { data: project, error } = await context.supabase.from('code_engine_projects').select('name,files').eq('id', data.id).single();
+  if (error || !project) throw new Error('Save the project to Cloud before publishing.');
+  const checks = checkCodeFiles(Array.isArray(project.files) ? project.files as { path: string; content: string }[] : []);
+  if (!checks.passed) throw new Error(`Publishing blocked: ${checks.errors.join(' ')}`);
+  const base = publishSlug(String(project.name));
+  const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
+  // Find a free slug: name, name-2, name-3 …
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const slug = attempt === 0 ? base : `${base}-${attempt + 1}`;
+    const { data: taken } = await supabaseAdmin.from('code_engine_projects').select('id').eq('publish_slug', slug).neq('id', data.id).maybeSingle();
+    if (taken) continue;
+    const { error: update } = await supabaseAdmin.from('code_engine_projects').update({ publish_slug: slug, published_at: new Date().toISOString() }).eq('id', data.id).eq('user_id', context.userId);
+    if (update) throw new Error('Could not publish the project.');
+    return { slug, path: `/projects/${slug}` };
+  }
+  throw new Error('No free publish link available for this name. Rename the project and try again.');
+});
+
+export const unpublishCodeProject = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(v => z.object({ id: z.string().uuid() }).parse(v)).handler(async ({ data, context }) => {
+  const { supabaseAdmin } = await import('@/integrations/supabase/client.server');
+  const { error } = await supabaseAdmin.from('code_engine_projects').update({ published_at: null }).eq('id', data.id).eq('user_id', context.userId);
+  if (error) throw new Error('Could not unpublish the project.');
+  return { ok: true };
+});
