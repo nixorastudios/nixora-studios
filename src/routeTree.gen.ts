@@ -23,6 +23,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ApiCodeEngineRouteImport } from './routes/api/code-engine'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
 import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
 import { Route as ApiPublicReconcileRouteImport } from './routes/api/public/reconcile'
@@ -98,6 +99,11 @@ const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
   path: '/api/generate-image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/projects/$slug',
+  path: '/projects/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsToolRoute = ToolsToolRouteImport.update({
   id: '/tools/$tool',
   path: '/tools/$tool',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
@@ -155,6 +162,7 @@ export interface FileRoutesByTo {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
@@ -176,6 +184,7 @@ export interface FileRoutesById {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
@@ -198,6 +207,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
@@ -259,6 +271,7 @@ export interface RootRouteChildren {
   ApiCodeEngineRoute: typeof ApiCodeEngineRoute
   ApiEditImageRoute: typeof ApiEditImageRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
   ToolsToolRoute: typeof ToolsToolRoute
   ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
   ApiPublicReconcileRoute: typeof ApiPublicReconcileRoute
@@ -365,6 +378,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGenerateImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools/$tool': {
       id: '/tools/$tool'
       path: '/tools/$tool'
@@ -411,6 +431,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCodeEngineRoute: ApiCodeEngineRoute,
   ApiEditImageRoute: ApiEditImageRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
+  ProjectsSlugRoute: ProjectsSlugRoute,
   ToolsToolRoute: ToolsToolRoute,
   ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
   ApiPublicReconcileRoute: ApiPublicReconcileRoute,

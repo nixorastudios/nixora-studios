@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { z } from 'zod';
-import { PROFESSIONS, projectFileSchema } from './code-engine';
+import { PROFESSIONS, checkCodeFiles, projectFileSchema, publishSlug } from './code-engine';
 
 const saveSchema = z.object({ id: z.string().uuid(), name: z.string().trim().min(1).max(100), profession: z.enum(PROFESSIONS), idea: z.string().max(12000), files: z.array(projectFileSchema).max(30) });
 export const saveCodeProject = createServerFn({ method: 'POST' }).middleware([requireSupabaseAuth]).inputValidator(v => saveSchema.parse(v)).handler(async ({ data, context }) => {
