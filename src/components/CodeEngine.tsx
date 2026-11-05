@@ -79,7 +79,7 @@ export function CodeEngine() {
   const ghPushFn = useServerFn(pushProjectToGitHub);
   const ghCommitsFn = useServerFn(listGitHubCommits);
 
-  const decodeProject = (row: Record<string, unknown>): CodeProject => ({ id: String(row['id']), name: String(row['name']), profession: String(row['profession']), idea: String(row['idea']), plan: row['plan'] ? codePlanSchema.parse(row['plan']) : null, approved: row['approved'] === true, files: Array.isArray(row['files']) ? row['files'] as CodeFile[] : [], updated_at: row['updated_at'] ? String(row['updated_at']) : undefined });
+  const decodeProject = (row: Record<string, unknown>): CodeProject => ({ id: String(row['id']), name: String(row['name']), profession: String(row['profession']), idea: String(row['idea']), plan: row['plan'] ? codePlanSchema.parse(row['plan']) : null, approved: row['approved'] === true, files: Array.isArray(row['files']) ? row['files'] as CodeFile[] : [], ...(row['updated_at'] ? { updated_at: String(row['updated_at']) } : {}) });
 
   const refreshGitHub = async () => {
     try {
