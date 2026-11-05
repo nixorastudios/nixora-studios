@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { PROFESSIONS, assertCanBuild, checkCodeFiles, codePlanSchema, codeBuildSchema } from './code-engine';
 import { createLovableAiGatewayRunIdFetch, getLovableAiGatewayRunId, getLovableAiGatewayResponseHeaders } from './code-engine/run-id.ts';
 
-const requestSchema = z.object({ id: z.string().uuid(), action: z.enum(['plan','build','fix','feature','suggest']), instruction: z.string().max(12000).default('') });
+const requestSchema = z.object({ id: z.string().uuid(), action: z.enum(['plan','build','fix','feature','suggest']), instruction: z.string().max(12000).default(''), reference: z.string().max(2_000_000).regex(/^data:image\/jpeg;base64,[A-Za-z0-9+/=]+$/).nullable().optional() });
 const guide = `You are NIXORA CODE ENGINE, a professional creative prototyping assistant. Adapt to the selected profession. Give concise decision summaries, never hidden internal reasoning. Do not claim engineering certification, structural safety, production readiness, executed tests or actual deployments. Identify unsafe engineering assumptions and require a licensed professional for real structural/mechanical work. No secrets, real payments, network dependencies or tracking in generated projects. Plans must contain five concise steps labeled Understand, Plan, Design, Build, Check, warnings, remaining needs, and clearly labeled approximate time and cost ranges. AI usage is billed separately in workspace credits; never invent exact pricing. For builds produce a complete runnable plain HTML/CSS/JavaScript prototype with index.html and optional style.css/script.js. All assets must be inline SVG, CSS, or data URIs; no external imports or libraries. Include real interactions, polished responsive layouts, accessible controls and correct calculations. For engineering projects create a labeled conceptual browser visualization, not a certified blueprint. Keep files under 500 KB total. The scene field describes an optional conceptual primitive 3D view, never an exact CAD result. Only kind building, car, machine, sculpture or none. Never claim missing database, payments, domain, GitHub or hosting integrations exist. After build list concrete remaining needs and actual changes. Follow the approved plan; fix syntax/runtime errors reported by the user. Refuse unsafe ideas with warnings rather than building dangerous instructions.`;
 
 export async function handleCodeEngine(request: Request) {
@@ -47,8 +47,8 @@ export async function handleCodeEngine(request: Request) {
   const planning = data.action === 'plan' || data.action === 'suggest';
   const result = streamText({
     model: provider.responses('openai/gpt-6-astra'), instructions: guide,
-    messages: [{ role: 'user', content: JSON.stringify({ action: data.action, profession: project.profession, idea: project.idea, approvedPlan: project.approved ? project.plan : null, files: planning ? [] : project.files, instruction: data.instruction }) }],
-    output: Output.object({ schema: planning ? codePlanSchema : codeBuildSchema }),
+    messages: [{ role: 'user', content: [{ type: 'text', text: JSON.stringify({ action: data.action, profession: project.profession, idea: project.idea, approvedPlan: project.approved ? project.plan : null, files: planning ? [] : project.files, instruction: data.instruction }) }, ...(data.reference ? [{ type: 'image' as const, image: data.reference }] : [])] }],
+    output: planning ? Output.object({ schema: codePlanSchema }) : Output.object({ schema: codeBuildSchema }),
     abortSignal: request.signal, maxRetries: 0,
     providerOptions: { openai: { forceReasoning: true, reasoningEffort: 'medium', reasoningSummary: 'auto', store: false, include: ['reasoning.encrypted_content'] } },
   });
@@ -71,7 +71,7 @@ export async function handleCodeEngine(request: Request) {
       if (planning) {
         const plan = codePlanSchema.parse(output);
         if (data.action === 'plan') {
-          const { error: save } = await client.from('code_engine_projects').update({ plan, approved: false, updated_at: new Date().toISOString() }).eq('id', data.id);
+          const { error: save } = await supabaseAdmin.from('code_engine_projects').update({ plan, approved: false, updated_at: new Date().toISOString() }).eq('id', data.id).eq('user_id', userId);
           if (save) throw new Error('Plan generated but Cloud save failed.');
         }
         emit('result', { type: 'plan', data: plan, action: data.action });
@@ -79,7 +79,7 @@ export async function handleCodeEngine(request: Request) {
         const build = codeBuildSchema.parse(output);
         if (JSON.stringify(build.files).length > 1_000_000) throw new Error('Generated project is too large to save.');
         const checks = checkCodeFiles(build.files);
-        const { error: save } = await client.from('code_engine_projects').update({ files: build.files, updated_at: new Date().toISOString() }).eq('id', data.id);
+        const { error: save } = await supabaseAdmin.from('code_engine_projects').update({ files: build.files, updated_at: new Date().toISOString() }).eq('id', data.id).eq('user_id', userId);
         if (save) throw new Error('Build generated but Cloud save failed.');
         const { error: versionError } = await supabaseAdmin.from('code_engine_versions').insert({ project_id: data.id, user_id: userId, files: build.files, summary: build.summary });
         if (versionError) throw new Error('Project saved, but version backup failed.');

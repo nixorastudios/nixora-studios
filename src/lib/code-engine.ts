@@ -29,6 +29,7 @@ export function checkCodeFiles(files: CodeFile[]) {
     seen.add(file.path);
     const scripts = file.path.endsWith('.js') ? [file.content] : file.path.endsWith('.html') ? Array.from(file.content.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi), m => m[1]).filter(Boolean) : [];
     for (const script of scripts) {
+      if (!script) continue;
       try { parse(script, { ecmaVersion: 'latest', sourceType: 'module' }); } catch (e) { errors.push(`${file.path}: ${e instanceof Error ? e.message : 'JavaScript syntax error'}`); }
     }
     if (file.path.endsWith('.ts') || file.path.endsWith('.tsx') || file.path.endsWith('.jsx')) errors.push(`${file.path}: browser preview requires plain HTML, CSS and JavaScript.`);
