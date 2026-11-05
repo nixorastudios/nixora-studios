@@ -42,6 +42,8 @@ export type Database = {
           name: string
           plan: Json | null
           profession: string
+          publish_slug: string | null
+          published_at: string | null
           updated_at: string
           user_id: string
         }
@@ -54,6 +56,8 @@ export type Database = {
           name?: string
           plan?: Json | null
           profession?: string
+          publish_slug?: string | null
+          published_at?: string | null
           updated_at?: string
           user_id: string
         }
@@ -66,6 +70,8 @@ export type Database = {
           name?: string
           plan?: Json | null
           profession?: string
+          publish_slug?: string | null
+          published_at?: string | null
           updated_at?: string
           user_id?: string
         }
