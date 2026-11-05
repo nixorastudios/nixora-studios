@@ -4,6 +4,7 @@ import { previewDocument, type CodeFile } from '@/lib/code-engine';
 // Public live page for a published Code Engine project. Read-only; only
 // projects the owner explicitly published are served.
 export const Route = createFileRoute('/projects/$slug')({
+  staticData: { sitemap: false },
   server: {
     handlers: {
       GET: async ({ params }) => {
