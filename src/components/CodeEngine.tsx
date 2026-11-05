@@ -184,7 +184,7 @@ export function CodeEngine() {
     </header>
     <div role="status" className="flex flex-wrap items-center gap-x-5 gap-y-1 border-b border-border bg-card px-5 py-2 text-[11px]">
       <span className="flex items-center gap-1.5"><span className={`size-2 rounded-full ${localAt?'bg-video-success':'bg-muted-foreground'}`}/>Local: {localAt?`Saved · ${ago(localAt)}`:'Not saved yet'}</span>
-      <span className="flex items-center gap-1.5"><span className={`size-2 rounded-full ${cloudFailed?'bg-destructive':cloudAt?'bg-video-success':'bg-muted-foreground'}`}/>Cloud: {cloudFailed?<span className="text-destructive">Sync failed <button className="underline" onClick={()=>save()}>Retry</button></span>:signedIn?`Synced · ${ago(cloudAt)}`:'Sign in to sync'}</span>
+      <span className="flex items-center gap-1.5"><span className={`size-2 rounded-full ${cloudFailed?'bg-destructive':cloudAt?'bg-video-success':'bg-muted-foreground'}`}/>Cloud: {cloudFailed?<span className="text-destructive">Sync failed <button className="underline" onClick={()=>save()}>Retry</button></span>:signedIn?(cloudAt?`Synced · ${ago(cloudAt)}`:'First sync pending'):'Sign in to sync'}</span>
       <span className="flex items-center gap-1.5"><span className={`size-2 rounded-full ${githubVersion?'bg-video-success':'bg-muted-foreground'}`}/>GitHub: {githubVersion?`Version ${githubVersion}`:github.connected?'Connected':'Not connected'}</span>
       <span className="ml-auto hidden text-muted-foreground md:inline">{saveStatus}</span>
     </div>
