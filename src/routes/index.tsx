@@ -224,7 +224,7 @@ function Index() {
         <div>
           <p className="text-lg font-black text-foreground">NIXORA STUDIOS.</p>
           <p className="mt-1 text-primary">Global AI Video Studio</p>
-          <p className="mt-3 text-launch-footer">© 2026 NIXORASTUDIOS LTD | RC 9950450</p>
+          <p className="mt-3 text-launch-footer">© 2026 NIXORA STUDIOS LTD - CR 9950450</p>
         </div>
         <nav aria-label="Product">
           <p className="mb-3 font-bold text-foreground">Product</p>
