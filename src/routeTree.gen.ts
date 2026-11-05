@@ -20,6 +20,7 @@ import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as SecurityRouteImport } from './routes/security'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as ApiCodeEngineRouteImport } from './routes/api/code-engine'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
@@ -82,6 +83,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCodeEngineRoute = ApiCodeEngineRouteImport.update({
+  id: '/api/code-engine',
+  path: '/api/code-engine',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiEditImageRoute = ApiEditImageRouteImport.update({
   id: '/api/edit-image',
   path: '/api/edit-image',
@@ -126,6 +132,7 @@ export interface FileRoutesByFullPath {
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/tools/$tool': typeof ToolsToolRoute
@@ -145,6 +152,7 @@ export interface FileRoutesByTo {
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/tools/$tool': typeof ToolsToolRoute
@@ -165,6 +173,7 @@ export interface FileRoutesById {
   '/security': typeof SecurityRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
+  '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
   '/tools/$tool': typeof ToolsToolRoute
@@ -186,6 +195,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
     | '/tools/$tool'
@@ -205,6 +215,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
     | '/tools/$tool'
@@ -224,6 +235,7 @@ export interface FileRouteTypes {
     | '/security'
     | '/sitemap.xml'
     | '/terms'
+    | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
     | '/tools/$tool'
@@ -244,6 +256,7 @@ export interface RootRouteChildren {
   SecurityRoute: typeof SecurityRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
+  ApiCodeEngineRoute: typeof ApiCodeEngineRoute
   ApiEditImageRoute: typeof ApiEditImageRoute
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
   ToolsToolRoute: typeof ToolsToolRoute
@@ -331,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/code-engine': {
+      id: '/api/code-engine'
+      path: '/api/code-engine'
+      fullPath: '/api/code-engine'
+      preLoaderRoute: typeof ApiCodeEngineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/edit-image': {
       id: '/api/edit-image'
       path: '/api/edit-image'
@@ -388,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityRoute: SecurityRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
+  ApiCodeEngineRoute: ApiCodeEngineRoute,
   ApiEditImageRoute: ApiEditImageRoute,
   ApiGenerateImageRoute: ApiGenerateImageRoute,
   ToolsToolRoute: ToolsToolRoute,
