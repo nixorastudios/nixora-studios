@@ -276,6 +276,7 @@ function Index() {
         <p className="mb-4 text-launch-card-muted">What do you want to create?</p>
         {selectedTool.slug === 'text-to-image' && imagePreview && <Button asChild className="mb-4 h-auto w-full whitespace-normal py-3"><Link to="/tools/$tool" params={{ tool: 'text-to-image' }}>Open Text to Image — Preview Test (real AI)</Link></Button>}
         {selectedTool.slug === 'text-to-video' && <Button asChild className="mb-4 h-auto w-full whitespace-normal py-3"><Link to="/tools/$tool" params={{ tool: 'text-to-video' }}>Open Text to Video — Studio Preview</Link></Button>}
+        {selectedTool.slug === 'code-engine' && imagePreview && <Button asChild className="mb-4 h-auto w-full whitespace-normal py-3"><Link to="/tools/$tool" params={{ tool: 'code-engine' }}>Open NIXORA CODE ENGINE</Link></Button>}
         <textarea aria-label="What do you want to create?" value={prompt} readOnly={showSuccess} onChange={e => saveDraft(e.target.value)} placeholder={`Describe your ${selectedTool.name.toLowerCase()} idea... e.g., A cinematic shot of...`} className="h-32 w-full rounded-xl border-2 border-camera-line bg-card p-4 text-card-foreground outline-none focus:border-primary" />
         {showSuccess ? <form onSubmit={joinWaitlist} className="mt-4 rounded-xl border border-launch-success-line bg-launch-success p-4 text-center">
           <p role="status" className="text-lg font-bold text-launch-success-foreground">✅ Draft Saved on this device!</p>

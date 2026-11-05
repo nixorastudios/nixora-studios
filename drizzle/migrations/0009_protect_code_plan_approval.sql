@@ -1,0 +1,2 @@
+REVOKE INSERT, UPDATE ON public.code_engine_projects FROM authenticated;
+COMMENT ON TABLE public.code_engine_projects IS 'Private projects. Plan and approval writes only through authenticated server handlers after ownership verification.';

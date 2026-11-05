@@ -24,7 +24,7 @@ export const ENGINES_CONFIG: EngineEntry[] = [
   { id: "music-daw", name: "Music Studio", models: [], styles: ["score", "beat"], sizes: [], acceptsImageHandoff: false },
   { id: "lipsync", name: "Lipsync", models: ["gemini-omni-1.1-flash"], styles: ["realistic", "anime", "3d"], sizes: VIDEO_SIZES, acceptsImageHandoff: true },
   { id: "video-editor", name: "Video Editor", models: [], styles: [], sizes: VIDEO_SIZES, acceptsImageHandoff: true },
-  { id: "code-engine", name: "Code Engine", models: [], styles: [], sizes: [], acceptsImageHandoff: false },
+  { id: "code-engine", name: "NIXORA Code Engine", models: [], styles: [], sizes: [], acceptsImageHandoff: false },
 ];
 
 /** Engines a generated image can be pushed to from the Text to Image studio. */

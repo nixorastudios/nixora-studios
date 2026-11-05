@@ -21,7 +21,7 @@ export const TOOLS: ToolConfig[] = [
   { slug: "music-daw", name: "MUSIC STUDIO", icon: "🎹", description: "Compose music tracks and beats", input: null, output: "audio", work: "Compose Music Tracks", category: "audio" },
   { slug: "lipsync", name: "LIPSYNC", icon: "🗣️", description: "Sync lip movements to voice", input: "audio", output: "video", work: "Sync Lip Movements", category: "video" },
   { slug: "video-editor", name: "VIDEO EDITOR", icon: "🎞️", description: "Edit final footage and cuts", input: "video", output: "video", work: "Edit Final Footage", category: "video" },
-  { slug: "code-engine", name: "CODE ENGINE", icon: "💻", description: "Integrate system logic - Final integration module", input: null, output: "image", work: "Integrate System Logic", category: "system" },
+  { slug: "code-engine", name: "NIXORA CODE ENGINE", icon: "💻", description: "Plan, build and test creative web prototypes in a profession-aware AI workspace", input: null, output: "image", work: "Build Creative Prototypes", category: "system" },
 ];
 
 export const getTool = (slug: string) => TOOLS.find((t) => t.slug === slug);

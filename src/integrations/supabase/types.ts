@@ -14,6 +14,98 @@ export type Database = {
   }
   public: {
     Tables: {
+      code_engine_ai_blocks: {
+        Row: {
+          created_at: string
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          reason: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          reason?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      code_engine_projects: {
+        Row: {
+          approved: boolean
+          created_at: string
+          files: Json
+          id: string
+          idea: string
+          name: string
+          plan: Json | null
+          profession: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          approved?: boolean
+          created_at?: string
+          files?: Json
+          id?: string
+          idea?: string
+          name?: string
+          plan?: Json | null
+          profession?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          approved?: boolean
+          created_at?: string
+          files?: Json
+          id?: string
+          idea?: string
+          name?: string
+          plan?: Json | null
+          profession?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      code_engine_versions: {
+        Row: {
+          created_at: string
+          files: Json
+          id: string
+          project_id: string
+          summary: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          files: Json
+          id?: string
+          project_id: string
+          summary: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          files?: Json
+          id?: string
+          project_id?: string
+          summary?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "code_engine_versions_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "code_engine_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cookie_consent: {
         Row: {
           analytics: boolean
