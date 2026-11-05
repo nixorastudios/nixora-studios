@@ -84,11 +84,12 @@ export function CodeEngine() {
   const refreshGitHub = async () => {
     try {
       const status = await ghStatusFn();
-      setGithub(status.connected ? { connected: true, username: status.username } : { connected: false });
+      setGithub(status.connected ? { connected: true, username: status.username ?? '' } : { connected: false });
       if (status.connected) {
         const list = await ghReposFn();
         setRepos(list);
-        if (!repo && list.length) setRepo(list[0].name);
+        const first = list[0]?.name;
+        if (!repo && first) setRepo(first);
       }
     } catch { setGithub({ connected: false }); }
   };
