@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Build NIXORA CODE ENGINE: black/gold profession workspace, approval-first AI plan/build/check workflow, local ten-second autosave, private Cloud projects/history, sandboxed preview and project export; do not publish the studio itself.
+- [x] Build NIXORA CODE ENGINE: black/gold profession workspace, approval-first AI plan/build/check workflow, local ten-second autosave, private Cloud projects/history, sandboxed preview and project export; real signed-in plan/build, saved calculator arithmetic, export and mobile 3D verified; not published.
 - [ ] External Code Engine GitHub push, hosting, Drive/Dropbox/Firebase connections — blocked: user-authorized service connections and hosting setup; show truthful connection states rather than simulated success.
 
 - [x] Terms enforcement layer: terms_acceptance records (365-day validity), checkout schema requires terms/privacy acceptance + verified email, credit delivery blocked without fresh acceptance and verified email, future TermsCheckoutGuard component; 64 tests pass, real-database block verified; payments still not connected

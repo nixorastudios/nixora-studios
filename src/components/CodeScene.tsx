@@ -15,7 +15,8 @@ export function CodeScene({ kind = 'machine' }: { kind?: string }) {
         const css = getComputedStyle(host);
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(40, host.clientWidth / Math.max(host.clientHeight,1), 0.1, 100);
-        camera.position.set(6, 4, 7);
+        const frameCamera = () => { const ratio=host.clientWidth/Math.max(host.clientHeight,1);const distance=Math.max(8,5/Math.max(ratio,0.35));camera.position.set(distance*0.6,distance*0.4,distance*0.7);camera.lookAt(0,0,0); };
+        frameCamera();
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.setSize(host.clientWidth, host.clientHeight);
@@ -42,7 +43,7 @@ export function CodeScene({ kind = 'machine' }: { kind?: string }) {
         scene.add(new THREE.HemisphereLight(css.getPropertyValue('--code-3d-light').trim(),css.getPropertyValue('--code-3d-floor').trim(),3));
         const light=new THREE.DirectionalLight(css.getPropertyValue('--code-3d-light').trim(),5);light.position.set(4,6,5);scene.add(light);
         const grid=new THREE.GridHelper(14,28,css.getPropertyValue('--code-3d-grid').trim(),css.getPropertyValue('--code-3d-grid').trim());grid.position.y=-1.3;scene.add(grid);
-        const observer=new ResizeObserver(()=>{if(!host.clientWidth)return;camera.aspect=host.clientWidth/Math.max(host.clientHeight,1);camera.updateProjectionMatrix();renderer.setSize(host.clientWidth,host.clientHeight);});observer.observe(host);
+        const observer=new ResizeObserver(()=>{if(!host.clientWidth)return;camera.aspect=host.clientWidth/Math.max(host.clientHeight,1);camera.updateProjectionMatrix();frameCamera();renderer.setSize(host.clientWidth,host.clientHeight);});observer.observe(host);
         let frame=0;
         const render=()=>{frame=requestAnimationFrame(render);controls.update();renderer.render(scene,camera);};render();
         dispose=()=>{cancelAnimationFrame(frame);observer.disconnect();controls.dispose();scene.traverse(o=>{if(o instanceof THREE.Mesh){o.geometry.dispose();}});gold.dispose();wire.dispose();grid.geometry.dispose();renderer.dispose();renderer.domElement.remove();};
