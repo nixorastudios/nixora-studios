@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CODE_AUTOSAVE_MS, PROFESSIONS, WORKFLOW, assertCanBuild, assertCanExport, checkCodeFiles, previewDocument } from '../lib/code-engine';
+import { CODE_AUTOSAVE_MS, CLOUD_SYNC_MS, PROFESSIONS, WORKFLOW, assertCanBuild, assertCanExport, checkCodeFiles, previewDocument, publishSlug } from '../lib/code-engine';
 describe('Code Engine workflow', () => {
   it('autosaves every ten seconds', () => expect(CODE_AUTOSAVE_MS).toBe(10000));
   it('supports all twelve requested professions', () => expect(PROFESSIONS).toEqual(['Coder','Developer','Mechanical Engineer','Architect','Construction Engineer','Car Designer','Teacher','Artist','Drawer','Building Plans','Innovative Creator','Inventor']));
