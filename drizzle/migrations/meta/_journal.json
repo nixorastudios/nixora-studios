@@ -57,6 +57,13 @@
       "when": 1793810509642,
       "tag": "0007_owner_roles",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793878109161,
+      "tag": "0008_code_engine_projects",
+      "breakpoints": true
     }
   ]
 }
