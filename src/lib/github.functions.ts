@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start';
 import { requireSupabaseAuth } from '@/integrations/supabase/auth-middleware';
 import { z } from 'zod';
-import { projectFileSchema, publishSlug } from './code-engine';
+import { projectFileSchema } from './code-engine';
 
 const GATEWAY = 'https://connector-gateway.lovable.dev/github';
 
@@ -101,5 +101,3 @@ export const listGitHubCommits = createServerFn({ method: 'POST' }).middleware([
   const commits = await gh(`/repos/${String(user.login)}/${data.repo}/commits?per_page=30`);
   return (commits as any[]).map(c => ({ sha: String(c.sha).slice(0, 7), message: String(c.commit?.message ?? '').slice(0, 120), date: String(c.commit?.author?.date ?? '') }));
 });
-
-export { publishSlug };
