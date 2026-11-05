@@ -4,6 +4,7 @@ import { parse } from 'acorn';
 export const PROFESSIONS = ['Coder', 'Developer', 'Mechanical Engineer', 'Architect', 'Construction Engineer', 'Car Designer', 'Teacher', 'Artist', 'Drawer', 'Building Plans', 'Innovative Creator', 'Inventor'] as const;
 export const WORKFLOW = ['Idea', 'Plan', 'Build', 'Check', 'Fix', 'Test', 'Publish + Backup'] as const;
 export const CODE_AUTOSAVE_MS = 10_000;
+export const CLOUD_SYNC_MS = 30_000;
 export const projectFileSchema = z.object({ path: z.string(), content: z.string() }).strict();
 export const codePlanSchema = z.object({
   title: z.string(), summary: z.string(), steps: z.array(z.string()), warnings: z.array(z.string()),
@@ -35,6 +36,12 @@ export function checkCodeFiles(files: CodeFile[]) {
     if (file.path.endsWith('.ts') || file.path.endsWith('.tsx') || file.path.endsWith('.jsx')) errors.push(`${file.path}: browser preview requires plain HTML, CSS and JavaScript.`);
   }
   return { passed: errors.length === 0, errors };
+}
+
+export function publishSlug(name: string) {
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60);
+  if (!slug) throw new Error('Give the project a name with letters or numbers before publishing.');
+  return slug;
 }
 
 export function assertCanBuild(project: Pick<CodeProject, 'plan' | 'approved'>) {
