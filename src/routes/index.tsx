@@ -161,6 +161,7 @@ function Index() {
           <h1 className="mb-4 text-5xl leading-tight font-black sm:text-6xl md:text-8xl">NIXORA STUDIOS.</h1>
           <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio</p>
           <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026 - 10 ENGINES IN 1</p>
+          <p className="mt-2 text-xs text-foreground/50">NIXORA STUDIOS LTD - CR 9950450</p>
         </div>
       </section>
       <section id="engines" className="bg-background px-8 py-20">
