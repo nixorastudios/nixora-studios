@@ -5,7 +5,7 @@ export const WAITLIST_PLANS = ['pro', 'ultra', 'business', 'small', 'medium', 'l
 export const waitlistSchema = z.object({
   email: z.string().trim().toLowerCase().max(254, 'Enter a valid email address.').email('Enter a valid email address.'),
   source: z.enum(['early-access', 'prompt-board', 'pricing-checkout']),
-  name: z.string().trim().max(120).optional(),
+  name: z.string().trim().min(2, 'Enter your full name.').max(120, 'Name is too long.'),
   plan: z.enum(WAITLIST_PLANS).optional(),
 }).strict();
 
@@ -14,7 +14,7 @@ export type WaitlistRow = { email: string; source: string; name: string | null; 
 export type WaitlistResult = { ok: true; position: number | null } | { ok: false; error: string };
 
 export function toWaitlistRow(input: WaitlistInput): WaitlistRow {
-  return { email: input.email, source: input.source, name: input.name || null, plan_code: input.plan ?? null };
+  return { email: input.email, source: input.source, name: input.name, plan_code: input.plan ?? null };
 }
 
 export async function persistWaitlistSignup(
