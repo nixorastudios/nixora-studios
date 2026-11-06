@@ -11,6 +11,6 @@ describe('Final Option A rules', () => {
     expect(CREDIT_VALUE_PROTECTION_MONTHS).toBe(12);
     expect(protectedValueUntil(new Date('2026-11-06T12:00:00Z')).toISOString()).toBe('2027-11-06T12:00:00.000Z');
   });
-  it('rejects external sign-in redirects', () => expect(safeAccountRedirect('//example.com')).toBe('/dashboard'));
+  it('rejects external sign-in redirects', () => expect(safeAccountRedirect('//example.com')).toBe('/my-studio'));
   it('keeps a safe checkout destination after sign-in', () => expect(safeAccountRedirect('/checkout?reference=nixora_123')).toBe('/checkout?reference=nixora_123'));
 });
