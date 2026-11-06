@@ -29,6 +29,7 @@ export function OptionAPricing({ ctaLabel = 'Join Waitlist / Buy' }: { ctaHref?:
     </div>)}
     <p className="mx-auto max-w-2xl text-center text-sm text-launch-footer">Credit cost — one wallet for all engines: Image {ENGINE_CREDIT_COSTS.image} · Voice minute {ENGINE_CREDIT_COSTS.voiceMinute} · Song {ENGINE_CREDIT_COSTS.song} · Video 5-sec {ENGINE_CREDIT_COSTS.videoFiveSeconds} · Code App {ENGINE_CREDIT_COSTS.codeApp}.</p>
     <p className="mx-auto max-w-2xl text-center text-sm text-launch-footer">Payments: Squad by HabariPay / GTBank MAIN, Paystack BACKUP — Secured by GTBank Squad. No payment today; checkout opens at launch.</p>
+    {selected && <CheckoutModal product={selected} onClose={() => setSelected(null)} />}
   </div>;
 }
 
