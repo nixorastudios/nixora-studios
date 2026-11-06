@@ -93,6 +93,12 @@ function OwnerPage() {
                 {data && !data.waitlist.length && <p className="p-4 text-muted-foreground">No signups yet.</p>}</div>
             </section>
             <section className="space-y-3">
+              <h2 className="text-xl font-bold">Users</h2>
+              <div className="overflow-x-auto rounded-xl border border-border"><table className="w-full text-sm"><thead className="bg-muted text-left"><tr><th className="p-3">Name</th><th className="p-3">Email</th><th className="p-3">Joined</th></tr></thead>
+                <tbody>{data?.users.map(u => <tr key={u.email} className="border-t border-border"><td className="p-3">{u.name || "—"}</td><td className="p-3">{u.email}</td><td className="p-3">{new Date(u.date).toLocaleDateString()}</td></tr>)}</tbody></table>
+                {data && !data.users.length && <p className="p-4 text-muted-foreground">No users yet.</p>}</div>
+            </section>
+            <section className="space-y-3">
               <h2 className="text-xl font-bold">Payments {data && !data.payments.length && <span className="text-sm font-normal text-muted-foreground">— demo data until test keys are added</span>}</h2>
               <div className="overflow-x-auto rounded-xl border border-border"><table className="w-full text-sm"><thead className="bg-muted text-left"><tr><th className="p-3">Email</th><th className="p-3">Plan</th><th className="p-3">Amount</th><th className="p-3">Gateway</th><th className="p-3">Status</th></tr></thead>
                 <tbody>{payments.map((p, i) => <tr key={i} className="border-t border-border"><td className="p-3">{p.email}</td><td className="p-3 uppercase">{p.plan || "—"}</td><td className="p-3">{naira(p.amountNaira)}</td><td className="p-3 capitalize">{p.gateway}</td><td className="p-3">{p.status}</td></tr>)}</tbody></table></div>

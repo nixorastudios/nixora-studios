@@ -13,7 +13,7 @@ function Signup() {
   const [message, setMessage] = useState(''); const [busy, setBusy] = useState(false);
   async function submit(e: FormEvent) {
     e.preventDefault(); setMessage('');
-    if (name.trim().length < 2) return setMessage('Enter your name.');
+    if (name.trim().length < 2) return setMessage('Enter your full name.');
     if (password.length < 8) return setMessage('Password must be at least 8 characters.');
     if (password !== confirm) return setMessage('Passwords do not match.');
     setBusy(true);
@@ -26,7 +26,7 @@ function Signup() {
     <BackToHome />
     <h1 className="text-3xl font-bold">Create Account</h1>
     <form onSubmit={submit} className="space-y-4">
-      <label className="block text-sm">Name<Input required maxLength={120} value={name} onChange={e => setName(e.target.value)} /></label>
+      <label className="block text-sm">Full Name<Input required maxLength={120} value={name} onChange={e => setName(e.target.value)} /></label>
       <label className="block text-sm">Email<Input type="email" required maxLength={254} value={email} onChange={e => setEmail(e.target.value)} /></label>
       <label className="block text-sm">Password<Input type="password" required minLength={8} value={password} onChange={e => setPassword(e.target.value)} /></label>
       <label className="block text-sm">Confirm Password<Input type="password" required minLength={8} value={confirm} onChange={e => setConfirm(e.target.value)} /></label>

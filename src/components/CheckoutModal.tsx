@@ -12,6 +12,7 @@ const naira = (n: number) => `₦${n.toLocaleString('en-NG')}`;
 // TODO: Insert SQUAD_SANDBOX_PUBLIC_KEY here when keys arrive, then Paystack test key.
 export function CheckoutModal({ product, onClose }: { product: CheckoutProduct; onClose: () => void }) {
   const join = useServerFn(joinLaunchWaitlist);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
@@ -23,8 +24,8 @@ export function CheckoutModal({ product, onClose }: { product: CheckoutProduct; 
   }, [onClose]);
 
   const pay = async () => {
-    const parsed = waitlistSchema.safeParse({ email, source: 'pricing-checkout', plan: product.code });
-    if (!parsed.success) return setMsg('Enter a valid email address.');
+    const parsed = waitlistSchema.safeParse({ name, email, source: 'pricing-checkout', plan: product.code });
+    if (!parsed.success) return setMsg(parsed.error.issues[0]?.message ?? 'Check your details.');
     setBusy(true); setMsg('');
     try {
       const r = await join({ data: parsed.data });
@@ -42,6 +43,7 @@ export function CheckoutModal({ product, onClose }: { product: CheckoutProduct; 
         <dt className="text-muted-foreground">Credits</dt><dd className="font-bold">{product.credits.toLocaleString()}</dd>
         <dt className="text-muted-foreground">Price</dt><dd className="font-bold">{naira(product.naira)}{product.kind === 'subscription' ? ' / month' : ' one-time'}</dd>
       </dl>
+      <input type="text" required maxLength={120} value={name} onChange={e => setName(e.target.value)} placeholder="Full Name" aria-label="Full Name" className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground" />
       <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" aria-label="Email" className="w-full rounded-lg border border-input bg-background px-3 py-2 text-foreground" />
       <button type="button" disabled={busy} onClick={pay} className="w-full rounded-xl bg-primary px-4 py-3 font-bold text-primary-foreground disabled:opacity-60">Pay with Squad — GTBank</button>
       <button type="button" disabled={busy} onClick={pay} className="w-full rounded-xl bg-muted px-4 py-3 font-bold text-muted-foreground disabled:opacity-60">Pay with Paystack (backup)</button>
