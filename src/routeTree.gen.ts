@@ -17,16 +17,19 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HomepageRouteImport } from './routes/homepage'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OwnerRouteImport } from './routes/owner'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as RefundPolicyRouteImport } from './routes/refund-policy'
 import { Route as SecurityRouteImport } from './routes/security'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedCheckoutRouteImport } from './routes/_authenticated/checkout'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedMyStudioRouteImport } from './routes/_authenticated/my-studio'
 import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
 import { Route as ApiCodeEngineRouteImport } from './routes/api/code-engine'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
@@ -76,6 +79,11 @@ const OwnerRoute = OwnerRouteImport.update({
   path: '/owner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -101,6 +109,11 @@ const SecurityRoute = SecurityRouteImport.update({
   path: '/security',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -124,6 +137,11 @@ const AuthenticatedCheckoutRoute = AuthenticatedCheckoutRouteImport.update({
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedMyStudioRoute = AuthenticatedMyStudioRouteImport.update({
+  id: '/my-studio',
+  path: '/my-studio',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
@@ -181,16 +199,19 @@ export interface FileRoutesByFullPath {
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
   '/owner': typeof OwnerRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/my-studio': typeof AuthenticatedMyStudioRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
@@ -209,16 +230,19 @@ export interface FileRoutesByTo {
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
   '/owner': typeof OwnerRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/checkout': typeof AuthenticatedCheckoutRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/my-studio': typeof AuthenticatedMyStudioRoute
   '/profile': typeof AuthenticatedProfileRoute
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
@@ -239,16 +263,19 @@ export interface FileRoutesById {
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
   '/owner': typeof OwnerRoute
+  '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/refund': typeof RefundRoute
   '/refund-policy': typeof RefundPolicyRoute
   '/security': typeof SecurityRoute
+  '/signup': typeof SignupRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms': typeof TermsRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/checkout': typeof AuthenticatedCheckoutRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/my-studio': typeof AuthenticatedMyStudioRoute
   '/_authenticated/profile': typeof AuthenticatedProfileRoute
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
@@ -269,16 +296,19 @@ export interface FileRouteTypes {
     | '/homepage'
     | '/login'
     | '/owner'
+    | '/pricing'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
     | '/refund-policy'
     | '/security'
+    | '/signup'
     | '/sitemap.xml'
     | '/terms'
     | '/admin'
     | '/checkout'
     | '/dashboard'
+    | '/my-studio'
     | '/profile'
     | '/api/code-engine'
     | '/api/edit-image'
@@ -297,16 +327,19 @@ export interface FileRouteTypes {
     | '/homepage'
     | '/login'
     | '/owner'
+    | '/pricing'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
     | '/refund-policy'
     | '/security'
+    | '/signup'
     | '/sitemap.xml'
     | '/terms'
     | '/admin'
     | '/checkout'
     | '/dashboard'
+    | '/my-studio'
     | '/profile'
     | '/api/code-engine'
     | '/api/edit-image'
@@ -326,16 +359,19 @@ export interface FileRouteTypes {
     | '/homepage'
     | '/login'
     | '/owner'
+    | '/pricing'
     | '/privacy'
     | '/privacy-policy'
     | '/refund'
     | '/refund-policy'
     | '/security'
+    | '/signup'
     | '/sitemap.xml'
     | '/terms'
     | '/_authenticated/admin'
     | '/_authenticated/checkout'
     | '/_authenticated/dashboard'
+    | '/_authenticated/my-studio'
     | '/_authenticated/profile'
     | '/api/code-engine'
     | '/api/edit-image'
@@ -356,11 +392,13 @@ export interface RootRouteChildren {
   HomepageRoute: typeof HomepageRoute
   LoginRoute: typeof LoginRoute
   OwnerRoute: typeof OwnerRoute
+  PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RefundRoute: typeof RefundRoute
   RefundPolicyRoute: typeof RefundPolicyRoute
   SecurityRoute: typeof SecurityRoute
+  SignupRoute: typeof SignupRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsRoute: typeof TermsRoute
   ApiCodeEngineRoute: typeof ApiCodeEngineRoute
@@ -431,6 +469,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OwnerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -466,6 +511,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SecurityRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -499,6 +551,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/my-studio': {
+      id: '/_authenticated/my-studio'
+      path: '/my-studio'
+      fullPath: '/my-studio'
+      preLoaderRoute: typeof AuthenticatedMyStudioRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/profile': {
@@ -571,6 +630,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedCheckoutRoute: typeof AuthenticatedCheckoutRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedMyStudioRoute: typeof AuthenticatedMyStudioRoute
   AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
 }
 
@@ -578,6 +638,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedCheckoutRoute: AuthenticatedCheckoutRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedMyStudioRoute: AuthenticatedMyStudioRoute,
   AuthenticatedProfileRoute: AuthenticatedProfileRoute,
 }
 
@@ -593,11 +654,13 @@ const rootRouteChildren: RootRouteChildren = {
   HomepageRoute: HomepageRoute,
   LoginRoute: LoginRoute,
   OwnerRoute: OwnerRoute,
+  PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   RefundRoute: RefundRoute,
   RefundPolicyRoute: RefundPolicyRoute,
   SecurityRoute: SecurityRoute,
+  SignupRoute: SignupRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsRoute: TermsRoute,
   ApiCodeEngineRoute: ApiCodeEngineRoute,

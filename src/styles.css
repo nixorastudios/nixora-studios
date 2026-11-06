@@ -369,3 +369,5 @@
 @media (max-width: 900px) { .code-layout { grid-template-columns: minmax(0,1fr); } .code-sidebar { display: flex; flex-wrap: wrap; gap: 4px; border-right: none; border-bottom: 1px solid var(--border); padding: 10px; } .code-sidebar>p,.code-sidebar>div { display: none; } .code-sidebar button { width: auto; margin: 0; font-size: 11px; padding: 6px 9px; } .code-workspace { grid-template-columns: 320px minmax(0,1fr); } }
 @media (max-width: 700px) { .code-workspace { grid-template-columns: minmax(0,1fr); } .code-chat { border-right: none; border-bottom: 1px solid var(--border); } .code-chat>div:nth-child(2) { padding-top: 22px; } .code-output { min-height: 650px; } .code-canvas { min-height: 500px; } .code-scene { height: 520px; } .code-topbar { padding: 12px; } .code-topbar h1 { font-size: 13px; } }
 @media (prefers-reduced-motion: reduce) { .code-engine * { animation: none; transition: none; } }
+
+html { overflow-y: scroll; }

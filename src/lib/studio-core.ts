@@ -29,5 +29,5 @@ export function validateStudioUpload(file: Pick<File, 'size' | 'type'>) {
   if (file.size <= 0 || file.size > MAX_UPLOAD_BYTES) throw new Error('Choose a nonempty file up to 50 MB.');
 }
 export function safeAccountRedirect(path: unknown) {
-  return typeof path === 'string' && /^\/(?!\/)[^\\]*$/.test(path) && !path.startsWith('/login') && !path.startsWith('/auth') ? path : '/dashboard';
+  return typeof path === 'string' && /^\/(?!\/)[^\\]*$/.test(path) && !path.startsWith('/login') && !path.startsWith('/auth') ? path : '/my-studio';
 }
