@@ -130,7 +130,7 @@ function Index() {
     setNotice('');
     try {
       const result = await runJoin({ data: parsed.data });
-      setNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. Your idea stays on this device; no email has been sent.' : result.error);
+      setNotice(result.ok ? `You are #${result.position ?? '—'} on the waitlist! Your email is saved securely. Your idea stays on this device; no email has been sent.` : result.error);
       if (result.ok) { setEmail(''); void refreshWaitlistTotal(); }
     } catch {
       setNotice('We could not save your signup. Please check your connection and try again.');
@@ -149,7 +149,7 @@ function Index() {
     setEarlyNotice('');
     try {
       const result = await runJoin({ data: parsed.data });
-      setEarlyNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. No email has been sent.' : result.error);
+      setEarlyNotice(result.ok ? `You are #${result.position ?? '—'} on the waitlist! Your email is saved securely. No email has been sent.` : result.error);
       if (result.ok) { setEarlyEmail(''); void refreshWaitlistTotal(); }
     } catch {
       setEarlyNotice('We could not save your signup. Please check your connection and try again.');
