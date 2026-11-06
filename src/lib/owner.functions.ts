@@ -31,7 +31,7 @@ export const getOwnerOverview = createServerFn({ method: "POST" })
       waitlistCount: waitlist.count ?? 0,
       waitlist: (waitlist.data ?? []).map(w => ({ name: w.name ?? "", email: w.email, date: w.created_at, plan: w.plan_code ?? "" })),
       totalUsers: users.data && "total" in users.data ? Number(users.data.total) : 0,
-      users: (users.data?.users ?? []).map(u => ({ name: nameOf.get(u.id) || String(u.user_metadata?.full_name ?? ""), email: u.email ?? "", date: u.created_at })),
+      users: (users.data?.users ?? []).map(u => ({ name: nameOf.get(u.id) || String(u.user_metadata?.['full_name'] ?? ""), email: u.email ?? "", date: u.created_at })),
       creditsSold: (ledger.data ?? []).reduce((s, r) => s + Number(r.credits), 0),
       revenueNaira: paid.reduce((s, p) => s + Number(p.amount_kobo), 0) / 100,
       payments: (payments.data ?? []).map(p => ({ email: p.email, plan: p.product_code ?? "", amountNaira: Number(p.amount_kobo) / 100, gateway: p.provider, status: p.status, date: p.created_at })),
