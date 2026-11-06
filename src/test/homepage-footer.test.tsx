@@ -53,23 +53,16 @@ describe("Homepage footer", () => {
     }
   });
 
-  it("shows USD under NGN on each Early Access card", async () => {
-    const router = createRouter({
-      routeTree,
-      history: createMemoryHistory({ initialEntries: ["/"] }),
-      context: { queryClient: new QueryClient() },
-    });
-
+  it("shows Option A prices and no old bundles", async () => {
+    const router = createRouter({ routeTree, history: createMemoryHistory({ initialEntries: ["/"] }), context: { queryClient: new QueryClient() } });
     await router.load();
-
     render(<RouterProvider router={router} />);
-
-    expect(await screen.findByText("Early value ₦5,000")).toBeInTheDocument();
-    expect(screen.getByText("$5 USD")).toBeInTheDocument();
-    expect(screen.getByText("Early value ₦20,000")).toBeInTheDocument();
-    expect(screen.getByText("$20 USD")).toBeInTheDocument();
-    expect(screen.getByText("Early value ₦60,000")).toBeInTheDocument();
-    expect(screen.getByText("$60 USD")).toBeInTheDocument();
-    expect(screen.getByText(/Paystack \(NGN\) \+ Stripe \(USD\) at launch Nov 23/)).toBeInTheDocument();
+    expect(await screen.findByText("₦30,000 / month")).toBeInTheDocument();
+    expect(screen.getByText("₦60,000 / month")).toBeInTheDocument();
+    expect(screen.getByText("₦120,000 / month")).toBeInTheDocument();
+    expect(screen.getByText("₦7,500 one-time")).toBeInTheDocument();
+    expect(screen.getByText("₦35,000 one-time")).toBeInTheDocument();
+    expect(screen.queryByText("Early value ₦5,000")).not.toBeInTheDocument();
+    expect(screen.queryByText(/Stripe/)).not.toBeInTheDocument();
   });
 });
