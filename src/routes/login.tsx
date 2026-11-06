@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { studioHead } from '@/lib/studio-head';
 import { safeAccountRedirect } from '@/lib/studio-core';
 
-export const Route = createFileRoute('/login')({ ssr: false, validateSearch: (s: Record<string, unknown>) => ({ redirect: safeAccountRedirect(s.redirect) }), head: () => studioHead('Sign in', 'Sign in to your private NIXORA studio.'), staticData: { sitemap: false }, component: Login });
+export const Route = createFileRoute('/login')({ ssr: false, validateSearch: (s: Record<string, unknown>) => ({ redirect: safeAccountRedirect(s['redirect']) }), head: () => studioHead('Sign in', 'Sign in to your private NIXORA studio.'), staticData: { sitemap: false }, component: Login });
 function Login() {
   const { redirect } = Route.useSearch();
   const navigate = useNavigate();
