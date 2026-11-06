@@ -5,12 +5,12 @@ describe('Shared launch waitlist', () => {
   it('stores a normalized email in the database rather than browser storage', async () => {
     const insert = vi.fn().mockResolvedValue({ error: null });
     expect(await persistWaitlistSignup({ name: 'Ada Obi', email: ' Creator@Example.com ', source: 'early-access' }, insert)).toEqual({ ok: true, position: null });
-    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'creator@example.com', source: 'early-access', name: null, plan_code: null });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'creator@example.com', source: 'early-access', name: 'Ada Obi', plan_code: null });
   });
   it('supports the prompt-board signup without uploading the draft', async () => {
     const insert = vi.fn().mockResolvedValue({ error: null });
     await persistWaitlistSignup({ name: 'Ada Obi', email: 'creator@example.com', source: 'prompt-board' }, insert);
-    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'creator@example.com', source: 'prompt-board', name: null, plan_code: null });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'creator@example.com', source: 'prompt-board', name: 'Ada Obi', plan_code: null });
   });
   it('does not expose whether an address is already registered', async () => {
     const insert = vi.fn().mockResolvedValue({ error: { code: '23505' } });
@@ -32,7 +32,7 @@ describe('Shared launch waitlist', () => {
   it('records the plan clicked at checkout and returns the waitlist position', async () => {
     const insert = vi.fn().mockResolvedValue({ error: null });
     expect(await persistWaitlistSignup({ name: 'Ada Obi', email: 'a@example.com', source: 'pricing-checkout', plan: 'ultra' }, insert, async () => 848)).toEqual({ ok: true, position: 848 });
-    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'a@example.com', source: 'pricing-checkout', name: null, plan_code: 'ultra' });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ name: 'Ada Obi', email: 'a@example.com', source: 'pricing-checkout', name: 'Ada Obi', plan_code: 'ultra' });
   });
 });
 
