@@ -10,8 +10,8 @@ const platforms = [
   { id: "spotify", label: "Spotify", spec: "WAV 44.1kHz 24bit Cover 3000x3000", frame: "audio" },
 ];
 
-export default function ExportModal({ onClose, onExport, isOwner = true }: any) {
-  const [selected, setSelected] = useState(platforms[0]!.id);
+export default function ExportModal({ onClose, onExport, isOwner = false }: any) {
+  const [selected, setSelected] = useState(platforms[0]?.id ?? 'youtube');
 
   const handleExport = () => {
     const platform = platforms.find(p => p.id === selected);

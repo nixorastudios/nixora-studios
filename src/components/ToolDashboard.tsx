@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import type { ToolConfig } from "@/lib/tools";
+import { saveStudioUpload } from '@/lib/studio-uploads';
 
 export function ToolDashboard({ tool }: { tool: ToolConfig }) {
   const [prompt, setPrompt] = useState("");
@@ -16,6 +17,7 @@ export function ToolDashboard({ tool }: { tool: ToolConfig }) {
     setFile(f);
     if (fileUrl) URL.revokeObjectURL(fileUrl);
     setFileUrl(f ? URL.createObjectURL(f) : null);
+    if (f && (f.type.startsWith('image/') || f.type.startsWith('video/'))) void saveStudioUpload(f, tool.name).then(r => { if (r.saved) setStatus('File saved to your private library.'); }).catch(e => setStatus(e instanceof Error ? e.message : 'Upload failed.'));
   };
 
   const generate = () => {

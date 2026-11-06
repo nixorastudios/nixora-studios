@@ -1,5 +1,8 @@
 import { useEffect, useState, type DragEvent } from "react";
 import ExportModal from "./ExportModal";
+import { useServerFn } from '@tanstack/react-start';
+import { getOwnerStatus } from '@/lib/owner.functions';
+import { saveStudioUpload } from '@/lib/studio-uploads';
 const TABS = ["PROMPT", "IMAGE", "SPREADSHEET", "VIDEO/WORK"] as const;
 type Tab = (typeof TABS)[number];
 const JOBS_KEY = "nixora_code_engine_jobs";
@@ -25,6 +28,9 @@ function parseCsv(text: string) {
 }
 
 export function ExtensionDashboard({ tool, onClose }: { tool: string; onClose: () => void }) {
+  const [isOwner, setIsOwner] = useState(false);
+  const ownerStatus = useServerFn(getOwnerStatus);
+  useEffect(() => { let active = true; ownerStatus().then(r => { if (active) setIsOwner(r.isOwner); }).catch(() => { if (active) setIsOwner(false); }); return () => { active = false; }; }, [ownerStatus]);
   const [tab, setTab] = useState<Tab>("PROMPT");
   const [prompt, setPrompt] = useState("");
   const [image, setImage] = useState<{ name: string; url: string } | null>(null);
@@ -59,6 +65,7 @@ useEffect(() => {
     const r = new FileReader();
     r.onload = () => setImage({ name: f.name, url: String(r.result) });
     r.readAsDataURL(f);
+    void saveStudioUpload(f, tool).catch(e => setOutput(e instanceof Error ? e.message : 'Upload failed.'));
   };
   const onDrop = (e: DragEvent) => {
     e.preventDefault();
@@ -186,7 +193,7 @@ useEffect(() => {
   <ExportModal
     onClose={() => setShowExportModal(false)}
     onExport={(data: any) => handlePlatformExport(data, currentOutput || output)}
-    isOwner={true}
+    isOwner={isOwner}
   />
 )}
         </div>
