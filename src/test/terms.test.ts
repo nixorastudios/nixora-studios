@@ -30,6 +30,12 @@ function mockedAdmin({ acceptedAt = new Date().toISOString(), emailConfirmedAt =
 const paid = { provider: 'paystack', reference: 'order_123456', amount: 500000, currency: 'NGN', email: 'creator@example.com' };
 
 describe('terms enforcement on credit delivery', () => {
+  it('rejects future-dated acceptance', async () => {
+    const { rpc, admin } = mockedAdmin({ acceptedAt: '2099-01-01T00:00:00Z' });
+    await expect(purchaseCredits(admin, paid)).rejects.toThrow('Terms not accepted');
+    expect(rpc).not.toHaveBeenCalled();
+    await expect(hasAcceptedTerms(admin, 'u1')).resolves.toBe(false);
+  });
   it('blocks credit delivery when the buyer never accepted terms', async () => {
     const { rpc, admin } = mockedAdmin({ acceptedAt: null });
     await expect(purchaseCredits(admin, paid)).rejects.toThrow('Terms not accepted');

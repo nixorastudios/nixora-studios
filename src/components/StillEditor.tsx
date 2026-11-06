@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Download, ImagePlus, Loader2, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { saveStudioUpload } from '@/lib/studio-uploads';
 
 const HANDOFF_KEY = "nixora_handoff_image";
 const MOTIONS = ["Slow zoom in", "Slow zoom out", "Pan left", "Pan right", "Still"] as const;
@@ -34,7 +35,7 @@ export function StillEditor() {
   function draw(t: number) {
     const c = canvas.current, i = img.current; if (!c || !i) return;
     const [w, h] = SIZES[size]; c.width = w; c.height = h;
-    const ctx = c.getContext("2d")!; const p = Math.min(1, Math.max(0, t));
+    const ctx = c.getContext("2d"); if (!ctx) return; const p = Math.min(1, Math.max(0, t));
     const zoom = motion === "Slow zoom in" ? 1 + 0.15 * p : motion === "Slow zoom out" ? 1.15 - 0.15 * p : motion === "Still" ? 1 : 1.15;
     const cover = Math.max(w / i.naturalWidth, h / i.naturalHeight) * zoom;
     const dw = i.naturalWidth * cover, dh = i.naturalHeight * cover;
@@ -61,7 +62,7 @@ export function StillEditor() {
     rec.onstop = () => { const blob = new Blob(chunks, { type: rec.mimeType }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `nixora-edit.${rec.mimeType.includes("mp4") ? "mp4" : "webm"}`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000); setBusy(false); setNotice("Clip downloaded."); };
     rec.start(); play(() => setTimeout(() => rec.stop(), 100));
   }
-  const pick = (f?: File) => { if (f?.type.startsWith("image/")) { const r = new FileReader(); r.onload = () => setSrc(String(r.result)); r.readAsDataURL(f); } };
+  const pick = (f?: File) => { if (f?.type.startsWith("image/")) { const r = new FileReader(); r.onload = () => setSrc(String(r.result)); r.readAsDataURL(f); void saveStudioUpload(f, 'Video Editor').then(result => { if (result.saved) setNotice('Image saved to your private library.'); }).catch(e => setNotice(e instanceof Error ? e.message : 'Upload failed.')); } };
 
   return <div className="video-studio min-h-screen bg-background text-foreground">
     <header className="flex items-center gap-3 border-b border-border px-4 py-3 lg:px-8"><Button asChild variant="ghost" size="icon" title="Back to home"><Link to="/"><ArrowLeft /></Link></Button><Link to="/" className="text-lg font-extrabold">NIXORA<span className="text-primary">.</span></Link><span className="hidden border-l border-border pl-3 text-xs text-muted-foreground sm:block">ENGINE 09 · VIDEO EDITOR</span></header>
@@ -79,7 +80,7 @@ export function StillEditor() {
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={fade} onChange={(e) => setFade(e.target.checked)} />Fade in and out</label>
         <div className="flex gap-2"><Button variant="outline" disabled={!src || busy} onClick={() => play()}><Play />Preview</Button><Button disabled={!src || busy} onClick={exportClip}>{busy ? <Loader2 className="animate-spin" /> : <Download />}Export clip</Button></div>
         {notice && <p role="status" className="rounded-md border border-border bg-card p-3 text-sm">{notice}</p>}
-        <p className="text-[11px] text-muted-foreground">Edits run on your device; nothing is uploaded.</p>
+        <p className="text-[11px] text-muted-foreground">Edits run on your device. Signed-in uploads are saved privately.</p>
       </section>
       <section className="flex min-h-[360px] items-center justify-center rounded-lg border border-border bg-card p-3" aria-label="Preview">
         {src ? <canvas ref={canvas} className="max-h-[70vh] max-w-full rounded" /> : <p className="text-sm text-muted-foreground">Send an image from Text to Image, or choose one to start editing.</p>}

@@ -45,7 +45,7 @@ const [currentOutput, setCurrentOutput] = useState<any>(null);
 
 const handlePlatformExport = (exportData: any, output: any) => {
   console.log("EXPORTING TO PLATFORM", exportData, output);
-  alert(`Exported to ${exportData.platform} - ${exportData.spec} - Signature embedded: NIXORA_PAID_SIGNATURE_v1 - Media sees PAID content`);
+  alert(`Export settings selected for ${exportData.platform}. No media export or payment verification was performed.`);
 };
   useEffect(() => {
   if (output) setCurrentOutput(output);
@@ -166,7 +166,7 @@ useEffect(() => {
           )}
           {tab === "VIDEO/WORK" && (
             <div>
-              <input type="file" accept="video/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) setVideo({ name: f.name, url: URL.createObjectURL(f) }); }} />
+              <input type="file" accept="video/*" onChange={(e) => { const f = e.target.files?.[0]; if (f) { setVideo({ name: f.name, url: URL.createObjectURL(f) }); void saveStudioUpload(f, tool).catch(err => setOutput(err instanceof Error ? err.message : 'Upload failed.')); } }} />
               {video && <video src={video.url} controls style={{ maxWidth: "100%", marginTop: 10 }} />}
               <textarea value={work} onChange={(e) => setWork(e.target.value)} placeholder="Describe the work..." style={{ ...area, height: 180, marginTop: 10 }} />
             </div>
