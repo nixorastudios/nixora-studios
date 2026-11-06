@@ -23,7 +23,10 @@ describe.skipIf(!admin || !pub)('private upload ownership', () => {
       const created = await admin.auth.admin.createUser({ email, password, email_confirm: true });
       if (created.error || !created.data.user) throw new Error('Fixture creation failed');
       ids.push(created.data.user.id); const actor = client(pub);
-      const login = await actor.auth.signInWithPassword({ email, password }); if (login.error) throw new Error('Fixture sign-in failed');
+      const link = await admin.auth.admin.generateLink({ type: 'magiclink', email });
+      const tokenHash = link.data.properties?.hashed_token;
+      if (link.error || !tokenHash) throw new Error('Fixture session preparation failed');
+      const login = await actor.auth.verifyOtp({ token_hash: tokenHash, type: 'email' }); if (login.error) throw new Error('Fixture sign-in failed');
       actors.push(actor);
     }
     const first = actors[0], second = actors[1], firstId = ids[0];
