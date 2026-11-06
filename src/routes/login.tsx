@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
-import { useState } from 'react';
+import { useState, type FormEvent } from 'react';
 import { lovable } from '@/integrations/lovable';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,7 @@ function Login() {
     try { sessionStorage.setItem('nixora_after_login', redirect); const result = await lovable.auth.signInWithOAuth(provider, { redirect_uri: `${window.location.origin}/auth` }); if (result.error) throw result.error; const { data } = await supabase.auth.getUser(); if (data.user) await navigate({ href: safeAccountRedirect(redirect) }); }
     catch { setMessage('Sign-in could not finish. Please try again.'); } finally { setBusy(false); }
   }
-  async function passwordSignIn(e: React.FormEvent) { e.preventDefault(); setBusy(true); setMessage(''); const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password }); setBusy(false); if (error) { setMessage(error.message); return; } await navigate({ href: safeAccountRedirect(redirect) }); }
+  async function passwordSignIn(e: FormEvent) { e.preventDefault(); setBusy(true); setMessage(''); const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password }); setBusy(false); if (error) { setMessage(error.message); return; } await navigate({ href: safeAccountRedirect(redirect) }); }
   return <main className="launch-theme min-h-screen bg-background px-6 py-10 text-foreground"><div className="mx-auto w-full max-w-md space-y-6">
     <BackToHome /><h1 className="text-3xl font-bold">Sign In</h1>
     <form onSubmit={passwordSignIn} className="space-y-4"><label className="block text-sm">Email<Input type="email" required maxLength={254} value={email} onChange={e => setEmail(e.target.value)} /></label><label className="block text-sm">Password<Input type="password" required value={password} onChange={e => setPassword(e.target.value)} /></label><Button type="submit" className="w-full" disabled={busy}>Sign In</Button></form>
