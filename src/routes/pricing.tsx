@@ -10,6 +10,7 @@ export const Route = createFileRoute('/pricing')({
     { property: 'og:type', content: 'website' },
     { name: 'twitter:card', content: 'summary' },
   ] }),
+  staticData: { sitemap: true },
   component: Pricing,
 });
 
