@@ -99,6 +99,13 @@
       "when": 1793989005461,
       "tag": "0013_waitlist_checkout_source",
       "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1793990123442,
+      "tag": "0014_profile_name_on_signup",
+      "breakpoints": true
     }
   ]
 }
