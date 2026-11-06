@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Studio core completion: About page and links; protected user dashboard, owner admin and profile; remove unconditional owner export; real homepage totals; personal Drive/Gmail; verify GitHub push; Paystack checkout using existing terms/credits; private upload library. Preserve existing studios and do not publish. Blockers to resolve: owner account transfer decision, Google OAuth client configuration, genuine Paystack test credentials and authorized GitHub test target.
+- [x] Owner correction: preserve anago.vincent.nnalue@gmail.com as the single verified app owner; no second owner, email transfer or further owner questions.
+- [ ] Studio core completion: About page and links; protected user dashboard, owner admin and profile; remove unconditional owner export; real homepage totals; personal Drive/Gmail; verify GitHub push; Paystack checkout using existing terms/credits; private upload library. Preserve existing studios and do not publish. Blockers to resolve: Google OAuth client configuration, genuine Paystack test credentials and authorized GitHub test target.
 - [x] Build NIXORA CODE ENGINE: black/gold profession workspace, approval-first AI plan/build/check workflow, local ten-second autosave, private Cloud projects/history, sandboxed preview and project export; real signed-in plan/build, saved calculator arithmetic, export and mobile 3D verified; not published.
 - [ ] External Code Engine GitHub push, hosting, Drive/Dropbox/Firebase connections — blocked: user-authorized service connections and hosting setup; show truthful connection states rather than simulated success.
 

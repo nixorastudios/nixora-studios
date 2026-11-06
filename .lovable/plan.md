@@ -13,7 +13,7 @@ Keep the existing homepage appearance, camera photo, legal content, footer layou
 - Add protected `/admin`: server-authorized owner access to user, waitlist, project and payment totals, with paginated lists of all users, projects and payments. Ordinary users cannot fetch these records directly.
 - Add protected `/profile`: editable name and photo, plus secure password update/recovery through the existing account service. Photo changes use private storage; never use editable profile fields to assign roles.
 - Remove the legacy Extension Dashboard's unconditional `isOwner={true}`. Keep its opening, tabs, local saving and close behavior unchanged. Owner controls require the existing verified server-side role check; no browser email checks.
-- **Safe owner transition:** the current verified owner account exists; `vincent@nixorastudios.com` does not yet exist. Keep current access during implementation. Prepare a server-controlled transfer to the verified business-email account; do not revoke existing access before that account can sign in and the transfer is completed.
+- **Single owner, unchanged:** preserve `anago.vincent.nnalue@gmail.com` as the only verified owner using the existing server-side role. Ignore the nonexistent business-email account. Do not add a second owner, transfer access or ask about ownership again. Do not display the personal owner email on public pages.
 
 ## 3. Genuine public numbers
 - Replace the illustrative waitlist total with an aggregate database count that never exposes signup emails.
