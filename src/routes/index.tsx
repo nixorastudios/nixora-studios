@@ -11,6 +11,10 @@ import { saveLaunchDraft } from '@/lib/launch';
 import { joinLaunchWaitlist } from '@/lib/waitlist.functions';
 import { waitlistSchema } from '@/lib/waitlist';
 import models from '@/lib/models.json';
+import { publicWaitlistTotal } from '@/lib/studio-core.functions';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+
+const waitlistTotalQuery = queryOptions({ queryKey: ['public-waitlist-total'], queryFn: async () => { try { return await publicWaitlistTotal(); } catch { return null; } }, staleTime: 30000 });
 
 const homepageTools = models.flatMap(model => {
   const tool = TOOLS.find(tool => tool.slug === model.slug);
@@ -20,6 +24,7 @@ const homepageTools = models.flatMap(model => {
 const title = 'NIXORA STUDIOS — Coming Soon · Global AI Video Studio';
 const description = '10 engines in 1. One global studio. NIXORA STUDIOS launches November 23, 2026.';
 export const Route = createFileRoute('/')({
+  loader: ({ context }) => context.queryClient.ensureQueryData(waitlistTotalQuery),
   head: () => ({ meta: [{ title }, { name: 'description', content: description }, { property: 'og:title', content: title }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] }),
   staticData: { sitemap: true },
   component: Index,
@@ -30,6 +35,7 @@ const draftKey = (slug: string) => `nixora_launch_prompt_${slug}`;
 const VIDEO_ENGINES = new Set(['text-to-video', 'photo-to-video', 'animation', 'lipsync', 'video-editor']);
 
 function Index() {
+  const { data: waitlistTotal, refetch: refreshWaitlistTotal } = useSuspenseQuery(waitlistTotalQuery);
   const [selectedTool, setSelectedTool] = useState<ToolConfig | null>(null);
   const [imagePreview, setImagePreview] = useState(false);
   useEffect(() => { setImagePreview(isImageEnginePreviewHost(window.location.hostname)); }, []);
@@ -124,7 +130,7 @@ function Index() {
     try {
       const result = await runJoin({ data: parsed.data });
       setNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. Your idea stays on this device; no email has been sent.' : result.error);
-      if (result.ok) setEmail('');
+      if (result.ok) { setEmail(''); void refreshWaitlistTotal(); }
     } catch {
       setNotice('We could not save your signup. Please check your connection and try again.');
     } finally {
@@ -143,7 +149,7 @@ function Index() {
     try {
       const result = await runJoin({ data: parsed.data });
       setEarlyNotice(result.ok ? 'You’re on the NIXORA STUDIOS waitlist! Your email is saved securely. No email has been sent.' : result.error);
-      if (result.ok) setEarlyEmail('');
+      if (result.ok) { setEarlyEmail(''); void refreshWaitlistTotal(); }
     } catch {
       setEarlyNotice('We could not save your signup. Please check your connection and try again.');
     } finally {
@@ -152,6 +158,7 @@ function Index() {
   };
 
   return <div className="launch-theme camera-home min-h-screen text-foreground">
+    <nav aria-label="Main navigation" className="flex flex-wrap justify-end gap-5 border-b border-border bg-background px-8 py-3 text-sm"><Link to="/about">About</Link><Link to="/dashboard">My studio</Link><Link to="/login" search={{ redirect: '/dashboard' }}>Sign in</Link></nav>
     <main>
       <section className="camera-single-hero relative flex min-h-[80svh] items-center px-8 py-16 md:px-16">
         <img src={cameraHero} alt="" className="absolute inset-0 size-full object-cover object-right" aria-hidden="true" />
@@ -162,6 +169,7 @@ function Index() {
           <p className="mb-6 text-xl text-foreground/80">Coming Soon — Global AI Video Studio</p>
           <p className="text-foreground/60">LAUNCHING NOVEMBER 23, 2026 - 10 ENGINES IN 1</p>
           <p className="mt-2 text-xs text-foreground/50">NIXORA STUDIOS LTD - CR 9950450</p>
+          <p className="mt-4 text-sm text-foreground/80">{waitlistTotal === null ? 'Waitlist count unavailable' : `${waitlistTotal.toLocaleString()} on the waitlist`}</p>
         </div>
       </section>
       <section id="engines" className="bg-background px-8 py-20">
@@ -226,6 +234,7 @@ function Index() {
           <p className="text-lg font-black text-foreground">NIXORA STUDIOS.</p>
           <p className="mt-1 text-primary">Global AI Video Studio</p>
           <p className="mt-3 text-launch-footer">© 2026 NIXORA STUDIOS LTD - CR 9950450</p>
+          <div className="mt-3 flex flex-wrap gap-4"><Link to="/about" className="underline text-launch-footer-link">About</Link><Link to="/dashboard" className="underline text-launch-footer-link">My studio</Link></div>
         </div>
         <nav aria-label="Product">
           <p className="mb-3 font-bold text-foreground">Product</p>

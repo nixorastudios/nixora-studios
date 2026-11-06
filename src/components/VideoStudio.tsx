@@ -10,6 +10,7 @@ import { generateStudioVideo, getStudioVideo, listStudioVideos } from '@/lib/vid
 import { polishVideoPrompt } from '@/lib/prompt-polish.functions';
 import { DEFAULT_VIDEO_SETTINGS, loadStartFrameDataUrl, stripStartFrame, videoSettingsSchema, type StudioJob, type VideoSettings } from '@/lib/video-studio';
 import sample from '@/assets/video-studio-sample.jpg';
+import { saveStudioUpload } from '@/lib/studio-uploads';
 
 const samples = [
   { name: 'The last explorer', tag: 'SCI-FI · LANDSCAPE', prompt: 'A lone astronaut stands on a black volcanic coastline, looking out over the Atlantic as the sun breaks through storm clouds. The camera slowly pushes toward the astronaut; waves roll naturally against the rocks.' },
@@ -82,7 +83,7 @@ export function VideoStudio({ variant = 'video' }: { variant?: StudioVariant } =
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-    try { update('startFrame', await loadStartFrameDataUrl(file)); setNotice(''); }
+    try { update('startFrame', await loadStartFrameDataUrl(file)); setNotice(''); const saved = await saveStudioUpload(file, V.title); if (saved.saved) setNotice('Opening frame saved to your private library.'); }
     catch { setNotice('That image could not be prepared. Try a JPG, PNG or WebP photo instead.'); }
   };
   const animateStill = async () => {

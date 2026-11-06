@@ -51,13 +51,19 @@ export default function Terms() {
 
         <h2 className="mt-8 text-lg font-bold">5. Credits &amp; Payments</h2>
         <p>
-          Generations are paid for with credits: one credit equals one generation, and the credit is deducted when
-          the generation starts. Payments are processed securely by Paystack, and your bank statement may show the
-          payment under the name NIXORASTUDIOS LTD. We do not store your card details on our own servers. During the
-          Coming Soon period there is no automatic subscription and no recurring billing of any kind — you only ever
-          pay for the credits you choose to buy. Prices are shown before you pay, and credits do not expire while
-          your account remains active.
+          Generations are paid for through one shared credit wallet across all engines. The published credit costs
+          are Image 2, Voice per minute 4, Song 10, Video per 5 seconds 20 and Code App 25. Costs apply only when the
+          corresponding paid service is activated; preview tests remain separate. Squad by HabariPay / GTBank (GTCO)
+          is the primary payment provider and Paystack is the backup. Both are test-only until merchant setup and
+          payment verification are completed. We do not store card details on our own servers.
         </p>
+        <p className="mt-3">Monthly subscriptions are PRO ₦30,000 for 150 credits, ULTRA ₦60,000 for 500 credits,
+          and BUSINESS/GROUP ₦120,000 for 1,500 credits and 3 seats. One-time packs, without a subscription, are
+          Small ₦7,500 for 60 credits, Medium ₦15,000 for 150 credits, and Large ₦35,000 for 500 credits.
+          Recurring charges remain unavailable until the provider's recurring-billing setup is verified.
+          Prices are shown before payment; existing homepage early-access offers are separate.</p>
+        <p className="mt-3">Prices and credit amounts may change with 7 days notice on the website. Credits bought
+          before a change keep their old value for 12 months. Subscription price is locked for the current billing month.</p>
 
         <h2 className="mt-8 text-lg font-bold">6. Acceptable Use</h2>
         <p>

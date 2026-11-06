@@ -11,6 +11,7 @@ import { imagePromptAction } from "@/lib/image-prompt.functions";
 import { HANDOFF_ENGINES } from "@/lib/engines.config";
 import { PREFS_KEY, applyFeedback, readPreferences, type CreatorPreferences } from "@/lib/creator-feedback";
 import { recordCreatorFeedback } from "@/lib/creator-feedback.functions";
+import { saveStudioUpload } from '@/lib/studio-uploads';
 import { ASPECTS, DIMENSIONS, FORMATS, MAX_PROMPT, MODE_GROUPS, PLATFORMS, RESOLUTIONS, appendStyleHint, buildImagePrompt, exportSize, generationSize, isVaguePrompt, parsePromptHints, type Aspect, type Resolution } from "@/lib/image-studio";
 
 type Ref = { id: string; name: string; file: File; url: string };
@@ -111,6 +112,9 @@ export function ImageStudio() {
     if (!list.length) { setNotice("Drop image files (JPG, PNG or WEBP)."); return; }
     setRefs((old) => [...old, ...list.map((f) => ({ id: crypto.randomUUID(), name: f.name.replace(/\.[^.]+$/, ""), file: f, url: URL.createObjectURL(f) }))].slice(0, 4));
     setNotice(list.length + refs.length > 4 ? "Up to four references are used." : "");
+    for (const file of list.slice(0, Math.max(0, 4 - refs.length))) {
+      void saveStudioUpload(file, 'Text to Image').then(r => { if (r.saved) setNotice('Reference saved to your private library.'); }).catch(e => setNotice(e instanceof Error ? e.message : 'Reference upload failed.'));
+    }
   };
   const onDrop = (e: DragEvent) => { e.preventDefault(); setDrop(false); addRefs(e.dataTransfer.files); };
 

@@ -55,7 +55,7 @@ export function TermsCheckoutGuard({ children }: { children: (ready: boolean) =>
           className="mt-1 accent-primary"
         />
         I have verified my email and I accept the Terms, Refund Policy and Privacy Policy —
-        1 credit = 1 successful generation, failed generations auto-refund in credits.
+        engine credit costs are shown before checkout; failed charged generations auto-refund in credits.
       </label>
       {isLoggedIn && !emailVerified && (
         <p className="text-xs text-destructive">Verify your email before continuing to payment.</p>
