@@ -344,48 +344,202 @@ export type Database = {
           amount_kobo: number
           created_at: string
           credit_delivered_at: string | null
+          credit_value_snapshot: Json | null
           currency: string
           email: string
           expected_credits: number
           id: string
           ip: string | null
+          pricing_version: string | null
+          product_code: string | null
           provider: string
           reference: string
           status: string
+          subscription_id: string | null
           terms_version: string | null
           user_agent: string | null
           user_id: string
+          value_protected_until: string | null
         }
         Insert: {
           amount_kobo: number
           created_at?: string
           credit_delivered_at?: string | null
+          credit_value_snapshot?: Json | null
           currency?: string
           email: string
           expected_credits: number
           id?: string
           ip?: string | null
+          pricing_version?: string | null
+          product_code?: string | null
           provider: string
           reference: string
           status?: string
+          subscription_id?: string | null
           terms_version?: string | null
           user_agent?: string | null
           user_id: string
+          value_protected_until?: string | null
         }
         Update: {
           amount_kobo?: number
           created_at?: string
           credit_delivered_at?: string | null
+          credit_value_snapshot?: Json | null
           currency?: string
           email?: string
           expected_credits?: number
           id?: string
           ip?: string | null
+          pricing_version?: string | null
+          product_code?: string | null
           provider?: string
           reference?: string
           status?: string
+          subscription_id?: string | null
           terms_version?: string | null
           user_agent?: string | null
+          user_id?: string
+          value_protected_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "payments_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "studio_subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          display_name: string
+          id: string
+          photo_path: string | null
+          updated_at: string
+        }
+        Insert: {
+          display_name?: string
+          id: string
+          photo_path?: string | null
+          updated_at?: string
+        }
+        Update: {
+          display_name?: string
+          id?: string
+          photo_path?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      studio_group_seats: {
+        Row: {
+          created_at: string
+          id: string
+          subscription_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          subscription_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          subscription_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_group_seats_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "studio_subscriptions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean
+          created_at: string
+          credits_per_period: number
+          id: string
+          period_end: string | null
+          period_start: string | null
+          plan_code: string
+          price_kobo: number
+          provider: string
+          provider_subscription_id: string | null
+          seat_limit: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          credits_per_period: number
+          id?: string
+          period_end?: string | null
+          period_start?: string | null
+          plan_code: string
+          price_kobo: number
+          provider: string
+          provider_subscription_id?: string | null
+          seat_limit?: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          credits_per_period?: number
+          id?: string
+          period_end?: string | null
+          period_start?: string | null
+          plan_code?: string
+          price_kobo?: number
+          provider?: string
+          provider_subscription_id?: string | null
+          seat_limit?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      studio_uploads: {
+        Row: {
+          created_at: string
+          engine: string
+          id: string
+          mime_type: string
+          name: string
+          path: string
+          size_bytes: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          engine: string
+          id?: string
+          mime_type: string
+          name: string
+          path: string
+          size_bytes: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          engine?: string
+          id?: string
+          mime_type?: string
+          name?: string
+          path?: string
+          size_bytes?: number
           user_id?: string
         }
         Relationships: []
@@ -544,6 +698,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      public_waitlist_total: { Args: never; Returns: number }
       purchase_credits: {
         Args: {
           p_amount: number

@@ -78,6 +78,13 @@
       "when": 1793886038088,
       "tag": "0010_code_engine_publish",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1793982192653,
+      "tag": "0011_studio_core_accounts_and_uploads",
+      "breakpoints": true
     }
   ]
 }

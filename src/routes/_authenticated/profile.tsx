@@ -1,0 +1,16 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { StudioAccountShell } from '@/components/StudioAccountShell';
+import { studioHead } from '@/lib/studio-head';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { saveStudioUpload, studioFileLink } from '@/lib/studio-uploads';
+export const Route = createFileRoute('/_authenticated/profile')({ head: () => studioHead('Profile', 'Manage your NIXORA name, private photo and password.'), staticData: { sitemap: false }, component: Profile });
+function Profile() { const [name, setName] = useState(''); const [photo, setPhoto] = useState(''); const [path, setPath] = useState<string | null>(null); const [password, setPassword] = useState(''); const [status, setStatus] = useState('');
+  useEffect(() => { void (async () => { const { data } = await supabase.auth.getUser(); if (!data.user) return; const { data: profile } = await supabase.from('profiles').select('*').eq('id', data.user.id).maybeSingle(); if (profile) { setName(profile.display_name); setPath(profile.photo_path); if (profile.photo_path) setPhoto(await studioFileLink(profile.photo_path)); } })().catch(() => setStatus('Profile could not load.')); }, []);
+  return <StudioAccountShell title="Your profile"><form className="max-w-lg space-y-5" onSubmit={async e => { e.preventDefault(); const { data } = await supabase.auth.getUser(); if (!data.user) return; const { error } = await supabase.from('profiles').upsert({ id: data.user.id, display_name: name.trim(), photo_path: path, updated_at: new Date().toISOString() }); setStatus(error ? 'Profile could not save.' : 'Profile saved.'); }}>
+    {photo && <img src={photo} alt="Your profile" className="size-24 rounded-lg object-cover" />}<label className="block text-sm">Name<Input required maxLength={100} value={name} onChange={e => setName(e.target.value)} /></label>
+    <label className="block text-sm">Photo<input type="file" accept="image/jpeg,image/png,image/webp" className="mt-2 block max-w-full" onChange={async e => { const f = e.target.files?.[0]; if (!f) return; setStatus('Uploading photo…'); try { const r = await saveStudioUpload(f, 'Profile'); if (r.saved) { setPath(r.path); setPhoto(await studioFileLink(r.path)); setStatus('Photo uploaded. Save your profile to apply it.'); } } catch (err) { setStatus(err instanceof Error ? err.message : 'Photo upload failed.'); } }} /></label><Button type="submit">Save profile</Button>
+  </form><form className="max-w-lg space-y-4 border-t border-border pt-6" onSubmit={async e => { e.preventDefault(); const { error } = await supabase.auth.updateUser({ password }); setStatus(error ? error.message : 'Password updated.'); if (!error) setPassword(''); }}><label className="block text-sm">New password<Input type="password" minLength={8} required value={password} onChange={e => setPassword(e.target.value)} /></label><Button type="submit" variant="outline">Update password</Button></form>{status && <p role="status">{status}</p>}</StudioAccountShell>;
+}

@@ -1,0 +1,22 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { queryOptions, useSuspenseQuery } from '@tanstack/react-query';
+import { loadStudioDashboard } from '@/lib/studio-core.functions';
+import { StudioAccountShell } from '@/components/StudioAccountShell';
+import { Button } from '@/components/ui/button';
+import { studioHead } from '@/lib/studio-head';
+import { saveStudioUpload, studioFileLink, deleteStudioUpload } from '@/lib/studio-uploads';
+import { useState } from 'react';
+import { TOOLS } from '@/lib/tools';
+const dashboardQuery = queryOptions({ queryKey: ['studio-dashboard'], queryFn: () => loadStudioDashboard() });
+export const Route = createFileRoute('/_authenticated/dashboard')({ loader: ({ context }) => context.queryClient.ensureQueryData(dashboardQuery), head: () => studioHead('Dashboard', 'Your private projects, wallet and uploaded files.'), staticData: { sitemap: false }, component: Dashboard });
+function Dashboard() {
+  const { data, refetch } = useSuspenseQuery(dashboardQuery); const [status, setStatus] = useState('');
+  return <StudioAccountShell title="Your studio"><div className="flex flex-wrap items-center justify-between gap-4"><p className="text-lg"><strong>{data.balance}</strong> credits · one wallet for all engines</p>{data.isOwner && <Button asChild variant="outline"><Link to="/admin">Owner administration</Link></Button>}</div>
+    <section className="space-y-4"><h2 className="text-xl font-bold">Start a project</h2><div className="flex flex-wrap gap-3">{TOOLS.map(tool => <Button key={tool.slug} asChild variant="outline"><Link to="/tools/$tool" params={{ tool: tool.slug }}>{tool.name}</Link></Button>)}</div></section>
+    <section className="space-y-4"><h2 className="text-xl font-bold">Projects</h2>{!data.projects.length && !data.videos.length && <p className="text-muted-foreground">No Cloud projects yet.</p>}<div className="divide-y divide-border">{data.projects.map(p => <div key={p.id} className="flex flex-wrap justify-between gap-3 py-4"><div><p className="font-semibold">{p.name}</p><p className="text-sm text-muted-foreground">Code Engine · {p.profession}</p></div><Button asChild variant="outline"><Link to="/tools/$tool" params={{ tool: 'code-engine' }}>Open workspace</Link></Button></div>)}{data.videos.map(v => <div key={v.id} className="py-4"><p className="line-clamp-2">{v.prompt}</p><p className="text-sm text-muted-foreground">Video · {v.status}</p></div>)}</div></section>
+    <section className="space-y-4"><h2 className="text-xl font-bold">Engines used</h2><p className="text-muted-foreground">{[...(data.projects.length ? ['Code Engine'] : []), ...(data.videos.length ? ['Video'] : []), ...new Set(data.uploads.map(f => f.engine))].join(' · ') || 'No recorded activity yet.'}</p></section>
+    <section className="space-y-4"><h2 className="text-xl font-bold">Private files</h2><label className="block text-sm">Upload image or video<input className="mt-2 block max-w-full" aria-label="Upload to private library" type="file" accept="image/jpeg,image/png,image/webp,image/gif,video/mp4,video/webm,video/quicktime" onChange={async e => { const file = e.target.files?.[0]; if (!file) return; setStatus('Uploading…'); try { await saveStudioUpload(file, 'Library'); setStatus('Saved privately.'); await refetch(); } catch (err) { setStatus(err instanceof Error ? err.message : 'Upload failed.'); } }} /></label>
+    <div className="divide-y divide-border">{data.uploads.map(f => <div key={f.id} className="flex flex-wrap items-center justify-between gap-3 py-4"><div className="min-w-0"><p className="break-all">{f.name}</p><p className="text-xs text-muted-foreground">{f.engine} · {(f.size_bytes / 1024 / 1024).toFixed(2)} MB</p></div><div className="flex gap-2"><Button variant="outline" onClick={async () => { try { const url = await studioFileLink(f.path); window.open(url, '_blank', 'noopener,noreferrer'); } catch { setStatus('File unavailable.'); } }}>Open</Button><Button variant="ghost" onClick={async () => { try { await deleteStudioUpload(f.id, f.path); await refetch(); } catch { setStatus('Deletion failed.'); } }}>Delete</Button></div></div>)}</div></section>
+    {status && <p role="status" className="text-primary">{status}</p>}
+  </StudioAccountShell>;
+}
