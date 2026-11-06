@@ -4,17 +4,17 @@ import { persistWaitlistSignup, waitlistSchema } from '@/lib/waitlist';
 describe('Shared launch waitlist', () => {
   it('stores a normalized email in the database rather than browser storage', async () => {
     const insert = vi.fn().mockResolvedValue({ error: null });
-    expect(await persistWaitlistSignup({ email: ' Creator@Example.com ', source: 'early-access' }, insert)).toEqual({ ok: true });
-    expect(insert).toHaveBeenCalledExactlyOnceWith({ email: 'creator@example.com', source: 'early-access' });
+    expect(await persistWaitlistSignup({ email: ' Creator@Example.com ', source: 'early-access' }, insert)).toEqual({ ok: true, position: null });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ email: 'creator@example.com', source: 'early-access', name: null, plan_code: null });
   });
   it('supports the prompt-board signup without uploading the draft', async () => {
     const insert = vi.fn().mockResolvedValue({ error: null });
     await persistWaitlistSignup({ email: 'creator@example.com', source: 'prompt-board' }, insert);
-    expect(insert).toHaveBeenCalledExactlyOnceWith({ email: 'creator@example.com', source: 'prompt-board' });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ email: 'creator@example.com', source: 'prompt-board', name: null, plan_code: null });
   });
   it('does not expose whether an address is already registered', async () => {
     const insert = vi.fn().mockResolvedValue({ error: { code: '23505' } });
-    expect(await persistWaitlistSignup({ email: 'creator@example.com', source: 'early-access' }, insert)).toEqual({ ok: true });
+    expect(await persistWaitlistSignup({ email: 'creator@example.com', source: 'early-access' }, insert)).toEqual({ ok: true, position: null });
   });
   it('does not claim success if storing the email fails', async () => {
     const insert = vi.fn().mockResolvedValue({ error: { code: '42501' } });
@@ -28,5 +28,10 @@ describe('Shared launch waitlist', () => {
   it('rejects unexpected data and oversize input', () => {
     expect(waitlistSchema.safeParse({ email: 'a'.repeat(250) + '@example.com', source: 'early-access' }).success).toBe(false);
     expect(waitlistSchema.safeParse({ email: 'creator@example.com', source: 'early-access', prompt: 'private idea' }).success).toBe(false);
+  });
+  it('records the plan clicked at checkout and returns the waitlist position', async () => {
+    const insert = vi.fn().mockResolvedValue({ error: null });
+    expect(await persistWaitlistSignup({ email: 'a@example.com', source: 'pricing-checkout', plan: 'ultra' }, insert, async () => 848)).toEqual({ ok: true, position: 848 });
+    expect(insert).toHaveBeenCalledExactlyOnceWith({ email: 'a@example.com', source: 'pricing-checkout', name: null, plan_code: 'ultra' });
   });
 });

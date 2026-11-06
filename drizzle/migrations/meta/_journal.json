@@ -85,6 +85,20 @@
       "when": 1793982192653,
       "tag": "0011_studio_core_accounts_and_uploads",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1793988620178,
+      "tag": "0012_waitlist_name_plan",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1793989005461,
+      "tag": "0013_waitlist_checkout_source",
+      "breakpoints": true
     }
   ]
 }

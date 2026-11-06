@@ -10,13 +10,26 @@ export const getOwnerStatus = createServerFn({ method: "POST" })
     return { isOwner: data === true };
   });
 
-// Owner-only overview: role verified first, then privileged counts.
+// Owner-only overview: role verified first, then privileged reads.
 export const getOwnerOverview = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { data: isOwner } = await context.supabase.rpc("has_role", { _user_id: context.userId, _role: "owner" });
     if (isOwner !== true) throw new Error("Forbidden");
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { count } = await supabaseAdmin.from("waitlist_signups").select("*", { count: "exact", head: true });
-    return { waitlistCount: count ?? 0 };
+    const { supabaseAdmin: admin } = await import("@/integrations/supabase/client.server");
+    const [waitlist, users, ledger, payments] = await Promise.all([
+      admin.from("waitlist_signups").select("name,email,created_at,plan_code", { count: "exact" }).order("created_at", { ascending: false }).limit(1000),
+      admin.auth.admin.listUsers({ page: 1, perPage: 1 }),
+      admin.from("credit_ledger").select("credits").eq("type", "purchase").limit(10000),
+      admin.from("payments").select("email,product_code,amount_kobo,provider,status,created_at").order("created_at", { ascending: false }).limit(200),
+    ]);
+    const paid = (payments.data ?? []).filter(p => p.status === "success" || p.status === "paid");
+    return {
+      waitlistCount: waitlist.count ?? 0,
+      waitlist: (waitlist.data ?? []).map(w => ({ name: w.name ?? "", email: w.email, date: w.created_at, plan: w.plan_code ?? "" })),
+      totalUsers: users.data && "total" in users.data ? Number(users.data.total) : 0,
+      creditsSold: (ledger.data ?? []).reduce((s, r) => s + Number(r.credits), 0),
+      revenueNaira: paid.reduce((s, p) => s + Number(p.amount_kobo), 0) / 100,
+      payments: (payments.data ?? []).map(p => ({ email: p.email, plan: p.product_code ?? "", amountNaira: Number(p.amount_kobo) / 100, gateway: p.provider, status: p.status, date: p.created_at })),
+    };
   });

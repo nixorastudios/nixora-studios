@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { ENGINE_CREDIT_COSTS, STUDIO_PRODUCTS } from '@/lib/studio-core';
+import { CheckoutModal, type CheckoutProduct } from '@/components/CheckoutModal';
 
 const naira = (n: number) => `₦${n.toLocaleString('en-NG')}`;
 
-export function OptionAPricing({ ctaHref = '#early-access-form', ctaLabel = 'Join Waitlist — Priority Access' }: { ctaHref?: string; ctaLabel?: string }) {
+export function OptionAPricing({ ctaLabel = 'Join Waitlist / Buy' }: { ctaHref?: string; ctaLabel?: string }) {
+  const [selected, setSelected] = useState<CheckoutProduct | null>(null);
   const groups = [
     { title: 'Monthly subscriptions', items: STUDIO_PRODUCTS.filter(p => p.kind === 'subscription') },
     { title: 'One-time credit packs — no subscription', items: STUDIO_PRODUCTS.filter(p => p.kind === 'pack') },
@@ -19,13 +22,14 @@ export function OptionAPricing({ ctaHref = '#early-access-form', ctaLabel = 'Joi
             <p className="mt-1 text-3xl font-black text-primary">{p.credits.toLocaleString()} Credits</p>
             <p className="mt-4 font-bold">{naira(p.naira)}{p.kind === 'subscription' ? ' / month' : ' one-time'}</p>
             {p.seats > 1 && <p className="text-sm text-launch-card-muted">{p.seats} seats</p>}
-            <a href={ctaHref} className={`mt-6 inline-flex items-center justify-center rounded-xl px-4 py-3 text-center font-bold transition-colors ${popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground'}`}>{ctaLabel}</a>
+            <button type="button" onClick={() => setSelected(p)} className={`mt-6 inline-flex items-center justify-center rounded-xl px-4 py-3 text-center font-bold transition-colors ${popular ? 'bg-primary text-primary-foreground hover:bg-primary/90' : 'border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground'}`}>{ctaLabel}</button>
           </div>;
         })}
       </div>
     </div>)}
     <p className="mx-auto max-w-2xl text-center text-sm text-launch-footer">Credit cost — one wallet for all engines: Image {ENGINE_CREDIT_COSTS.image} · Voice minute {ENGINE_CREDIT_COSTS.voiceMinute} · Song {ENGINE_CREDIT_COSTS.song} · Video 5-sec {ENGINE_CREDIT_COSTS.videoFiveSeconds} · Code App {ENGINE_CREDIT_COSTS.codeApp}.</p>
     <p className="mx-auto max-w-2xl text-center text-sm text-launch-footer">Payments: Squad by HabariPay / GTBank MAIN, Paystack BACKUP — Secured by GTBank Squad. No payment today; checkout opens at launch.</p>
+    {selected && <CheckoutModal product={selected} onClose={() => setSelected(null)} />}
   </div>;
 }
 
