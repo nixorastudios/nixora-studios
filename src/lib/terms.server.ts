@@ -27,5 +27,6 @@ export async function hasAcceptedTerms(admin: Admin, userId: string): Promise<bo
     .limit(1)
     .maybeSingle();
   if (error || !data) return false;
-  return Date.now() - new Date(data.accepted_at).getTime() <= TERMS_VALIDITY_MS;
+  const age = Date.now() - new Date(data.accepted_at).getTime();
+  return Number.isFinite(age) && age >= 0 && age <= TERMS_VALIDITY_MS;
 }
