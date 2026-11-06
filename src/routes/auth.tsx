@@ -1,0 +1,7 @@
+import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { safeAccountRedirect } from '@/lib/studio-core';
+import { studioHead } from '@/lib/studio-head';
+export const Route = createFileRoute('/auth')({ ssr: false, head: () => studioHead('Account confirmation', 'Complete your NIXORA account sign-in.'), staticData: { sitemap: false }, component: Auth });
+function Auth() { const navigate = useNavigate(); const [message, setMessage] = useState('Finishing sign-in…'); useEffect(() => { let active = true; const finish = async () => { const { data } = await supabase.auth.getUser(); if (!active) return; if (data.user) { const path = safeAccountRedirect(sessionStorage.getItem('nixora_after_login')); sessionStorage.removeItem('nixora_after_login'); if (path === '/profile') await navigate({ to: '/profile' }); else await navigate({ to: '/dashboard' }); } else await navigate({ to: '/login' }); }; void finish().catch(() => setMessage('Sign-in could not finish. Return to sign in.')); return () => { active = false; }; }, [navigate]); return <main className="min-h-screen bg-background p-8 text-foreground"><p role="status">{message}</p></main>; }
