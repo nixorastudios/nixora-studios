@@ -26,19 +26,57 @@ Keep the existing homepage appearance, camera photo, legal content, footer layou
 - Preserve GitHub's existing owner-only connection and push workflow. Test with a clearly named disposable private repository, then read the uploaded file/commit back and report the actual result.
 - **Google setup required:** no per-user OAuth clients are configured yet. A workspace owner/admin must configure and link them. Register only `https://connector-gateway.lovable.dev/api/v1/app-users/oauth2/callback` as Google's redirect URI, enable offline access, and publish the Google OAuth app or use Internal audience where applicable. Do not substitute the shared Gmail/Drive credentials.
 
-## 5. Paystack-only credit checkout
-- Add protected `/checkout` using exactly these server-priced bundles:
-  - 100 credits: **₦15,000**
-  - 500 credits: **₦60,000**
-  - 1000 credits: **₦100,000**
-- Reuse the existing verified-email checks, single terms-acceptance record, payment-attempt logging, signature-verified Paystack webhook and atomic/idempotent credit fulfillment. No duplicate terms store or new wallet system.
-- Register the buyer and server-selected order before starting Paystack checkout. Verify the provider result before displaying success; browser redirects never deliver credits on their own.
-- Add owner-visible payment alerts from fulfilled payment records. Automatic email alerts require a separately configured delivery service; do not claim emails were sent without one.
-- Keep homepage early-access offers unchanged, as requested; these checkout bundles are separate. Keep live charging disabled until genuine credentials and launch authorization exist.
-- Provide an owner-only payment setup/status section, but **do not store secret keys in browser storage, ordinary settings rows or source code**. Use secure project secret entry rather than an ordinary dashboard textbox. Genuine Paystack test keys are required to complete a test transaction; placeholders cannot take payments or create credits.
-- Do not add Stripe, Flutterwave or activate Squad.
+## 5. Option A FINAL — subscriptions and one-time packs
+Add protected `/checkout` with both systems and exactly these server-selected prices and credit amounts. Reject all superseded checkout bundles; never double the credit amounts below.
 
-## 6. Private uploaded-file library
+### A. Subscription — monthly
+| Plan | Monthly price | Credits | Seats |
+| --- | ---: | ---: | ---: |
+| PRO | **₦30,000** | **150** | — |
+| ULTRA — **MOST POPULAR** | **₦60,000** | **500** | — |
+| BUSINESS/GROUP | **₦120,000** | **1,500** | **3** |
+
+### B. Packs — one-time, no subscription
+| Pack | One-time price | Credits |
+| --- | ---: | ---: |
+| Small | **₦7,500** | **60** |
+| Medium | **₦15,000** | **150** |
+| Large | **₦35,000** | **500** |
+
+### One wallet for all engines
+| Engine action | Credit cost |
+| --- | ---: |
+| Image | **2** |
+| Voice — per minute | **4** |
+| Song | **10** |
+| Video — per 5 seconds | **20** |
+| Code App | **25** |
+
+- Customers can switch engines using the same wallet, without purchasing another subscription. Reuse the existing credit ledger and atomic/idempotent deductions and refunds, rather than introducing separate engine wallets. Connect these costs only to implemented paid actions; do not build missing engines.
+- Reuse verified-email checks, the single terms-acceptance record and payment-attempt logging. Register the authenticated buyer and server-priced order before provider checkout; browser redirects never deliver credits.
+- Record subscription status and verified billing events, grant credits once per paid billing period, and enforce the BUSINESS/GROUP three-seat entitlement server-side. Support cancellation and accurate next-billing information; do not assume unrequested rollover or pack expiry rules.
+- Add owner-visible payment alerts from fulfilled payment records. Automatic email alerts require a configured delivery service; never claim emails were sent without one.
+- Keep homepage early-access offers unchanged, as requested; these checkout products are separate. Keep all payment work in test mode, with live charging disabled.
+
+### T&C addition
+- Prices and credit amounts may change with **7 days notice on the website**.
+- Credits bought before a change **keep their old value for 12 months**; retain purchase-time pricing and usage-value information so later changes cannot silently devalue them during that period.
+- The **subscription price is locked for the current billing month**.
+- Add these clauses to the existing terms, with no second acceptance store and no unrelated legal rewrite.
+
+## 6. Payment gateways and private uploaded-file library
+### MAIN — Squad by HabariPay / GTBank (GTCO)
+- **Test keys only.** Required payment methods: **Card, Bank Transfer, USSD *737#**, and **recurring billing for subscriptions**.
+- Verify Squad's current official test API, raw-body webhook signature/event contract, supported payment channels and recurring-billing capabilities before activation. Implement the required flows using the verified contract; unsupported or unverified capabilities remain visibly unavailable rather than simulated.
+- Replace the existing fail-closed Squad stub only after that verification. Squad is required as the main provider; do not route subscriptions through an invented recurring-payment contract.
+
+### BACKUP — Paystack
+- **Test keys only.** Preserve and reuse the existing verified-signature webhook and registered-order credit fulfillment as the backup payment path.
+- Use deliberate provider selection/fallback before a payment starts; never automatically submit to a second provider after an uncertain payment result. Prevent duplicate delivery across both providers.
+- Provide owner-only configuration/status controls. Collect genuine test keys through secure secret entry, never ordinary dashboard textboxes, browser storage, source code or plaintext database settings. Placeholder keys cannot complete payments or create credits.
+- Test Squad checkout, supported channels and recurring renewal/cancellation; test Paystack backup checkout and replay successful events to confirm no duplicate credits. Keep live charging disabled and report any credential/provider-contract blockers honestly.
+
+### Private uploaded-file library — preserved
 - Create private `nixora-uploads` storage and user-owned file records, integrated with existing engine upload handlers without redesigning them.
 - Signed-in image/video uploads are saved under the authenticated user's identity and listed on their dashboard. Signed-out uploads must not silently persist or share ownership.
 - Keep base64 image data out of local drafts and database settings; save file bytes privately and record only metadata/storage paths. This deliberately replaces the previous transient-only upload policy for user-uploaded files; generated-video storage and the existing image handoff remain compatible.
