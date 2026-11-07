@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Verification redirect: signup/resend use the production callback, validate confirmation before My Studio and show welcome; publish and verify. Hosted Site URL change requires More → Users → Auth settings → Advanced; domain wildcard already allowed.
+- [x] Verification redirect: signup/resend use the production callback; verified owner session reached My Studio with welcome, expired callback blocked, four tests and build pass. Publishing requested next; actual inbox link click not tested.
+- [ ] Hosted Auth Site URL — blocked: no tool edits this setting; user must set https://nixorastudios.com in More → Users → Auth settings → Advanced. Domain wildcard already allows the requested paths.
 
 - [x] Email verification security fix: hosted signup returned no session, test3@nixora.com password sign-in blocked with email_not_confirmed and My Studio redirected to login; signup instructions/resend button added, sole verified owner confirmed, 19 tests/build pass; not published. Test account remains unverified; inbox delivery not tested.
 
