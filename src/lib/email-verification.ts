@@ -3,6 +3,6 @@ export function hasVerifiedEmail(user: { email?: string; email_confirmed_at?: st
   return Boolean(user?.email && user.email_confirmed_at);
 }
 
-export function isEmailUnconfirmed(error: { code?: string; message: string }): boolean {
+export function isEmailUnconfirmed(error: { code?: string | undefined; message: string }): boolean {
   return error.code === 'email_not_confirmed' || /email not confirmed/i.test(error.message);
 }
