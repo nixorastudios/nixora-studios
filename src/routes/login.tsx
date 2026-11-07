@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { studioHead } from '@/lib/studio-head';
 import { safeAccountRedirect } from '@/lib/studio-core';
 import { BackToHome } from '@/components/OptionAPricing';
-import { hasVerifiedEmail, isEmailUnconfirmed } from '@/lib/email-verification';
+import { hasVerifiedEmail, isEmailUnconfirmed, VERIFICATION_REDIRECT_URL } from '@/lib/email-verification';
 
 export const Route = createFileRoute('/login')({ ssr: false, validateSearch: (s: Record<string, unknown>) => ({ redirect: safeAccountRedirect(s['redirect']) }), head: () => studioHead('Sign in', 'Sign in to your private NIXORA studio.'), staticData: { sitemap: false }, component: Login });
 function Login() {
@@ -46,7 +46,7 @@ function Login() {
     setBusy(true);
     try {
       sessionStorage.setItem('nixora_after_login', redirect);
-      const { error } = await supabase.auth.resend({ type: 'signup', email: email.trim(), options: { emailRedirectTo: `${window.location.origin}/auth` } });
+      const { error } = await supabase.auth.resend({ type: 'signup', email: email.trim(), options: { emailRedirectTo: VERIFICATION_REDIRECT_URL } });
       setMessage(error ? error.message : 'Check your email - click link to verify - check spam too.');
     } catch { setMessage('Unable to request a verification email. Please try again.'); }
     finally { setBusy(false); }

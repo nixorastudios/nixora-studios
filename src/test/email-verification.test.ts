@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { hasVerifiedEmail, isEmailUnconfirmed } from '@/lib/email-verification';
+import { hasVerifiedEmail, isEmailUnconfirmed, VERIFICATION_REDIRECT_URL } from '@/lib/email-verification';
 
 describe('email verification access', () => {
+  it('returns signup and resend verification to the production domain callback', () => {
+    expect(VERIFICATION_REDIRECT_URL).toBe('https://nixorastudios.com/auth/callback');
+  });
   it('blocks test3@nixora.com before the confirmation link is clicked', () => {
     expect(hasVerifiedEmail({ email: 'test3@nixora.com', email_confirmed_at: null })).toBe(false);
   });
