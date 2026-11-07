@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Email verification security fix: require confirmation, signup instructions and resend link, block test3@nixora.com before verification; preserve sole owner role.
+- [x] Email verification security fix: hosted signup returned no session, test3@nixora.com password sign-in blocked with email_not_confirmed and My Studio redirected to login; signup instructions/resend button added, sole verified owner confirmed, 19 tests/build pass; not published. Test account remains unverified; inbox delivery not tested.
 
 - [x] Owner correction: preserve anago.vincent.nnalue@gmail.com as the single verified app owner; no second owner, email transfer or further owner questions.
 - [x] Core account additions: About and account links, protected dashboard/admin/profile, real aggregate waitlist count, fail-closed legacy owner export, private uploads integrated with existing engine handlers, Option A catalog/checkout and terms clauses; preview only, no publication. Signed-out gates and owner dashboard/admin, upload read-back/delete and cross-user storage denial verified; studio/payment regressions pass.
