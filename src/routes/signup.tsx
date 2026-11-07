@@ -20,7 +20,7 @@ function Signup() {
     sessionStorage.setItem('nixora_after_login', '/my-studio');
     const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: `${window.location.origin}/auth`, data: { full_name: name.trim() } } });
     setBusy(false);
-    setMessage(error ? error.message : 'Account created. Check your email to confirm, then sign in.');
+    setMessage(error ? error.message : 'Check your email - click link to verify - check spam too.');
   }
   return <main className="launch-theme min-h-screen bg-background px-6 py-10 text-foreground"><div className="mx-auto w-full max-w-md space-y-6">
     <BackToHome />
