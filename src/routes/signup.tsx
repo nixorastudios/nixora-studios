@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { studioHead } from '@/lib/studio-head';
 import { BackToHome } from '@/components/OptionAPricing';
+import { VERIFICATION_REDIRECT_URL } from '@/lib/email-verification';
 
 export const Route = createFileRoute('/signup')({ ssr: false, head: () => studioHead('Create account', 'Create your NIXORA STUDIOS account.'), staticData: { sitemap: false }, component: Signup });
 
@@ -18,7 +19,7 @@ function Signup() {
     if (password !== confirm) return setMessage('Passwords do not match.');
     setBusy(true);
     sessionStorage.setItem('nixora_after_login', '/my-studio');
-    const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: `${window.location.origin}/auth`, data: { full_name: name.trim() } } });
+    const { error } = await supabase.auth.signUp({ email: email.trim(), password, options: { emailRedirectTo: VERIFICATION_REDIRECT_URL, data: { full_name: name.trim() } } });
     setBusy(false);
     setMessage(error ? error.message : 'Check your email - click link to verify - check spam too.');
   }

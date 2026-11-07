@@ -34,6 +34,7 @@ import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticate
 import { Route as ApiCodeEngineRouteImport } from './routes/api/code-engine'
 import { Route as ApiEditImageRouteImport } from './routes/api/edit-image'
 import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-image'
+import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
 import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
@@ -164,6 +165,11 @@ const ApiGenerateImageRoute = ApiGenerateImageRouteImport.update({
   path: '/api/generate-image',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthCallbackRoute = AuthCallbackRouteImport.update({
+  id: '/callback',
+  path: '/callback',
+  getParentRoute: () => AuthRoute,
+} as any)
 const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   id: '/projects/$slug',
   path: '/projects/$slug',
@@ -194,7 +200,7 @@ const ApiPublicSquadWebhookRoute = ApiPublicSquadWebhookRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
@@ -225,7 +232,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
@@ -247,6 +254,7 @@ export interface FileRoutesByTo {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
@@ -258,7 +266,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/contact': typeof ContactRoute
   '/homepage': typeof HomepageRoute
   '/login': typeof LoginRoute
@@ -280,6 +288,7 @@ export interface FileRoutesById {
   '/api/code-engine': typeof ApiCodeEngineRoute
   '/api/edit-image': typeof ApiEditImageRoute
   '/api/generate-image': typeof ApiGenerateImageRoute
+  '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
@@ -313,6 +322,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
@@ -344,6 +354,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
@@ -376,6 +387,7 @@ export interface FileRouteTypes {
     | '/api/code-engine'
     | '/api/edit-image'
     | '/api/generate-image'
+    | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
     | '/api/public/paystack-webhook'
@@ -387,7 +399,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
   ContactRoute: typeof ContactRoute
   HomepageRoute: typeof HomepageRoute
   LoginRoute: typeof LoginRoute
@@ -588,6 +600,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiGenerateImageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/callback': {
+      id: '/auth/callback'
+      path: '/callback'
+      fullPath: '/auth/callback'
+      preLoaderRoute: typeof AuthCallbackRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/projects/$slug': {
       id: '/projects/$slug'
       path: '/projects/$slug'
@@ -645,11 +664,21 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface AuthRouteChildren {
+  AuthCallbackRoute: typeof AuthCallbackRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthCallbackRoute: AuthCallbackRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
   ContactRoute: ContactRoute,
   HomepageRoute: HomepageRoute,
   LoginRoute: LoginRoute,

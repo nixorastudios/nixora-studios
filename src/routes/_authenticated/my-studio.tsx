@@ -6,6 +6,9 @@ import { StudioAccountShell } from '@/components/StudioAccountShell';
 import { Button } from '@/components/ui/button';
 import { studioHead } from '@/lib/studio-head';
 import { TOOLS } from '@/lib/tools';
+import { useEffect, useState } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { hasVerifiedEmail, VERIFIED_WELCOME_KEY } from '@/lib/email-verification';
 
 const studioQuery = queryOptions({ queryKey: ['studio-dashboard'], queryFn: () => loadStudioDashboard() });
 
@@ -18,7 +21,21 @@ export const Route = createFileRoute('/_authenticated/my-studio')({
 
 function MyStudio() {
   const { data } = useSuspenseQuery(studioQuery);
+  const [verifiedWelcome, setVerifiedWelcome] = useState(false);
+  useEffect(() => {
+    let active = true;
+    const marker = sessionStorage.getItem(VERIFIED_WELCOME_KEY);
+    if (!marker) return;
+    void supabase.auth.getUser().then(({ data: account }) => {
+      if (active && account.user?.id === marker && hasVerifiedEmail(account.user)) {
+        setVerifiedWelcome(true);
+        sessionStorage.removeItem(VERIFIED_WELCOME_KEY);
+      }
+    });
+    return () => { active = false; };
+  }, []);
   return <StudioAccountShell title="My Studio">
+    {verifiedWelcome && <p role="status" className="text-primary">Email verified - Welcome to NIXORA</p>}
     <section className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-card p-6 text-card-foreground">
       <div className="flex items-center gap-3"><Wallet className="size-8 text-primary" /><div><p className="text-sm text-muted-foreground">Wallet — one balance for all engines</p><p className="text-3xl font-black">{data.balance} Credits</p></div></div>
       <Button asChild><Link to="/pricing">Upgrade</Link></Button>
