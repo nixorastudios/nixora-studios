@@ -3,13 +3,41 @@ export const VOICE_HANDOFF_KEY = 'nixora_voice_handoff';
 export const VOICE_STORAGE_KEY = 'nixora_voice_jobs';
 export const MAX_SCRIPT = 5000;
 
-export type VoiceId = 'male-ng' | 'female-ng' | 'male-us' | 'female-us';
-export const VOICES: { id: VoiceId; label: string; lang: string; gender: 'male' | 'female' }[] = [
-  { id: 'male-ng', label: 'Male Nigerian', lang: 'en-NG', gender: 'male' },
-  { id: 'female-ng', label: 'Female Nigerian', lang: 'en-NG', gender: 'female' },
-  { id: 'male-us', label: 'Male US', lang: 'en-US', gender: 'male' },
-  { id: 'female-us', label: 'Female US', lang: 'en-US', gender: 'female' },
+export type Gender = 'male' | 'female';
+export type Accent = { id: string; label: string; lang: string };
+export type Language = { id: string; label: string; region: string; accents: Accent[] };
+/** Global catalog: pick language (country group) -> accent -> male/female. */
+export const LANGUAGES: Language[] = [
+  { id: 'english', label: 'English', region: 'English', accents: [
+    { id: 'en-us', label: 'United States', lang: 'en-US' }, { id: 'en-gb', label: 'United Kingdom', lang: 'en-GB' },
+    { id: 'en-au', label: 'Australia', lang: 'en-AU' }, { id: 'en-ca', label: 'Canada', lang: 'en-CA' } ] },
+  { id: 'african-english', label: 'African English', region: 'Africa', accents: [
+    { id: 'ng-yoruba', label: 'Nigerian — Yoruba accent', lang: 'en-NG' }, { id: 'ng-igbo', label: 'Nigerian — Igbo accent', lang: 'en-NG' },
+    { id: 'ng-hausa', label: 'Nigerian — Hausa accent', lang: 'en-NG' }, { id: 'gh', label: 'Ghanaian', lang: 'en-GH' },
+    { id: 'ke', label: 'Kenyan (Swahili)', lang: 'sw-KE' }, { id: 'za', label: 'South African', lang: 'en-ZA' } ] },
+  { id: 'french', label: 'French', region: 'Europe', accents: [{ id: 'fr-fr', label: 'France', lang: 'fr-FR' }] },
+  { id: 'spanish', label: 'Spanish', region: 'Europe / Americas', accents: [{ id: 'es-es', label: 'Spain', lang: 'es-ES' }, { id: 'es-mx', label: 'Mexico', lang: 'es-MX' }] },
+  { id: 'german', label: 'German', region: 'Europe', accents: [{ id: 'de-de', label: 'Germany', lang: 'de-DE' }] },
+  { id: 'italian', label: 'Italian', region: 'Europe', accents: [{ id: 'it-it', label: 'Italy', lang: 'it-IT' }] },
+  { id: 'portuguese', label: 'Portuguese', region: 'Europe / Americas', accents: [{ id: 'pt-pt', label: 'Portugal', lang: 'pt-PT' }, { id: 'pt-br', label: 'Brazil', lang: 'pt-BR' }] },
+  { id: 'hindi', label: 'Hindi', region: 'Asia', accents: [{ id: 'hi-in', label: 'India', lang: 'hi-IN' }] },
+  { id: 'arabic', label: 'Arabic', region: 'Asia', accents: [{ id: 'ar-sa', label: 'Arabic (Standard)', lang: 'ar-SA' }] },
+  { id: 'chinese', label: 'Chinese', region: 'Asia', accents: [{ id: 'zh-cn', label: 'Mandarin', lang: 'zh-CN' }] },
+  { id: 'japanese', label: 'Japanese', region: 'Asia', accents: [{ id: 'ja-jp', label: 'Japan', lang: 'ja-JP' }] },
+  { id: 'korean', label: 'Korean', region: 'Asia', accents: [{ id: 'ko-kr', label: 'Korea', lang: 'ko-KR' }] },
 ];
+/** Stored voice id: "<accentId>:<gender>", e.g. "ng-igbo:female". */
+export type VoiceId = string;
+export const voiceId = (accentId: string, gender: Gender) => `${accentId}:${gender}`;
+export function parseVoiceId(id: VoiceId): { language: Language; accent: Accent; gender: Gender } {
+  const [aid = '', g] = id.split(':');
+  for (const language of LANGUAGES) { const accent = language.accents.find(a => a.id === aid); if (accent) return { language, accent, gender: g === 'male' ? 'male' : 'female' }; }
+  // Legacy ids from the first version (male-ng, female-us, ...)
+  const legacy = /^(male|female)-(ng|us)$/.exec(id);
+  if (legacy) return parseVoiceId(voiceId((legacy[2] as string) === 'ng' ? 'ng-yoruba' : 'en-us', legacy[1] as Gender));
+  const language = LANGUAGES[0]!; return { language, accent: language.accents[0]!, gender: 'female' };
+}
+export const voiceLabel = (id: VoiceId) => { const v = parseVoiceId(id); return `${v.language.label} · ${v.accent.label} · ${v.gender === 'male' ? 'Male' : 'Female'}`; };
 
 export type VoiceJob = { id: string; script: string; voice: VoiceId; speed: number; pitch: number; provider: 'browser' | 'api'; createdAt: string };
 
@@ -29,10 +57,13 @@ export function saveLocalJob(job: VoiceJob) {
 }
 
 function pickVoice(id: VoiceId): SpeechSynthesisVoice | undefined {
-  const cfg = VOICES.find(v => v.id === id)!;
+  const { accent, gender } = parseVoiceId(id);
+  const cfg = { lang: accent.lang, gender };
   const all = speechSynthesis.getVoices();
-  const byLang = all.filter(v => v.lang.replace('_', '-').startsWith(cfg.lang));
-  const pool = byLang.length ? byLang : all.filter(v => v.lang.startsWith('en'));
+  const norm = (l: string) => l.replace('_', '-');
+  const byLang = all.filter(v => norm(v.lang).startsWith(cfg.lang));
+  const base = cfg.lang.split('-')[0] ?? 'en';
+  const pool = byLang.length ? byLang : all.filter(v => norm(v.lang).startsWith(base));
   const gendered = pool.find(v => (cfg.gender === 'female' ? /female|woman|samantha|zira|aria|jenny|ezinne/i : /male|man|daniel|david|guy|abeo/i).test(v.name) && !(cfg.gender === 'male' && /female/i.test(v.name)));
   return gendered ?? pool[0];
 }
@@ -42,7 +73,7 @@ export function speakInBrowser(script: string, voice: VoiceId, speed: number, pi
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(script);
   const v = pickVoice(voice); if (v) u.voice = v;
-  u.lang = VOICES.find(x => x.id === voice)!.lang;
+  u.lang = parseVoiceId(voice).accent.lang;
   u.rate = clamp(speed, 0.5, 2); u.pitch = clamp(pitch, 0, 2);
   u.onend = onEnd; u.onerror = onEnd;
   speechSynthesis.speak(u);
