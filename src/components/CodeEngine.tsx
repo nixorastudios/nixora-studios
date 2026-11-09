@@ -14,6 +14,7 @@ import { approveCodePlan, deleteCodeProject, listCodeProjects, listCodeVersions,
 import { getGitHubStatus, listGitHubCommits, listGitHubRepos, pushProjectToGitHub } from '@/lib/github.functions';
 import { getOwnerStatus } from '@/lib/owner.functions';
 import { CodeScene } from './CodeScene';
+import { parseVoiceOverCommand, VOICE_HANDOFF_KEY } from '@/lib/voice-over';
 import { saveStudioUpload } from '@/lib/studio-uploads';
 
 const LOCAL_KEY = 'nixora_code_engine_projects_v1';
@@ -136,6 +137,8 @@ export function CodeEngine() {
     const p=current.current;if(!p||busy)return;
     if(!signedIn){setError('Sign in to plan and build with AI.');return;}
     if(!p.idea.trim()){setError('Enter your project idea first.');return;}
+    const voiceScript=action==='plan'?parseVoiceOverCommand(p.idea):null;
+    if(voiceScript!==null){sessionStorage.setItem(VOICE_HANDOFF_KEY,voiceScript);window.location.assign('/tools/voice-over');return;}
     setBusy(action);setError('');setSummary('');setActivity(action==='plan'?'Understanding your idea…':'Working on your project…');
     controller.current=new AbortController();
     try {
