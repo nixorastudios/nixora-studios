@@ -37,6 +37,7 @@ import { Route as ApiGenerateImageRouteImport } from './routes/api/generate-imag
 import { Route as AuthCallbackRouteImport } from './routes/auth.callback'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as ToolsToolRouteImport } from './routes/tools.$tool'
+import { Route as ToolsVoiceOverRouteImport } from './routes/tools.voice-over'
 import { Route as ApiPublicPaystackWebhookRouteImport } from './routes/api/public/paystack-webhook'
 import { Route as ApiPublicReconcileRouteImport } from './routes/api/public/reconcile'
 import { Route as ApiPublicSquadWebhookRouteImport } from './routes/api/public/squad-webhook'
@@ -180,6 +181,11 @@ const ToolsToolRoute = ToolsToolRouteImport.update({
   path: '/tools/$tool',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolsVoiceOverRoute = ToolsVoiceOverRouteImport.update({
+  id: '/tools/voice-over',
+  path: '/tools/voice-over',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicPaystackWebhookRoute =
   ApiPublicPaystackWebhookRouteImport.update({
     id: '/api/public/paystack-webhook',
@@ -225,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/tools/voice-over': typeof ToolsVoiceOverRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
   '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
@@ -257,6 +264,7 @@ export interface FileRoutesByTo {
   '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/tools/voice-over': typeof ToolsVoiceOverRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
   '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
@@ -291,6 +299,7 @@ export interface FileRoutesById {
   '/auth/callback': typeof AuthCallbackRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/tools/$tool': typeof ToolsToolRoute
+  '/tools/voice-over': typeof ToolsVoiceOverRoute
   '/api/public/paystack-webhook': typeof ApiPublicPaystackWebhookRoute
   '/api/public/reconcile': typeof ApiPublicReconcileRoute
   '/api/public/squad-webhook': typeof ApiPublicSquadWebhookRoute
@@ -325,6 +334,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
+    | '/tools/voice-over'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
     | '/api/public/squad-webhook'
@@ -357,6 +367,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
+    | '/tools/voice-over'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
     | '/api/public/squad-webhook'
@@ -390,6 +401,7 @@ export interface FileRouteTypes {
     | '/auth/callback'
     | '/projects/$slug'
     | '/tools/$tool'
+    | '/tools/voice-over'
     | '/api/public/paystack-webhook'
     | '/api/public/reconcile'
     | '/api/public/squad-webhook'
@@ -418,6 +430,7 @@ export interface RootRouteChildren {
   ApiGenerateImageRoute: typeof ApiGenerateImageRoute
   ProjectsSlugRoute: typeof ProjectsSlugRoute
   ToolsToolRoute: typeof ToolsToolRoute
+  ToolsVoiceOverRoute: typeof ToolsVoiceOverRoute
   ApiPublicPaystackWebhookRoute: typeof ApiPublicPaystackWebhookRoute
   ApiPublicReconcileRoute: typeof ApiPublicReconcileRoute
   ApiPublicSquadWebhookRoute: typeof ApiPublicSquadWebhookRoute
@@ -621,6 +634,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsToolRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tools/voice-over': {
+      id: '/tools/voice-over'
+      path: '/tools/voice-over'
+      fullPath: '/tools/voice-over'
+      preLoaderRoute: typeof ToolsVoiceOverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/paystack-webhook': {
       id: '/api/public/paystack-webhook'
       path: '/api/public/paystack-webhook'
@@ -697,6 +717,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiGenerateImageRoute: ApiGenerateImageRoute,
   ProjectsSlugRoute: ProjectsSlugRoute,
   ToolsToolRoute: ToolsToolRoute,
+  ToolsVoiceOverRoute: ToolsVoiceOverRoute,
   ApiPublicPaystackWebhookRoute: ApiPublicPaystackWebhookRoute,
   ApiPublicReconcileRoute: ApiPublicReconcileRoute,
   ApiPublicSquadWebhookRoute: ApiPublicSquadWebhookRoute,
