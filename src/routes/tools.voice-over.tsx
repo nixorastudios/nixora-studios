@@ -90,7 +90,7 @@ function VoiceOver() {
           <p className="text-right text-xs text-[#737373]">{script.length}/{MAX_SCRIPT}</p>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
             <label className="text-sm font-semibold">Language / country
-              <select value={sel.language.id} onChange={e => { const l = LANGUAGES.find(x => x.id === e.target.value)!; setVoice(voiceId(l.accents[0].id, sel.gender)); }} className="mt-1 w-full rounded-xl border border-[#d4d4d4] p-2 text-sm outline-none focus:border-[#FF6B00]">
+              <select value={sel.language.id} onChange={e => { const l = LANGUAGES.find(x => x.id === e.target.value)!; setVoice(voiceId(l.accents[0]!.id, sel.gender)); }} className="mt-1 w-full rounded-xl border border-[#d4d4d4] p-2 text-sm outline-none focus:border-[#FF6B00]">
                 {LANGUAGES.map(l => <option key={l.id} value={l.id}>{l.label} ({l.region})</option>)}
               </select>
             </label>

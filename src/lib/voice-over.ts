@@ -30,12 +30,12 @@ export const LANGUAGES: Language[] = [
 export type VoiceId = string;
 export const voiceId = (accentId: string, gender: Gender) => `${accentId}:${gender}`;
 export function parseVoiceId(id: VoiceId): { language: Language; accent: Accent; gender: Gender } {
-  const [aid, g] = id.split(':');
+  const [aid = '', g] = id.split(':');
   for (const language of LANGUAGES) { const accent = language.accents.find(a => a.id === aid); if (accent) return { language, accent, gender: g === 'male' ? 'male' : 'female' }; }
   // Legacy ids from the first version (male-ng, female-us, ...)
   const legacy = /^(male|female)-(ng|us)$/.exec(id);
-  if (legacy) return parseVoiceId(voiceId(legacy[2] === 'ng' ? 'ng-yoruba' : 'en-us', legacy[1] as Gender));
-  return { language: LANGUAGES[0], accent: LANGUAGES[0].accents[0], gender: 'female' };
+  if (legacy) return parseVoiceId(voiceId((legacy[2] as string) === 'ng' ? 'ng-yoruba' : 'en-us', legacy[1] as Gender));
+  const language = LANGUAGES[0]!; return { language, accent: language.accents[0]!, gender: 'female' };
 }
 export const voiceLabel = (id: VoiceId) => { const v = parseVoiceId(id); return `${v.language.label} · ${v.accent.label} · ${v.gender === 'male' ? 'Male' : 'Female'}`; };
 
@@ -62,7 +62,7 @@ function pickVoice(id: VoiceId): SpeechSynthesisVoice | undefined {
   const all = speechSynthesis.getVoices();
   const norm = (l: string) => l.replace('_', '-');
   const byLang = all.filter(v => norm(v.lang).startsWith(cfg.lang));
-  const base = cfg.lang.split('-')[0];
+  const base = cfg.lang.split('-')[0] ?? 'en';
   const pool = byLang.length ? byLang : all.filter(v => norm(v.lang).startsWith(base));
   const gendered = pool.find(v => (cfg.gender === 'female' ? /female|woman|samantha|zira|aria|jenny|ezinne/i : /male|man|daniel|david|guy|abeo/i).test(v.name) && !(cfg.gender === 'male' && /female/i.test(v.name)));
   return gendered ?? pool[0];
