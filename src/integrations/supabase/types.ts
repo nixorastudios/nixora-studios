@@ -661,6 +661,45 @@ export type Database = {
         }
         Relationships: []
       }
+      voice_jobs: {
+        Row: {
+          created_at: string
+          id: string
+          pitch: number
+          provider: string
+          script: string
+          speed: number
+          status: string
+          storage_path: string | null
+          user_id: string
+          voice: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          pitch?: number
+          provider?: string
+          script: string
+          speed?: number
+          status?: string
+          storage_path?: string | null
+          user_id?: string
+          voice: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          pitch?: number
+          provider?: string
+          script?: string
+          speed?: number
+          status?: string
+          storage_path?: string | null
+          user_id?: string
+          voice?: string
+        }
+        Relationships: []
+      }
       waitlist_signups: {
         Row: {
           consent_at: string
