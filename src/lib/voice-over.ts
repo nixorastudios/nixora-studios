@@ -18,7 +18,7 @@ export const clamp = (n: number, min: number, max: number) => Math.min(max, Math
 /** Recognises Code Engine prompts like "Build voice over for my product launch". Returns the script or null. */
 export function parseVoiceOverCommand(text: string): string | null {
   const m = text.trim().match(/^build\s+(?:a\s+)?voice[\s-]?over\s+for\s*:?\s*([\s\S]*)$/i);
-  return m ? m[1].trim() : null;
+  return m ? (m[1] ?? '').trim() : null;
 }
 
 export function readLocalJobs(): VoiceJob[] {
