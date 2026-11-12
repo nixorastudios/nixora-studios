@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Full migration to the personal backend — separate PERSONAL_SUPABASE_URL and PERSONAL_SUPABASE_PUBLISHABLE_KEY stored securely; blocked on authorized external schema/Auth administration. Publishable credentials cannot create tables or configure Auth. Migrate all existing role, wallet, consent, project/history and private storage dependencies, not only four tables; keep the current app unchanged until prerequisites are ready. Live-domain signup verification also requires deploying the completed migration.
+
 - [x] Verification redirect: signup/resend use the production callback; verified owner session reached My Studio with welcome, expired callback blocked, four tests and build pass. Publishing requested next; actual inbox link click not tested.
 - [ ] Hosted Auth Site URL — blocked: no tool edits this setting; user must set https://nixorastudios.com in More → Users → Auth settings → Advanced. Domain wildcard already allows the requested paths.
 
