@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Read-only GitHub/publication/Cloud-loss audit — migration paused at the user's request; compare current source with nixorastudios/nixora-studios and distinguish source backup from hosted data and publication. Do not request a server-only key.
+- [x] Read-only GitHub/publication/Cloud-loss audit — GitHub db800dd6 matches the entire pre-audit source tree; only this roadmap update differs. Live global Voice Over confirmed; exact published commit and legacy deployed Edge Function inventory unavailable. Cloud contains 5 Auth users, 5 profiles, 1 project/version, 1 balance/terms/owner/waitlist row and two empty private buckets. Migration remains paused; no server-only key requested again.
 - [x] Personal migration Step 1 — user confirmed both private storage buckets already exist.
 - [x] Personal migration Step 2 — user confirmed the full SQL was run and all 20 tables exist; do not rerun SQL.
 - [ ] Full migration Step 3 — personal URL and publishable key stored separately; connection rewiring has not started and is paused pending the user's audit review. No application files changed or published. External privileged access and Auth settings remain unverified; live-domain signup requires a later authorized deployment.
