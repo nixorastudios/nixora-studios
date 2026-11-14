@@ -1,6 +1,7 @@
 # Roadmap
 
-- [ ] Migration Pack V3 — audit five app-building capabilities and add tested, key-free Code Engine enhancements to standalone artifacts only; no migration, provider provisioning or publication. Full autonomous provisioning and external hosting remain unverified.
+- [x] Migration Pack V3 audit and partial code delivery — standalone direct OpenAI generation, owner-only project RPCs, atomic separate-project GitHub backup, replacement screen and tests; 11 mocked tests/server typecheck pass. Nothing migrated or published.
+- [ ] Autonomous full-stack Code Engine — blocked: safe per-app provisioning/management authorization, isolated full-stack build/test runner, independent GitHub authentication and unsupported external Cloudflare deployment infrastructure; V3 is explicitly incomplete and provider/SQL/UI end-to-end checks remain unverified.
 
 - [x] Read-only GitHub/publication/Cloud-loss audit — GitHub db800dd6 matches the entire pre-audit source tree; only this roadmap update differs. Live global Voice Over confirmed; exact published commit and legacy deployed Edge Function inventory unavailable. Cloud contains 5 Auth users, 5 profiles, 1 project/version, 1 balance/terms/owner/waitlist row and two empty private buckets. Migration remains paused; no server-only key requested again.
 - [x] Personal migration Step 1 — user confirmed both private storage buckets already exist.
