@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Migration Pack V3 — audit five app-building capabilities and add tested, key-free Code Engine enhancements to standalone artifacts only; no migration, provider provisioning or publication. Full autonomous provisioning and external hosting remain unverified.
+
 - [x] Read-only GitHub/publication/Cloud-loss audit — GitHub db800dd6 matches the entire pre-audit source tree; only this roadmap update differs. Live global Voice Over confirmed; exact published commit and legacy deployed Edge Function inventory unavailable. Cloud contains 5 Auth users, 5 profiles, 1 project/version, 1 balance/terms/owner/waitlist row and two empty private buckets. Migration remains paused; no server-only key requested again.
 - [x] Personal migration Step 1 — user confirmed both private storage buckets already exist.
 - [x] Personal migration Step 2 — user confirmed the full SQL was run and all 20 tables exist; do not rerun SQL.
